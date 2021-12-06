@@ -1,0 +1,26 @@
+/**
+ * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+@import './Colors';
+
+@mixin grid-title {
+    font-weight: 500;
+    color: $dell-black;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+@mixin grid-cell {
+    font-weight: 400;
+    color: $dell-black;
+    font-size: 14px;
+    height: 46px;
+    padding-right: 24px;
+    padding-left: 16px;
+}

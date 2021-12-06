@@ -1,0 +1,113 @@
+/**
+ * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+@import './datagrid_mixin';
+@import './Colors';
+
+.datagrid-table {
+
+    .datagrid-column {
+        background-color: $dell-white;
+        height: 3.38rem;
+        border-color : #E4E4E4;
+
+        .datagrid-column-title {
+            @include grid-title;
+        }
+
+        .clr-dg-filter {
+            top: 0.44rem;
+        }
+
+        .datagrid-column-separator {            
+
+            &:after {
+                height: 1.5rem;
+                background-color: $dell-gray;
+                margin-top: 0.69rem;          
+            }
+        }
+    }
+
+    .datagrid-row:hover {
+        background-color: $dell-white;
+    }
+
+    .datagrid-row-sticky {
+        background-color: $dell-white;
+
+        .datagrid-select {
+
+            &.datagrid-fixed-column {
+
+                .datagrid-column-separator {
+                    
+                    &:after {
+                        content: none;
+                    }
+                }
+            }
+        }
+
+        .datagrid-cell {
+
+            &:last-child {
+
+                &:after {
+                    background-color: white;
+                }
+            }
+        }
+    }
+
+    .datagrid-cell {
+        @include grid-cell;
+    }
+
+    .datagrid-scrolling-cells {
+        background-color: $dell-white;
+
+        &:hover {
+            background-color: $datagrid-hover;
+        }
+
+        &::selection {
+            background-color: $datagrid-selected;
+        }
+    }
+
+    .datagrid-container {
+        background-color: $dell-white;
+        margin: 0.19rem 1.5rem 1.25rem 1rem;
+        padding: 0rem;
+    }
+}
+
+.datagrid-footer {
+    @include grid-cell;
+    background-color: $dell-white;
+    border-color: $dell-gray;
+
+    .btn {
+      width: 1.25rem;
+    }
+
+    .column-switch {
+
+        .switch-header {
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .clr-control-label {
+            font-size: 0.88rem;
+            font-weight: 400;
+        }
+    }
+}

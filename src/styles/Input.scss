@@ -1,0 +1,59 @@
+/**
+ * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "styles/Colors.scss";
+
+.clr-control-container {
+    display: inline-flex;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    .input {
+        box-shadow: none;
+        height: 40px;
+        width: 320px;
+        padding-left: 0.6rem;
+        margin-left: 0 !important;
+        border-color: $DARK-GREY;
+        border-style: solid;
+        border-width: 1px;
+  
+        ::placeholder{
+            font-weight: 500;
+            text-transform: none;
+            font-size: 14px;
+            color: $LIGHT-GREY;
+        }
+
+        &:focus{
+            outline-color: $BLUE !important;
+            border-radius: 0rem !important;
+            border: 1px ;
+            outline-style: solid;
+        }
+
+    }
+
+}
+
+label{
+    width: max-content;
+    margin-right: 1.5rem;
+    font-weight: bold;
+    letter-spacing: initial;
+    align-content: center;
+    margin-top: 0.35rem;
+    margin-left: 1.5rem;
+    size: 14px;
+}
+
+.topLabel{
+    margin-right: 0rem !important;
+}
