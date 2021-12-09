@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# dell-design-react-common binding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project an unofficial implementation of CSS wrapper for [Dell Design System for Product] (https://web.ddsproduct.com/31b3fd8b1/p/07e33c-) on [VMware Clarity Design](https://clarity.design) in React. It leverages CSS, icons and images from the Clarity project. 
 
-## Available Scripts
+## Usage in React projects
 
-In the project directory, you can run:
+To use the project simply add the dependencies with `yarn`, `npm`, etc:
+```shell
+$ yarn add @dellstorage/dell-design-react-common
+```
 
-### `yarn start`
+Import styles and globals from peer dependencies:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### `index.tsx`
+```typescript
+import "@webcomponents/custom-elements/custom-elements.min.js";
+import "@dellstorage/dell-design-react-common/main.css";
+import "@clr/icons/clr-icons-lite.min.js";
+import "@clr/icons/shapes/technology-shapes.js";
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+...
+```
 
-### `yarn test`
+And make use of the components in your app:
+#### `App.tsx`
+```typescript jsx
+import React, {Component} from 'react';
+import MainContainer from "@dellstorage/clarity-react/layout/main-container/MainContainer";
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const initialState = {
+};
 
-### `yarn build`
+type MainPageProps = {
+    token?: string
+    level?: string
+    message?: string
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export type MainPageState = Readonly<typeof initialState>;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default class MainPage extends Component<MainPageProps> {
+    readonly state: MainPageState = initialState;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    render() {
+        return(
+            <MainContainer>
+                Hello
+            </MainContainer>
+        );
+    }
+}
+```
 
-### `yarn eject`
+## Storybook
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project includes [Storybook](https://storybook.js.org/) as a component browser. To fire up storybook, download the project in Git:
+```shell
+$ git clone git@github.com:EMCECS/dell-design-react-common.git
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install the dependencies with `yarn`, `npm`, etc.
+```sbtshell
+$ cd dell-design-react-common
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Using yarn
+$ yarn
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Using NPM
+$ npm install
+```
 
-## Learn More
+Any run the "storybook" script:
+```shell
+# Using yarn
+$ yarn run storybook
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Using NPM
+$ npm run storybook
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Licenses
+* dell-design-react-common components is licensed under Apache 2.0 License.
+* The VMware Clarity Design System is licensed under the MIT license.

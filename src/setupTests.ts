@@ -6,18 +6,10 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */
+*/
 
-@import './Colors';
-
-@mixin link_button {
-    margin-right: 0;
-    width: 48px ;
-    height: 40px ;
-    border-color: $BLUE;
-    background-color: transparent;
-    color: $BLUE;  
-    outline-color: $BLUE !important;
-    border: 1px ;
-    outline-style: solid; 
-}
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';

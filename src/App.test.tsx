@@ -6,18 +6,14 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */
+*/
 
-@import './Colors';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
-@mixin link_button {
-    margin-right: 0;
-    width: 48px ;
-    height: 40px ;
-    border-color: $BLUE;
-    background-color: transparent;
-    color: $BLUE;  
-    outline-color: $BLUE !important;
-    border: 1px ;
-    outline-style: solid; 
-}
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
