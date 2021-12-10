@@ -1,6 +1,6 @@
 # dell-design-react-common binding
 
-This project an unofficial implementation of CSS wrapper for [Dell Design System for Product] (https://web.ddsproduct.com/31b3fd8b1/p/07e33c-) on [VMware Clarity Design](https://clarity.design) in React. It leverages CSS, icons and images from the Clarity project. 
+This project an unofficial implementation of CSS wrapper for [Dell Design System for Product](https://web.ddsproduct.com/31b3fd8b1/p/07e33c-) on [VMware Clarity Design](https://clarity.design) in React. It leverages CSS, icons and images from the Clarity project. 
 
 ## Usage in React projects
 
