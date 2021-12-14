@@ -1,4 +1,4 @@
-name: dell-design-react-common CI - Release from Main branch - Pipeline
+name: dell-design-react-common CI - Release from master branch - Pipeline
 
 # Controls when the action will run. 
 on:
