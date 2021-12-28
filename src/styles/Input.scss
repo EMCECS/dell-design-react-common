@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- */
+* Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*/
 
 @import "./Colors";
 
@@ -20,11 +20,12 @@
         height: 40px;
         width: 320px;
         padding-left: 0.6rem;
+        margin-right: 0.4rem;
         margin-left: 0 !important;
         border-color: $DARK-GREY;
         border-style: solid;
         border-width: 1px;
-  
+
         ::placeholder{
             font-weight: 500;
             text-transform: none;
@@ -38,9 +39,40 @@
             border: 1px ;
             outline-style: solid;
         }
-
     }
+}
 
+.clr-subtext{
+    display: block;
+    font-size: 12px;
+    line-height: 2rem;
+    margin-top: .3rem;
+    fill: #666666;
+    font-weight: 400;
+    letter-spacing: 0px;
+    margin-top: 1.5rem;
+    margin-left: -16rem;
+}
+
+.clr-error .clr-subtext{
+    color: $ERROR;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 20px;
+    margin-top: 2rem;
+    margin-left: -17.5rem;
+}
+
+.clr-validate-icon {
+    color: $ERROR-ICON;
+    margin-top: 0.4rem;;
+}
+
+.clr-error{
+    input{
+        border-color: $ERROR-ICON !important;
+    }
 }
 
 label{
@@ -52,6 +84,15 @@ label{
     margin-top: 0.35rem;
     margin-left: 1.5rem;
     size: 14px;
+}
+
+span{
+    font-weight: bold;
+    size: 14px;
+    letter-spacing: 0px;
+    line-height: 20px;
+    fill: #333333;
+    margin-left: 1.5rem;
 }
 
 .topLabel{
