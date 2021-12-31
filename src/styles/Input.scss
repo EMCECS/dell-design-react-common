@@ -32,6 +32,13 @@
             border: 1px ;
             outline-style: solid;
         }
+
+        &:disabled{
+            border-radius: 0rem !important;
+            border: 1px #BBBBBB;
+            border-style: solid;
+            fill: #EEEEEE;
+        }
     }
 
     ::placeholder{
