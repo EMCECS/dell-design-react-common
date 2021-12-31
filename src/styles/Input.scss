@@ -26,19 +26,19 @@
         border-style: solid;
         border-width: 1px;
 
-        ::placeholder{
-            font-weight: 500;
-            text-transform: none;
-            font-size: 14px;
-            color: $LIGHT-GREY;
-        }
-
         &:focus{
             outline-color: $BLUE !important;
             border-radius: 0rem !important;
             border: 1px ;
             outline-style: solid;
         }
+    }
+
+    ::placeholder{
+        font-weight: 400;
+        text-transform: none;
+        font-size: 14px;
+        color: $LIGHT-GREY;
     }
 }
 
