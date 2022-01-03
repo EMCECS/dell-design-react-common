@@ -9,6 +9,7 @@
 */
 
 @import "./Colors";
+@import "./Font";
 
 .clr-control-container {
     display: inline-flex;
@@ -45,6 +46,7 @@
         font-weight: 400;
         text-transform: none;
         font-size: 0.7rem;
+        font-family: $DELL-FONT; 
         color: $LIGHT-GREY;
     }
 
@@ -57,6 +59,7 @@
         font-weight: 400;
         margin-top: 1.5rem;
         margin-left: -16.4rem;
+        font-family: $DELL-FONT; 
     }
 
     &.clr-error{
@@ -87,6 +90,7 @@
         width: max-content;
         margin-right: 1.5rem;
         font-weight: 400;
+        font-family: $DELL-FONT; 
         letter-spacing: initial;
         align-content: center;
         margin-top: 0.35rem;
