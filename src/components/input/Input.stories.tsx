@@ -61,17 +61,6 @@ storiesOf("Input", module)
             />
         </div>
     ))
-    .add("input box with header", () => (
-        <div>
-            <div className="input-header">Header Example</div>
-            <Input
-                name="somevalue"
-                isBoxed
-                label="Label 1"
-                onChange={action("changed")}
-            />
-        </div>
-    ))
     .add("input box disabled", () => (
         <div>
             <Input
