@@ -1,0 +1,54 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+@import "./Colors";
+
+.clr-checkbox-wrapper {
+    input[type="checkbox"] {
+        &:checked {
+            + label {
+                &::before {
+                    background: $BLUE !important;
+                }
+            }
+        }
+        &:focus {
+            + label {
+                &::before {
+                    border: 2px $LIGHTER-BLUE;
+                }
+            }
+        }
+        + label {
+            &::before {
+                height: 16px;
+                width: 16px;
+            }
+        }
+        &:disabled {
+            + label {
+                color: $LIGHT-GREY;
+                border: $LIGHT-GREY;
+            }
+            color: $LIGHT-GREY;
+            border: 1px $LIGHT-GREY;
+            &:checked {
+                + label {
+                    &::before {
+                        background: $LIGHT-GREY !important;
+                    }
+                }
+            }
+        }
+    }
+
+    label {
+        margin-left: 0 !important;
+    }
+}
