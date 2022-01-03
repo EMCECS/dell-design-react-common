@@ -6,31 +6,26 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */
+*/
 
 @import "./Colors";
+@import "./Font";
 
 .clr-control-container {
     display: inline-flex;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
 
-    .input {
+    input {
         box-shadow: none;
         height: 40px;
         width: 320px;
         padding-left: 0.6rem;
+        margin-right: 0.4rem;
         margin-left: 0 !important;
         border-color: $DARK-GREY;
         border-style: solid;
         border-width: 1px;
-  
-        ::placeholder{
-            font-weight: 500;
-            text-transform: none;
-            font-size: 14px;
-            color: $LIGHT-GREY;
-        }
 
         &:focus{
             outline-color: $BLUE !important;
@@ -39,21 +34,68 @@
             outline-style: solid;
         }
 
+        &:disabled{
+            border-radius: 0rem !important;
+            border: 1px $LIGHT-GREY;
+            border-style: solid;
+            background: $WHITE;
+        }
     }
 
-}
+    ::placeholder{
+        font-weight: 400;
+        text-transform: none;
+        font-size: 0.7rem;
+        font-family: $DELL-FONT; 
+        color: $LIGHT-GREY;
+    }
 
-label{
-    width: max-content;
-    margin-right: 1.5rem;
-    font-weight: bold;
-    letter-spacing: initial;
-    align-content: center;
-    margin-top: 0.35rem;
-    margin-left: 1.5rem;
-    size: 14px;
-}
+    .clr-subtext{
+        display: block;
+        font-size: 0.6rem;
+        line-height: 2rem;
+        margin-top: .3rem;
+        color: $DARK-GREY-HELPER-TEXT;
+        font-weight: 400;
+        margin-top: 1.5rem;
+        margin-left: -16.4rem;
+        font-family: $DELL-FONT; 
+    }
 
-.topLabel{
-    margin-right: 0rem !important;
+    &.clr-error{
+        .clr-subtext{
+            color: $ERROR;
+            line-height: 20px;
+            margin-top: 2rem;
+            margin-left: -17.5rem;
+        }
+
+        .clr-validate-icon {
+            color: $ERROR;
+            margin-top: 0.4rem;
+        }
+    
+        input{
+            border-color: $ERROR !important;
+        }
+    }
+
+    &.clr-form-control-disabled{
+        label{
+            color: $LIGHT-GREY;
+        }
+    }
+
+    label {
+        width: max-content;
+        margin-right: 1.5rem;
+        font-weight: 400;
+        font-family: $DELL-FONT; 
+        letter-spacing: initial;
+        align-content: center;
+        margin-top: 0.35rem;
+        margin-left: 1.5rem;
+        font-size: 0.7rem;
+        color: $BLACK;
+    }
 }

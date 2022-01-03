@@ -21,7 +21,6 @@ storiesOf("Input", module)
             <Input
                 name="somevalue"
                 isBoxed
-                className="input"
                 placeholder="Input Textbox"
                 onChange={action("changed")}
             />
@@ -33,8 +32,67 @@ storiesOf("Input", module)
                 name="somevalue"
                 isBoxed
                 label="Label 1"
-                className="input"
                 placeholder="Input Textbox"
+                onChange={action("changed")}
+            />
+        </div>
+    ))
+    .add("input box with label and helper text", () => (
+        <div>
+            <Input
+                name="somevalue"
+                isBoxed
+                label="Label 1"
+                helperText="Input Textbox"
+                onChange={action("changed")}
+            />
+        </div>
+    ))
+    .add("input box with validation", () => (
+        <div>
+            <Input
+                name="somevalue"
+                isBoxed
+                label="Label 1"
+                title="Input Textbox"
+                onChange={action("changed")}
+                error={true}
+                errorHelperText="This field is required"
+            />
+        </div>
+    ))
+    .add("input box disabled", () => (
+        <div>
+            <Input
+                name="somevalue"
+                isBoxed
+                label="Label 1"
+                placeholder="Input Textbox"
+                onChange={action("changed")}
+                disabled={true}
+            />
+        </div>
+    ))
+    .add("input box password", () => (
+        <div>
+            <Input
+                name="somevalue"
+                isBoxed
+                label="Label 1"
+                type="password"
+                placeholder="Password"
+                onChange={action("changed")}
+            />
+        </div>
+    ))
+    .add("input box number", () => (
+        <div>
+            <Input
+                name="somevalue"
+                isBoxed
+                label="Label 1"
+                type="number"
+                placeholder="Number"
                 onChange={action("changed")}
             />
         </div>
