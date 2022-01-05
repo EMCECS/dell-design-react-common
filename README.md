@@ -81,3 +81,24 @@ $ npm run storybook
 ## Licenses
 * dell-design-react-common components is licensed under Apache 2.0 License.
 * The VMware Clarity Design System is licensed under the MIT license.
+
+## SASS Style conventions
+1. SCSS File Structure
+styles
+ -> Common
+ -> Components
+ index.scss
+Common utility styles such as Variables, Mixins, Functions, Fonts, Layout (padding, margin) etc. under the Common folder and reusable component styles are under Components like Buttons, Inputs etc.
+
+2. Use more generic to specific, semantically-named variables with kebab-case
+ex. $blue-border, $light-blue-border has no pattern
+
+$border-blue, $border-light-blue helps in recollection
+In this pattern you can start generically and get more specific as the text editor auto-suggests variable names.
+3. Declare/ organize the related CSS properties together so it helps to identify repeated blocks for reuse.
+For example - all margin related stlyes (top, left, right etc) should be declared together, font-size, font-weight etc 
+
+3. If block of style is getting repeated use mixins
+4. If something needs to be calculated and returned depending on variables then use function
+5. If some style is repeated declare and use as variable
+

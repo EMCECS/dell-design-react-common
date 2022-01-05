@@ -8,17 +8,19 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import "./Font";
-@import "./Colors";
-@import "./Input";
-@import "./Label";
-@import "./Button";
-@import "./DataGrid";
-@import "./CheckBox";
+@import './../common/mixins';
+@import './../common/_colors';
+@import "./../common/_fonts";
+@import "./../components/button";
+@import "./../components/dataGrid";
+@import "./../components/input";
+@import "./../components/label";
+@import "./../components/checkbox";
+@import "./../common/borders";
 
 body {
   margin: 0;
-  font-family: $DELL-FONT;
+  font-family: $dell-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -26,5 +28,5 @@ body {
 code {
   // font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   //   monospace;
-  font-family: $DELL-FONT;
+  font-family: $dell-font;
 }

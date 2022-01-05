@@ -1,0 +1,100 @@
+/**
+ * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "./../common/mixins";
+@import "./../common/colors";
+@import "./../common/functions";
+@import "./../common/borders";
+@import "./../common/fonts";
+
+.clr-control-container {
+    font-family: $dell-font;
+    display: inline-flex;
+    margin-bottom: $input-container-margin;
+    margin-top: $input-container-margin;
+
+    input {
+        box-shadow: none;
+        height: $input-height;
+        width: $input-width;
+        padding-left: $input-padding-left;
+        margin-left: $input-margin-left !important;
+        margin-right: $input-margin-right;
+        border-color: $input-border-color;
+        border-style: solid;
+        border-width: $border-default;
+
+        &:focus {
+            outline-color: $outline !important;
+            border-radius: $input-focus-border-radius !important;
+            border: $border-default;
+            outline-style: solid;
+        }
+
+        &:disabled {
+            border-radius: $input-disabled-border-radius !important;
+            border: $border-default $disabled-color;
+            border-style: solid;
+            background: $disabled-background-color;
+        }
+    }
+
+    ::placeholder {
+        text-transform: none;
+        font-size: $input-placeholder-font-size;
+        font-weight: $font-weight-regular;
+        color: $input-placeholder-color;
+    }
+
+    .clr-subtext{
+        display: block;
+        color: $subtext-color;
+        font-size: $subtext-font-size;
+        font-weight: $font-weight-regular;
+        line-height: $subtext-line-height;
+        margin-top: $subtext-margin-top;
+        margin-left: $subtext-margin-left;
+    }
+
+    &.clr-error{
+        .clr-subtext{
+            color: $input-error-color;
+            line-height: $subtext-error-line-height;
+            margin-top: $subtext-error-margin-top;
+            margin-left: $subtext-error-margin-left;
+        }
+
+        .clr-validate-icon {
+            color: $input-error-color;
+            margin-top: $input-validate-icon-m-top;
+        }
+    
+        input{
+            border-color: $input-error-color !important;
+        }
+    }
+
+    &.clr-form-control-disabled{
+        label{
+            color: $disabled-color;
+        }
+    }
+
+    label {
+        width: max-content;
+        color: $input-label-color;
+
+        letter-spacing: initial;
+        align-content: center;
+        margin-top: $input-label-margin-top;
+        margin-left: $input-label-margin-left;
+        margin-right: $input-label-margin-right;
+    }
+}

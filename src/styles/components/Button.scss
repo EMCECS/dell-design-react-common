@@ -1,0 +1,83 @@
+/**
+ * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+ @import "./../common/mixins";
+ @import "./../common/_colors";
+ @import "./../common/_fonts";
+ @import "./../common/borders";
+
+.btn {
+        font-weight: $font-weight-medium;
+        width: max-content ;
+        border-radius: $btn-border-radius;
+        line-height: $btn-line-height;
+        font-size: $btn-font-size;
+        text-transform: none;
+        letter-spacing: 0 !important;
+        border-color: $btn-default;
+        size: $btn-size;
+        height: $btn-height;
+   
+    btn-link{
+        @include link_button;
+    }
+
+    btn-icon {
+        min-width: 0;
+        color: $btn-default;
+        @include link_button;
+    } 
+
+    &:focus{
+        outline: none !important;
+        border-color: $focus-border-color;
+    }
+
+    &:hover{
+        btn-primary{
+            background-color: $btn-hover;
+        }       
+        border-color: $btn-hover;
+    }
+
+    &:disabled{
+        border: none;
+        background-color: $disabled-background-color;
+        color: $btn-disabled;
+    }
+
+}
+
+.btn.btn-primary{
+    min-width: $btn-min-width;
+    background-color: $btn-default !important;
+}
+
+.warning-button{
+    background-color: $btn-warning!important;   
+    border-color: $btn-warning !important;
+    color: $btn-warning-font !important;
+}
+
+.small-button-size{
+    @include btn-style($btn-small-width, $btn-small-height);
+}
+
+.normal-button-size{
+    @include btn-style($btn-normal-width, $btn-normal-height);
+}
+
+.medium-button-size{
+    @include btn-style($btn-medium-width, $btn-medium-height);
+}
+
+.fluid-button-size{
+    @include btn-style($btn-fluid-width, $btn-fluid-height);
+}

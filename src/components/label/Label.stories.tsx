@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import "styles/Label.scss";
+import "styles/components/Label.scss";
 
 import {storiesOf} from "@storybook/react";
 import {Label} from "@dellstorage/clarity-react/forms/label/Label";

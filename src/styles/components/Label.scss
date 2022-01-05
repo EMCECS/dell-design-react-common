@@ -8,12 +8,16 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import "./Colors";
+@import "./../common/mixins";
+@import "./../common/colors";
+@import "./../common/fonts";
+@import "./../common/borders";
+@import "./../common/layout";
 
 .label{
-    border: 0;
+    border: $border-thick;
     border-color: none;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
+    font-size: $label-font-size;
+    line-height: $line-height-20;
+    font-weight: $font-weight-regular;
 }

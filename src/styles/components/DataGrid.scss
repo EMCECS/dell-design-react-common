@@ -7,40 +7,42 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-@import './datagrid_mixin';
-@import './Colors';
+ @import "./../common/mixins";
+ @import "./../common/colors";
+ @import "./../common/fonts";
+ @import "./../common/layout";
 
 .datagrid-table {
 
     .datagrid-column {
-        background-color: $dell-white;
-        height: 3.38rem;
-        border-color : #E4E4E4;
+        background-color: $grid-backgroud-color;
+        height: $grid-column-height;
+        border-color : $grid-border-color;
 
         .datagrid-column-title {
             @include grid-title;
         }
 
         .clr-dg-filter {
-            top: 0.44rem;
+            top: $grid-filter-top;
         }
 
         .datagrid-column-separator {            
 
             &:after {
-                height: 1.5rem;
-                background-color: $dell-gray;
-                margin-top: 0.69rem;          
+                height: $grid-column-separator-height;
+                background-color: $grid-selected-background-color;
+                margin-top: $grid-column-separator-margin-top;          
             }
         }
     }
 
     .datagrid-row:hover {
-        background-color: $dell-white;
+        background-color: $grid-backgroud-color;
     }
 
     .datagrid-row-sticky {
-        background-color: $dell-white;
+        background-color: $grid-backgroud-color;
 
         .datagrid-select {
 
@@ -60,7 +62,7 @@
             &:last-child {
 
                 &:after {
-                    background-color: white;
+                    background-color: $grid-backgroud-color;
                 }
             }
         }
@@ -71,43 +73,43 @@
     }
 
     .datagrid-scrolling-cells {
-        background-color: $dell-white;
+        background-color: $grid-backgroud-color;
 
         &:hover {
-            background-color: $datagrid-hover;
+            background-color: $grid-hover-color;
         }
 
         &::selection {
-            background-color: $datagrid-selected;
+            background-color: $grid-selected-color;
         }
     }
 
     .datagrid-container {
-        background-color: $dell-white;
-        margin: 0.19rem 1.5rem 1.25rem 1rem;
+        background-color: $grid-backgroud-color;
+        margin: $grid-container-m-top $grid-container-m-right $grid-container-m-bottom $grid-container-m-left;
         padding: 0rem;
     }
 }
 
 .datagrid-footer {
     @include grid-cell;
-    background-color: $dell-white;
-    border-color: $dell-gray;
+    background-color: $grid-backgroud-color;
+    border-color: $grid-border-color;
 
     .btn {
-      width: 1.25rem;
+      width: $grid-footer-btn-width;
     }
 
     .column-switch {
 
         .switch-header {
-            font-size: 0.88rem;
-            font-weight: 500;
+            font-size: $grid-font-size-default;
+            font-weight: $font-weight-medium;
         }
 
         .clr-control-label {
-            font-size: 0.88rem;
-            font-weight: 400;
+            font-size: $grid-font-size-default;
+            font-weight: $font-weight-regular;
         }
     }
 }

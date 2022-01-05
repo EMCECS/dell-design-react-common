@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import "styles/CheckBox.scss";
+import "styles/components/CheckBox.scss";
 import {storiesOf} from "@storybook/react";
 import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
 
