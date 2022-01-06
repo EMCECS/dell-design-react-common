@@ -8,8 +8,8 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import "styles/Input.scss";
-import "styles/Label.scss";
+import "styles/components/Input.scss";
+import "styles/components/Label.scss";
 
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";

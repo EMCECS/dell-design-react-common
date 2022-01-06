@@ -1,0 +1,115 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+ @import "../common/mixins";
+ @import "../common/colors";
+ @import "../common/fonts";
+ @import "../common/layout";
+
+.datagrid-table {
+
+    .datagrid-column {
+        background-color: $grid-background-color;
+        height: $grid-column-height;
+        border-color : $grid-border-color;
+
+        .datagrid-column-title {
+            @include grid-title;
+        }
+
+        .clr-dg-filter {
+            top: $grid-filter-top;
+        }
+
+        .datagrid-column-separator {            
+
+            &:after {
+                height: $grid-column-separator-height;
+                background-color: $grid-selected-background-color;
+                margin-top: $grid-column-separator-margin-top;          
+            }
+        }
+    }
+
+    .datagrid-row:hover {
+        background-color: $grid-background-color;
+    }
+
+    .datagrid-row-sticky {
+        background-color: $grid-background-color;
+
+        .datagrid-select {
+
+            &.datagrid-fixed-column {
+
+                .datagrid-column-separator {
+                    
+                    &:after {
+                        content: none;
+                    }
+                }
+            }
+        }
+
+        .datagrid-cell {
+
+            &:last-child {
+
+                &:after {
+                    background-color: $grid-background-color;
+                }
+            }
+        }
+    }
+
+    .datagrid-cell {
+        @include grid-cell;
+    }
+
+    .datagrid-scrolling-cells {
+        background-color: $grid-background-color;
+
+        &:hover {
+            background-color: $grid-hover-color;
+        }
+
+        &::selection {
+            background-color: $grid-selected-color;
+        }
+    }
+
+    .datagrid-container {
+        background-color: $grid-background-color;
+        margin: $grid-container-margin-top $grid-container-margin-right $grid-container-margin-bottom $grid-container-margin-left;
+        padding: 0rem;
+    }
+}
+
+.datagrid-footer {
+    @include grid-cell;
+    background-color: $grid-background-color;
+    border-color: $grid-border-color;
+
+    .btn {
+      width: $grid-footer-btn-width;
+    }
+
+    .column-switch {
+
+        .switch-header {
+            font-size: $grid-font-size-default;
+            font-weight: $font-weight-medium;
+        }
+
+        .clr-control-label {
+            font-size: $grid-font-size-default;
+            font-weight: $font-weight-regular;
+        }
+    }
+}

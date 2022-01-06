@@ -11,7 +11,7 @@
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import { Button, ButtonState } from "@dellstorage/clarity-react/forms/button";
-import "styles/Button.scss";
+import "styles/components/Button.scss";
 
 storiesOf("Button", module)
     .add("Button Types", () => (
@@ -30,7 +30,7 @@ storiesOf("Button", module)
             </div>))
     .add("Button Sizes", () => (
         <div>
-          <Button key="primary" primary onClick={action("Small button click")}>
+          <Button key="primary" primary className="small-button-size" onClick={action("Small button click")}>
             {"Small"}
         </Button>
         <Button key="primary" primary className="medium-button-size" onClick={action("Medium button click")}>

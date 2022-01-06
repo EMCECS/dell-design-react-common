@@ -1,0 +1,66 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+// Contains Paddings, Margins, Height, Width, top, bottom, right, left etc
+
+// Line Height
+$line-height-18: 18px;
+$line-height-20: 20px;
+$line-height-32: 32px;
+
+
+// Input
+$input-width: 320px;
+$input-height: 40px;
+$input-margin-left: 0;
+$input-margin-right: 0.4rem;
+$input-padding-left: 0.6rem;
+$input-container-margin: 0.5rem;
+$input-validate-icon-m-top: 0.4rem;
+$input-label-margin-top: 0.35rem;
+$input-label-margin-left: 1.5rem;
+$input-label-margin-right: 1.5rem;
+$subtext-error-line-height: $line-height-20;
+$subtext-line-height: 2rem;
+$subtext-margin-top: 1.5rem;
+$subtext-margin-left: -16.4rem;
+$subtext-error-margin-top: 2rem;
+$subtext-error-margin-left: -17.5rem;
+
+// Grid
+$grid-line-height: $line-height-20;
+$grid-cell-padding-right: 1.5rem;
+$grid-cell-padding-left: 1rem;
+$grid-column-height: 3.38rem;
+$grid-filter-top: 0.44rem;
+$grid-footer-btn-width: 1.25rem;
+$grid-container-margin-top: 0.19rem;
+$grid-container-margin-right: 1.5rem;
+$grid-container-margin-bottom: 1.25rem;
+$grid-container-margin-left: 1rem;
+$grid-column-separator-margin-top: 0.69rem;
+$grid-column-separator-height: 1.5rem;
+
+// Button
+$btn-line-height: 1.1rem;
+$btn-size: 16px;
+$btn-height: 40px;
+$btn-min-width: 78px;
+$btn-small-width: 56px;
+$btn-small-height: 24px;
+$btn-normal-width: 82px;
+$btn-normal-height: 40px;
+$btn-medium-width: 82px;
+$btn-medium-height: 32px;
+$btn-fluid-width: 319px;
+$btn-fluid-height: 40px;
+
+// Checkbox
+$checkbox-label-height: 16px;
+$checkbox-label-width: 16px;

@@ -7,41 +7,44 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-@import "./Colors";
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/layout";
 
 .clr-checkbox-wrapper {
     input[type="checkbox"] {
         &:checked {
             + label {
                 &::before {
-                    background: $BLUE !important;
+                    background: $checkbox-default-color !important;
                 }
             }
         }
         &:focus {
             + label {
                 &::before {
-                    border: 2px $LIGHTER-BLUE;
+                    border:$border-thin $focus-border-color;
                 }
             }
         }
         + label {
             &::before {
-                height: 16px;
-                width: 16px;
+                height: $checkbox-label-height;
+                width: $checkbox-label-width;
             }
         }
         &:disabled {
             + label {
-                color: $LIGHT-GREY;
-                border: $LIGHT-GREY;
+                color: $disabled-color;
+                border: $disabled-color;
             }
-            color: $LIGHT-GREY;
-            border: 1px $LIGHT-GREY;
+            color: $disabled-color;
+            border: $border-default $disabled-color;
             &:checked {
                 + label {
                     &::before {
-                        background: $LIGHT-GREY !important;
+                        background: $disabled-color !important;
                     }
                 }
             }

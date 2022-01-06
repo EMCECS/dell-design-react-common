@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import "styles/DataGrid.scss";
+import "styles/components/DataGrid.scss";
 import * as React from "react";
 import {storiesOf} from "@storybook/react";
 import {DataGrid, GridRowType, DataGridFilter, FilterPosition} from "@dellstorage/clarity-react/datagrid";
