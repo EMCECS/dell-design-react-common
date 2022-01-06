@@ -8,15 +8,15 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import './../common/mixins';
-@import './../common/_colors';
-@import "./../common/_fonts";
-@import "./../components/button";
-@import "./../components/dataGrid";
-@import "./../components/input";
-@import "./../components/label";
-@import "./../components/checkbox";
-@import "./../common/borders";
+@import "./common/mixins";
+@import "./common/colors";
+@import "./common/fonts";
+@import "./components/Button.scss";
+@import "./components/DataGrid.scss";
+@import "./components/Input.scss";
+@import "./components/Label.scss";
+@import "./components/CheckBox.scss";
+@import "./common/borders";
 
 body {
   margin: 0;
