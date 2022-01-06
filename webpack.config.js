@@ -36,10 +36,10 @@ const config = {
       },
       {
         test: /\.(s(a|c)ss)$/i,
-        include: [path.resolve(__dirname, "src/styles")],
+        include: [path.resolve(__dirname, "src/styles"), path.resolve(__dirname, "src/styles/common"), path.resolve(__dirname, "src/styles/components")],
         loader: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
       },
-     
+    
       {
         test: /\.(png|jpg|gif)$/i,
         use: [

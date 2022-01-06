@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,10 +8,11 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import "./../common/mixins";
-@import "./../common/colors";
-@import "./../common/borders";
-@import "./../common/fonts";
+@import "../common/mixins";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/fonts";
 
 .clr-control-container {
     font-family: $dell-font;
@@ -31,10 +32,10 @@
         border-width: $border-default;
 
         &:focus {
-            outline-color: $outline !important;
+            outline: none !important;
             border-radius: $input-focus-border-radius !important;
-            border: $border-default;
-            outline-style: solid;
+            border: $border-default solid $input-focus-border-color;
+            background-size: 0 !important;
         }
 
         &:disabled {
@@ -89,7 +90,6 @@
     label {
         width: max-content;
         color: $input-label-color;
-
         letter-spacing: initial;
         align-content: center;
         margin-top: $input-label-margin-top;

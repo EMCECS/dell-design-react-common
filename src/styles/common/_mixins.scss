@@ -7,13 +7,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
+ @import "colors";
+ @import "borders";
+ @import "fonts";
 
- @import "./../common/colors";
- @import "./../common/layout";
- @import "./../common/borders";
- @import "./../common/fonts";
-
-
+// Mixin for reusing link or icon type of button styles
  @mixin link_button {
      margin-right: 0;
      width: 48px ;
@@ -26,24 +24,28 @@
      outline-style: solid; 
  }
  
+ // Mixin to reuse grid-title related style
  @mixin grid-title {
     font-weight: $font-weight-medium;
+    font-size: $grid-font-size-default;
     color: $grid-text-default-color;
     line-height: $grid-line-height;
-    font-size: $grid-font-size-default;
 }
 
+// Mixin for grid cell, use this to avoid repeated stlyes for cells in table, footer etc.
 @mixin grid-cell {
     font-weight: $font-weight-regular;
-    color: $grid-text-default-color;
     font-size: $grid-font-size-default;
+    color: $grid-text-default-color;
     height: 46px;
     padding-right: $grid-cell-padding-right;
     padding-left: $grid-cell-padding-left;
 }
 
+// Mixin to create buttons in different sizes, it accepts width and height
 @mixin btn-style($width, $height) {
     width: $width;
     height: $height;
     background-color: $btn-default;
 }
+

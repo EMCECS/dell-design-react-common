@@ -7,9 +7,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-@import "./../common/mixins";
-@import "./../common/colors";
-@import "./../common/borders";
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/layout";
 
 .clr-checkbox-wrapper {
     input[type="checkbox"] {
@@ -23,7 +24,7 @@
         &:focus {
             + label {
                 &::before {
-                    border:$border-medium $focus-border-color;
+                    border:$border-thin $focus-border-color;
                 }
             }
         }

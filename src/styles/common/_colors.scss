@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-// Dell Design Standard Color codes
+// Dell Design Standard Color codes, follow the same codes as https://web.ddsproduct.com/31b3fd8b1/p/60290f-colors
 
 $primary-white: #FFFFFF;
 $gray-100: #F7F7F7;
@@ -53,7 +53,7 @@ $outline: $blue-600;
 // Grid colors
 $grid-text-default-color: $gray-900;
 $grid-border-color: $gray-300;
-$grid-backgroud-color: $primary-white;
+$grid-background-color: $primary-white;
 $grid-selected-background-color: $gray-300;
 $grid-hover-color: $gray-100;
 $grid-selected-color: $blue-50;
@@ -67,3 +67,4 @@ $input-placeholder-color: $gray-450;
 $input-border-color: $gray-550;
 $input-error-color: $red-700;
 $input-label-color: $gray-900;
+$input-focus-border-color: $blue-600;

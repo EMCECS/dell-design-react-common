@@ -11,11 +11,11 @@
 @import "./common/mixins";
 @import "./common/colors";
 @import "./common/fonts";
-@import "./components/Button.scss";
-@import "./components/DataGrid.scss";
-@import "./components/Input.scss";
-@import "./components/Label.scss";
-@import "./components/CheckBox.scss";
+@import "./components/Button";
+@import "./components/DataGrid";
+@import "./components/Input";
+@import "./components/Label";
+@import "./components/CheckBox";
 @import "./common/borders";
 
 body {

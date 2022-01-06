@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7,15 +7,15 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
- @import "./../common/mixins";
- @import "./../common/colors";
- @import "./../common/fonts";
- @import "./../common/layout";
+ @import "../common/mixins";
+ @import "../common/colors";
+ @import "../common/fonts";
+ @import "../common/layout";
 
 .datagrid-table {
 
     .datagrid-column {
-        background-color: $grid-backgroud-color;
+        background-color: $grid-background-color;
         height: $grid-column-height;
         border-color : $grid-border-color;
 
@@ -38,11 +38,11 @@
     }
 
     .datagrid-row:hover {
-        background-color: $grid-backgroud-color;
+        background-color: $grid-background-color;
     }
 
     .datagrid-row-sticky {
-        background-color: $grid-backgroud-color;
+        background-color: $grid-background-color;
 
         .datagrid-select {
 
@@ -62,7 +62,7 @@
             &:last-child {
 
                 &:after {
-                    background-color: $grid-backgroud-color;
+                    background-color: $grid-background-color;
                 }
             }
         }
@@ -73,7 +73,7 @@
     }
 
     .datagrid-scrolling-cells {
-        background-color: $grid-backgroud-color;
+        background-color: $grid-background-color;
 
         &:hover {
             background-color: $grid-hover-color;
@@ -85,15 +85,15 @@
     }
 
     .datagrid-container {
-        background-color: $grid-backgroud-color;
-        margin: $grid-container-m-top $grid-container-m-right $grid-container-m-bottom $grid-container-m-left;
+        background-color: $grid-background-color;
+        margin: $grid-container-margin-top $grid-container-margin-right $grid-container-margin-bottom $grid-container-margin-left;
         padding: 0rem;
     }
 }
 
 .datagrid-footer {
     @include grid-cell;
-    background-color: $grid-backgroud-color;
+    background-color: $grid-background-color;
     border-color: $grid-border-color;
 
     .btn {

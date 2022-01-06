@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,11 +8,11 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import "./../common/mixins";
-@import "./../common/colors";
-@import "./../common/fonts";
-@import "./../common/borders";
-@import "./../common/layout";
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+@import "../common/layout";
 
 .label{
     border: $border-thick;

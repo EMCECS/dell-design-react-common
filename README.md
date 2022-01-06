@@ -92,21 +92,24 @@ Common utility styles such as Variables, Mixins, Functions, Fonts, Layout (paddi
 
 2. Use more generic to specific, semantically-named variables with kebab-case for example:
 Avoid- $blue-border, $light-blue-border has no pattern
-
 Prefer - $border-blue, $border-light-blue 
 This pattern helps in recollection and hinting by editor.
 In this pattern you can start generically and get more specific as the text editor auto-suggests variable names.
+
 3. Declare/ indent the related CSS properties together so it helps to identify repeated blocks for reuse.
-For example - all margin related stlyes (top, left, right etc) should be declared together, font-size, font-weight etc 
+For example - all margin related styles (top, left, right etc) should be declared together, font-size, font-weight etc 
 
 4. If block of style is getting repeated use mixins
 5. If something needs to be calculated and returned depending on variables then use function
 6. If some style is repeated declare and use as variable
 7. The color codes are named as per Dell Design Standard, refer this page if any code is missing and needs to be added. https://web.ddsproduct.com/31b3fd8b1/p/60290f-colors
+
 8. Avoid naming variables with actual values they hold, instead name them by the function they do, for example:
 Avoid- $padding-top-5: 5px;
 As value of the this would always remain 5px
-Prefer- $checkbox-padding-top: 5px; 
+Prefer- $checkbox-padding-top: 5px;
+
+9. Always override the class associated with the HTML element and not the HTML element iteself
 
           
 
