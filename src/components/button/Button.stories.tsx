@@ -42,6 +42,9 @@ storiesOf("Button", module)
         <Button key="primary" primary className="fluid-button-size" onClick={action("Fluid button click")}>
             {"Fluid"}
         </Button>
+        <Button key="primary" primary className="minimum-button-size" onClick={action("Minimum button click")}>
+            {"ok"}
+        </Button>
         </div>
     ))
     .add("Button Status", () => (
@@ -60,5 +63,21 @@ storiesOf("Button", module)
         <div>
             <Button key="link" link onClick={action("delete click")} icon={{shape: "trash"}}/>
             <Button key="link" link onClick={action("copy click")} icon={{shape: "copy"}}/>
+            <Button key="link" link onClick={action("window-close click")} icon={{shape: "window-close"}}/>
+            <Button key="link" link onClick={action("refresh click")} className="icon-button-border" icon={{shape: "refresh"}}/>
+            <Button key="link" link onClick={action("settings click")} className="icon-button-background" icon={{shape: "settings"}}/>
+        </div>
+    ))
+    .add("Buttons usages", () => (
+        <div>
+            <Button key="disabled" disabled >
+                {"Disabled"}
+            </Button>
+            <Button key="disabled" primary disabled >
+                {"Primary"}
+            </Button>
+            <Button key="disabled" className="warning-button" disabled >
+                {"Warning"}
+            </Button>
         </div>
     )); 

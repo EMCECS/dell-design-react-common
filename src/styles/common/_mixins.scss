@@ -14,7 +14,6 @@
 // Mixin for reusing link or icon type of button styles
  @mixin link_button {
      margin-right: 0;
-     width: 48px ;
      height: 40px ;
      border-color: $btn-link-border;
      background-color: transparent;

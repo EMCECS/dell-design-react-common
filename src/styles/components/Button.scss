@@ -26,32 +26,70 @@
         size: $btn-size;
         height: $btn-height;
    
-    btn-link{
+    &.btn-link{
         @include link_button;
+        border: none !important;
+        outline-style: none !important;
+
+        &:focus{
+            border: $blue-450 $border-thin solid !important;
+        }
+    
+        &:hover{     
+            color: $blue-700;
+        }
+    
+        &:active{
+            color: $blue-800;
+            background-color: transparent !important;
+        }
+    
+        &:disabled{
+            border: none;
+            background-color: $gray-200 !important;
+            color: $gray-450 !important;
+            font-size: 14px;
+        }
     }
 
-    btn-icon {
+    &.btn-icon {
         min-width: 0;
         color: $btn-default;
         @include link_button;
+        outline-style: none;
+
+        &.icon-button-border{
+            border: 1px $blue-600 solid;
+        }
+
+        &.icon-button-background{
+            background-color: $blue-600;
+
+            clr-icon{
+                color: $primary-white;
+            }
+        }
     } 
 
     &:focus{
         outline: none !important;
-        border-color: $focus-border-color;
+        border: $blue-450 $border-thick double;
     }
 
-    &:hover{
-        btn-primary{
-            background-color: $btn-hover;
-        }       
+    &:hover{     
         border-color: $btn-hover;
     }
 
+    &:active{
+        border: $blue-600;
+        background-color: $blue-100 !important;
+    }
+
     &:disabled{
-        border: none;
-        background-color: $disabled-background-color;
-        color: $btn-disabled;
+        border: $gray-500 $border-default solid;
+        background-color: $gray-200 !important;
+        color: $gray-450 !important;
+        font-size: 14px;
     }
 
 }
@@ -59,12 +97,37 @@
 .btn.btn-primary{
     min-width: $btn-min-width;
     background-color: $btn-default !important;
+
+    &:disabled{
+        border: none !important;
+        background-color: $gray-200 !important;
+        color: $gray-450;
+        font-size: 14px;
+    }
+
+    &:focus{
+        border: $blue-450 $border-thick double;
+    }
+
+    &:hover{
+        border: none;
+        background-color: $btn-hover !important;
+    }
+
+    &:active{
+        border: none;
+        background-color: $blue-800 !important;
+    }
 }
 
 .warning-button{
     background-color: $btn-warning!important;   
     border-color: $btn-warning !important;
     color: $btn-warning-font !important;
+
+    &:disabled{
+        border: none;
+    }
 }
 
 .small-button-size{
