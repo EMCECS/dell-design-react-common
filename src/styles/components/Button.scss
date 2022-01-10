@@ -25,6 +25,27 @@
         border-color: $btn-default;
         size: $btn-size;
         height: $btn-height;
+
+        &:focus{
+            outline: none !important;
+            border: $blue-450 $border-thick double;
+        }
+    
+        &:hover{     
+            border-color: $btn-hover;
+        }
+    
+        &:active{
+            border: $blue-600;
+            background-color: $blue-100 !important;
+        }
+    
+        &:disabled{
+            border: $gray-500 $border-default solid;
+            background-color: $gray-200 !important;
+            color: $gray-450 !important;
+            font-size: 14px;
+        }
    
     &.btn-link{
         @include link_button;
@@ -71,32 +92,41 @@
         }
     } 
 
-    &:focus{
-        outline: none !important;
-        border: $blue-450 $border-thick double;
+    &.btn-success{
+        border: none;
+        &:hover{
+            background-color: $btn-success-hover !important;
+        }
+
+        &:focus{
+            border: $blue-450 $border-thick double;
+        }
+
+        &:active{
+            background-color: $btn-success-press !important;
+        }
     }
 
-    &:hover{     
-        border-color: $btn-hover;
-    }
+    &.btn-danger{
+        border: none;
+        &:hover{
+            background-color: $btn-danger-hover !important;
+        }
 
-    &:active{
-        border: $blue-600;
-        background-color: $blue-100 !important;
-    }
+        &:focus{
+            border: $blue-450 $border-thick double;
+        }
 
-    &:disabled{
-        border: $gray-500 $border-default solid;
-        background-color: $gray-200 !important;
-        color: $gray-450 !important;
-        font-size: 14px;
+        &:active{
+            background-color: $btn-danger-press !important;
+        }
     }
 
 }
 
 .btn.btn-primary{
     min-width: $btn-min-width;
-    background-color: $btn-default !important;
+    background-color: $btn-default;
 
     &:disabled{
         border: none !important;
@@ -111,7 +141,7 @@
 
     &:hover{
         border: none;
-        background-color: $btn-hover !important;
+        background-color: $btn-hover;
     }
 
     &:active{
@@ -122,11 +152,23 @@
 
 .warning-button{
     background-color: $btn-warning!important;   
-    border-color: $btn-warning !important;
+    border: none;
     color: $btn-warning-font !important;
 
     &:disabled{
         border: none;
+    }
+
+    &:focus{
+        border: $blue-450 $border-thick double;
+    }
+
+    &:hover{
+        background-color: $btn-warning-hover !important;
+    }
+
+    &:active{
+        background-color: $btn-warning-press !important;
     }
 }
 
