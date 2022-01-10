@@ -68,7 +68,7 @@ storiesOf("Button", module)
             <Button key="link" link onClick={action("settings click")} className="icon-button-background" icon={{shape: "settings"}}/>
         </div>
     ))
-    .add("Buttons usages", () => (
+    .add("Buttons Disabled", () => (
         <div>
             <Button key="disabled" disabled >
                 {"Disabled"}
