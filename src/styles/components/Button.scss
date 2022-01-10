@@ -25,6 +25,7 @@
         border-color: $btn-default;
         size: $btn-size;
         height: $btn-height;
+        box-shadow: none !important;
 
         &:focus{
             outline: none !important;
@@ -37,7 +38,7 @@
     
         &:active{
             border: $blue-600;
-            background-color: $blue-100 !important;
+            background-color: $blue-100;
         }
     
         &:disabled{
@@ -146,17 +147,18 @@
 
     &:active{
         border: none;
-        background-color: $blue-800 !important;
+        background-color: $blue-800;
     }
 }
 
-.warning-button{
-    background-color: $btn-warning!important;   
+.btn-warning{
+    background-color: $btn-warning !important;   
     border: none;
     color: $btn-warning-font !important;
 
     &:disabled{
         border: none;
+        background-color: none !important;
     }
 
     &:focus{
