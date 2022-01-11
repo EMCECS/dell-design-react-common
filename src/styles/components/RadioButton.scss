@@ -1,0 +1,83 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+ @import "../common/colors";
+ @import "../common/layout";
+ @import "../common/borders";
+ @import "../common/fonts";
+
+.clr-control-container {
+    .clr-radio-wrapper {
+        margin-bottom: $radio-wrapper-margin-bottom;
+        input[type=radio] {
+            &:checked + label {
+                &::before {
+                    height: $radio-button-height;
+                    width: $radio-button-width;
+                    background: radial-gradient($radio-button-selected-color 0%, $radio-button-selected-color 40%, transparent 50%, transparent);
+                    box-shadow: inset 0 0 0 $radio-button-box-shadow-spread-radius $radio-button-background-color;
+                    border: $border-thin solid $radio-button-selected-color;
+                    outline-color: $radio-button-outline-color;
+                }
+            }
+            &:hover {
+                + label {
+                    &::before {
+                        border: $border-thin solid $radio-button-unselected-hover-color;
+                    }
+                }
+                &:checked {
+                    + label {
+                        &::before {
+                            border: $border-thin solid $radio-button-selected-hover-color;
+                            background: radial-gradient($radio-button-selected-hover-color 0%, $radio-button-selected-hover-color 40%, transparent 50%, transparent);
+                        }
+                    }
+                }
+                &:disabled {
+                    + label {
+                        &::before {
+                            border: $border-thin solid $disabled-color;
+                        }
+                    }
+                }
+            }
+            &:disabled {
+                 + label{
+                    color: $disabled-color;
+                    &::before {
+                        box-shadow: inset 0 0 0 $radio-button-box-shadow-spread-radius $radio-button-background-color;
+                        border: $border-thin solid $disabled-color;
+                    }
+                }
+                &:checked {
+                    + label {
+                        &::before {
+                            background: radial-gradient($disabled-color 0%, $disabled-color 40%, transparent 50%, transparent);
+                        }
+                    }
+                }
+            }
+        }
+        .clr-control-label {
+            color: $radio-button-label-color;
+            padding-left: $radio-button-label-padding-left;
+            font-family: $dell-font;
+            font-size: $radio-button-label-font-size;
+            &::before {
+                height: $radio-button-height;
+                width: $radio-button-width;
+                border:$border-default solid $radio-button-unselected-color;
+                &:hover {
+                    border: $border-default solid $radio-button-unselected-color;
+                }
+            }
+        }
+    }
+}
