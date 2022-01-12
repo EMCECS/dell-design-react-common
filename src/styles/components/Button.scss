@@ -28,8 +28,7 @@
         box-shadow: none !important;
 
         &:focus{
-            outline: none !important;
-            border: $blue-450 $border-thick double;
+            @include button-focus;
         }
     
         &:hover{     
@@ -37,7 +36,7 @@
         }
     
         &:active{
-            border: $blue-600;
+            border: $blue-600 1px solid;
             background-color: $blue-100;
         }
     
@@ -45,20 +44,20 @@
             border: $gray-500 $border-default solid;
             background-color: $gray-200 !important;
             color: $gray-450 !important;
-            font-size: 14px;
+            font-size: $font-size-7;
         }
-   
+
     &.btn-link{
         @include link_button;
-        border: none !important;
-        outline-style: none !important;
+        border: none;
+        outline-style: none;
 
         &:focus{
-            border: $blue-450 $border-thin solid !important;
+            @include button-focus;
         }
     
         &:hover{     
-            color: $blue-700;
+            color: $btn-hover;
         }
     
         &:active{
@@ -70,26 +69,16 @@
             border: none;
             background-color: $gray-200 !important;
             color: $gray-450 !important;
-            font-size: 14px;
+            font-size: $font-size-7;
         }
     }
 
     &.btn-icon {
-        min-width: 0;
+        min-width: $btn-icon-width !important;
         color: $btn-default;
-        @include link_button;
-        outline-style: none;
 
-        &.icon-button-border{
-            border: 1px $blue-600 solid;
-        }
-
-        &.icon-button-background{
-            background-color: $blue-600;
-
-            clr-icon{
-                color: $primary-white;
-            }
+        &.btn-primary{
+            color: $primary-white;
         }
     } 
 
@@ -100,7 +89,7 @@
         }
 
         &:focus{
-            border: $blue-450 $border-thick double;
+            @include button-focus;
         }
 
         &:active{
@@ -115,7 +104,7 @@
         }
 
         &:focus{
-            border: $blue-450 $border-thick double;
+            @include button-focus;
         }
 
         &:active{
@@ -128,25 +117,23 @@
 .btn.btn-primary{
     min-width: $btn-min-width;
     background-color: $btn-default;
+    border: none;
 
     &:disabled{
-        border: none !important;
         background-color: $gray-200 !important;
         color: $gray-450;
         font-size: 14px;
     }
 
     &:focus{
-        border: $blue-450 $border-thick double;
+        @include button-focus;
     }
 
     &:hover{
-        border: none;
         background-color: $btn-hover;
     }
 
     &:active{
-        border: none;
         background-color: $blue-800;
     }
 }
@@ -162,14 +149,15 @@
     }
 
     &:focus{
-        border: $blue-450 $border-thick double;
+        @include button-focus;
     }
 
-    &:hover{
+    &:hover:enabled{
         background-color: $btn-warning-hover !important;
     }
 
-    &:active{
+    &:active:enabled{
+        border: none;
         background-color: $btn-warning-press !important;
     }
 }

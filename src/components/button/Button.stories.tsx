@@ -61,11 +61,17 @@ storiesOf("Button", module)
     </div>
     )).add("Icon Buttons", () => (
         <div>
-            <Button key="link" link onClick={action("delete click")} icon={{shape: "trash"}}/>
-            <Button key="link" link onClick={action("copy click")} icon={{shape: "copy"}}/>
+            <Button key="link" onClick={action("delete click")} icon={{shape: "trash"}}/>
+            <Button key="link" onClick={action("copy click")} icon={{shape: "copy"}}/>
             <Button key="link" link onClick={action("window-close click")} icon={{shape: "window-close"}}/>
-            <Button key="link" link onClick={action("refresh click")} className="icon-button-border" icon={{shape: "refresh"}}/>
-            <Button key="link" link onClick={action("settings click")} className="icon-button-background" icon={{shape: "settings"}}/>
+            <Button key="link" onClick={action("refresh click")} icon={{shape: "refresh"}}/>
+            <Button key="link" primary onClick={action("settings click")} icon={{shape: "settings"}}/>
+            <Button key="link" onClick={action("refresh click")} className="icon-button-border" icon={{shape: "refresh"}}>
+                Secondary
+            </Button>
+            <Button key="link" primary onClick={action("settings click")} className="icon-button-background" icon={{shape: "settings"}}>
+                Primary
+            </Button>
         </div>
     ))
     .add("Buttons Disabled", () => (
@@ -76,7 +82,7 @@ storiesOf("Button", module)
             <Button key="disabled" primary disabled >
                 {"Primary"}
             </Button>
-            <Button key="disabled" className="warning-button" disabled >
+            <Button key="disabled" className="warning-button" state={ButtonState.WARNING} disabled >
                 {"Warning"}
             </Button>
         </div>

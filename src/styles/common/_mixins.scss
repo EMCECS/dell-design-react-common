@@ -22,6 +22,12 @@
      border: $border-default;
      outline-style: solid; 
  }
+
+ //Mixin for reusing button focus css.
+ @mixin button-focus {
+    outline: $blue-450 2px solid !important;
+    outline-offset: 1px;
+ }
  
  // Mixin to reuse grid-title related style
  @mixin grid-title {
