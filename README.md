@@ -111,5 +111,33 @@ Prefer- $checkbox-padding-top: 5px;
 
 9. Always override the class associated with the HTML element and not the HTML element iteself
 
-          
+10. @extend vs @include i.e Mixin - which one to use when?
+Prefer Mixin if:-  
+@include keyword is used to include the code written in a mixin block. 
+@include/ Mixin can also accept parameters if required, use it when you need repeatable style with same parameters but with different values.
 
+Prefer @extend if:-
+@extend is used in SASS to inherit(share) the properties from another css selector
+@extend is most useful when the elements are almost same or identical and only differ in some properties
+@extend cannot accept parameters
+
+11. Mixin vs Function 
+Mostly use mixins, unless you need complex custom logic and calculations
+Its bad practice to use functions for side-effects and is heavily discouraged
+Prefer:
+    @function remy($pxsize) {
+        @return ($pxsize/16)+rem;
+    }
+    h1 { font-size: remy(32);}
+Avoid using Mixin like this:-
+    @mixin remy ($pxsize) {
+        font-size: ($pxsize/16)+rem;
+    }
+    h1 { @include remy(32);}
+Function can be used across different elements in your project
+    h1 { font-size: remy(32);}
+    div { width: remy(800);}
+
+12. Use proper nesting for the styles like HTML elements
+Its a good practice to keep it only a level or two to prevent overly specific selectors (which are less useful and harder to override).
+Refer various ways to use & selector https://css-tricks.com/the-sass-ampersand/
