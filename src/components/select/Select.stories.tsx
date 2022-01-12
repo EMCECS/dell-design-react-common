@@ -42,11 +42,11 @@
              </Select>
  
              <br />
-             <Select onChange={action("basic change")} width="50%" isBoxed label="Boxed Select">
+             {/* <Select onChange={action("basic change")} width="50%" isBoxed label="Boxed Select" className="boxedSelect">
                  <SelectOption value="1">One</SelectOption>
                  <SelectOption value="2">Two</SelectOption>
                  <SelectOption value="3">Three</SelectOption>
-             </Select>
+             </Select> */}
          </div>
      ))
      .add("Labels", () => (
@@ -106,7 +106,7 @@
      ))
      .add("Disabled select", () => (
          <div>
-             <Select onChange={action("Disabled select - change")} disabled={true}>
+             <Select onChange={action("Disabled select - change")} disabled={true} label="I've got some options">
                  <SelectOption value="1">One</SelectOption>
                  <SelectOption value="2">Two</SelectOption>
                  <SelectOption value="3">Three</SelectOption>

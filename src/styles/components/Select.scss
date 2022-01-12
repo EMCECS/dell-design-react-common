@@ -2,39 +2,76 @@
 @import "../common/layout";
 @import "../common/colors";
 
-.clr-select-wrapper {
-    width: $input-width;
-    max-height: unset;
-    height: $input-height;
 
-    .clr-select {
-        width: 100% !important;
-        border: 1px solid $gray-550;
-        height: 100%;
-        padding: 7px 16px;
+.clr-form-control {
+
+    .clr-control-label {
         font-family: Roboto;
         line-height: $line-height-20;
         letter-spacing: 0;
         font-size: $font-size-7;
         font-weight: $font-weight-regular;
-        color: $gray-900;
-        background: #fff !important;
-
-        &:not([multiple]):focus {
-            border: 1px solid $blue-600;
-            background-size: 0;
-        }
-
-        // option{
-        //     // color: red;
-        //     // padding: 0 10px;
-        //     height: 40px;
-        // }
+        color: gray-900;
     }
 
-    &::after {
-        top: 15px;
-        right: 0.8rem;
-        z-index: 9;
+    .clr-control-container {
+        margin-top: 0.2rem;
+        flex-direction: column;
+    
+        .clr-select-wrapper {
+            width: $input-width !important;
+            max-height: unset;
+            height: $input-height;
+    
+            .clr-select {
+                width: 100% !important;
+                border: 1px solid $gray-550;
+                height: 100%;
+                padding: 7px 16px;
+                font-family: Roboto;
+                line-height: $line-height-20;
+                letter-spacing: 0;
+                font-size: $font-size-7;
+                font-weight: $font-weight-regular;
+                color: $gray-900;
+                background: $primary-white !important;
+    
+                &:not([multiple]):focus {
+                    border: 1px solid $blue-600;
+                    background-size: 0;
+                }
+    
+                &:hover {
+                    border-color: $gray-900;
+                }
+    
+                &:disabled {
+                    background: $gray-200 !important;
+                    border-color: $gray-450;
+                    color: $gray-450;
+                }
+            }
+    
+            &::after {
+                top: 15px;
+                right: 0.8rem;
+                z-index: 9;
+            }
+        }
+    
+        &.clr-error .clr-validate-icon {
+            margin-top: 0;
+            margin-left: 0;
+        }
+    
+        &.clr-error .clr-subtext, & .clr-subtext  {
+            margin-top: 0.2rem;
+            margin-left: 0;
+            line-height: 1rem;
+        }
+    
+        &.clr-error .clr-select {
+            border-color: $red-700;
+        }
     }
 }
