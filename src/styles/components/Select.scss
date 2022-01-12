@@ -11,7 +11,7 @@
         letter-spacing: 0;
         font-size: $font-size-7;
         font-weight: $font-weight-regular;
-        color: gray-900;
+        color: $gray-900;
     }
 
     .clr-control-container {
@@ -19,7 +19,7 @@
         flex-direction: column;
     
         .clr-select-wrapper {
-            width: $input-width !important;
+            width: $input-width;
             max-height: unset;
             height: $input-height;
     
@@ -27,7 +27,7 @@
                 width: 100% !important;
                 border: 1px solid $gray-550;
                 height: 100%;
-                padding: 7px 16px;
+                padding: 7px 42px 7px 16px;
                 font-family: Roboto;
                 line-height: $line-height-20;
                 letter-spacing: 0;
