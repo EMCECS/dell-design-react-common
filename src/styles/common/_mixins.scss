@@ -28,6 +28,13 @@
     outline: $blue-450 2px solid !important;
     outline-offset: 1px;
  }
+
+ @mixin button-disabled($border, $background-color, $color, $font-size) {
+    border: $border;
+    background-color: $background-color !important;
+    color: $color !important;
+    font-size: $font-size;
+ }
  
  // Mixin to reuse grid-title related style
  @mixin grid-title {

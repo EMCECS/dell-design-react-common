@@ -41,10 +41,8 @@
         }
     
         &:disabled{
-            border: $gray-500 $border-default solid;
-            background-color: $gray-200 !important;
-            color: $gray-450 !important;
-            font-size: $font-size-7;
+            @include button-disabled($gray-500 $border-default solid, $disabled-background-color, $disabled-color, $font-size-7);
+            
         }
 
     &.btn-link{
@@ -66,10 +64,7 @@
         }
     
         &:disabled{
-            border: none;
-            background-color: $gray-200 !important;
-            color: $gray-450 !important;
-            font-size: $font-size-7;
+            @include button-disabled(none, $disabled-background-color, $disabled-color, $font-size-7);
         }
     }
 
@@ -120,9 +115,7 @@
     border: none;
 
     &:disabled{
-        background-color: $gray-200 !important;
-        color: $gray-450;
-        font-size: 14px;
+        @include button-disabled(none, $disabled-background-color, $disabled-color, $font-size-7);
     }
 
     &:focus{
