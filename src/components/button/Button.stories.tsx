@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,71 +18,71 @@ storiesOf("Button", module)
              <div>
                 {"Button Types:"}
                 <br />
-                <Button key="primary" primary onClick={action("Primary click")}>
+                <Button primary onClick={action("Primary click")}>
                     {"Primary"}
                 </Button>
-                <Button key="basic" onClick={action("Secondary click")}>
+                <Button onClick={action("Secondary click")}>
                     {"Secondary"}
                 </Button>
-                <Button key="tertiary" link onClick={action("Tertiary click")}>
+                <Button link onClick={action("Tertiary click")}>
                     {"Tertiary"}
                 </Button>
             </div>))
     .add("Button Sizes", () => (
         <div>
-          <Button key="primary" primary className="small-button-size" onClick={action("Small button click")}>
+          <Button primary className="small-button-size" onClick={action("Small button click")}>
             {"Small"}
         </Button>
-        <Button key="primary" primary className="medium-button-size" onClick={action("Medium button click")}>
+        <Button primary className="medium-button-size" onClick={action("Medium button click")}>
             {"Medium"}
         </Button>
-        <Button key="primary" primary className="normal-button-size" onClick={action("Normal button click")}>
+        <Button primary className="normal-button-size" onClick={action("Normal button click")}>
             {"Normal"}
         </Button>
-        <Button key="primary" primary className="fluid-button-size" onClick={action("Fluid button click")}>
+        <Button primary className="fluid-button-size" onClick={action("Fluid button click")}>
             {"Fluid"}
         </Button>
-        <Button key="primary" primary className="minimum-button-size" onClick={action("Minimum button click")}>
+        <Button primary className="minimum-button-size" onClick={action("Minimum button click")}>
             {"ok"}
         </Button>
         </div>
     ))
     .add("Button Status", () => (
         <div> 
-            <Button key="basic-warning" className="warning-button" state={ButtonState.WARNING} onClick={action("basic-warning click")}>
+            <Button className="warning-button" state={ButtonState.WARNING} onClick={action("basic-warning click")}>
                 {"Warning"}
             </Button>
-            <Button key="basic-success" state={ButtonState.SUCCESS} onClick={action("basic-success click")}>
+            <Button state={ButtonState.SUCCESS} onClick={action("basic-success click")}>
                 {"Success"}
             </Button>
-            <Button key="basic-danger" state={ButtonState.DANGER} onClick={action("basic-danger click")}>
+            <Button state={ButtonState.DANGER} onClick={action("basic-danger click")}>
                 {"Danger"}
             </Button>
     </div>
     )).add("Icon Buttons", () => (
         <div>
-            <Button key="link" onClick={action("delete click")} icon={{shape: "trash"}}/>
-            <Button key="link" onClick={action("copy click")} icon={{shape: "copy"}}/>
-            <Button key="link" link onClick={action("window-close click")} icon={{shape: "window-close"}}/>
-            <Button key="link" onClick={action("refresh click")} icon={{shape: "refresh"}}/>
-            <Button key="link" primary onClick={action("settings click")} icon={{shape: "settings"}}/>
-            <Button key="link" onClick={action("refresh click")} className="icon-button-border" icon={{shape: "refresh"}}>
+            <Button onClick={action("delete click")} icon={{shape: "trash"}}/>
+            <Button onClick={action("copy click")} icon={{shape: "copy"}}/>
+            <Button link onClick={action("window-close click")} icon={{shape: "window-close"}}/>
+            <Button onClick={action("refresh click")} icon={{shape: "refresh"}}/>
+            <Button primary onClick={action("settings click")} icon={{shape: "settings"}}/>
+            <Button onClick={action("refresh click")} icon={{shape: "refresh"}}>
                 Secondary
             </Button>
-            <Button key="link" primary onClick={action("settings click")} className="icon-button-background" icon={{shape: "settings"}}>
+            <Button primary onClick={action("settings click")} icon={{shape: "settings"}}>
                 Primary
             </Button>
         </div>
     ))
     .add("Buttons Disabled", () => (
         <div>
-            <Button key="disabled" disabled >
+            <Button disabled >
                 {"Disabled"}
             </Button>
-            <Button key="disabled" primary disabled >
+            <Button primary disabled >
                 {"Primary"}
             </Button>
-            <Button key="disabled" className="warning-button" state={ButtonState.WARNING} disabled >
+            <Button state={ButtonState.WARNING} disabled >
                 {"Warning"}
             </Button>
         </div>
