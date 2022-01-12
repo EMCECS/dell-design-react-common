@@ -20,7 +20,6 @@ import "@clr/icons/shapes/technology-shapes.js";
 
 ...
 ```
-
 And make use of the components in your app:
 #### `App.tsx`
 ```typescript jsx
@@ -84,15 +83,19 @@ $ npm run storybook
 
 ## SASS Style conventions
 1. SCSS File Structure
+```
 styles
  -> Common
  -> Components
- index.scss
+ -> index.scss
+ ```
 Common utility styles such as Variables, Mixins, Functions, Fonts, Layout (padding, margin) etc. under the Common folder and reusable component styles are under Components like Buttons, Inputs etc.
 
 2. Use more generic to specific, semantically-named variables with kebab-case for example:
+```
 Avoid- $blue-border, $light-blue-border has no pattern
-Prefer - $border-blue, $border-light-blue 
+Prefer - $border-blue, $border-light-blue
+```
 This pattern helps in recollection and hinting by editor.
 In this pattern you can start generically and get more specific as the text editor auto-suggests variable names.
 
@@ -105,31 +108,39 @@ For example - all margin related styles (top, left, right etc) should be declare
 7. The color codes are named as per Dell Design Standard, refer this page if any code is missing and needs to be added. https://web.ddsproduct.com/31b3fd8b1/p/60290f-colors
 
 8. Avoid naming variables with actual values they hold, instead name them by the function they do, for example:
-Avoid- $padding-top-5: 5px;
+Avoid- ``` $padding-top-5: 5px;```
 As value of the this would always remain 5px
-Prefer- $checkbox-padding-top: 5px;
+Prefer-  ``` $checkbox-padding-top: 5px;```
 
 9. Always override the class associated with the HTML element and not the HTML element iteself
 
 10. @extend vs @include i.e Mixin - which one to use when?
-Prefer Mixin if:-  
+
+Prefer Mixin if
+```
 @include keyword is used to include the code written in a mixin block. 
 @include/ Mixin can also accept parameters if required, use it when you need repeatable style with same parameters but with different values.
+```
 
-Prefer @extend if:-
+Prefer @extend if
+```
 @extend is used in SASS to inherit(share) the properties from another css selector
 @extend is most useful when the elements are almost same or identical and only differ in some properties
 @extend cannot accept parameters
+```
 
 11. Mixin vs Function 
 Mostly use mixins, unless you need complex custom logic and calculations
 Its bad practice to use functions for side-effects and is heavily discouraged
 Prefer:
+```
     @function remy($pxsize) {
         @return ($pxsize/16)+rem;
     }
     h1 { font-size: remy(32);}
-Avoid using Mixin like this:-
+```
+Avoid using Mixin like this
+```
     @mixin remy ($pxsize) {
         font-size: ($pxsize/16)+rem;
     }
@@ -137,6 +148,7 @@ Avoid using Mixin like this:-
 Function can be used across different elements in your project
     h1 { font-size: remy(32);}
     div { width: remy(800);}
+```
 
 12. Use proper nesting for the styles like HTML elements
 Its a good practice to keep it only a level or two to prevent overly specific selectors (which are less useful and harder to override).
