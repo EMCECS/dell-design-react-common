@@ -15,14 +15,17 @@ $gray-100: #F7F7F7;
 $gray-200: #EEEEEE;
 $gray-300: #E4E4E4;
 $gray-450:  #BBBBBB;
+$gray-500:  #AAAAAA;
 $gray-550: #888888;
 $gray-700: #666666;
 $gray-900: #333333;
 
 $blue-50: #E7F2FB;
+$blue-100: #D2E7F8;
 $blue-450: #6BACDE;
 $blue-600: #0076CE;
 $blue-700: #005DA4;
+$blue-800: #00447C;
 
 $yellow-300:  #F2AF00;
 
@@ -39,6 +42,13 @@ $btn-disabled: $gray-450;
 $btn-warning: $yellow-300;
 $btn-warning-font: $gray-900;
 $btn-link-border: $blue-600;
+
+$btn-warning-hover: #CB9300;
+$btn-warning-press: #A47700;
+$btn-success-hover: #5C8803;
+$btn-success-press: #4B6E03;
+$btn-danger-hover: #AD0E20;
+$btn-danger-press: #8C0C1A;
 
 // Disabled color
 $disabled-color: $gray-450;

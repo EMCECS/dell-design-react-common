@@ -25,46 +25,134 @@
         border-color: $btn-default;
         size: $btn-size;
         height: $btn-height;
-   
-    btn-link{
+        box-shadow: none !important;
+
+        &:focus{
+            @include button-focus;
+        }
+    
+        &:hover{     
+            border-color: $btn-hover;
+        }
+    
+        &:active{
+            border: $blue-600 1px solid;
+            background-color: $blue-100;
+        }
+    
+        &:disabled{
+            @include button-disabled($gray-500 $border-default solid, $disabled-background-color, $disabled-color, $font-size-7);
+            
+        }
+
+    &.btn-link{
         @include link_button;
+        border: none;
+        outline-style: none;
+
+        &:focus{
+            @include button-focus;
+        }
+    
+        &:hover{     
+            color: $btn-hover;
+        }
+    
+        &:active{
+            color: $blue-800;
+            background-color: transparent !important;
+        }
+    
+        &:disabled{
+            @include button-disabled(none, $disabled-background-color, $disabled-color, $font-size-7);
+        }
     }
 
-    btn-icon {
-        min-width: 0;
+    &.btn-icon {
+        min-width: $btn-icon-width !important;
         color: $btn-default;
-        @include link_button;
+
+        &.btn-primary{
+            color: $primary-white;
+        }
     } 
 
-    &:focus{
-        outline: none !important;
-        border-color: $focus-border-color;
-    }
-
-    &:hover{
-        btn-primary{
-            background-color: $btn-hover;
-        }       
-        border-color: $btn-hover;
-    }
-
-    &:disabled{
+    &.btn-success{
         border: none;
-        background-color: $disabled-background-color;
-        color: $btn-disabled;
+        &:hover{
+            background-color: $btn-success-hover !important;
+        }
+
+        &:focus{
+            @include button-focus;
+        }
+
+        &:active{
+            background-color: $btn-success-press !important;
+        }
+    }
+
+    &.btn-danger{
+        border: none;
+        &:hover{
+            background-color: $btn-danger-hover !important;
+        }
+
+        &:focus{
+            @include button-focus;
+        }
+
+        &:active{
+            background-color: $btn-danger-press !important;
+        }
     }
 
 }
 
 .btn.btn-primary{
     min-width: $btn-min-width;
-    background-color: $btn-default !important;
+    background-color: $btn-default;
+    border: none;
+
+    &:disabled{
+        @include button-disabled(none, $disabled-background-color, $disabled-color, $font-size-7);
+    }
+
+    &:focus{
+        @include button-focus;
+    }
+
+    &:hover{
+        background-color: $btn-hover;
+    }
+
+    &:active{
+        background-color: $blue-800;
+    }
 }
 
-.warning-button{
-    background-color: $btn-warning!important;   
-    border-color: $btn-warning !important;
+.btn-warning{
+    background-color: $btn-warning !important;   
+    border: none;
     color: $btn-warning-font !important;
+
+    &:disabled{
+        border: none;
+        background-color: none !important;
+    }
+
+    &:focus{
+        @include button-focus;
+    }
+
+    &:hover:enabled{
+        background-color: $btn-warning-hover !important;
+    }
+
+    &:active:enabled{
+        border: none;
+        background-color: $btn-warning-press !important;
+    }
 }
 
 .small-button-size{
