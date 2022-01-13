@@ -11,6 +11,7 @@
  @import "../common/layout";
  @import "../common/borders";
  @import "../common/fonts";
+ @import "../common/mixins";
 
 .clr-control-container {
     .clr-radio-wrapper {
@@ -66,10 +67,8 @@
             }
         }
         .clr-control-label {
-            color: $radio-button-label-color;
+            @include label($radio-button-label-font-size);
             padding-left: $radio-button-label-padding-left;
-            font-family: $dell-font;
-            font-size: $radio-button-label-font-size;
             &::before {
                 height: $radio-button-height;
                 width: $radio-button-width;

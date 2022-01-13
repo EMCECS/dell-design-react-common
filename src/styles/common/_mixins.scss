@@ -49,3 +49,18 @@
     background-color: $btn-default;
 }
 
+@mixin subtext($marginTop, $marginLeft) {
+    margin-top: $marginTop;
+    margin-left: $marginLeft;
+    line-height: 1rem;
+}
+
+@mixin label($fontSize: $font-size-7) {
+    font-family: $dell-font;
+    line-height: $line-height-20;
+    letter-spacing: 0;
+    font-size: $fontSize;
+    font-weight: $font-weight-regular;
+    color: $gray-900;
+}
+
