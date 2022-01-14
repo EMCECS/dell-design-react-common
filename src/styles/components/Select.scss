@@ -1,0 +1,86 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+
+@import "../common/fonts";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/mixins";
+
+
+.clr-control-label {
+    @include label;
+}
+
+.clr-control-container {
+
+    .clr-select-wrapper {
+        width: $input-width;
+        max-height: unset;
+        height: $input-height;
+        margin-top: -0.3rem;
+
+        .clr-select {
+            width: 100% !important;
+            border: $border-default solid $gray-550;
+            height: 100%;
+            padding: 0.35rem 2.1rem 0.35rem 0.8rem;
+            font-family: $dell-font;
+            line-height: $line-height-20;
+            letter-spacing: 0;
+            font-size: $font-size-7;
+            font-weight: $font-weight-regular;
+            color: $gray-900;
+            background: $primary-white !important;
+
+            &:not([multiple]):focus {
+                border: $border-default solid $blue-600;
+                background-size: 0;
+            }
+
+            &:hover {
+                border-color: $gray-900;
+            }
+
+            &:disabled {
+                background: $disabled-background-color !important;
+                border-color: $disabled-color;
+                color: $disabled-color;
+            }
+        }
+
+        &::after {
+            top: 15px;
+            right: 0.8rem;
+            z-index: 9;
+        }
+    }
+
+    &>.clr-subtext {
+        @include subtext(0.2rem, 0);
+    }
+
+    &.clr-error {
+        .clr-validate-icon {
+            margin-top: 0;
+            margin-left: 0;
+        }
+    
+        .clr-subtext  {
+            @include subtext(0.2rem, 0);
+        }
+    
+        .clr-select {
+            border-color: $red-700;
+        }
+    }
+}
+
