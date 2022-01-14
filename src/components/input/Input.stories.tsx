@@ -20,7 +20,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 placeholder="Input Textbox"
                 onChange={action("changed")}
             />
@@ -30,7 +29,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 placeholder="Input Textbox"
                 onChange={action("changed")}
@@ -41,7 +39,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 helperText="Input Textbox"
                 onChange={action("changed")}
@@ -52,7 +49,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 title="Input Textbox"
                 onChange={action("changed")}
@@ -65,7 +61,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 placeholder="Input Textbox"
                 onChange={action("changed")}
@@ -77,7 +72,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 type="password"
                 placeholder="Password"
@@ -89,7 +83,6 @@ storiesOf("Input", module)
         <div>
             <Input
                 name="somevalue"
-                isBoxed
                 label="Label 1"
                 type="number"
                 placeholder="Number"
