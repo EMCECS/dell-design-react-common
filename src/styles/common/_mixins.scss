@@ -14,7 +14,6 @@
 // Mixin for reusing link or icon type of button styles
  @mixin link_button {
      margin-right: 0;
-     width: 48px ;
      height: 40px ;
      border-color: $btn-link-border;
      background-color: transparent;
@@ -22,6 +21,19 @@
      outline-color: $outline !important;
      border: $border-default;
      outline-style: solid; 
+ }
+
+ //Mixin for reusing button focus css.
+ @mixin button-focus {
+    outline: $blue-450 2px solid !important;
+    outline-offset: 1px;
+ }
+
+ @mixin button-disabled($border, $background-color, $color, $font-size) {
+    border: $border;
+    background-color: $background-color !important;
+    color: $color !important;
+    font-size: $font-size;
  }
  
  // Mixin to reuse grid-title related style
