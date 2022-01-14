@@ -8,14 +8,13 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- 
 import "styles/components/TextArea.scss";
 import "styles/components/Label.scss";
 
- import {storiesOf} from "@storybook/react";
- import {TextArea} from "@dellstorage/clarity-react/forms/textarea";
- 
- storiesOf("TextArea", module)
+import {storiesOf} from "@storybook/react";
+import {TextArea} from "@dellstorage/clarity-react/forms/textarea";
+
+storiesOf("TextArea", module)
     .add("TextArea Without Label", () => (
         <div>
             <TextArea 
@@ -65,4 +64,3 @@ import "styles/components/Label.scss";
             />
         </div>
     ));
-     
