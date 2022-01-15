@@ -1,0 +1,62 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+ @import "../common/colors";
+ @import "../common/fonts";
+ @import "../common/layout";
+ @import "../common/borders";
+ @import "../common/mixins";
+
+.alert {
+    font-family: $dell-font;
+    font-size: $alert-font-size;
+    line-height: $line-height-20;
+    &.alert-app-level {
+        height: $alert-height;
+        .alert-text {
+            flex: 0 1 auto!important;
+        }
+        &.alert-info {
+            background: $alert-global-info-color;
+        }
+        &.alert-danger {
+            background: $alert-global-danger-color;
+        }
+        &.alert-warning {
+            background: $alert-global-warning-color;
+        }
+        
+        .alert-item {
+            .btn {
+                font-size: $alert-btn-font-size;
+                font-weight: $font-weight-medium;
+            }
+        }
+    }
+    &.alert-info {
+        @include inline-alert($alert-blue-background, $blue-600);
+    }
+    &.alert-success {
+        @include inline-alert($alert-green-background, $green-400);
+    }
+    &.alert-danger {
+        @include inline-alert($alert-red-background, $red-700);
+    }
+    &.alert-warning {
+        @include inline-alert($alert-yellow-background, $yellow-300);
+    }
+    .alert-text {
+        margin-left: $alert-text-margin-left;
+        margin-right: $alert-text-margin-right;
+    }
+    .close {
+        margin-right: $alert-close-margin-right;
+    }
+}

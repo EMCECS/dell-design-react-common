@@ -76,3 +76,11 @@
     color: $gray-900;
 }
 
+// Mixin to create inline alert, accepts background and border color
+@mixin inline-alert($backgroundColor, $borderColor) {
+    background: $backgroundColor;
+    border-color: $borderColor;
+    border-left-width: $border-thick;
+    border-radius: 0px;
+    color: $alert-inline-text-color;
+}

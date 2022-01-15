@@ -29,6 +29,8 @@ $blue-800: #00447C;
 
 $yellow-300:  #F2AF00;
 
+$green-400: #6EA204;
+
 //Error color
 $red-700: #CE1126;
 
@@ -89,4 +91,14 @@ $radio-button-unselected-color: $gray-700;
 $radio-button-unselected-hover-color: $gray-900;
 $radio-button-background-color: $primary-white;
 $radio-button-outline-color: $blue-450;
+
+// Alerts
+$alert-inline-text-color: $gray-900;
+$alert-global-info-color: $blue-450;
+$alert-global-danger-color: $red-700;
+$alert-global-warning-color: $yellow-300;
+$alert-blue-background:#EFF6FB;
+$alert-green-background:#F0F5E5;
+$alert-yellow-background:#FDF6E5;
+$alert-red-background:#FAE6E8;
 
