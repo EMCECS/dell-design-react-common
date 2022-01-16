@@ -20,7 +20,7 @@
     .clr-input {
         box-shadow: none;
         min-height: $input-height !important;
-        height: $input-height;
+        height: $input-height !important;
         width: $input-width;
         padding-left: $input-padding-left;
         margin-left: $input-margin-left !important;
