@@ -24,7 +24,7 @@
         letter-spacing: 0 !important;
         border-color: $btn-default;
         size: $btn-size;
-        height: $btn-height;
+        height: $btn-height !important;
         box-shadow: none !important;
 
         &:focus{
