@@ -1,0 +1,62 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/mixins";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/fonts";
+
+.clr-control-container {
+    .clr-textarea-wrapper {
+        font-family: $dell-font;
+        margin-top: 0;
+        .clr-textarea {
+            @include textarea-border($border-default, $textarea-border-color);
+            margin-top: 0;
+            min-width: $textarea-width;
+            min-height: $textarea-height;
+            border-radius: $textarea-disabled-border-radius;
+
+            &:focus {
+                @include textarea-border($border-default, $textarea-focus-border-color);
+            }
+
+            &:disabled {
+                background: $disabled-background-color;
+                @include textarea-border($border-default, $disabled-color);
+            }
+
+            ::placeholder {
+                text-transform: none;
+                font-size: $textarea-placeholder-font-size;
+                font-weight: $font-weight-regular;
+                color: $textarea-placeholder-color;
+            }
+        }
+    }
+    & .clr-subtext {
+        @include textarea-subtext
+    }
+
+    &.clr-error {
+        & .clr-textarea {
+            @include textarea-border($border-default, $input-error-color);
+        }
+
+        & .clr-subtext {
+            @include textarea-subtext
+        }
+
+        & .clr-validate-icon {
+            margin-top: 0 !important;
+        }
+    }
+}
