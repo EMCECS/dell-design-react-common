@@ -19,7 +19,7 @@
         width: max-content ;
         border-radius: $btn-border-radius;
         line-height: $btn-line-height;
-        font-size: $btn-font-size;
+        font-size: $btn-font-size !important;
         text-transform: none;
         letter-spacing: 0 !important;
         border-color: $btn-default;
