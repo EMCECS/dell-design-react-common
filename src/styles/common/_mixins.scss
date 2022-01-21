@@ -10,6 +10,7 @@
  @import "colors";
  @import "borders";
  @import "fonts";
+ @import "layout";
 
 // Mixin for reusing link or icon type of button styles
  @mixin link_button {
@@ -101,4 +102,15 @@
 @mixin basic-badge($backgroundColor) {
     background: $backgroundColor;
     border: none;
+}
+
+@mixin textarea-border($border, $border-color) {
+    outline: none !important;
+    border: $border solid $border-color;
+}
+
+@mixin textarea-subtext {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    line-height: $textarea-subtext-line-height;
 }

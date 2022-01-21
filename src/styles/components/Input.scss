@@ -16,11 +16,10 @@
 
 .clr-control-container {
     font-family: $dell-font;
-    margin-bottom: $input-container-margin;
-    margin-top: $input-container-margin;
 
-    input {
+    .clr-input {
         box-shadow: none;
+        min-height: $input-height !important;
         height: $input-height;
         width: $input-width;
         padding-left: $input-padding-left;
@@ -58,16 +57,12 @@
         font-size: $subtext-font-size;
         font-weight: $font-weight-regular;
         line-height: $subtext-line-height;
-        margin-top: $subtext-margin-top;
-        margin-left: $subtext-margin-left;
     }
 
     &.clr-error{
         .clr-subtext{
             color: $input-error-color;
             line-height: $subtext-error-line-height;
-            margin-top: $subtext-error-margin-top;
-            margin-left: $subtext-error-margin-left;
         }
 
         .clr-validate-icon {
@@ -85,14 +80,13 @@
             color: $disabled-color;
         }
     }
+}
 
-    label {
-        width: max-content;
-        color: $input-label-color;
-        letter-spacing: initial;
-        align-content: center;
-        margin-top: $input-label-margin-top;
-        margin-left: $input-label-margin-left;
-        margin-right: $input-label-margin-right;
-    }
+.clr-control-label {
+    width: max-content;
+    color: $input-label-color;
+    letter-spacing: initial;
+    font-weight: $font-weight-regular !important;
+    line-height: $line-height-20 !important;
+    font-size: $font-size-7 !important;
 }
