@@ -46,23 +46,23 @@
     }
     &.badge-light-blue {
         color: $badge-default-font-color;
-        @include basic-badge($blue-100);
+        @include basic-badge($blue-100!important);
     }
     &.badge-blue, &.badge-3 {
-        @include basic-badge($blue-800);
+        @include basic-badge($blue-800!important);
     }
     &.badge-purple, &.badge-2 {
-        @include basic-badge($purple);
+        @include basic-badge($purple!important);
     }
     &.badge-orange, &.badge-4 {
-        @include basic-badge($orange-500);
+        @include basic-badge($orange-500!important);
     }
     &.badge-1 {
         color: $badge-default-font-color;
-        @include basic-badge($gray-200);
+        @include basic-badge($gray-200!important);
     }
     &.badge-5 {
-        color: $badge-default-font-color;
+        color: $badge-default-font-color!important;
         background: $primary-white;
         border: $border-default solid $badge-default-border-color;
     }

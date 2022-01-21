@@ -16,7 +16,7 @@
 
 .alert {
     font-family: $dell-font;
-    font-size: $alert-font-size;
+    font-size: $alert-font-size!important;
     line-height: $line-height-20;
     min-height: $alert-height;
     .alert-carousal-text {
@@ -26,6 +26,9 @@
         height: $alert-app-level-height;
         .alert-text {
             flex: 0 1 auto!important;
+            .btn {
+                height: 24px!important;
+            }
         }
         &.alert-info {
             @include app-level-alert($alert-global-info-color, $primary-white, $alert-global-info-corousal-color, $alert-global-info-corousal-hover-color);
@@ -65,6 +68,7 @@
                 font-size: $alert-btn-font-size;
                 font-weight: $font-weight-medium;
                 margin-left: 1rem;
+                text-transform: unset;
             }
         }
         .alert-carousal {
@@ -116,7 +120,7 @@
         height: 32px;
     }
     .alert-items {
-        padding: 0.25rem 0rem 0.25rem .75rem;
+        padding: 0.25rem 0rem 0.25rem .75rem!important;
     }
     .alert-actions {
         height: 20px;
