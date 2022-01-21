@@ -53,6 +53,11 @@
                     }
                 }
             }
+            .alert-actions{
+                .alert-action {
+                    color: $alert-global-warning-text-color!important;
+                }
+            }
         }
         
         .alert-item {
@@ -78,6 +83,15 @@
                 clr-icon {
                     fill: $primary-white;
                 }
+            }
+        }
+        .alert-actions {
+            height: 24px;
+            .alert-action {
+                margin-top: 0px;
+                height: 24px!important;
+                width: fit-content;
+                color: $primary-white!important;
             }
         }
     }
@@ -108,7 +122,7 @@
         height: 20px;
         .alert-action {
             margin-top: 0px;
-            height: 20px;
+            height: 20px!important;
             width: fit-content;
             color: $alert-action-color!important;
         }
