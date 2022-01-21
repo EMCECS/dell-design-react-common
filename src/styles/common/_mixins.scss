@@ -81,7 +81,7 @@
 @mixin inline-alert($backgroundColor, $borderColor) {
     background: $backgroundColor;
     border-color: $borderColor;
-    border-left-width: $border-thick;
+    border-left-width: $border-thick!important;
     border-radius: 0px;
     color: $alert-inline-text-color;
 }
