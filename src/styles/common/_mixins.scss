@@ -84,3 +84,21 @@
     border-radius: 0px;
     color: $alert-inline-text-color;
 }
+
+// Mixin to create app level alert, accepts background, color, corousal color,  corousal hover color
+@mixin app-level-alert($backgroundColor, $color, $corousalColor, $corousalHoverColor ) {
+    background: $backgroundColor;
+    color: $color;
+    .alert-carousal {
+        background-color: $corousalColor;
+        &:hover {
+            background-color: $corousalHoverColor;
+        }
+    }
+}
+
+// Mixin to reuse badge common styles accepts background
+@mixin basic-badge($backgroundColor) {
+    background: $backgroundColor;
+    border: none;
+}
