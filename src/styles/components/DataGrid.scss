@@ -32,7 +32,8 @@
             &:after {
                 height: $grid-column-separator-height;
                 background-color: $grid-selected-background-color;
-                margin-top: $grid-column-separator-margin-top;          
+                margin-top: $grid-column-separator-margin-top;
+                top: -35%;        
             }
         }
     }
@@ -55,6 +56,10 @@
                     }
                 }
             }
+        }
+
+        .datagrid-expandable-caret-button {
+            min-width: 100% !important;
         }
 
         .datagrid-cell {
