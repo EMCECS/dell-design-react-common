@@ -85,5 +85,8 @@ storiesOf("Button", module)
             <Button state={ButtonState.WARNING} disabled >
                 {"Warning"}
             </Button>
+            <Button link disabled >
+                {"Link"}
+            </Button>
         </div>
     )); 
