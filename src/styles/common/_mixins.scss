@@ -53,6 +53,7 @@
     min-height: 46px;
     line-height: $grid-line-height;
     padding-right: $grid-cell-padding-right;
+    min-width: $grid-cell-min-width;
 }
 
 // Mixin to create buttons in different sizes, it accepts width and height
