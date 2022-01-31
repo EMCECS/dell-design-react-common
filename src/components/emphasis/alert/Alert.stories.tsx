@@ -14,15 +14,13 @@ import { Direction, Icon } from "@dellstorage/clarity-react/icon";
 import { Button, ButtonSize } from "@dellstorage/clarity-react/forms/button";
 import "styles/components/Alert.scss";
 
-let closeable = false;
-
 storiesOf("Alert", module)
     .add("Global / App Level Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} level={AlertLevel.APP} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} level={AlertLevel.APP} >
                 <AlertItem>Informational Standard</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} level={AlertLevel.APP} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} level={AlertLevel.APP} >
                 <AlertItem>Dangerous Alert</AlertItem>
             </Alert>
             <Alert type={AlertType.WARNING} level={AlertLevel.APP}>
@@ -32,10 +30,10 @@ storiesOf("Alert", module)
     ))
     .add("Global / App Level Actionable Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} level={AlertLevel.APP} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} level={AlertLevel.APP} >
                 <AlertItem actions={<Button>Action</Button>}>Informational Standard</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} level={AlertLevel.APP} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} level={AlertLevel.APP} >
                 <AlertItem actions={<Button>Action</Button>}>Dangerous Alert</AlertItem>
             </Alert>
             <Alert type={AlertType.WARNING} level={AlertLevel.APP}>
@@ -45,7 +43,7 @@ storiesOf("Alert", module)
     ))
     .add("Global / App Level Actionable Alerts with carousel", () => (
         <div style={{ width: '80em', padding: '3em' }}>
-            <div className="alert alert-info alert-app-level" style={{ marginBottom: "2em" }}>
+            <div className="alert alert-info alert-app-level" >
                 <div className="alert-carousal">
                     <Button
                         link
@@ -62,7 +60,7 @@ storiesOf("Alert", module)
                 <div className="alert-items"><AlertItem actions={<Button>Action</Button>}>Informational Standard </AlertItem>
                 </div>
             </div>
-            <div className="alert alert-danger alert-app-level" style={{ marginBottom: "2em" }}>
+            <div className="alert alert-danger alert-app-level" >
                 <div className="alert-carousal">
                     <Button
                         link
@@ -79,7 +77,7 @@ storiesOf("Alert", module)
                 <div className="alert-items"><AlertItem actions={<Button>Action</Button>}>Informational Standard</AlertItem>
                 </div>
             </div>
-            <div className="alert alert-warning alert-app-level" style={{ marginBottom: "2em" }}>
+            <div className="alert alert-warning alert-app-level" >
                 <div className="alert-carousal">
                     <Button
                         link
@@ -100,29 +98,29 @@ storiesOf("Alert", module)
     ))
     .add("Inline Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} >
                 <AlertItem>This is the default informational alert.</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} >
                 <AlertItem>This is the default dangerous alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.SUCCESS} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.SUCCESS} >
                 <AlertItem>This is the success alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.WARNING} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.WARNING} >
                 <AlertItem>This is a warning alert</AlertItem>
             </Alert>
         </div>
     ))
     .add("Closable Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} closeable style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} closeable >
                 <AlertItem>Informational Alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} closeable style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} closeable >
                 <AlertItem>Dangerous Alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.SUCCESS} closeable style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.SUCCESS} closeable >
                 <AlertItem>Successful Alert</AlertItem>
             </Alert>
             <Alert type={AlertType.WARNING} closeable>
@@ -132,13 +130,13 @@ storiesOf("Alert", module)
     ))
     .add("Compact Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} size={AlertSize.COMPACT} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} size={AlertSize.COMPACT} >
                 <AlertItem>Informational Standard</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} size={AlertSize.COMPACT} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} size={AlertSize.COMPACT} >
                 <AlertItem>Dangerous Alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.SUCCESS} size={AlertSize.COMPACT} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.SUCCESS} size={AlertSize.COMPACT} >
                 <AlertItem>Successful Alert</AlertItem>
             </Alert>
             <Alert type={AlertType.WARNING} size={AlertSize.COMPACT}>
@@ -148,13 +146,13 @@ storiesOf("Alert", module)
     ))
     .add("Actionable Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} closeable={true} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} closeable={true} >
                 <AlertItem actions={<Button link>Action</Button>}>Informational Standard</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} closeable={true} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.DANGER} closeable={true} >
                 <AlertItem actions={<Button link>Action</Button>}>Dangerous Alert</AlertItem>
             </Alert>
-            <Alert type={AlertType.SUCCESS} closeable={true} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.SUCCESS} closeable={true} >
                 <AlertItem actions={<Button link>Action</Button>}>Successful Alert</AlertItem>
             </Alert>
             <Alert type={AlertType.WARNING} closeable={true} size={AlertSize.COMPACT}>
@@ -164,25 +162,25 @@ storiesOf("Alert", module)
     ))
     .add("Multi-item alert", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} style={{ marginBottom: "2em" }} closeable={true}>
+            <Alert type={AlertType.INFO} closeable={true}>
                 <AlertItem>Alert Item one</AlertItem>
                 <AlertItem icon={<Icon shape="piggy-bank" />}>Alert Item two</AlertItem>
                 <AlertItem icon={<Icon shape="dollar" />}>Alert Item three</AlertItem>
                 <AlertItem icon={<Icon shape="asterisk" />}>Alert Item four</AlertItem>
             </Alert>
-            <Alert type={AlertType.DANGER} style={{ marginBottom: "2em" }} closeable={true}>
+            <Alert type={AlertType.DANGER} closeable={true}>
                 <AlertItem>Alert Item one</AlertItem>
                 <AlertItem icon={<Icon shape="piggy-bank" />}>Alert Item two</AlertItem>
                 <AlertItem icon={<Icon shape="dollar" />}>Alert Item three</AlertItem>
                 <AlertItem icon={<Icon shape="asterisk" />}>Alert Item four</AlertItem>
             </Alert>
-            <Alert type={AlertType.SUCCESS} style={{ marginBottom: "2em" }} closeable={true}>
+            <Alert type={AlertType.SUCCESS} closeable={true}>
                 <AlertItem>Alert Item one</AlertItem>
                 <AlertItem icon={<Icon shape="piggy-bank" />}>Alert Item two</AlertItem>
                 <AlertItem icon={<Icon shape="dollar" />}>Alert Item three</AlertItem>
                 <AlertItem icon={<Icon shape="asterisk" />}>Alert Item four</AlertItem>
             </Alert>
-            <Alert type={AlertType.WARNING} style={{ marginBottom: "2em" }} closeable={true}>
+            <Alert type={AlertType.WARNING} closeable={true}>
                 <AlertItem>Alert Item one</AlertItem>
                 <AlertItem icon={<Icon shape="piggy-bank" />}>Alert Item two</AlertItem>
                 <AlertItem icon={<Icon shape="dollar" />}>Alert Item three</AlertItem>
@@ -192,7 +190,7 @@ storiesOf("Alert", module)
     ))
     .add("Static Alerts", () => (
         <div style={{ width: "80em", padding: "3em" }}>
-            <Alert type={AlertType.INFO} style={{ marginBottom: "2em" }}>
+            <Alert type={AlertType.INFO} >
                 <AlertItem isStatic>Informational Standard</AlertItem>
             </Alert>
         </div>

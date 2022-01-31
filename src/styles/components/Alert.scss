@@ -19,6 +19,7 @@
     font-size: $alert-font-size!important;
     line-height: $line-height-20;
     min-height: $alert-height;
+    margin-bottom: 1rem;
     .alert-carousal-text {
         width: auto;
     }
@@ -120,7 +121,7 @@
         height: 32px;
     }
     .alert-items {
-        padding: 0.25rem 0rem 0.25rem .75rem!important;
+        padding: 0.5rem 0rem 0.5rem .75rem!important;
     }
     .alert-actions {
         height: 20px;
