@@ -18,6 +18,7 @@
         background-color: $grid-background-color;
         height: $grid-column-height;
         border-color : $grid-border-color;
+        min-width: $grid-cell-min-width;
 
         .datagrid-column-title {
             @include grid-title;
@@ -32,7 +33,8 @@
             &:after {
                 height: $grid-column-separator-height;
                 background-color: $grid-selected-background-color;
-                margin-top: $grid-column-separator-margin-top;          
+                margin-top: $grid-column-separator-margin-top;
+                top: -35%;        
             }
         }
     }
@@ -55,6 +57,10 @@
                     }
                 }
             }
+        }
+
+        .datagrid-expandable-caret-button {
+            min-width: 100% !important;
         }
 
         .datagrid-cell {
@@ -98,6 +104,15 @@
 
     .btn {
       width: $grid-footer-btn-width;
+      display: flex;
+      justify-content: center;
+      &.btn-icon {
+          min-width: unset !important;
+      }
+      &:disabled {
+          border: none;
+          background-color: unset !important;
+      }
     }
 
     .column-switch {

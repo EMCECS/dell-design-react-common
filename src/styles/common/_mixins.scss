@@ -50,9 +50,10 @@
     font-weight: $font-weight-regular;
     font-size: $grid-font-size-default;
     color: $grid-text-default-color;
-    height: 46px;
+    min-height: 46px;
+    line-height: $grid-line-height;
     padding-right: $grid-cell-padding-right;
-    padding-left: $grid-cell-padding-left;
+    min-width: $grid-cell-min-width;
 }
 
 // Mixin to create buttons in different sizes, it accepts width and height
