@@ -1,0 +1,103 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../common/fonts";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+
+.modal-content-wrapper {
+    .clr-wizard-stepnav-wrapper {
+        padding-top: 0;
+        padding-bottom: 3.15rem;
+
+        .clr-wizard-title {
+            font-family: $dell-font;
+            line-height: $line-height-32;
+            letter-spacing: 0;
+            font-size: $font-size-24;
+            font-weight: $font-weight-regular;
+        }
+
+        .clr-wizard-stepnav-list {
+
+            .clr-wizard-stepnav-item {
+                box-shadow: none;
+                position: relative;
+                padding-left: 0;
+                padding-top: 0;
+
+                &.complete::after {
+                    position: absolute;
+                    content: "";
+                    transform: rotate(45deg);
+                    height: 14px;
+                    width: 9.53px;
+                    border-bottom: $border-thin solid $tick-success;
+                    border-right: $border-thin solid $tick-success;
+                    right: 0;
+                    top: 0;
+                    bottom: 12px;
+                    z-index: 1;
+                    margin: auto 0.75rem;
+                }
+
+                &.error::after {
+                    position: absolute;
+                    content: "X";
+                    width: $tick-success-width;
+                    height: $tick-success-height;
+                    color: $primary-white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: $red-700;
+                    top: 0;
+                    right: 0;
+                    bottom: 6px;
+                    margin: auto 0.75rem;
+                    font-size: 10px;
+                }
+
+                &.active {
+                    
+                    .btn {
+                        background-color: $blue-50;
+                        border-left: $border-thick solid $blue-600;
+                        font-weight: $font-weight-medium;
+                        color: $blue-600;
+                        border-radius: 0;
+                    }
+                }
+
+                .btn {
+                    font-family: $dell-font;
+                    line-height: $line-height-20;
+                    letter-spacing: 0;
+                    font-size: $font-size-7;
+                    font-weight: $font-weight-regular;
+                    color: $gray-900;
+                }
+            }
+        }
+    }
+
+    .clr-wizard-footer {
+        .clr-form-control {
+            margin-top: 0;
+
+            .clr-input-wrapper {
+                .clr-subtext {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
