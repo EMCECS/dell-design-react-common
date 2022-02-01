@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
@@ -114,4 +115,23 @@
     margin-top: 0 !important;
     margin-left: 0 !important;
     line-height: $textarea-subtext-line-height;
+}
+
+@mixin input-style {
+    box-shadow: none;
+    min-height: $input-height !important;
+    height: $input-height;
+    width: $input-width;
+    margin-left: $input-margin-left !important;
+    margin-right: $input-margin-right;
+    border-color: $input-border-color;
+    border-style: solid;
+    border-width: $border-default; 
+}
+
+@mixin input-focus-style {
+    outline: none !important;
+    border-radius: $input-focus-border-radius !important;
+    border: $border-default solid $input-focus-border-color;
+    background-size: 0 !important;
 }

@@ -14,22 +14,27 @@ import {DataList, DataListOption} from "@dellstorage/clarity-react/forms/datalis
 import "styles/components/DataList.scss";
 import {action} from "@storybook/addon-actions";
 
+//Default datalist options
+const renderDefaultDatalistOptions = () => (
+    <>
+        <DataListOption value="Item1" />
+        <DataListOption value="Item2" />
+        <DataListOption value="Item3" />
+    </>
+)
+
 storiesOf("DataList", module)
     .add("Basic DataList", () => (
         <div>
             <DataList>
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
     .add("With place holder text", () => (
         <div>
             <DataList placeHolder="No label">
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
@@ -42,18 +47,14 @@ storiesOf("DataList", module)
                 errorText="This field is reuired"
                 errorTitle="This field is required"
             >
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
     .add("With helper text", () => (
         <div>
             <DataList placeHolder="No label" helperText="Select any option or create one">
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
@@ -65,9 +66,7 @@ storiesOf("DataList", module)
                 label="Select Item"
                 style={{width: "50%"}}
             >
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
@@ -79,9 +78,7 @@ storiesOf("DataList", module)
                 label="Select Item"
                 defaultValue="Item1"
             >
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
@@ -95,9 +92,7 @@ storiesOf("DataList", module)
                 debounce={true}
                 debounceTime={1000}
             >
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ))
@@ -109,9 +104,7 @@ storiesOf("DataList", module)
                 label="Select Item"
                 onChange={action("changed: Immediately")}
             >
-                <DataListOption value="Item1" />
-                <DataListOption value="Item2" />
-                <DataListOption value="Item3" />
+                {renderDefaultDatalistOptions()}
             </DataList>
         </div>
     ));
