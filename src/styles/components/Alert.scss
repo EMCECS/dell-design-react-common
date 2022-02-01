@@ -1,0 +1,136 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+ @import "../common/colors";
+ @import "../common/fonts";
+ @import "../common/layout";
+ @import "../common/borders";
+ @import "../common/mixins";
+
+.alert {
+    font-family: $dell-font;
+    font-size: $alert-font-size!important;
+    line-height: $line-height-20;
+    min-height: $alert-height;
+    margin-bottom: 1rem;
+    .alert-carousal-text {
+        width: auto;
+    }
+    &.alert-app-level {
+        height: $alert-app-level-height;
+        .alert-text {
+            flex: 0 1 auto!important;
+            .btn {
+                height: 24px!important;
+            }
+        }
+        &.alert-info {
+            @include app-level-alert($alert-global-info-color, $primary-white, $alert-global-info-corousal-color, $alert-global-info-corousal-hover-color);
+        }
+        &.alert-danger {
+            @include app-level-alert($alert-global-danger-color, $primary-white, $alert-global-danger-corousal-color, $alert-global-danger-corousal-hover-color); 
+        }
+        &.alert-warning {
+            @include app-level-alert($alert-global-warning-color, $alert-global-warning-text-color, $alert-global-warning-corousal-color, $alert-global-warning-corousal-hover-color);
+            .alert-item {
+                .btn {
+                    color: $alert-global-warning-text-color;
+                    border: $border-default solid $alert-global-warning-text-color;
+                }
+                .alert-icon-wrapper {
+                    clr-icon {
+                        fill: $alert-global-warning-text-color;
+                    }
+                }
+            }
+            .alert-carousal {
+                .btn-icon {
+                    clr-icon {
+                        fill: $alert-global-warning-text-color;
+                    }
+                }
+            }
+            .alert-actions{
+                .alert-action {
+                    color: $alert-global-warning-text-color!important;
+                }
+            }
+        }
+        
+        .alert-item {
+            .btn {
+                font-size: $alert-btn-font-size;
+                font-weight: $font-weight-medium;
+                margin-left: 1rem;
+                text-transform: unset;
+            }
+        }
+        .alert-carousal {
+            border-right: none;
+            display: inline-flex;
+            align-items: center;
+            .alert-carousal-text {
+                text-align: center;
+                margin-left: 0.5rem;
+                margin-right: 0.2rem;
+                width: auto;
+            }
+            .btn-icon {
+                width: 40px;
+                padding: 0rem;
+                clr-icon {
+                    fill: $primary-white;
+                }
+            }
+        }
+        .alert-actions {
+            height: 24px;
+            .alert-action {
+                margin-top: 0px;
+                height: 24px!important;
+                width: fit-content;
+                color: $primary-white!important;
+            }
+        }
+    }
+    &.alert-info {
+        @include inline-alert($alert-blue-background, $blue-600);
+    }
+    &.alert-success {
+        @include inline-alert($alert-green-background, $green-400);
+    }
+    &.alert-danger {
+        @include inline-alert($alert-red-background, $red-700);
+    }
+    &.alert-warning {
+        @include inline-alert($alert-yellow-background, $yellow-300);
+    }
+    .alert-text {
+        margin-left: $alert-text-margin-left;
+        margin-right: $alert-text-margin-right;
+    }
+    .close {
+        margin-right: $alert-close-margin-right;
+        height: 32px;
+    }
+    .alert-items {
+        padding: 0.5rem 0rem 0.5rem .75rem!important;
+    }
+    .alert-actions {
+        height: 20px;
+        .alert-action {
+            margin-top: 0px;
+            height: 20px!important;
+            width: fit-content;
+            color: $alert-action-color!important;
+        }
+    }
+}
+
