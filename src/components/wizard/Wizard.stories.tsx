@@ -12,132 +12,15 @@
  import {storiesOf} from "@storybook/react";
  import Wizard, {WizardSize} from "@dellstorage/clarity-react/newWizard/Wizard";
  import WizardStep, {WizardStepType} from "@dellstorage/clarity-react/newWizard/WizardStep";
- import {State, Store} from "@sambego/storybook-state";
+ import {State} from "@sambego/storybook-state";
  import {Button} from "@dellstorage/clarity-react/forms/button";
  import {Input} from "@dellstorage/clarity-react/forms/input/Input";
  import {Select, SelectOption} from "@dellstorage/clarity-react/forms/select";
  import {WizardFooterProps} from "@dellstorage/clarity-react/newWizard/WizardFooter";
- import {action} from "@storybook/addon-actions";
  import {SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
  import "styles/components/Wizard.scss";
+ import {store} from './WizardUtility';
  
- let steps: any[] = [];
- 
- // Function to create array of step data
- function buildStepData(numberOfSteps: number = 1) {
-     for (let i = 0; i < numberOfSteps; i++) {
-         steps.push({name: "page " + i, type: null});
-     }
- }
- 
- // Function to create steps UI
- function buildStepsUI() {
-     const StepUI = steps.map((step, index) => {
-         return <WizardStep id={index} key={index} name={step.name} type={step.type} valid={true} complete={true} />;
-     });
-     return StepUI;
- }
- 
- // Function to build steps for story
- function buildSteps(numberOfSteps: number = 1) {
-     buildStepData(numberOfSteps);
-     return buildStepsUI();
- }
- 
- // Function to update steps array for story
- function updateSteps(index: number, action: string) {
-     if (action === "insert") {
-         // Insert new step
-         steps.splice(index, 0, {index: index, name: "page new", type: WizardStepType.SUB_STEP});
-     } else if (action === "remove") {
-         steps.splice(index, 1);
-     }
-     return buildStepsUI();
- }
- 
- const store = new Store({
-     open: false,
-     isLoading: false,
-     activeWizard: "",
-     basicInfoValid: true,
-     basicInfoComplete: false,
-     currentWizardStepID: 0,
-     steps: buildSteps(2),
-     addStep: (index: number, numberOfSteps: number = 1) =>
-         store.set({
-             open: true,
-             steps: updateSteps(index, "insert"),
-         }),
-     removeStep: (index: number, numberOfSteps: number = 1) =>
-         store.set({
-             open: true,
-             steps: updateSteps(index, "remove"),
-         }),
-     handleToggleWizard: (size: string) =>
-         store.set({
-             open: true,
-             activeWizard: size,
-         }),
-     handleClose: (): void =>
-         store.set({
-             open: false,
-         }),
-     handleNext: (): void => {
-         action("next");
-         store.set({
-             currentWizardStepID: store.get("currentWizardStepID") + 1,
-         });
-     },
-     handlePrevious: (): void =>
-         action("previous") &&
-         store.set({
-             currentWizardStepID: store.get("currentWizardStepID") - 1,
-         }),
-     handleComplete: (): void =>
-         action("complete") &&
-         store.set({
-             open: false,
-         }),
-     handleSyncComplete: (): void => {
-         action("complete with loading spinner") &&
-             store.set({
-                 isLoading: true,
-             });
- 
-         // enable wizard navigation and footer after 3 sec
-         setTimeout(function() {
-             store.set({
-                 isLoading: false,
-             });
-         }, 3000);
- 
-         // Add delay for story only
-         setTimeout(function() {
-             store.set({
-                 open: false,
-             });
-         }, 5000);
-     },
-     handleSelectStep: (selectedStepID: any): void => {
-         action("selected step ", selectedStepID) &&
-             store.set({
-                 currentWizardStepID: selectedStepID,
-             });
-     },
-     handleValidate: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-         if (evt.target.value.length > 2) {
-             store.set({
-                 basicInfoValid: true,
-                 basicInfoComplete: true,
-             });
-         } else {
-             store.set({
-                 basicInfoValid: false,
-                 basicInfoComplete: false,
-             });
-         }
-     },
- });
  
  storiesOf("New Wizard", module)
      .add("Wizard Sizes", (_props: any) => (
