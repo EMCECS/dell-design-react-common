@@ -18,22 +18,11 @@
     font-family: $dell-font;
 
     .clr-input {
-        box-shadow: none;
-        min-height: $input-height !important;
-        height: $input-height;
-        width: $input-width;
+        @include input-style;
         padding-left: $input-padding-left;
-        margin-left: $input-margin-left !important;
-        margin-right: $input-margin-right;
-        border-color: $input-border-color;
-        border-style: solid;
-        border-width: $border-default;
 
         &:focus {
-            outline: none !important;
-            border-radius: $input-focus-border-radius !important;
-            border: $border-default solid $input-focus-border-color;
-            background-size: 0 !important;
+            @include input-focus-style
         }
 
         &:disabled {
