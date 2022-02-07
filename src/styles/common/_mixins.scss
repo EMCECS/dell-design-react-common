@@ -135,3 +135,8 @@
     border: $border-default solid $input-focus-border-color;
     background-size: 0 !important;
 }
+
+@mixin border-background-none {
+    border: none !important;
+    background-color: transparent !important;
+}

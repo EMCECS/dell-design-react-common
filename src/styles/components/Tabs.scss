@@ -1,0 +1,72 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/mixins";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/fonts";
+
+.nav[role="tablist"] {
+    height: unset;
+    & .nav-item {
+        margin-right: 0;
+    }
+    .nav-link {
+        color: $gray-700 !important;
+    }
+
+    .btn {
+        padding-left: $tab-padding-left;
+        padding-right: $tab-padding-right;
+        font-weight: $font-weight-medium;
+        &:not(:disabled) {
+            &.active {
+                color: $blue-600 !important;
+                box-shadow: 0 $tab-box-shadow-y-offset 0 inset $blue-600 !important;
+            }
+            &:not(.active):hover {
+                background-color: $blue-50 !important;
+            }
+        }
+        &.btn-link {
+            &:focus {
+                outline: none !important;
+            }
+        }
+        &.dropdown-item {
+            &:disabled {
+                @include border-background-none;
+            }
+            &:focus {
+                outline: none !important;
+            }
+            &:active {
+                @include border-background-none;
+            }
+        }
+    }
+
+    .dropdown {
+        > .btn {
+            display: flex;
+            gap: $tab-dropdown-btn-flex-gap;
+            align-items: center;
+        }
+    }
+}
+
+.tabs-vertical {
+    > .nav {
+        .nav-link.active {
+            @include border-background-none;
+        }
+    }
+}
