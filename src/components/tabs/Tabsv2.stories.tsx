@@ -10,21 +10,16 @@
 
 import {storiesOf} from "@storybook/react";
 import {State} from "@sambego/storybook-state";
-import {TabsV2, TabV2Orientation, TabPane} from "@dellstorage/clarity-react/tabs";
+import {TabsV2, TabV2Orientation} from "@dellstorage/clarity-react/tabs";
 import "styles/components/Tabs.scss";
-import {store} from "components/tabs/TabsV2Utils";
+import {store, tabPanes} from "components/tabs/TabsV2Utils";
 
 storiesOf("TabsV2", module)
     .add("TabV2 Horizontal", () => (
         <State store={store}>
             {(state) => (
                 <TabsV2 id="horizontalTabs" tabs={state.simpleTabs} tabOrientation={TabV2Orientation.HORIZONTAL}>
-                    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>
-                    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>
-                    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>
-                    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>
-                    <TabPane id={"metrics"}>{"METRICS"}</TabPane>
-                    <TabPane id={"policies"}>{"POLICIES"}</TabPane>
+                    {tabPanes.map((tabPane) => tabPane)}
                 </TabsV2>
             )}
         </State>
@@ -33,12 +28,7 @@ storiesOf("TabsV2", module)
         <State store={store}>
             {(state) => (
                 <TabsV2 id="staticTabs" tabs={state.staticTabs} tabOrientation={TabV2Orientation.HORIZONTAL}>
-                    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>
-                    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>
-                    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>
-                    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>
-                    <TabPane id={"metrics"}>{"METRICS"}</TabPane>
-                    <TabPane id={"policies"}>{"POLICIES"}</TabPane>
+                    {tabPanes.map((tabPane) => tabPane)}
                 </TabsV2>
             )}
         </State>
@@ -52,12 +42,7 @@ storiesOf("TabsV2", module)
                     tabOrientation={TabV2Orientation.HORIZONTAL}
                     overflowTabsFrom={2}
                 >
-                    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>
-                    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>
-                    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>
-                    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>
-                    <TabPane id={"metrics"}>{"METRICS"}</TabPane>
-                    <TabPane id={"policies"}>{"POLICIES"}</TabPane>
+                    {tabPanes.map((tabPane) => tabPane)}
                 </TabsV2>
             )}
         </State>
@@ -82,12 +67,7 @@ storiesOf("TabsV2", module)
                     tabs={state.staticTabsWithTabSelected}
                     tabOrientation={TabV2Orientation.HORIZONTAL}
                 >
-                    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>
-                    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>
-                    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>
-                    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>
-                    <TabPane id={"metrics"}>{"METRICS"}</TabPane>
-                    <TabPane id={"policies"}>{"POLICIES"}</TabPane>
+                    {tabPanes.map((tabPane) => tabPane)}
                 </TabsV2>
             )}
         </State>
@@ -96,12 +76,7 @@ storiesOf("TabsV2", module)
         <State store={store}>
             {(state) => (
                 <TabsV2 id="verticalTabs" tabs={state.simpleTabs} tabOrientation={TabV2Orientation.VERTICAL}>
-                    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>
-                    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>
-                    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>
-                    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>
-                    <TabPane id={"metrics"}>{"METRICS"}</TabPane>
-                    <TabPane id={"policies"}>{"POLICIES"}</TabPane>
+                    {tabPanes.map((tabPane) => tabPane)}
                 </TabsV2>
             )}
         </State>

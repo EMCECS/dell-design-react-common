@@ -8,10 +8,10 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- import {TabV2Details, TabV2Type} from "@dellstorage/clarity-react/tabs";
- import {Store} from "@sambego/storybook-state";
+import {TabV2Details, TabV2Type, TabPane} from "@dellstorage/clarity-react/tabs";
+import {Store} from "@sambego/storybook-state";
 
- const tabsData: TabV2Details[] = [
+const tabsData: TabV2Details[] = [
     {
         name: "Dashboard",
         id: "dashboard",
@@ -87,3 +87,12 @@ export const store = new Store({
         });
     },
 });
+
+export const tabPanes: JSX.Element[] = [
+    <TabPane id={"dashboard"}>{"DASHBOARD"}</TabPane>,
+    <TabPane id={"mgmt"}>{"MANAGEMENT"}</TabPane>,
+    <TabPane id={"cloud"}>{"CLOUD"}</TabPane>,
+    <TabPane id={"infra"}>{"INFRASTRUCTURE"}</TabPane>,
+    <TabPane id={"metrics"}>{"METRICS"}</TabPane>,
+    <TabPane id={"policies"}>{"POLICIES"}</TabPane>,
+];
