@@ -1,0 +1,127 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../common/fonts";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/layout";
+
+.table {
+    border: $table-border;
+
+    th {
+        height: 48px;
+        font-family: $dell-font;
+        font-size: $font-size-7;
+        font-weight: $font-weight-medium;
+        line-height: $line-height-20;
+        letter-spacing: 0;
+        vertical-align: middle;
+        padding-left: .8rem;
+        position: relative;
+        background: transparent;
+        border-bottom-color: $gray-300;
+
+        &:first-child, &.left:first-child {
+            padding-left: 1.2rem;
+        }
+
+        &:not(:last-child):after {
+            position: absolute;
+            content: "";
+            width: 1px;
+            height: 24px;
+            background-color: $gray-300;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+        }
+    }
+
+    td {
+        height: 40px;
+        font-family: $dell-font;
+        font-size: $font-size-7;
+        font-weight: $font-weight-regular;
+        line-height: $line-height-20;
+        letter-spacing: 0;
+        padding: .5rem .8rem;
+
+        &:first-child, &.left:first-child {
+            padding-left: 1.2rem;
+        }
+    }
+
+    &.table-compact {
+        th {
+            height: 40px;
+        }
+        td {
+            height: 32px;
+        }
+    }
+
+    &.table-noborder {
+        & th {
+            border-bottom: $table-border;
+            border-top: $table-border;
+        }
+        & td {
+            border-bottom: $table-border;
+            padding: .45rem .8rem;
+        }
+        &.table-compact {
+            & td {
+                padding: .25rem .8rem;
+
+                &:first-child {
+                    padding-left: 1.25rem;
+                }
+            }
+        }
+    }
+
+    &.table-vertical {
+        & th {
+            &:not(:last-child):after {
+                width: 0;
+                height: 0;
+            }
+
+            &:first-child {
+                padding-left: 1.2rem;
+                background: transparent;
+                border-right: $table-border;
+            }
+        }
+        
+        td {
+            &:not(:last-of-type) {
+                border-right: $table-border;
+            }
+        }
+
+        &.table-compact {
+            tr:not(:first-child) {
+                th {
+                    border-top: 0;
+                }
+            }
+            tbody {
+                tr:first-child {
+                    th, td {
+                        border-top: $table-border;
+                    }
+                }
+            }
+        }
+    }
+}
