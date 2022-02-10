@@ -14,7 +14,7 @@
 .clr-accordion {
     &-panel {
         .clr-accordion-header {
-            background: $gray-100;
+            background: $primary-white;
         }
         &-open {
             & .clr-accordion-header {
@@ -28,6 +28,9 @@
         .clr-accordion-header-button {
             &:focus {
                 outline: none !important;
+            }
+            &:hover {
+                background: $gray-100;
             }
             .clr-accordion-status {
                 color: $gray-900;
