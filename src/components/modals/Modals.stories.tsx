@@ -48,7 +48,9 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <p>I'm a small modal</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => storeSmall.set({isOpen: false})}>cancel</Button>
+                        <Button onClick={() => storeSmall.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
                         <Button onClick={() => storeSmall.set({isOpen: false})} primary={true}>
                             ok
                         </Button>
@@ -62,9 +64,11 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <p>I'm a medium modal</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => storeMedium.set({isOpen: false})}>cancel</Button>
+                        <Button onClick={() => storeMedium.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
                         <Button onClick={() => storeMedium.set({isOpen: false})} primary={true}>
-                            ok
+                            OK
                         </Button>
                     </ModalFooter>
                 </Modal>
@@ -76,9 +80,11 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <p>I'm a large modal</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => storeLarge.set({isOpen: false})}>cancel</Button>
+                        <Button onClick={() => storeLarge.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
                         <Button onClick={() => storeLarge.set({isOpen: false})} primary={true}>
-                            ok
+                            OK
                         </Button>
                     </ModalFooter>
                 </Modal>
@@ -94,9 +100,11 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <p>I'm an extra large modal</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => storeExtraLarge.set({isOpen: false})}>cancel</Button>
+                        <Button onClick={() => storeExtraLarge.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
                         <Button onClick={() => storeExtraLarge.set({isOpen: false})} primary={true}>
-                            ok
+                            OK
                         </Button>
                     </ModalFooter>
                 </Modal>
@@ -115,9 +123,11 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <p>I'm a Custom sized modal with 500 X 300</p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => storeCustom.set({isOpen: false})}>cancel</Button>
+                        <Button onClick={() => storeCustom.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
                         <Button onClick={() => storeCustom.set({isOpen: false})} primary={true}>
-                            ok
+                            OK
                         </Button>
                     </ModalFooter>
                 </Modal>
