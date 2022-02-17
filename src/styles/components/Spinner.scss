@@ -14,7 +14,7 @@
 @import "../common/mixins";
 
 .spinner {
-    animation: spin 1.25s linear infinite;
+    animation: spin $spinner-spin-duration linear infinite;
     &.spinner-lg {
         @include spinner-size($spinner-lg-height, $spinner-lg-width, $spinner-lg-min-height, $spinner-lg-min-width);
         + span {
