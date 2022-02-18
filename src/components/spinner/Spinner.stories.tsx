@@ -20,7 +20,7 @@ storiesOf("Spinner", module)
     ))
     .add("Inline spinners", () => (
         <div>
-            <Spinner type={SpinnerType.INLINE}>Loading ...</Spinner>
+            <Spinner type={SpinnerType.INLINE}>{"Loading ..."}</Spinner>
         </div>
     ))
     .add("Spinners on a dark background", () => (
