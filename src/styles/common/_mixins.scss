@@ -140,3 +140,10 @@
     border: none !important;
     background-color: transparent !important;
 }
+
+@mixin spinner-size($height, $width, $min-height, $min-width) {
+    height: $height;
+    width: $width;
+    min-height: $min-height;
+    min-width: $min-width;
+}
