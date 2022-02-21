@@ -1,0 +1,28 @@
+.circular-progress {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    max-height: 250px;
+    transform: rotate(-90deg);
+}
+.circular-bg {
+    fill: none;
+}
+.circle {
+    fill: none;
+}
+.progress-label {
+    fill: #333333;
+    font-weight: bold;
+    transform: rotate(90deg);
+    text-anchor:middle;
+}
+
+.percent {
+    font-size: 40px;
+    font-weight: 400;
+}
+.detail {
+    font-size: 18px;
+    font-weight: 400;
+}
