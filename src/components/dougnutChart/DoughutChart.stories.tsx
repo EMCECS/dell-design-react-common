@@ -1,130 +1,130 @@
 import React from 'react';
 import { storiesOf } from "@storybook/react";
-import CircularProgress from './CircularProgress';
-import { ProgressBarStatus } from './CircularProgress';
+import DoughnutChart from './DoughnutChart';
+import { CHART_STATUS } from './DoughnutChart';
 
 const divStyle: any = {display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent:"space-around"}
 
-storiesOf("CircularProgressBar", module)
+storiesOf("Dougnut Chart", module)
     .add("Default", () => (
         <div style={divStyle}>
-            <CircularProgress
-                progress={25}
+            <DoughnutChart
+                percentage={25}
                 label="Sample Label"/>
         </div>
     ))
     .add("Status", () => (
         <div style={divStyle}>
-            <CircularProgress
-                progress={14}
+            <DoughnutChart
+                percentage={14}
                 label="Success"
-                status={ProgressBarStatus.SUCCESS}/>
-            <CircularProgress 
-                progress={87}
+                status={CHART_STATUS.SUCCESS}/>
+            <DoughnutChart 
+                percentage={87}
                 label="Danger"
-                status={ProgressBarStatus.DANGER}/>
-            <CircularProgress
-                progress={55}
+                status={CHART_STATUS.DANGER}/>
+            <DoughnutChart
+                percentage={55}
                 label="Warning"
-                status={ProgressBarStatus.WARNING}/>
+                status={CHART_STATUS.WARNING}/>
         </div>
     ))
     .add("Only label", () => (
         <div style={divStyle}>
-            <CircularProgress
-                progress={14}
+            <DoughnutChart
+                percentage={14}
                 label="Success"
-                status={ProgressBarStatus.SUCCESS}
+                status={CHART_STATUS.SUCCESS}
                 showPercentage={false}/>
-            <CircularProgress
-                progress={87}
+            <DoughnutChart
+                percentage={87}
                 label="Danger"
-                status={ProgressBarStatus.DANGER}
+                status={CHART_STATUS.DANGER}
                 showPercentage={false}/>
-            <CircularProgress
-                progress={55}
+            <DoughnutChart
+                percentage={55}
                 label="Warning"
-                status={ProgressBarStatus.WARNING}
+                status={CHART_STATUS.WARNING}
                 showPercentage={false}/>
         </div>
     ))
     .add("Size", () => (
         <div style={divStyle}>
-            <CircularProgress
-                size={100}
-                progress={14}
+            <DoughnutChart
+                size={20}
+                percentage={14}
                 label="Success"
-                status={ProgressBarStatus.SUCCESS}
+                status={CHART_STATUS.SUCCESS}
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 size={150}
-                progress={14}
+                percentage={14}
                 label="150px"
-                status={ProgressBarStatus.SUCCESS}/>
-            <CircularProgress
+                status={CHART_STATUS.SUCCESS}/>
+            <DoughnutChart
                 size={175}
-                progress={87}
+                percentage={87}
                 label="175px"
-                status={ProgressBarStatus.DANGER}/>
-            <CircularProgress
+                status={CHART_STATUS.DANGER}/>
+            <DoughnutChart
                 size={225}
-                progress={55}
+                percentage={55}
                 label="225px"
-                status={ProgressBarStatus.WARNING}/>
-            <CircularProgress
+                status={CHART_STATUS.WARNING}/>
+            <DoughnutChart
                 size={250}
-                progress={55}
-                label="225px"
-                status={ProgressBarStatus.WARNING}/>
+                percentage={55}
+                label="250px"
+                status={CHART_STATUS.WARNING}/>
         </div>
     ))
     .add("Track Width", () => (
         <div style={divStyle}>
-            <CircularProgress
+            <DoughnutChart
                 trackWidth={5}
                 size={100}
-                progress={14}
+                percentage={14}
                 label="5px"
-                status={ProgressBarStatus.SUCCESS}
+                status={CHART_STATUS.SUCCESS}
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 trackWidth={10}
                 size={100}
-                progress={87}
+                percentage={87}
                 label="10px"
-                status={ProgressBarStatus.DANGER}
+                status={CHART_STATUS.DANGER}
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 trackWidth={15}
                 size={100}
-                progress={55}
+                percentage={55}
                 label="15px"
-                status={ProgressBarStatus.WARNING}
+                status={CHART_STATUS.WARNING}
                 showPercentage={false}/>
         </div>
     ))
     .add("Label Length", () => (
         <div style={divStyle}>
-            <CircularProgress
+            <DoughnutChart
                 size={100}
-                progress={14}
+                percentage={14}
                 label="Eiusmod elit adipisicing magna nostrud commodo sunt sit."
                 labelLength={5}
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 size={150}
-                progress={87}
+                percentage={87}
                 label="Eiusmod elit adipisicing magna nostrud commodo sunt sit."
                 labelLength={10}
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 size={200}
-                progress={55}
+                percentage={55}
                 label="Eiusmod elit adipisicing magna nostrud commodo sunt sit."
                 showPercentage={false}/>
-            <CircularProgress
+            <DoughnutChart
                 size={250}
-                progress={55}
+                percentage={55}
                 label="Eiusmod elit adipisicing magna nostrud commodo sunt sit."
                 labelLength={20}
                 showPercentage={false}/>
