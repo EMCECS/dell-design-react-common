@@ -19,7 +19,10 @@
         @include tooltip-content;
         &::before{
             @include tooltip-arrow-position(auto, auto, -8px, -1px);
-            
+            border-top: 4px solid $tooltip-border-color;
+            border-right: 5px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left: 5px solid $tooltip-border-color;
         }
         &::after{
             @include tooltip-arrow-position(auto, auto, -5px, 0px);
@@ -51,7 +54,7 @@
 
     &.tooltip-top-right {
         .tooltip-content {
-                &::before{
+            &::before {
                 @include tooltip-arrow-position(auto, auto, -8px, -1px);
                 border-top: 4px solid $tooltip-border-color;
                 border-right: 5px solid transparent;
