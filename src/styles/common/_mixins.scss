@@ -140,3 +140,24 @@
     border: none !important;
     background-color: transparent !important;
 }
+
+// Mixin for Tooltip arrow position
+@mixin tooltip-arrow-position($top, $right, $bottom, $left) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    position: absolute;
+    content: "";
+}
+
+// Mixin for Tootip content
+@mixin tooltip-content {
+    background-color: $tooltip-background-color!important;
+    color: $tooltip-text-color!important;
+    border: 1px solid $tooltip-border-color;
+    box-shadow: 0 0 2px $tooltip-border-color;
+    border-radius: 0px;
+    padding: 16px !important;
+    font-size: $tooltip-font-size;
+}

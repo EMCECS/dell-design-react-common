@@ -1,0 +1,207 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/mixins";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/borders";
+@import "../common/fonts";
+
+.tooltip {
+    .tooltip-content {
+        @include tooltip-content;
+        &::before{
+            @include tooltip-arrow-position(auto, auto, -8px, -1px);
+            
+        }
+        &::after{
+            @include tooltip-arrow-position(auto, auto, -5px, 0px);
+            border-top: 3px solid $tooltip-background-color;
+            border-right: 4px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-left: 4px solid $tooltip-background-color;
+        }
+    }
+
+    &.tooltip-bottom-right {
+        .tooltip-content {
+            &::before{
+                @include tooltip-arrow-position(-8px, auto, auto, -1px);
+                border-right: 5px solid transparent;
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid $tooltip-border-color;
+                border-left: 5px solid $tooltip-border-color;
+            }
+            &::after{
+                @include tooltip-arrow-position(-6px, auto, auto, 0px);
+                border-top: 3px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 3px solid $tooltip-background-color;
+                border-left: 4px solid $tooltip-background-color;
+            }
+        }
+    }
+
+    &.tooltip-top-right {
+        .tooltip-content {
+                &::before{
+                @include tooltip-arrow-position(auto, auto, -8px, -1px);
+                border-top: 4px solid $tooltip-border-color;
+                border-right: 5px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 5px solid $tooltip-border-color;
+            }
+        }
+    }
+
+    &.tooltip-top {
+        .tooltip-content {
+            &::before{
+                @include tooltip-arrow-position(auto, auto, -8px, -1px);
+                border-top: 4px solid $tooltip-border-color;
+                border-right: 5px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 5px solid $tooltip-border-color;
+            }
+            &::after{
+                @include tooltip-arrow-position(auto, auto, -5px, 0px);
+                border-top: 3px solid $tooltip-background-color;
+                border-right: 4px solid transparent;
+                border-bottom: 3px solid transparent;
+                border-left: 4px solid $tooltip-background-color;
+            }
+        }
+    }
+
+
+    &.tooltip-bottom-right {
+        .tooltip-content {
+            &::before{
+                @include tooltip-arrow-position(-8px, auto, auto, -1px);
+                border-right: 5px solid transparent;
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid $tooltip-border-color;
+                border-left: 5px solid $tooltip-border-color;
+            }
+            &::after{
+                @include tooltip-arrow-position(-6px, auto, auto, 0px);
+                border-top: 3px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 3px solid $tooltip-background-color;
+                border-left: 4px solid $tooltip-background-color;
+            }
+        }
+    }
+
+    &.tooltip-bottom-left {
+        .tooltip-content {
+            &::before{
+                @include tooltip-arrow-position(-8px, -1px, auto, auto);
+                border-top: 4px solid transparent;
+                border-right: 5px solid $tooltip-border-color;
+                border-bottom: 4px solid $tooltip-border-color;
+                border-left: 5px solid transparent;
+            }
+            &::after{
+                @include tooltip-arrow-position(-6px, 0, auto, auto);
+                border-top: 3px solid transparent;
+                border-right: 4px solid $tooltip-background-color;
+                border-bottom: 3px solid $tooltip-background-color;
+                border-left: 4px solid transparent;
+            }
+        }
+    }
+
+    &.tooltip-bottom {
+        .tooltip-content {
+            top: 100%;
+            left: 50%;
+            padding: .45rem .6rem;
+            margin-top: 0.8rem;
+            bottom: auto;
+            &::before{
+                @include tooltip-arrow-position(-8px, auto, auto, -1px);
+                border-top: 4px solid transparent;
+                border-right: 5px solid transparent;
+                border-bottom: 4px solid $tooltip-border-color;
+                border-left: 5px solid $tooltip-border-color;
+            }
+            &::after{
+                @include tooltip-arrow-position(-6px, auto, auto, 0px);
+                border-top: 3px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 3px solid $tooltip-background-color;
+                border-left: 4px solid $tooltip-background-color;
+            }
+        }
+    }
+
+    &.tooltip-right {
+        .tooltip-content {
+            &::before{
+                @include tooltip-arrow-position(-1px, auto, auto, -8px);
+                border-top: 5px solid $tooltip-border-color;
+                border-right: 4px solid $tooltip-border-color;
+                border-bottom: 5px solid transparent;
+                border-left: 4px solid transparent;
+            }
+            &::after {
+                @include tooltip-arrow-position(0px, auto, auto, -5px);
+                border-top: 4px solid $tooltip-background-color;
+                border-right: 3px solid $tooltip-background-color;
+                border-bottom: 4px solid transparent;
+                border-left: 3px solid transparent;
+            }
+        }
+    }
+
+    &.tooltip-top-left {
+        .tooltip-content {
+            &::before {
+                @include tooltip-arrow-position(auto, -1px, -8px, auto);
+                border-top: 4px solid $tooltip-border-color;
+                border-right: 5px solid $tooltip-border-color;
+                border-bottom: 4px solid transparent;
+                border-left: 5px solid transparent;
+            }
+            &::after {
+                @include tooltip-arrow-position(auto, 0px, -5px, auto);
+                border-top: 3px solid $tooltip-background-color;
+                border-right: 4px solid $tooltip-background-color;
+                border-bottom: 3px solid transparent;
+                border-left: 4px solid transparent;
+            }
+        }
+    }
+
+    &.tooltip-left {
+        .tooltip-content {
+            &::before {
+                @include tooltip-arrow-position(-1px, -8px, auto, auto);
+                border-top: 5px solid $tooltip-border-color;
+                border-right: 4px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-left: 4px solid $tooltip-border-color;
+            }
+            &::after {
+                @include tooltip-arrow-position(0px, -5px, auto, auto);
+                border-top: 4px solid $tooltip-background-color;
+                border-right: 3px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 3px solid $tooltip-background-color;
+            }
+        }
+    }
+    .tooltip-xs {
+        .tooltip-content {
+            font-size: 0.75rem;
+        }
+    }
+}
