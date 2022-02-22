@@ -15,14 +15,17 @@
 @import "../common/fonts";
 
 .tooltip {
+    .is-solid {
+        color: $tooltip-icon-color!important;
+    }
     .tooltip-content {
         @include tooltip-content;
         &::before{
             @include tooltip-arrow-position(auto, auto, -8px, -1px);
-            border-top: 4px solid $tooltip-border-color;
-            border-right: 5px solid transparent;
-            border-bottom: 4px solid transparent;
-            border-left: 5px solid $tooltip-border-color;
+            border-top: 4px solid$tooltip-border-color!important;
+            border-right: 5px solid transparent!important;
+            border-bottom: 4px solid transparent!important;
+            border-left: 5px solid$tooltip-border-color!important;
         }
         &::after{
             @include tooltip-arrow-position(auto, auto, -5px, 0px);
@@ -37,10 +40,10 @@
         .tooltip-content {
             &::before{
                 @include tooltip-arrow-position(-8px, auto, auto, -1px);
-                border-right: 5px solid transparent;
-                border-top: 4px solid transparent;
-                border-bottom: 4px solid $tooltip-border-color;
-                border-left: 5px solid $tooltip-border-color;
+                border-right: 5px solid transparent!important;
+                border-top: 4px solid transparent!important;
+                border-bottom: 4px solid$tooltip-border-color!important;
+                border-left: 5px solid$tooltip-border-color!important;
             }
             &::after{
                 @include tooltip-arrow-position(-6px, auto, auto, 0px);
@@ -56,10 +59,10 @@
         .tooltip-content {
             &::before {
                 @include tooltip-arrow-position(auto, auto, -8px, -1px);
-                border-top: 4px solid $tooltip-border-color;
-                border-right: 5px solid transparent;
-                border-bottom: 4px solid transparent;
-                border-left: 5px solid $tooltip-border-color;
+                border-top: 4px solid$tooltip-border-color!important;
+                border-right: 5px solid transparent!important;
+                border-bottom: 4px solid transparent!important;
+                border-left: 5px solid$tooltip-border-color!important;
             }
         }
     }
@@ -68,10 +71,10 @@
         .tooltip-content {
             &::before{
                 @include tooltip-arrow-position(auto, auto, -8px, -1px);
-                border-top: 4px solid $tooltip-border-color;
-                border-right: 5px solid transparent;
-                border-bottom: 4px solid transparent;
-                border-left: 5px solid $tooltip-border-color;
+                border-top: 4px solid$tooltip-border-color!important;
+                border-right: 5px solid transparent!important;
+                border-bottom: 4px solid transparent!important;
+                border-left: 5px solid$tooltip-border-color!important;
             }
             &::after{
                 @include tooltip-arrow-position(auto, auto, -5px, 0px);
@@ -88,10 +91,10 @@
         .tooltip-content {
             &::before{
                 @include tooltip-arrow-position(-8px, auto, auto, -1px);
-                border-right: 5px solid transparent;
-                border-top: 4px solid transparent;
-                border-bottom: 4px solid $tooltip-border-color;
-                border-left: 5px solid $tooltip-border-color;
+                border-right: 5px solid transparent!important;
+                border-top: 4px solid transparent!important;
+                border-bottom: 4px solid$tooltip-border-color!important;
+                border-left: 5px solid$tooltip-border-color!important;
             }
             &::after{
                 @include tooltip-arrow-position(-6px, auto, auto, 0px);
@@ -107,10 +110,10 @@
         .tooltip-content {
             &::before{
                 @include tooltip-arrow-position(-8px, -1px, auto, auto);
-                border-top: 4px solid transparent;
-                border-right: 5px solid $tooltip-border-color;
-                border-bottom: 4px solid $tooltip-border-color;
-                border-left: 5px solid transparent;
+                border-top: 4px solid transparent!important;
+                border-right: 5px solid$tooltip-border-color!important;
+                border-bottom: 4px solid$tooltip-border-color!important;
+                border-left: 5px solid transparent!important;
             }
             &::after{
                 @include tooltip-arrow-position(-6px, 0, auto, auto);
@@ -131,10 +134,10 @@
             bottom: auto;
             &::before{
                 @include tooltip-arrow-position(-8px, auto, auto, -1px);
-                border-top: 4px solid transparent;
-                border-right: 5px solid transparent;
-                border-bottom: 4px solid $tooltip-border-color;
-                border-left: 5px solid $tooltip-border-color;
+                border-top: 4px solid transparent!important;
+                border-right: 5px solid transparent!important;
+                border-bottom: 4px solid$tooltip-border-color!important;
+                border-left: 5px solid$tooltip-border-color!important;
             }
             &::after{
                 @include tooltip-arrow-position(-6px, auto, auto, 0px);
@@ -150,10 +153,10 @@
         .tooltip-content {
             &::before{
                 @include tooltip-arrow-position(-1px, auto, auto, -8px);
-                border-top: 5px solid $tooltip-border-color;
-                border-right: 4px solid $tooltip-border-color;
-                border-bottom: 5px solid transparent;
-                border-left: 4px solid transparent;
+                border-top: 5px solid$tooltip-border-color!important;
+                border-right: 4px solid$tooltip-border-color!important;
+                border-bottom: 5px solid transparent!important;
+                border-left: 4px solid transparent!important;
             }
             &::after {
                 @include tooltip-arrow-position(0px, auto, auto, -5px);
@@ -169,10 +172,10 @@
         .tooltip-content {
             &::before {
                 @include tooltip-arrow-position(auto, -1px, -8px, auto);
-                border-top: 4px solid $tooltip-border-color;
-                border-right: 5px solid $tooltip-border-color;
-                border-bottom: 4px solid transparent;
-                border-left: 5px solid transparent;
+                border-top: 4px solid$tooltip-border-color!important;
+                border-right: 5px solid$tooltip-border-color!important;
+                border-bottom: 4px solid transparent!important;
+                border-left: 5px solid transparent!important;
             }
             &::after {
                 @include tooltip-arrow-position(auto, 0px, -5px, auto);
@@ -188,10 +191,10 @@
         .tooltip-content {
             &::before {
                 @include tooltip-arrow-position(-1px, -8px, auto, auto);
-                border-top: 5px solid $tooltip-border-color;
-                border-right: 4px solid transparent;
-                border-bottom: 5px solid transparent;
-                border-left: 4px solid $tooltip-border-color;
+                border-top: 5px solid$tooltip-border-color!important;
+                border-right: 4px solid transparent!important;
+                border-bottom: 5px solid transparent!important;
+                border-left: 4px solid$tooltip-border-color!important;
             }
             &::after {
                 @include tooltip-arrow-position(0px, -5px, auto, auto);

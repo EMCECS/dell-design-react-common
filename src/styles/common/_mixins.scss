@@ -143,10 +143,10 @@
 
 // Mixin for Tooltip arrow position
 @mixin tooltip-arrow-position($top, $right, $bottom, $left) {
-    top: $top;
-    right: $right;
-    bottom: $bottom;
-    left: $left;
+    top: $top!important;
+    right: $right!important;
+    bottom: $bottom!important;
+    left: $left!important;
     position: absolute;
     content: "";
 }
