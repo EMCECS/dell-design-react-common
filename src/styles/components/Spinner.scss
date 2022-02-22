@@ -1,0 +1,41 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../common/fonts";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/mixins";
+
+.spinner {
+    animation: spin $spinner-spin-duration linear infinite;
+    &.spinner-lg {
+        @include spinner-size($spinner-lg-height, $spinner-lg-width, $spinner-lg-min-height, $spinner-lg-min-width);
+        + span {
+            margin-left: $spinner-lg-label-left-margin;
+            font-size: $spinner-lg-label-font-size;
+        }
+    }
+    &.spinner-md {
+        @include spinner-size($spinner-md-height, $spinner-md-width, $spinner-md-min-height, $spinner-md-min-width);
+        + span {
+            margin-left: $spinner-md-label-left-margin;
+        }
+    }
+    &.spinner-sm {
+        @include spinner-size($spinner-sm-height, $spinner-sm-width, $spinner-sm-min-height, $spinner-sm-min-width);
+        + span {
+            margin-left: $spinner-sm-label-left-margin;
+        }
+    }
+    + span {
+        color: $gray-900;
+        margin-left: $spinner-sm-label-left-margin;
+    }
+}

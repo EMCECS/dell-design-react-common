@@ -151,7 +151,7 @@
     content: "";
 }
 
-// Mixin for Tootip content
+// Mixin for Tootip content common style
 @mixin tooltip-content {
     background-color: $tooltip-background-color!important;
     color: $tooltip-text-color!important;
@@ -161,3 +161,11 @@
     padding: 16px !important;
     font-size: $tooltip-font-size;
 }
+
+@mixin spinner-size($height, $width, $min-height, $min-width) {
+    height: $height;
+    width: $width;
+    min-height: $min-height;
+    min-width: $min-width;
+}
+
