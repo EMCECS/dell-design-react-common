@@ -5,7 +5,7 @@ import { CHART_STATUS } from './DoughnutChart';
 
 const divStyle: any = {display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent:"space-around"}
 
-storiesOf("Dougnut Chart", module)
+storiesOf("Doughnut Chart", module)
     .add("Default", () => (
         <div style={divStyle}>
             <DoughnutChart
