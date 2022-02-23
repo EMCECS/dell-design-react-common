@@ -42,6 +42,10 @@ import { Icon } from "@dellstorage/clarity-react/icon";
                         <span className="nav-text">{"Object Stores"}</span> 
                     </a>
                     <a className="nav-link nav-icon-text submenu-navlink">
+                        <Icon shape={""} className="" />
+                        <span className="nav-text">{"ObjectScale Systems"}</span>
+                    </a>
+                    <a className="nav-link nav-icon-text submenu-navlink">
                         <Icon shape={"file-settings"} className="nav-icon" />
                         <span className="nav-text">{"Settings"}</span>
                     </a>
