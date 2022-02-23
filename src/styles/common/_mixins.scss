@@ -147,3 +147,9 @@
     min-height: $min-height;
     min-width: $min-width;
 }
+
+//Main container focus style 
+@mixin main-container-focus-style {
+    background-color: $blue-800;
+    outline: dotted 1px $main-container-outline-color !important;
+}
