@@ -12,7 +12,7 @@
  import {storiesOf} from "@storybook/react";
  import {Header, HeaderColor, Nav, NavLevel, NavLink, NavType} from "@dellstorage/clarity-react/layout/nav";
  import "styles/components/Navigation.scss";
-import { Icon } from "@dellstorage/clarity-react/icon";
+ import { Icon } from "@dellstorage/clarity-react/icon";
  
  storiesOf("Header", module)
  
