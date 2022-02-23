@@ -1,0 +1,104 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+@import "../common/layout";
+
+$headerHeight:56px;
+
+.header {
+    background-color: $blue-600;
+    max-height: $headerHeight !important;
+    .branding {
+        clr-icon{
+            height: 30px;
+            width: 30px;
+            color: $primary-white;
+        }
+        .title {
+            font-size: 18px !important;
+            font-weight: light;
+            color: $primary-white;
+        }
+    }
+
+    .header-actions {
+       // height: $headerHeight;
+        clr-icon{
+            height: 16px;
+            width: 16px;
+            color: $primary-white !important;
+        }
+
+        .dropdown {
+            &:hover {
+                background-color: $blue-600;
+                height:56px
+            }
+            .btn.btn-outline-primary {
+                height: 16px;
+                color: $primary-white;
+                &:hover
+                {
+                    background-color: red;
+                }
+                &:focus{
+                    background-color: yellow;
+                }
+                border:none
+            }
+        }
+    }
+}
+
+.header-actions> clr-icon {
+    margin-top: 20px;
+    &:hover{
+        background-color: red;
+    }
+    &:focus{
+        background-color: yellow;
+    }
+}
+
+// .header * {
+//     background-color: $blue-600;
+// }
+
+.btn.btn-icon {
+    height: 16px;
+    margin-right: 0;
+    //width: 16px;
+    clr-icon{
+    
+        color: $primary-white ;
+        // &:hover
+        // {
+        //     background-color: red;
+        // }
+        // &:focus{
+        //     background-color: yellow;
+        // }
+    }
+}
+
+.header-actions> * {
+   // margin-right: 24px;
+    &:hover{
+        background-color: red;
+    }
+    &:focus{
+        background-color: yellow;
+    }
+}
+
