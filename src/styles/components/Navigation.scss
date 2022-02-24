@@ -1,0 +1,65 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+@import "../common/layout";
+
+.header-nav {
+    background-color: $primary-white;
+    .nav-link {
+        margin: 10px 32px 0 0;
+        padding: 0 0 9px 0;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: $border-thin solid transparent;
+        &:first-of-type {
+            margin-left: 24px;
+        }
+        .nav-text {
+            font-family: $dell-font;
+            font-size: $font-size-7;
+            line-height: $line-height-20;
+            font-weight: $font-weight-regular;
+            color: $gray-700;
+            padding: 0 8px;
+        }
+        clr-icon {
+            width: 16px;
+            height: 16px;
+            color: $gray-700 !important;
+            padding-right: 0;
+        }
+        &.active {
+            border-bottom: 2px solid $blue-600;
+            .nav-text {
+                font-weight: $font-weight-medium;
+                color: $blue-600;
+                font-size: $font-size-7;
+            }
+            clr-icon {
+                color: $blue-600 !important;
+            }
+            &::after {
+                content: unset;
+            }
+        }
+        &:hover {
+            border-bottom: 2px solid $gray-900;
+            .nav-text {
+                color: $gray-900;
+            }
+            clr-icon {
+                color: $gray-900 !important;
+            }
+        }
+    }
+}
