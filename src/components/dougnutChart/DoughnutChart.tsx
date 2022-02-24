@@ -38,12 +38,10 @@ export enum CHART_STATUS {
     DANGER = "danger",
 }
 
-
-export enum CHART_COLORS {
-    SUCCESS = "#6EA204",
-    WARNING = "#F2AF00",
-    DANGER = "#CE1126",
-    TRACK = "#DDDDDD",
+export enum PROGRESS_CLASS {
+    SUCCESS = "progress-sucess",
+    WARNING = "progress-warning",
+    DANGER = "progress-danger",
 }
 
 export enum DEFAULT_CHART_VALUES {
@@ -60,26 +58,12 @@ const LABEL_OFFSET = 35;
 
 const SHOW_PERCENTAGE = true;
 
-// Function to check whether the size got from user comes in range of the chart size. If not setting the min / max size for the chart.
-const calculateSize = (size: number) => {
-    if(size >= DEFAULT_CHART_VALUES.MAX_SIZE) {
-        return DEFAULT_CHART_VALUES.MAX_SIZE;
-    } else if(size < DEFAULT_CHART_VALUES.MIN_SIZE) {
-        return DEFAULT_CHART_VALUES.MIN_SIZE;
-    } else {
-        return size;
-    }
-}
-
-
 // This function takes the size and track width of the chart and will calculate center, radius, circumference
 const calculateDimensions = (size: number, trackWidth: number) => {
-    const progressSize: number = calculateSize(size);
-    const center = progressSize / 2;
-    const radius = progressSize / 2 - trackWidth / 2;
+    const center = size / 2;
+    const radius = size / 2 - trackWidth / 2;
     const circumference = 2 * Math.PI * radius;
     return {
-        progressSize,
         center,
         radius,
         circumference,
@@ -97,7 +81,6 @@ const getLabelYPosition = (center: number, showPercentage: boolean) => {
 
 // Component function
 const DoughnutChart = (props: CircularProgressType) => {
-    const circleRef = useRef<any>(null);
     const {
         size = DEFAULT_CHART_VALUES.SIZE,
         percentage,
@@ -108,7 +91,7 @@ const DoughnutChart = (props: CircularProgressType) => {
         labelLength = DEFAULT_CHART_VALUES.LABEL_LENGTH,
     } = props;
     const dimensions = calculateDimensions(size, trackWidth);
-    const [progressColor, setProgressColor] = useState<string>(CHART_COLORS.SUCCESS);
+    const [progressClass, setProgressClass] = useState<string>(PROGRESS_CLASS.SUCCESS);
     const [offset, setOffset] = useState<number>(dimensions.circumference);
     useEffect(() => {
         //  Constant progressOffset will contain circumference of 100 - percentage
@@ -116,31 +99,25 @@ const DoughnutChart = (props: CircularProgressType) => {
         setOffset(progressOffset);
         switch (status) {
             case CHART_STATUS.SUCCESS:
-                setProgressColor(CHART_COLORS.SUCCESS)
-                break
+                setProgressClass(PROGRESS_CLASS.SUCCESS);
+                break;
             case CHART_STATUS.WARNING:
-                setProgressColor(CHART_COLORS.WARNING)
-                break
+                setProgressClass(PROGRESS_CLASS.WARNING);
+                break;
             case CHART_STATUS.DANGER:
-                setProgressColor(CHART_COLORS.DANGER)
-                break
+                setProgressClass(PROGRESS_CLASS.DANGER);
+                break;
             default:
-                setProgressColor(CHART_COLORS.SUCCESS)
+                setProgressClass(PROGRESS_CLASS.SUCCESS);
         }
-
-        // Rotating the circle by 90 degree to set the starting point to 12'o clock position.
-        circleRef.current.style = 'transform: rotate(90deg)';
-        // Adding transition for change in value in the chart
-        circleRef.current.style = 'transition: stroke-dashoffset 850ms ease';
 
     }, [percentage, setOffset, dimensions.circumference, offset, label, showPercentage, trackWidth])
     return (
-        <div>
-            <svg className="doughnut-chart" width={dimensions.progressSize} height={dimensions.progressSize}>
+        <React.Fragment key={percentage}>
+            <svg className="doughnut-chart" width={size} height={size}>
                 {/* Track circle */}
                 <circle
-                    className="circular-bg"
-                    stroke={CHART_COLORS.TRACK}
+                    className="track-circle"
                     cx={dimensions.center}
                     cy={dimensions.center}
                     r={dimensions.radius}
@@ -149,9 +126,7 @@ const DoughnutChart = (props: CircularProgressType) => {
                 </circle>
                 {/* Progress circle */}
                 <circle
-                    ref={circleRef}
-                    className="circle"
-                    stroke={progressColor}
+                    className={"progress-circle " + progressClass}
                     cx={dimensions.center}
                     cy={dimensions.center}
                     r={dimensions.radius}
@@ -180,7 +155,7 @@ const DoughnutChart = (props: CircularProgressType) => {
                     {label.length > labelLength ? label.slice(0, labelLength) + '...' : label}
                 </text>
             </svg>
-        </div>
+        </React.Fragment>
     )
 }
 

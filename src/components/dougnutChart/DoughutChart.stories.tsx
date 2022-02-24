@@ -10,8 +10,7 @@
 
 import React from 'react';
 import { storiesOf } from "@storybook/react";
-import DoughnutChart from './DoughnutChart';
-import { CHART_STATUS } from './DoughnutChart';
+import DoughnutChart, { CHART_STATUS } from './DoughnutChart';
 
 const divStyle: any = {display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent:"space-around"}
 
@@ -61,7 +60,7 @@ storiesOf("Doughnut Chart", module)
     .add("Size", () => (
         <div style={divStyle}>
             <DoughnutChart
-                size={20}
+                size={120}
                 percentage={14}
                 label="Success"
                 status={CHART_STATUS.SUCCESS}

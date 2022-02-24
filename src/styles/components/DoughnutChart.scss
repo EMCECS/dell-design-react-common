@@ -8,31 +8,45 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-.doughnut-chart {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    max-height: 250px;
-    transform: rotate(-90deg);
-}
-.circular-bg {
-    fill: none;
-}
-.circle {
-    fill: none;
-}
-.progress-label {
-    fill: #333333;
-    font-weight: bold;
-    transform: rotate(90deg);
-    text-anchor:middle;
-}
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+@import "../common/layout";
 
-.percent {
-    font-size: 40px;
-    font-weight: 400;
-}
-.detail {
-    font-size: 18px;
-    font-weight: 400;
+
+.doughnut-chart {
+    margin: 1rem auto;
+    transform: rotate(-90deg);
+    .track-circle {
+        fill: none;
+        stroke: $gray-350;
+    }
+    .progress-circle {
+        fill: none;
+        transition: stroke-dashoffset 850ms ease;
+        &.progress-sucess {
+            @include doughnut-chart-stroke($green-400)
+        }
+        &.progress-warning {
+            @include doughnut-chart-stroke($yellow-300)
+        }
+        &.progress-danger {
+            @include doughnut-chart-stroke($red-700)
+        }
+    }
+    .progress-label {
+        fill: $gray-900;
+        font-weight: bold;
+        transform: rotate(90deg);
+        text-anchor:middle;
+        &.percent {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+        &.detail {
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+    }
 }

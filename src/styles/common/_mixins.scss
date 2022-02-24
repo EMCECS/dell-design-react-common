@@ -147,3 +147,7 @@
     min-height: $min-height;
     min-width: $min-width;
 }
+
+@mixin doughnut-chart-stroke($color) {
+    stroke: $color;
+}
