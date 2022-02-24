@@ -62,7 +62,7 @@ storiesOf("Doughnut Chart", module)
             <DoughnutChart
                 size={120}
                 percentage={14}
-                label="Success"
+                label="120px"
                 status={CHART_STATUS.SUCCESS}
                 showPercentage={false}/>
             <DoughnutChart
