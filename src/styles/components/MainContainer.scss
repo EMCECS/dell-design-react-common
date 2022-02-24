@@ -27,8 +27,8 @@ $main-container-height:56px;
             color: $primary-white;
         }
         .title {
-            font-size: 18px !important;
-            font-weight: light;
+            font-size: 1.1rem !important;
+            font-weight: $font-weight-light;
             color: $primary-white;
         }
     }
@@ -62,6 +62,18 @@ $main-container-height:56px;
                 min-height: 16px;
                 padding-right: 0;
             }
+        }
+
+        .btn.btn-icon > .badge {
+            position: absolute;
+            background-color:$main-container-action-badge-color;
+            color:$primary-white;
+            font-size:0.6rem;
+            height:13px;
+            width:18px;
+            padding: 0;
+            margin-bottom: 14px;
+            margin-left:-10px;
         }
 
         .dropdown {
