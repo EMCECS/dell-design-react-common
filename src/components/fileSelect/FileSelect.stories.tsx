@@ -45,4 +45,3 @@ storiesOf("FileSelect", module)
             <FileSelect onFileChange={action("File Changed")} accept="image/*" multiple/>
         </div>
     ))
-    
