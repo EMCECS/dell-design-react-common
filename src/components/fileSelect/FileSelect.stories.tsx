@@ -10,41 +10,39 @@
 
 import { storiesOf } from "@storybook/react";
 import {action} from "@storybook/addon-actions";
-import { State, Store } from "@sambego/storybook-state";
-import { Modal, ModalSize, ModalBody, ModalFooter } from "@dellstorage/clarity-react/modals/Modal";
-import { Button } from "@dellstorage/clarity-react/forms/button";
 import FileSelect from "./FileSelect";
 
-const storeSmall = new Store({
-    isOpen: false,
-    closable: true,
-});
-
 storiesOf("FileSelect", module)
-    .add("Modal", () => (
+    .add("Default", () => (
         <div>
-            <Button onClick={() => storeSmall.set({ isOpen: true })}>Upload YAML</Button>
-            <State store={storeSmall}>
-                <Modal {...storeSmall} size={ModalSize.LARGE} onClose={() => storeSmall.set({ isOpen: false })} title="Upload template">
-                    <ModalBody>
-                        <FileSelect accept=".yaml" onFileChange={action("File Changed")}/>
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={() => storeSmall.set({ isOpen: false })} link>
-                            Cancel
-                        </Button>
-                        <Button onClick={() => storeSmall.set({ isOpen: false })} primary={true}>
-                            Save
-                        </Button>
-                    </ModalFooter>
-                </Modal>
-            </State>
+            Default File select. Can select one file of any kind.
+            <FileSelect onFileChange={action("File Changed")}/>
         </div>
     ))
-    .add("Default", () => (
-        <FileSelect onFileChange={action("File Changed")}/>
-    ))
     .add("Multiple", () => (
-        <FileSelect onFileChange={action("File Changed")} multiple/>
+        <div>
+            Mulitple file select, supports any kind of file.
+            <FileSelect onFileChange={action("File Changed")} multiple/>
+        </div>
     ))
+    .add("Accept specific file types", () => (
+        <div>
+            Accepts only json files
+            <FileSelect onFileChange={action("File Changed")} accept=".json"/>
+            Accepts only YAML files
+            <FileSelect onFileChange={action("File Changed")} accept=".yaml"/>
+            Accepts only Audio files
+            <FileSelect onFileChange={action("File Changed")} accept="audio/*"/>
+            Accepts only Video files
+            <FileSelect onFileChange={action("File Changed")} accept="video/*"/>
+            Accepts only Image files
+            <FileSelect onFileChange={action("File Changed")} accept="image/*"/>
+        </div>
+    ))
+    .add("Multiple files on specific file type", () => (
+        <div>
+            Accepts multiple Image files
+            <FileSelect onFileChange={action("File Changed")} accept="image/*" multiple/>
+        </div>
+    ))
+    
