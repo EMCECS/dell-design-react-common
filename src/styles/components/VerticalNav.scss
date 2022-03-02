@@ -1,0 +1,153 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/mixins";
+@import "../common/layout";
+@import "../common/colors";
+@import "../common/fonts";
+
+.clr-vertical-nav {
+    %side-nav-item-height {
+        height: $side-nav-item-height;
+        line-height: $side-nav-item-height;
+    }
+    %side-nav-child-item-height {
+        height: $side-nav-child-item-height;
+        line-height: $side-nav-child-item-height;
+    }
+    %side-nav-active {
+        color: $side-nav-active-font-color;
+        background-color: $side-nav-active-background!important;
+        font-weight: $font-weight-medium!important;
+        @extend %side-nav-select-bar;
+    }
+    %side-nav-trigger-active {
+        @extend %side-nav-select-bar;
+        color: $side-nav-trigger-active-color!important;
+        font-weight: $font-weight-medium!important;
+        .nav-icon {
+            fill: inherit;
+        }
+    }
+    %side-nav-select-bar {
+        border-left: 0.25rem solid $side-nav-select-bar-color;
+    }
+    color: $side-nav-default-font-color!important;
+    background-color: $side-nav-default-background;
+    font-size: $side-nav-font-size;
+    box-shadow: 4px 0 4px $side-nav-border-color;
+    border: 1px solid $side-nav-border-color;
+    width: 17.5rem;
+    padding-top: 0px;
+    .nav-content {
+        padding-top: 0px;
+    }
+    &.has-nav-groups {
+        .nav-group {
+            .nav-group-text {
+                &.active {
+                    font-weight: $font-weight-medium!important;
+                }
+            }
+        }
+       .nav-group-children {
+            .nav-link {
+                font-weight: $font-weight-regular!important;
+                @extend %side-nav-child-item-height;
+                padding-left: 2.2rem;
+                .nav-text {
+                   @extend %side-nav-child-item-height;
+                }
+                &:active {
+                    @extend %side-nav-active;
+                }
+                &.active {
+                    @extend %side-nav-active;
+                }
+            }   
+       }
+    }
+    .nav-group-content {
+        .nav-group-trigger {
+             height: 2.5rem;
+        }
+        .nav-group-text {
+            @extend %side-nav-item-height;
+        }
+        &:hover {
+            color: $side-nav-hover-font-color;
+            background-color: $side-nav-hover-background;
+            .nav-group-trigger-icon {
+                color: $side-nav-trigger-icon-color;
+            }
+        }
+        &:active {
+            @extend %side-nav-trigger-active;
+        }
+        &.active {
+            @extend %side-nav-trigger-active;
+        }
+        .nav-icon {
+            margin: 0.5rem 1.5rem 0.5rem 1.3rem !important;
+        }
+    }
+    &.is-collapsed {
+        width: 4.1rem!important;
+        .nav-link {
+            .nav-icon {
+                margin: 0.5rem 1.5rem 0.5rem 1.5rem !important;
+            }
+        }
+    }
+    .nav-link {
+        color: $side-nav-default-font-color!important;
+        font-weight: $font-weight-regular!important;
+        padding-left: 1.5rem;
+        @extend %side-nav-item-height;
+        &:hover {
+            color: $side-nav-hover-font-color;
+            background-color: $side-nav-hover-background;
+        }
+        &:active {
+            @extend %side-nav-active;
+        }
+        &.active {
+            @extend %side-nav-active;
+        }
+        .nav-icon {
+            margin: 0.5rem 1.5rem 0.5rem 0rem !important;
+        }
+    }
+    .nav-trigger {
+        height: 3rem;
+        margin-top: 0px;
+        &:hover {
+            background-color:$side-nav-hover-background; 
+        }
+        .nav-trigger-icon {
+            color: $side-nav-trigger-icon-color!important;
+            margin: 0.5rem 1.5rem 0.5rem 1.5rem !important;
+        }
+    }
+    &.has-icons {
+        &.has-nav-groups {
+            .nav-group-children {
+                .nav-link {
+                    font-weight: $font-weight-regular!important;
+                    @extend %side-nav-child-item-height;
+                    padding-left: 4.6rem;
+                    .nav-text {
+                        @extend %side-nav-child-item-height;
+                    }
+                }   
+            }
+        }
+    }
+}
