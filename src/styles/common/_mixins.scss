@@ -172,3 +172,10 @@
 @mixin doughnut-chart-stroke($color) {
     stroke: $color;
 }
+
+@mixin breadcrumb-item($color) {
+    color:$color;
+    font:$dell-font;
+    font-size:0.7rem;
+    font-weight:$font-weight-regular;
+}
