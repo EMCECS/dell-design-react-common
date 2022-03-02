@@ -141,9 +141,40 @@
     background-color: transparent !important;
 }
 
+// Mixin for Tooltip arrow position
+@mixin tooltip-arrow-position($top, $right, $bottom, $left) {
+    top: $top!important;
+    right: $right!important;
+    bottom: $bottom!important;
+    left: $left!important;
+    position: absolute;
+    content: "";
+}
+
+// Mixin for Tootip content common style
+@mixin tooltip-content {
+    background-color: $tooltip-background-color!important;
+    color: $tooltip-text-color!important;
+    border: 1px solid $tooltip-border-color;
+    box-shadow: 0 0 2px $tooltip-border-color;
+    border-radius: 0px;
+    padding: 16px !important;
+    font-size: $tooltip-font-size;
+}
+
 @mixin spinner-size($height, $width, $min-height, $min-width) {
     height: $height;
     width: $width;
     min-height: $min-height;
     min-width: $min-width;
+}
+
+//Main container focus style 
+@mixin main-container-focus-style {
+    background-color: $blue-800;
+    outline: dotted 1px $main-container-outline-color !important;
+}
+
+@mixin doughnut-chart-stroke($color) {
+    stroke: $color;
 }
