@@ -178,3 +178,24 @@
 @mixin doughnut-chart-stroke($color) {
     stroke: $color;
 }
+
+/*  Mixin for Side navigation selected item style
+    isSelectBarRequired: Parameter for left select border
+    isSubSection: Parameter if selected item has subsection apply different stlye
+*/
+@mixin side-nav-active($isSelectBarRequired, $isSubSection) {
+    @if($isSubSection) {
+        color: $side-nav-trigger-active-color!important;
+        font-weight: $font-weight-medium!important;
+        border-left: 0.25rem solid $side-nav-select-bar-color;
+        .nav-icon {
+            fill: inherit;
+        }
+    } @else if($isSelectBarRequired) {
+        @extend %side-nav-active-no-subsection;
+        border-left: 0.25rem solid $side-nav-select-bar-color;
+    } @else {
+        @extend %side-nav-active-no-subsection;
+        border-left: none;
+    }
+}
