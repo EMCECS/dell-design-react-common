@@ -38,8 +38,8 @@ storiesOf("Vertical Navigation", module)
             title="Project Pokémon"
             sideNav={
                 <VerticalNav isCollapsible={true}>
-                    <NavLink iconShape="user">Normal</NavLink>
-                    <VerticalNavGroup iconShape="bolt" groupName="Electric" className="active">
+                    <NavLink iconShape="user" className="active">Normal</NavLink>
+                    <VerticalNavGroup iconShape="bolt" groupName="Electric">
                         <NavLink>Link 3</NavLink>
                         <NavLink>Link 4</NavLink>
                     </VerticalNavGroup>

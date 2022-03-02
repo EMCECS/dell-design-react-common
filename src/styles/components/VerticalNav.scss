@@ -23,10 +23,9 @@
         line-height: $side-nav-child-item-height;
     }
     %side-nav-active {
-        color: $side-nav-active-font-color;
+        color: $side-nav-active-font-color!important;
         background-color: $side-nav-active-background!important;
         font-weight: $font-weight-medium!important;
-        @extend %side-nav-select-bar;
     }
     %side-nav-trigger-active {
         @extend %side-nav-select-bar;
@@ -38,6 +37,9 @@
     }
     %side-nav-select-bar {
         border-left: 0.25rem solid $side-nav-select-bar-color;
+    }
+    %side-nav-hide-select-bar {
+        border-left: none;
     }
     color: $side-nav-default-font-color!important;
     background-color: $side-nav-default-background;
@@ -59,7 +61,7 @@
         }
        .nav-group-children {
             .nav-link {
-                font-weight: $font-weight-regular!important;
+                font-weight: $font-weight-regular;
                 @extend %side-nav-child-item-height;
                 padding-left: 2.2rem;
                 .nav-text {
@@ -67,9 +69,11 @@
                 }
                 &:active {
                     @extend %side-nav-active;
+                    @extend %side-nav-hide-select-bar;
                 }
                 &.active {
                     @extend %side-nav-active;
+                    @extend %side-nav-hide-select-bar;
                 }
             }   
        }
@@ -90,9 +94,11 @@
         }
         &:active {
             @extend %side-nav-trigger-active;
+            @extend %side-nav-select-bar;
         }
         &.active {
             @extend %side-nav-trigger-active;
+            @extend %side-nav-select-bar;
         }
         .nav-icon {
             margin: 0.5rem 1.5rem 0.5rem 1.3rem !important;
@@ -117,9 +123,11 @@
         }
         &:active {
             @extend %side-nav-active;
+            @extend %side-nav-select-bar;
         }
         &.active {
             @extend %side-nav-active;
+            @extend %side-nav-select-bar;
         }
         .nav-icon {
             margin: 0.5rem 1.5rem 0.5rem 0rem !important;
@@ -140,7 +148,7 @@
         &.has-nav-groups {
             .nav-group-children {
                 .nav-link {
-                    font-weight: $font-weight-regular!important;
+                    font-weight: $font-weight-regular;
                     @extend %side-nav-child-item-height;
                     padding-left: 4.6rem;
                     .nav-text {
