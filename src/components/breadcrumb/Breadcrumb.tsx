@@ -11,8 +11,6 @@
 import { MouseEventHandler, ReactNode } from "react";
 import "styles/components/Breadcrumb.scss";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { AnyRecord } from "dns";
-
 
 /**
  * Props for the doughnut chart
@@ -35,6 +33,7 @@ export type BreadcrumbItems = {
     className?:string;
     onClickHandler?:(e?: MouseEventHandler<HTMLElement>)=>void;
 }
+const CLASS_NAME = 'breadcrumb1';
 
 const getLabelColorClass=(isActive?:boolean):string=>{
     return isActive ? "breadcrumb1__breadcrumb-item-active" : "breadcrumb1__breadcrumb-item";
@@ -55,7 +54,7 @@ const getBreadcrumbItems=(items:Array<BreadcrumbItem>,onClickHandler?:(e?: Mouse
     });
 }
 
-export const Breadcrumbs=({breadcrumbItems=[],className='breadcrumb1',onClickHandler}:BreadcrumbItems)=>{
+export const Breadcrumbs=({breadcrumbItems=[],className=CLASS_NAME,onClickHandler}:BreadcrumbItems)=>{
     return (
         <div className={className}>
             <Breadcrumb>
