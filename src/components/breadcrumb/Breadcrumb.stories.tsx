@@ -10,17 +10,26 @@
 
  import {storiesOf} from "@storybook/react";
  import React from "react";
- import {Breadcrumbs } from "./Breadcrumb.component";
-import {breadcrumbItems1, breadcrumbItems} from './Breadcrumb.utils'
- 
+ import {Breadcrumbs} from "./Breadcrumb";
+ import {BreadcrumbItem} from "./Breadcrumb";
+ import {action} from "@storybook/addon-actions";
+
+ export const breadcrumbItems:Array<BreadcrumbItem> = [
+    {title: "Dashboard", path: "#"},
+    {title: "Profile", path: "/#/path"},
+    {title: "Details", path: "#",isActive:true}
+ ];
+
+ export const breadcrumbItems1:Array<BreadcrumbItem> = [
+   {title: "Dashboard", path: "#",isActive:true},
+ ];
 
  storiesOf("Breadcrumb", module)
      .add("Basic", () => 
         <React.Fragment>
-        <Breadcrumbs breadcrumbItems={breadcrumbItems1}/>
+        <Breadcrumbs breadcrumbItems={breadcrumbItems1} />
         <br />
-        <Breadcrumbs breadcrumbItems={breadcrumbItems}/>
+        <Breadcrumbs breadcrumbItems={breadcrumbItems} onClickHandler={action("Minimum button click")}/>
         <br />
         </React.Fragment>
  );
- 
