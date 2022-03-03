@@ -11,40 +11,42 @@
  @import "../common/colors";
  @import "../common/fonts";
  @import "../common/mixins";
-
- .breadcrumb1 {
-    display: block; 
-    width: fit-content;
-    padding: 23px 39px; 
-    &__breadcrumb-item-active{
-      @include breadcrumb-item($gray-900)  
-   }
-   &__breadcrumb-item{
-      @include breadcrumb-item($blue-600)  
-   }
- }
-
+ 
  .breadcrumb {
    display: flex;
    flex-wrap: wrap;
+   width: fit-content;
    padding: 0 0;
    margin-bottom: 1rem;
    list-style: none;
+   .breadcrumb-item {
+     + {
+       .breadcrumb-item {
+         padding-left: 0.5rem;
+ 
+         &::before {
+           float: left;
+           padding-right: 0.5rem;
+           color: $gray-500;
+           content: var(--bs-breadcrumb-divider, "/");
+         }
+         :focus {
+           outline: none !important;
+           border: 2px solid #6bacde;
+           border-radius: 5px;
+         }
+       }
+     }
+     &.active {
+       color: $gray-900;
+       :hover {
+         color: $gray-900;
+       }
+     }
+     @include breadcrumb-item($blue-600);
+     :hover {
+       color: $blue-700;
+     }
+   }
  }
  
-.breadcrumb-item {
-	+ {
-		.breadcrumb-item {
-			padding-left: 0.5rem;
-			&::before {
-				float: left;
-				padding-right: 0.5rem;
-				color: $breadcrumb-separator-color;
-				content: var(--bs-breadcrumb-divider, "/");
-			}
-		}
-	}
-}
-.breadcrumb-item.active {
-	color: $breadcrumb-separator-color;
-}
