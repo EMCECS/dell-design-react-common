@@ -28,18 +28,18 @@ export type BreadcrumbItem = {
  * Props for the BreadcrumbItems
  * @param {breadcrumbItems} is to get the array of Breadcrumb Elements to be displayed in the Breadcrumb.
  * @param {className} is to get a custom class to be applied on Breadcrumb or else default class is applied.
- * @param {onClickHandler} is to get a custom handler to be applied on click of Breadcrumb Element.
+ * @param {onClick} is to get a custom handler to be applied on click of Breadcrumb Element.
  */
 export type BreadcrumbItems = {
     breadcrumbItems:Array<BreadcrumbItem>;
     className?:string;
-    onClickHandler?:(event?: React.MouseEvent<HTMLElement>)=>void;
+    onClick?:(event?: React.MouseEvent<HTMLElement>)=>void;
 }
 
-const getBreadcrumbItems=(items:Array<BreadcrumbItem>,onClickHandler?:(event?: React.MouseEvent<HTMLElement>)=>void):ReactNode=>{
+const getBreadcrumbItems=(items:Array<BreadcrumbItem>,onClick?:(event?: React.MouseEvent<HTMLElement>)=>void):ReactNode=>{
     return items.map((item,index) => {
         return (
-        <Breadcrumb.Item key={index} href={item.path} active={item?.isActive} onClick={(event?:React.MouseEvent<HTMLElement>)=>{onClickHandler&&onClickHandler(event)}}>
+        <Breadcrumb.Item key={index} href={item.path} active={item?.isActive} onClick={(event?:React.MouseEvent<HTMLElement>)=>{onClick&&onClick(event)}}>
             {
                 <span>
                     {item.title}
@@ -50,12 +50,12 @@ const getBreadcrumbItems=(items:Array<BreadcrumbItem>,onClickHandler?:(event?: R
     });
 }
 
-export const Breadcrumbs=({breadcrumbItems=[],className,onClickHandler}:BreadcrumbItems)=>{
+export const Breadcrumbs=({breadcrumbItems=[],className,onClick}:BreadcrumbItems)=>{
     return (
         <div className={className}>
             <Breadcrumb>
                 {
-                getBreadcrumbItems(breadcrumbItems,onClickHandler)
+                getBreadcrumbItems(breadcrumbItems,onClick)
                 }
             </Breadcrumb>
         </div>

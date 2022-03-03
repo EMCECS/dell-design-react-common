@@ -28,7 +28,7 @@
         <React.Fragment>
         <Breadcrumbs breadcrumbItems={singleBreadcrumbItem} />
         <br />
-        <Breadcrumbs breadcrumbItems={breadcrumbItems} onClickHandler={action("breadcrumbItem click")}/>
+        <Breadcrumbs breadcrumbItems={breadcrumbItems} onClick={action("breadcrumbItem click")}/>
         <br />
         </React.Fragment>
  );
