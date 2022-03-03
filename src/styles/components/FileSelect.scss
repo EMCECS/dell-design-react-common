@@ -8,12 +8,6 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
 
-@import "../common/mixins";
-@import "../common/colors";
-@import "../common/fonts";
-@import "../common/borders";
-@import "../common/layout";
-
 .upload-container {
     display: flex;
     justify-content: flex-start;

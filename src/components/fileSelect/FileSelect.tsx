@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,13 @@ import { Button } from "@dellstorage/clarity-react/forms/button";
  * @param {onFileChange} is the function triggered when a file is picked or changed.
  * @param {accept} is a prop to get the file types which are to be accepted in the component.
  * @param {multiple} is a prop which allows to select multiple files, if set to true
+ * @param {placeholder} is the prop that holds the placeholder value for the input field
  */
 export type FileSelectProps = {
     onFileChange: (evt: ChangeEvent<HTMLInputElement>) => void,
-    accept?: string,
+    accept?: string[],
     multiple?: boolean,
+    placeholder?: string,
 }
 
 const FileSelect = (props: FileSelectProps) => {
@@ -57,23 +59,24 @@ const FileSelect = (props: FileSelectProps) => {
     return (
         <React.Fragment>
             <div className="upload-container">
-                {/* This component is hiddent to the user. We would be triggering the functionalities from button and the input */}
+                {/* This component is hidden from the user. We would be triggering the functionalities from button and the input */}
                 <input
                     type="file"
                     ref={fileSelectRef}
                     className={"file-select"}
                     onChange={onfileSelect}
-                    accept={props.accept}
+                    accept={props.accept?.join()}
                     multiple={props.multiple}
                 />
                 <span className="file-select-input" onClick={triggerFileSelect}>
                     <Input
-                        name="somevalue"
+                        name="fileInput"
                         value={fileName}
                         title={fileName}
+                        placeholder={props.placeholder}
                     />
                 </span>
-                <Button primary onClick={triggerFileSelect} className="select-file-button">Select File</Button>
+                <Button primary onClick={triggerFileSelect} className="select-file-button">{"Select File"}</Button>
             </div>
         </React.Fragment>
     )
