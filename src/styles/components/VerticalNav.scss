@@ -27,6 +27,9 @@
         background-color: $side-nav-active-background!important;
         font-weight: $font-weight-medium!important;
     }
+    %side-nav-select-bar {
+        border-left: 0.25rem solid $side-nav-select-bar-color;
+    }
     color: $side-nav-default-font-color!important;
     background-color: $side-nav-default-background;
     font-size: $side-nav-font-size;
@@ -53,21 +56,18 @@
                 .nav-text {
                    @extend %side-nav-child-item-height;
                 }
-                &:active {
-                    @include side-nav-active(false, false);
-                }
-                &.active {
+                &:active, &.active {
                     @include side-nav-active(false, false);
                 }
             }   
        }
     }
     .nav-group-content {
-        .nav-group-trigger {
+        .nav-group-trigger, .nav-group-text {
            @extend %side-nav-item-height;
-        }
-        .nav-group-text {
-            @extend %side-nav-item-height;
+           &:focus {
+               outline: none!important;
+           }
         }
         &:hover {
             color: $side-nav-hover-font-color;
@@ -76,11 +76,11 @@
                 color: $side-nav-trigger-icon-color;
             }
         }
-        &:active {
+        &:active, &.active {
            @include side-nav-active(true, true);
-        }
-        &.active {
-            @include side-nav-active(true, true);
+           .nav-icon {
+                margin: 0.5rem 1.5rem 0.5rem 1.1rem !important;
+            }
         }
         .nav-icon {
             margin: 0.5rem 1.5rem 0.5rem 1.3rem !important;
@@ -103,14 +103,14 @@
             color: $side-nav-hover-font-color;
             background-color: $side-nav-hover-background;
         }
-        &:active {
+        &:active, &.active {
             @include side-nav-active(true, false);
-        }
-        &.active {
-            @include side-nav-active(true, false);
+            .nav-icon {
+                margin: 0.5rem 1.5rem 0.5rem -0.4rem !important;
+            }
         }
         .nav-icon {
-            margin: 0.5rem 1.5rem 0.5rem 0rem !important;
+            margin: 0.5rem 1.5rem 0.5rem -0.25rem !important;
         }
     }
     .nav-trigger {

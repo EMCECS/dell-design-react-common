@@ -187,13 +187,13 @@
     @if($isSubSection) {
         color: $side-nav-trigger-active-color!important;
         font-weight: $font-weight-medium!important;
-        border-left: 0.25rem solid $side-nav-select-bar-color;
+        @extend %side-nav-select-bar;
         .nav-icon {
             fill: inherit;
         }
     } @else if($isSelectBarRequired) {
         @extend %side-nav-active-no-subsection;
-        border-left: 0.25rem solid $side-nav-select-bar-color;
+        @extend %side-nav-select-bar;
     } @else {
         @extend %side-nav-active-no-subsection;
         border-left: none;
