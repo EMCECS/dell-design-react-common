@@ -1,0 +1,52 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+ @import "../common/colors";
+ @import "../common/fonts";
+ @import "../common/mixins";
+ 
+ .breadcrumb {
+   display: flex;
+   flex-wrap: wrap;
+   width: fit-content;
+   padding: 0 0;
+   margin-bottom: 1rem;
+   list-style: none;
+   .breadcrumb-item {
+     + {
+       .breadcrumb-item {
+         padding-left: 0.5rem;
+ 
+         &::before {
+           float: left;
+           padding-right: 0.5rem;
+           color: $gray-500;
+           content: var(--bs-breadcrumb-divider, "/");
+         }
+         :focus {
+           outline: none !important;
+           border: 2px solid $blue-450;
+           border-radius: 5px;
+         }
+       }
+     }
+     &.active {
+       color: $gray-900;
+       :hover {
+         color: $gray-900;
+       }
+     }
+     @include breadcrumb-item($blue-600);
+     :hover {
+       color: $blue-700;
+     }
+   }
+ }
+ 
