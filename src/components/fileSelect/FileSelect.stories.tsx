@@ -28,19 +28,19 @@ storiesOf("FileSelect", module)
     .add("Accept specific file types", () => (
         <div>
             {"Accepts only json files"}
-            <FileSelect onFileChange={action("File Changed")} accept={[".json"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={[".json"]} placeholder="Select JSON file"/>
             {"Accepts only YAML files"}
-            <FileSelect onFileChange={action("File Changed")} accept={[".yaml"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={[".yaml"]} placeholder="Select YAML file"/>
             {"Accepts only Audio files"}
-            <FileSelect onFileChange={action("File Changed")} accept={["audio/*"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={["audio/*"]} placeholder="Select Audio file"/>
             {"Accepts only Video files"}
-            <FileSelect onFileChange={action("File Changed")} accept={["video/*"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={["video/*"]} placeholder="Select Video file"/>
             {"Accepts only Image files"}
-            <FileSelect onFileChange={action("File Changed")} accept={["image/*"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={["image/*"]} placeholder="Select Image file"/>
             {"Accepts Image and Video files"}
-            <FileSelect onFileChange={action("File Changed")} accept={["image/*", "video/*"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={["image/*", "video/*"]} placeholder="Select Image or Video file"/>
             {"Accepts YAML and JSON files"}
-            <FileSelect onFileChange={action("File Changed")} accept={[".yaml",".json"]}/>
+            <FileSelect onFileChange={action("File Changed")} accept={[".yaml",".json"]} placeholder="Select JSON or YAML file"/>
         </div>
     ))
     .add("Multiple files on specific file type", () => (
@@ -55,5 +55,17 @@ storiesOf("FileSelect", module)
             <FileSelect onFileChange={action("File Changed")} accept={["video/*"]} multiple/>
             {"Accepts multiple Image files"}
             <FileSelect onFileChange={action("File Changed")} accept={["image/*"]} multiple/>
+        </div>
+    ))
+    .add("Helper text / Error Message", () => (
+        <div>
+            <div style={{marginBottom: "2rem"}}>
+            {"Helper text"}
+            <FileSelect onFileChange={action("File Changed")} placeholder="Select Any File" helperText="Upload any files here"/>
+            </div>
+            <div style={{marginBottom: "2rem"}}>
+            {"Error message"}
+            <FileSelect onFileChange={action("File Changed")} placeholder="Select Any File" errorHelperText="Something went wrong while uploading file" isError/>
+            </div>
         </div>
     ))
