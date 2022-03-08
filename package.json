@@ -1,7 +1,7 @@
 {
   "name": "@dellstorage/dell-design-react-common",
   "description": "Override CSS of Clarity-React components to align it with Dell design standards",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "Apache-2.0",
   "private": false,
   "outDir": "dist",
@@ -100,7 +100,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@testing-library/dom":"^7.21.4",
+    "@testing-library/dom": "^7.21.4",
     "@types/jest": "^26.0.15",
     "@webpack-cli/generators": "^2.4.1",
     "autoprefixer": "^10.4.0",
