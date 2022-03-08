@@ -178,3 +178,32 @@
 @mixin doughnut-chart-stroke($color) {
     stroke: $color;
 }
+
+/*  Mixin for Side navigation selected item style
+    isSelectBarRequired: Parameter for left select border
+    isSubSection: Parameter if selected item has subsection apply different stlye
+*/
+@mixin side-nav-active($isSelectBarRequired, $isSubSection) {
+    @if($isSubSection) {
+        color: $side-nav-trigger-active-color!important;
+        font-weight: $font-weight-medium!important;
+        @extend %side-nav-select-bar;
+        .nav-icon {
+            fill: inherit;
+        }
+    } @else if($isSelectBarRequired) {
+        @extend %side-nav-active-no-subsection;
+        @extend %side-nav-select-bar;
+    } @else {
+        @extend %side-nav-active-no-subsection;
+        border-left: none;
+    }
+}
+
+@mixin breadcrumb-item($color) {
+    color:$color;
+    font:$dell-font;
+    font-size:0.875rem;
+    font-weight:$font-weight-regular;
+}
+
