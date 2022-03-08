@@ -1,0 +1,51 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/colors";
+
+.clr-toggle-wrapper {
+    margin-right: 8px;
+    margin-bottom: 16px;
+
+    input[type="checkbox"]{
+        &:checked{
+            & + label::before{
+                background-color: $blue-600 !important;
+                border-color: transparent !important;
+            }
+            & + label:hover::before{
+                background-color: $blue-700 !important;
+            }
+        }
+        
+        & + label::before{
+            background-color: $gray-700 !important;
+            border-color: transparent !important;
+        }
+        & + label:hover::before{
+            background-color: $gray-900 !important;
+        }
+
+        &:focus{
+            & + label::before{
+                outline-color: $blue-450 !important;
+            }
+        }
+
+        &:disabled{
+            & + label::before{
+                background-color: $gray-450 !important;
+            }
+            & + label:hover::before{
+                background-color: $gray-450 !important;
+            }
+        }
+    }
+}
