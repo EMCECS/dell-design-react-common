@@ -179,7 +179,6 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
     };
     renderEditModal = () => {
         const {isEditMode, files, enableButton} = this.state;
-        const {} = this.props;
         return(
         <Modal
             isOpen={isEditMode}
@@ -189,7 +188,7 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
         >
             <ModalBody>
                 <ul>
-                    {this.state.files.map((file: File, index: any) => (
+                    {files.map((file: File, index: any) => (
                         <div className="upload-container edit-input" key={file.name}>
                             <span className="file-select-input">
                                 <Input
