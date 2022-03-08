@@ -22,6 +22,9 @@ import {Modal, ModalSize, ModalBody, ModalFooter} from "@dellstorage/clarity-rea
  * @param {accept} is a prop to get the file types which are to be accepted in the component.
  * @param {multiple} is a prop which allows to select multiple files, if set to true
  * @param {placeholder} is the prop that holds the placeholder value for the input field
+ * @param {helperText} is the prop that holds input field's helper text.
+ * @param {isError} is a boolean prop to denote error state of the component.
+ * @param {errorHelperText} is the prop that holds the error message, that is displayed in error state of the component.
  */
 export type FileSelectProps = {
     onFileChange: (files: object) => void;
@@ -52,22 +55,22 @@ export type FileSelectState = {
 
 const ERROR_ICON_SIZE = 25;
 const ENABLE_BUTTON_DEFAULT = -1;
+const EDIT_MODAL_TITLE = "Edit Files";
 
-class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
+export default class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
     fileSelectRef: React.RefObject<HTMLInputElement>;
 
     constructor(props: FileSelectProps) {
         super(props);
         this.fileSelectRef = React.createRef();
+        this.state= {
+            fileName: "",
+            files: [],
+            isEditMode: false,
+            editedFileName: "",
+            enableButton: ENABLE_BUTTON_DEFAULT,
+        };
     }
-
-    state: FileSelectState = {
-        fileName: "",
-        files: [],
-        isEditMode: false,
-        editedFileName: "",
-        enableButton: ENABLE_BUTTON_DEFAULT,
-    };
 
     // Function to trigger the file select action
     triggerFileSelect = () => {
@@ -174,12 +177,15 @@ class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
             },
         );
     };
-    renderEditModal = () => (
+    renderEditModal = () => {
+        const {isEditMode, files, enableButton} = this.state;
+        const {} = this.props;
+        return(
         <Modal
-            isOpen={this.state.isEditMode}
+            isOpen={isEditMode}
             size={ModalSize.LARGE}
             onClose={() => this.setState({isEditMode: false})}
-            title="Edit Files"
+            title={EDIT_MODAL_TITLE}
         >
             <ModalBody>
                 <ul>
@@ -194,7 +200,7 @@ class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
                                 />
                             </span>
                             <Button
-                                disabled={this.state.enableButton !== index}
+                                disabled={enableButton !== index}
                                 state={ButtonState.WARNING}
                                 className="select-file-button"
                                 onClick={() => this.onFileRename(index)}
@@ -221,9 +227,11 @@ class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
                 </Button>
             </ModalFooter>
         </Modal>
-    );
+    )};
 
     render(): React.ReactNode {
+        const {fileName} = this.state;
+        const {accept, multiple, placeholder, helperText, errorHelperText, isError} = this.props;
         return (
             <React.Fragment>
                 <div className="upload-container">
@@ -233,18 +241,18 @@ class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
                         ref={this.fileSelectRef}
                         className={"file-select"}
                         onChange={this.onfileSelect}
-                        accept={this.props.accept?.join()}
-                        multiple={this.props.multiple}
+                        accept={accept?.join()}
+                        multiple={multiple}
                     />
                     <span className="file-select-input">
                         <Input
                             name="fileInput"
-                            value={this.state.fileName}
-                            title={this.state.fileName}
-                            placeholder={this.props.placeholder}
-                            helperText={this.props.helperText}
-                            errorHelperText={this.props.errorHelperText}
-                            error={this.props.isError}
+                            value={fileName}
+                            title={fileName}
+                            placeholder={placeholder}
+                            helperText={helperText}
+                            errorHelperText={errorHelperText}
+                            error={isError}
                         />
                         {/* File edit icon */}
                         {this.state.files.length > 0 ? (
@@ -267,5 +275,3 @@ class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
         );
     }
 }
-
-export default FileSelect;
