@@ -25,6 +25,7 @@ import {Modal, ModalSize, ModalBody, ModalFooter} from "@dellstorage/clarity-rea
  * @param {helperText} is the prop that holds input field's helper text.
  * @param {isError} is a boolean prop to denote error state of the component.
  * @param {errorHelperText} is the prop that holds the error message, that is displayed in error state of the component.
+ * @param {dataqa} is quality engineering testing field
  */
 export type FileSelectProps = {
     onFileChange: (files: object) => void;
@@ -34,15 +35,16 @@ export type FileSelectProps = {
     helperText?: string;
     isError?: boolean;
     errorHelperText?: string;
+    dataqa?: string;
 };
 
 /**
  * States for the file select component
- * @param fileName is the state that holds the file names of selected files, in string format.
- * @param files is the state that holds the actual files, that are been selected.
- * @param isEditMode is the state that holds the boolean value to show hide edit modal.
- * @param editedFileName is the state that holds renamed file name temporarily.
- * @param enableButton is the state that holds the index. Rename button with this index would be enabled.
+ * @param {fileName} is the state that holds the file names of selected files, in string format.
+ * @param {files} is the state that holds the actual files, that are been selected.
+ * @param {isEditMode} is the state that holds the boolean value to show hide edit modal.
+ * @param {editedFileName} is the state that holds renamed file name temporarily.
+ * @param {enableButton} is the state that holds the index. Rename button with this index would be enabled.
  */
 
 export type FileSelectState = {
@@ -79,16 +81,17 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
 
     // Function executed when a file is selected / changed
     onfileSelect = (evt: ChangeEvent<HTMLInputElement>) => {
+        const {onFileChange} = this.props;
         if (evt.target) {
-            const files = evt.target.files;
+            const selectedFiles = evt.target.files;
             const fileNames = [];
             const fileObjects = [];
-            if (files && files.length > 0) {
-                for (const key in files) {
+            if (selectedFiles && selectedFiles.length > 0) {
+                for (const key in selectedFiles) {
                     // Condition check to ignore the Prototypes in the files object
-                    if (files.hasOwnProperty(key)) {
-                        fileNames.push(files[key].name);
-                        fileObjects.push(files[key]);
+                    if (selectedFiles.hasOwnProperty(key)) {
+                        fileNames.push(selectedFiles[key].name);
+                        fileObjects.push(selectedFiles[key]);
                     }
                 }
                 this.setState(
@@ -97,7 +100,8 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
                         files: fileObjects,
                     },
                     () => {
-                        this.props.onFileChange(this.state.files);
+                        const {files} = this.state;
+                        onFileChange(files);
                     },
                 );
             }
@@ -135,6 +139,7 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
     // Function triggered when rename button is clicked
     onFileRename = (index: number) => {
         const {files, fileName, editedFileName} = this.state;
+        const {onFileChange} = this.props;
         const currentFile = files[index];
         // creating a file with newly provided name, since the file object is immutable
         const blob = currentFile.slice(0, currentFile.size, currentFile.type);
@@ -151,29 +156,32 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
                 editedFileName: "",
                 enableButton: ENABLE_BUTTON_DEFAULT,
             },
-            () => this.props.onFileChange(this.state.files),
+            () => onFileChange(files),
         );
     };
 
     // Function triggered when remove button is clicked
     onFileRemove = (index: any) => {
-        const files = this.state.files.slice();
-        const fileName = this.state.fileName.slice().split(",");
-        files.splice(index, 1);
-        fileName.splice(index, 1);
+        const {files, fileName} = this.state;
+        const existingFiles = files.slice();
+        const existingFileName = fileName.slice().split(",");
+        existingFiles.splice(index, 1);
+        existingFileName.splice(index, 1);
         this.setState(
             {
-                fileName: fileName.join(","),
-                files,
+                fileName: existingFileName.join(","),
+                files: existingFiles,
             },
             () => {
+                const {files} = this.state;
+                const {onFileChange} = this.props;
                 // When no file is present after removing, closing the edit modal
-                if (this.state.files.length === 0) {
+                if (files.length === 0) {
                     this.setState({
                         isEditMode: false,
                     });
                 }
-                this.props.onFileChange(this.state.files);
+                onFileChange(files);
             },
         );
     };
@@ -229,11 +237,11 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
     )};
 
     render(): React.ReactNode {
-        const {fileName} = this.state;
-        const {accept, multiple, placeholder, helperText, errorHelperText, isError} = this.props;
+        const {fileName, files} = this.state;
+        const {accept, multiple, placeholder, helperText, errorHelperText, isError, dataqa} = this.props;
         return (
             <React.Fragment>
-                <div className="upload-container">
+                <div className="upload-container" data-qa={dataqa}>
                     {/* This component is hidden from the user. We would be triggering the functionalities from button and the input */}
                     <input
                         type="file"
@@ -254,7 +262,7 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
                             error={isError}
                         />
                         {/* File edit icon */}
-                        {this.state.files.length > 0 ? (
+                        {files.length > 0 ? (
                             <span className="edit-icon" onClick={this.editFiles}>
                                 <Icon shape="note" size={ERROR_ICON_SIZE} />
                             </span>
@@ -264,7 +272,7 @@ export default class FileSelect extends React.PureComponent<FileSelectProps, Fil
                         {"Select File"}
                     </Button>
                     {/* File error Icon */}
-                    {this.props.isError ? (
+                    {isError ? (
                         <Icon shape="exclamation-circle" size={ERROR_ICON_SIZE} className="error-icon"></Icon>
                     ) : null}
                     {/* Edit Modal */}
