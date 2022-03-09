@@ -31,4 +31,4 @@ import "styles/components/Toggle.scss";
             <Toggle label="option 2" disabled={true} checked={false}/>
          </div>
      ));
- 
+
