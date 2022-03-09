@@ -1,0 +1,49 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+@import "../common/colors";
+@import "../common/layout";
+
+.upload-container {
+    display: flex;
+    justify-content: flex-start;
+    &.edit-input {
+        margin: 0.5rem;
+    }
+    .file-select{
+        &[type="file"] {
+            display: none;
+        }
+    }
+    .file-select-input{
+        position: relative;
+        .clr-form-control {
+            margin: unset;
+            .clr-validate-icon {
+                display: none;
+            }
+        }
+        .edit-icon { 
+            position: absolute;
+            right: 0.5rem;
+            top: 0.25rem;
+            background-color: $primary-white;
+            cursor: pointer;
+        }
+    }
+    .select-file-button {
+        margin: 0 0.25rem;
+    }
+    .error-icon {
+        color: $input-error-color;
+        margin-top: $input-validate-icon-m-top;
+        margin-left: 0.25rem;
+    }
+}
