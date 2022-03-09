@@ -11,8 +11,7 @@
 @import "../common/colors";
 
 .clr-toggle-wrapper {
-    margin-right: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 0.8rem;
 
     input[type="checkbox"]{
         &:checked{
@@ -40,10 +39,7 @@
         }
 
         &:disabled{
-            & + label::before{
-                background-color: $gray-450 !important;
-            }
-            & + label:hover::before{
+            & + label::before, & + label:hover::before{
                 background-color: $gray-450 !important;
             }
         }
