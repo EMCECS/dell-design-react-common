@@ -207,3 +207,10 @@
     font-weight:$font-weight-regular;
 }
 
+@mixin font-details($color:$gray-900, $fontWeight:$font-weight-regular, $fontSize: $font-size-7, $lineHeight: $line-height-20) {
+    font-family:$dell-font;
+    color:$color;  
+    font-weight:$fontWeight;
+    font-size: $fontSize;
+    line-height: $lineHeight;
+}
