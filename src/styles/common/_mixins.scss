@@ -52,7 +52,7 @@
     font-size: $grid-font-size-default;
     color: $grid-text-default-color;
     min-height: 46px;
-    line-height: $grid-line-height;
+    line-height: unset;
     padding-right: $grid-cell-padding-right;
     min-width: $grid-cell-min-width;
 }
