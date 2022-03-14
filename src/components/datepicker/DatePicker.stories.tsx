@@ -8,15 +8,14 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- import * as React from "react";
- import {storiesOf} from "@storybook/react";
- import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
- import "styles/components/DatePicker.scss";
- 
- storiesOf("Datepicker", module)
+import * as React from "react";
+import { storiesOf } from "@storybook/react";
+import { DatePicker } from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
+import "styles/components/DatePicker.scss";
+
+storiesOf("Datepicker", module)
     .add("Datepicker", () => (
         <div>
             <DatePicker />
         </div>
     ));
- 
