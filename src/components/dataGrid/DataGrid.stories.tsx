@@ -32,14 +32,15 @@ import {
     customRows,
     customFooter,
     getSelectableRowsData,
-    GridActions,
     sortFunction,
     columnsForCustomRows,
+    paginationRowsWithLinks
 } from "./DataGridStoriesData";
 
 const datagridFilterRef = React.createRef<DataGrid>();
 const datagridFilterSortRef = React.createRef<DataGrid>();
 const datagridCustomFilterMultiRef = React.createRef<DataGrid>();
+const datagridDetailsDemoRef = React.createRef<DataGrid>();
 
 storiesOf("DataGrid", module)
     .add("Basic grid with filtering", () => (
@@ -235,6 +236,40 @@ storiesOf("DataGrid", module)
             <DataGrid columns={normalColumns} rows={normalRows} footer={defaultFooter} rowType={GridRowType.COMPACT} />
         </div>
     ))
+    .add("Grid with open/close details pane on link click", () => {
+        // function to handle
+        const handleLinkClick = (rowIndex: number) => {
+            datagridDetailsDemoRef &&
+                datagridDetailsDemoRef.current &&
+                datagridDetailsDemoRef.current.handleDetailPaneToggle(rowIndex);
+        };
+
+        return (
+            <div style={{width: "80%", paddingTop: "5%"}}>
+                <DataGrid
+                    ref={datagridDetailsDemoRef}
+                    itemText={"Users"}
+                    columns={[
+                        {
+                            columnName: "User ID",
+                            isVisible: false,
+                        },
+                        {
+                            columnName: "Name",
+                        },
+                        {columnName: "Creation Date", style: {width: "20%"}},
+                        {
+                            columnName: "Favorite color",
+                        },
+                    ]}
+                    rows={paginationRowsWithLinks(handleLinkClick).slice(0, 5)}
+                    rowType={GridRowType.ROWS_WITH_DETAIL_PANE}
+                    selectionType={GridSelectionType.MULTI}
+                    footer={hideShowColFooter}
+                />
+            </div>
+        );
+    })
     .add("Empty data grid", () => (
         <div style={{width: "80%"}}>
             <DataGrid columns={normalColumns} footer={defaultFooter} style={{height: "70vh"}} />

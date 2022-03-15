@@ -87,6 +87,9 @@ export const columnsForCustomRows: DataGridColumn[] = [
     },
 ];
 
+// Data for pagination rows
+export const paginationRowsWithLinks = (linkFunction: Function) => getRowDataWithLink(linkFunction);
+
 /**
 * Data for Expandable Rows
 */
@@ -486,4 +489,46 @@ export class GridActions extends React.PureComponent<any, GridActionsState> {
             </div>
         );
     }
+}
+
+export function getRowDataWithLink(functionToAttach: Function) {
+    let rowValues: DataGridRow[] = [];
+    cellData.forEach(function(element: any, index: number) {
+        const row: DataGridRow = {
+            rowData: [
+                {
+                    columnName: "User ID",
+                    cellData: element[0],
+                },
+                {
+                    columnName: "Name",
+                    cellDisplayData: (
+                        // eslint-disable-next-line
+                        <a
+                            href="javascript:void(0);" // eslint-disable-line no-script-url
+                            className="nameLink"
+                            onClick={event => functionToAttach(index)}
+                        >
+                            {element[1]}
+                        </a>
+                    ),
+                    cellData: element[1],
+                },
+                {
+                    columnName: "Creation Date",
+                    cellData: element[2],
+                },
+                {
+                    columnName: "Favorite color",
+                    cellData: element[3],
+                },
+            ],
+            detailPaneData: {
+                detailPaneContent: <React.Fragment>Details Panel for : {element[1]}</React.Fragment>,
+            },
+        };
+
+        rowValues.push(row);
+    });
+    return rowValues;
 }

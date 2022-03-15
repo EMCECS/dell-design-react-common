@@ -44,8 +44,14 @@
         background-color: $grid-background-color;
     }
 
+    .datagrid-row-detail-open.datagrid-row {
+        .datagrid-row-sticky {
+            background-color: $grid-background-color !important;
+        }
+    }
+
     .datagrid-row-sticky {
-        background-color: $grid-background-color;
+        background-color: $grid-background-color !important;
 
         .datagrid-select {
             background-color: $grid-background-color;
@@ -63,6 +69,17 @@
 
         .datagrid-expandable-caret-button {
             min-width: 100% !important;
+        }
+
+        .datagrid-detail-caret-icon {
+            margin-top: 0;
+        }
+
+        .datagrid-detail-caret-button {
+            margin-top: 0.1rem;
+            &:focus {
+                outline: none !important;
+            }
         }
 
         .datagrid-cell {
