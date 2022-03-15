@@ -21,6 +21,9 @@
 
         .datagrid-column-title {
             @include grid-title;
+            &:focus {
+                outline: none !important;
+            }
         }
 
         .clr-dg-filter {
@@ -28,12 +31,11 @@
         }
 
         .datagrid-column-separator {
-
             &:after {
                 height: $grid-column-separator-height;
                 background-color: $grid-selected-background-color;
                 margin-top: $grid-column-separator-margin-top;
-                top: -35%;
+                top: $grid-column-separator-top;
             }
         }
     }
@@ -53,6 +55,9 @@
                         content: none;
                     }
                 }
+            }
+            & .clr-control-label {
+                margin-top: unset;
             }
         }
 
@@ -142,6 +147,23 @@
         .clr-control-label {
             font-size: $grid-font-size-default;
             font-weight: $font-weight-regular;
+        }
+    }
+}
+
+.datagrid-compact {
+    .datagrid-table {
+        .datagrid-column {
+            height: $grid-compact-column-height;
+        }
+        .datagrid-cell {
+            min-height: $grid-compact-cell-min-height;
+        }
+        .datagrid-column-separator {
+            &:after {
+                height: $grid-compact-column-separator-height;
+                top: $grid-compact-column-separator-top;
+            }
         }
     }
 }

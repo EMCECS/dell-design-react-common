@@ -51,9 +51,8 @@
     font-weight: $font-weight-regular;
     font-size: $grid-font-size-default;
     color: $grid-text-default-color;
-    min-height: 46px;
+    min-height: $grid-cell-min-height;
     line-height: unset;
-    padding-right: $grid-cell-padding-right;
     min-width: $grid-cell-min-width;
 }
 
