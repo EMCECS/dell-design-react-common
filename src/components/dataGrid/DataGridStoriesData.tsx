@@ -487,4 +487,3 @@ export class GridActions extends React.PureComponent<any, GridActionsState> {
         );
     }
 }
-
