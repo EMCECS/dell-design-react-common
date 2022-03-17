@@ -11,7 +11,14 @@
 import "styles/components/DataGrid.scss";
 import * as React from "react";
 import {storiesOf} from "@storybook/react";
-import {DataGrid, GridRowType, DataGridFilter, FilterPosition} from "@dellstorage/clarity-react/datagrid";
+import {
+    DataGrid,
+    GridRowType,
+    DataGridFilter,
+    FilterPosition,
+    GridSelectionType,
+    SortOrder,
+} from "@dellstorage/clarity-react/datagrid";
 import {
     normalColumns,
     normalRows,
@@ -21,15 +28,24 @@ import {
     paginationDetails,
     filterFunction,
     paginationRows,
-    sortColumns
+    sortColumns,
+    customRows,
+    customFooter,
+    getSelectableRowsData,
+    sortFunction,
+    columnsForCustomRows,
+    paginationRowsWithLinks
 } from "./DataGridStoriesData";
 
 const datagridFilterRef = React.createRef<DataGrid>();
+const datagridFilterSortRef = React.createRef<DataGrid>();
+const datagridCustomFilterMultiRef = React.createRef<DataGrid>();
+const datagridDetailsDemoRef = React.createRef<DataGrid>();
 
 storiesOf("DataGrid", module)
     .add("Basic grid with filtering", () => (
         <div style={{width: "80%"}}>
-            <DataGrid 
+            <DataGrid
                 ref={datagridFilterRef}
                 columns={[
                     {columnName: "IP"},
@@ -47,21 +63,21 @@ storiesOf("DataGrid", module)
                     {columnName: "Model"},
                     {columnName: "Template"},
                     {columnName: "Networking"},
-                    {columnName: "Role"}
+                    {columnName: "Role"},
                 ]}
-                footer={defaultFooter} 
+                footer={defaultFooter}
                 rows={normalRows}
             />
         </div>
     ))
     .add("Grid with expandable row", () => (
-            <DataGrid  
-                columns = {normalColumns}          
-                rows={expandableRows}
-                footer={hideShowColFooter}
-                rowType={GridRowType.EXPANDABLE}
-                itemText={"Items"}
-            />
+        <DataGrid
+            columns={normalColumns}
+            rows={expandableRows}
+            footer={hideShowColFooter}
+            rowType={GridRowType.EXPANDABLE}
+            itemText={"Items"}
+        />
     ))
     .add("Grid with pagination", () => (
         <div style={{width: "80%"}}>
@@ -77,5 +93,185 @@ storiesOf("DataGrid", module)
     .add("Grid with sorting", () => (
         <div style={{width: "80%"}}>
             <DataGrid columns={sortColumns} rows={normalRows} footer={defaultFooter} />
+        </div>
+    ))
+    .add("Grid with custom cells and footer", () => (
+        <div style={{width: "80%"}}>
+            <DataGrid columns={columnsForCustomRows} rows={customRows} footer={customFooter} />
+        </div>
+    ))
+    .add("Grid with multi select option and no footer", () => (
+        <div style={{width: "80%", paddingLeft: "1rem"}}>
+            <br />
+            <span> {"Grid with all rows are selectable :"} </span>
+            <DataGrid columns={normalColumns} rows={normalRows} selectionType={GridSelectionType.MULTI} />
+            <br /> <br />
+            <span> {"Grid with some rows are selectable :"} </span>
+            <DataGrid
+                columns={normalColumns}
+                rows={getSelectableRowsData()}
+                selectionType={GridSelectionType.MULTI}
+                footer={defaultFooter}
+                id="multi-select-datagrid"
+            />
+        </div>
+    ))
+    .add("Grid with single select option", () => (
+        <div style={{width: "80%", paddingLeft: "1rem"}}>
+            <br />
+            <span> {"Grid with all rows are selectable :"} </span>
+            <DataGrid
+                columns={normalColumns}
+                rows={normalRows}
+                selectionType={GridSelectionType.SINGLE}
+                footer={defaultFooter}
+            />
+            <br /> <br />
+            <span> {"Grid with some rows are selectable :"} </span>
+            <DataGrid
+                columns={normalColumns}
+                rows={getSelectableRowsData()}
+                selectionType={GridSelectionType.SINGLE}
+                footer={defaultFooter}
+                id="single-select-datagrid"
+            />
+        </div>
+    ))
+    .add("Grid with sorting and filter", () => (
+        <div style={{width: "80%"}}>
+            <DataGrid
+                ref={datagridFilterSortRef}
+                columns={[
+                    {
+                        columnName: "IP",
+                        sort: {defaultSortOrder: SortOrder.ASC, sortFunction: sortFunction}
+                    },
+                    {
+                        columnName: "Serial",
+                        filter: (
+                            <DataGridFilter
+                                onFilter={filterFunction}
+                                columnName={"Name"}
+                                datagridRef={datagridFilterSortRef}
+                                position={FilterPosition.CENTER}
+                            />
+                        ),
+                        sort: {defaultSortOrder: SortOrder.NONE, sortFunction: sortFunction, isSorted: true},
+                    },
+                    {columnName: "Model"},
+                    {columnName: "Template"},
+                    {columnName: "Networking"},
+                    {
+                        columnName: "Role",
+                        sort: {defaultSortOrder: SortOrder.ASC, sortFunction: sortFunction},
+                    },
+                ]}
+                rows={normalRows}
+                footer={defaultFooter}
+                selectionType={GridSelectionType.MULTI}
+            />
+        </div>
+    ))
+    .add("Grid with filter having show/hide functionality", () => (
+        <React.Fragment>
+            <div style={{width: "80%"}}>
+                <label> {"Datagrid with filter visible"} </label>
+                <DataGrid
+                    ref={datagridFilterRef}
+                    columns={[
+                        {columnName: "IP"},
+                        {
+                            columnName: "Serial",
+                            filter: (
+                                <DataGridFilter
+                                    onFilter={filterFunction}
+                                    columnName={"Name"}
+                                    datagridRef={datagridFilterRef}
+                                    position={FilterPosition.CENTER}
+                                />
+                            ),
+                            sort: {defaultSortOrder: SortOrder.NONE, sortFunction: sortFunction, isSorted: true},
+                        },
+                        {columnName: "Model"},
+                        {columnName: "Template"},
+                        {columnName: "Networking"},
+                        {columnName: "Role"},
+                    ]}
+                    rows={normalRows}
+                    footer={defaultFooter}
+                />
+            </div>
+            <br /> <br />
+            <div style={{width: "80%"}}>
+                <label> {"Datagrid with filter hidden"} </label>
+                <DataGrid
+                    ref={datagridCustomFilterMultiRef}
+                    columns={[
+                        {columnName: "IP"},
+                        {
+                            columnName: "Serial",
+                            filter: (
+                                <DataGridFilter
+                                    onFilter={filterFunction}
+                                    columnName={"Name"}
+                                    datagridRef={datagridFilterRef}
+                                    position={FilterPosition.CENTER}
+                                    showFilter={false}
+                                />
+                            )
+                        },
+                        {columnName: "Model"},
+                        {columnName: "Template"},
+                        {columnName: "Networking"},
+                        {columnName: "Role"},
+                    ]}
+                    rows={normalRows}
+                    footer={defaultFooter}
+                />
+            </div>
+        </React.Fragment>
+    ))
+    .add("Grid with compact row", () => (
+        <div style={{width: "80%"}}>
+            <DataGrid columns={normalColumns} rows={normalRows} footer={defaultFooter} rowType={GridRowType.COMPACT} />
+        </div>
+    ))
+    .add("Grid with open/close details pane on link click", () => {
+        // function to handle
+        const handleLinkClick = (rowIndex: number) => {
+            datagridDetailsDemoRef &&
+                datagridDetailsDemoRef.current &&
+                datagridDetailsDemoRef.current.handleDetailPaneToggle(rowIndex);
+        };
+
+        return (
+            <div style={{width: "80%", paddingTop: "5%"}}>
+                <DataGrid
+                    ref={datagridDetailsDemoRef}
+                    itemText={"Users"}
+                    columns={[
+                        {
+                            columnName: "User ID",
+                            isVisible: false,
+                        },
+                        {
+                            columnName: "Name",
+                        },
+                        {columnName: "Creation Date", style: {width: "20%"}},
+                        {
+                            columnName: "Favorite color",
+                        },
+                    ]}
+                    rows={paginationRowsWithLinks(handleLinkClick).slice(0, 5)}
+                    rowType={GridRowType.ROWS_WITH_DETAIL_PANE}
+                    selectionType={GridSelectionType.MULTI}
+                    footer={hideShowColFooter}
+                />
+            </div>
+        );
+    })
+    .add("Empty data grid", () => (
+        <div style={{width: "80%"}}>
+            <DataGrid columns={normalColumns} footer={defaultFooter} style={{height: "70vh"}} />
         </div>
     ));
