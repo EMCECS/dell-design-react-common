@@ -136,7 +136,7 @@ storiesOf("Signposts", module)
         <div style={{paddingTop: "250px", paddingLeft: "300px"}}>
             <div style={{float: "left"}}>
                 <SignPost direction={SignPostDirection.TOP_MIDDLE} signpostHeading={"Signpost Heading"} openAt={<span> Open SignPost </span>}>
-                    sample data here ...
+                    sample data here...
                 </SignPost>
             </div>
         </div>
