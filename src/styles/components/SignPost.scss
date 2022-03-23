@@ -12,6 +12,7 @@
 
 .signpost-content{
     min-width: 16rem !important;
+    color: $gray-900;
 
     .signpost-content-header{
         margin-top: 1rem;
@@ -32,5 +33,7 @@
     .signpost-content-body{
         margin-top: 1.2rem;
         margin-bottom: 1rem;
+        line-height: 1.25rem;
+        font-size: 0.8rem;
     }
 }
