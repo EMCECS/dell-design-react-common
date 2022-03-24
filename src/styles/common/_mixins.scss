@@ -207,3 +207,10 @@
     font-weight:$font-weight-regular;
 }
 
+@mixin modal-type($color) {
+    border-top-style: solid;
+    border-top-width: 8px;
+    border-color: $color;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

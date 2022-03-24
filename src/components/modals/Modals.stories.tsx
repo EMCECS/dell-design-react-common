@@ -10,7 +10,7 @@
 
 import {storiesOf} from "@storybook/react";
 import {State, Store} from "@sambego/storybook-state";
-import {Modal, ModalSize, ModalBody, ModalFooter} from "@dellstorage/clarity-react/modals/Modal";
+import {Modal, ModalSize, ModalBody, ModalFooter, ModalType} from "@dellstorage/clarity-react/modals/Modal";
 import {Button} from "@dellstorage/clarity-react/forms/button";
 import "styles/components/Modals.scss";
 
@@ -35,6 +35,21 @@ const storeExtraLarge = new Store({
 });
 
 const storeCustom = new Store({
+    isOpen: false,
+    closable: true,
+});
+
+const storeTypeDanger = new Store({
+    isOpen: false,
+    closable: true,
+});
+
+const storeTypeWarn = new Store({
+    isOpen: false,
+    closable: true,
+});
+
+const storeTypeInfo = new Store({
     isOpen: false,
     closable: true,
 });
@@ -132,6 +147,60 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                     </ModalFooter>
                 </Modal>
                 <Button onClick={() => storeCustom.set({isOpen: !storeCustom.get("isOpen")})}>Custom</Button>
+            </State>
+        </div>
+    </div>
+))
+.add("Modal Types", ()=> (
+    <div className="clr-row">
+        <div className="clr-col-12">
+            <State store={storeTypeDanger}>
+                <Modal onClose={() => storeTypeDanger.set({isOpen: false})} title="Medium modal" type={ModalType.DANGER}>
+                    <ModalBody>
+                        <p>Danger Modal Title</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => storeTypeDanger.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
+                        <Button onClick={() => storeTypeDanger.set({isOpen: false})} primary={true}>
+                            OK
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+                <Button onClick={() => storeTypeDanger.set({isOpen: !storeTypeDanger.get("isOpen")})}>DANGER</Button>
+            </State>
+            <State store={storeTypeWarn}>
+                <Modal onClose={() => storeTypeWarn.set({isOpen: false})} title="Medium modal" type={ModalType.INFO}>
+                    <ModalBody>
+                        <p>Warning Modal Title</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => storeTypeWarn.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
+                        <Button onClick={() => storeTypeWarn.set({isOpen: false})} primary={true}>
+                            OK
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+                <Button onClick={() => storeTypeWarn.set({isOpen: !storeTypeWarn.get("isOpen")})}>INFO</Button>
+            </State>
+            <State store={storeTypeInfo}>
+                <Modal onClose={() => storeTypeInfo.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING}>
+                    <ModalBody>
+                        <p>Info Modal Title</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => storeTypeInfo.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
+                        <Button onClick={() => storeTypeInfo.set({isOpen: false})} primary={true}>
+                            OK
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+                <Button onClick={() => storeTypeInfo.set({isOpen: !storeTypeInfo.get("isOpen")})}>WARNING</Button>
             </State>
         </div>
     </div>
