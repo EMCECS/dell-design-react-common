@@ -15,7 +15,7 @@
 
 .clr-vertical-nav {
     %side-nav-item-height {
-        height: $side-nav-item-height;
+        min-height: $side-nav-item-height;
         line-height: $side-nav-item-height;
     }
     %side-nav-child-item-height {
@@ -55,8 +55,9 @@
                 padding-left: 2.2rem;
                 .nav-text {
                    @extend %side-nav-child-item-height;
+                   align-self: center
                 }
-                &:active, &.active {
+                &.active {
                     @include side-nav-active(false, false);
                 }
             }   
@@ -76,21 +77,39 @@
                 color: $side-nav-trigger-icon-color;
             }
         }
-        &:active, &.active {
+        &.active {
            @include side-nav-active(true, true);
            .nav-icon {
-                margin: 0.5rem 1.5rem 0.5rem 1.1rem !important;
+                margin: 0.5rem 1.5rem 0.5rem 1.25rem !important;
             }
         }
         .nav-icon {
-            margin: 0.5rem 1.5rem 0.5rem 1.3rem !important;
+            margin: 0.5rem 1.5rem 0.5rem 1.5rem !important;
         }
     }
     &.is-collapsed {
-        width: 4.1rem!important;
+        width: 3.8rem !important;
         .nav-link {
             .nav-icon {
                 margin: 0.5rem 1.5rem 0.5rem 1.5rem !important;
+            }
+            &.active {
+                .nav-icon {
+                    margin: 0.5rem 1.5rem 0.5rem 1.25rem !important;
+                }
+            }
+        }
+        .nav-trigger {
+            margin-right: 0;
+        }
+        .nav-group-content {
+            .nav-icon {
+                margin-left: 1.5rem !important;
+            }
+            &.active {
+                .nav-icon {
+                    margin-left: 1.25rem !important;
+                }
             }
         }
     }
@@ -103,14 +122,14 @@
             color: $side-nav-hover-font-color;
             background-color: $side-nav-hover-background;
         }
-        &:active, &.active {
+        &.active {
             @include side-nav-active(true, false);
             .nav-icon {
-                margin: 0.5rem 1.5rem 0.5rem -0.4rem !important;
+                margin: 0.5rem 1.5rem 0.5rem -0.25rem !important;
             }
         }
         .nav-icon {
-            margin: 0.5rem 1.5rem 0.5rem -0.25rem !important;
+            margin: 0.5rem 1.5rem 0.5rem 0 !important;
         }
     }
     .nav-trigger {
@@ -119,9 +138,14 @@
         &:hover {
             background-color:$side-nav-hover-background; 
         }
+        &:focus {
+            outline: none;
+        }
         .nav-trigger-icon {
             color: $side-nav-trigger-icon-color!important;
             margin: 0.5rem 1.5rem 0.5rem 1.5rem !important;
+            min-width: 0.9rem;
+            min-height: 0.9rem;
         }
     }
     &.has-icons {
