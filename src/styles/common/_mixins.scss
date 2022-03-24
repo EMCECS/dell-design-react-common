@@ -51,9 +51,8 @@
     font-weight: $font-weight-regular;
     font-size: $grid-font-size-default;
     color: $grid-text-default-color;
-    min-height: 46px;
-    line-height: $grid-line-height;
-    padding-right: $grid-cell-padding-right;
+    min-height: $grid-cell-min-height;
+    line-height: unset;
     min-width: $grid-cell-min-width;
 }
 
@@ -213,4 +212,12 @@
     border-color: $color;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+@mixin font-details($color:$gray-900, $fontWeight:$font-weight-regular, $fontSize: $font-size-7, $lineHeight: $line-height-20) {
+    font-family:$dell-font;
+    color:$color;  
+    font-weight:$fontWeight;
+    font-size: $fontSize;
+    line-height: $lineHeight;
 }

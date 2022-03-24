@@ -8,18 +8,27 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import {DataGridRow, DataGridFilterResult, SortOrder} from "@dellstorage/clarity-react/datagrid";
-
+import {DataGridRow, DataGridFilterResult, SortOrder, DataGridColumn} from "@dellstorage/clarity-react/datagrid";
+import {Icon} from "@dellstorage/clarity-react/icon";
+import {Button} from "@dellstorage/clarity-react/forms/button";
+import * as React from "react";
 /**
  * Data for Columns
  */
- export const normalColumns = [
+ export const normalColumns: DataGridColumn[] = [
     {columnName: "IP"},
     {columnName: "Serial"},
     {columnName: "Model"},
     {columnName: "Template"},
     {columnName: "Networking"},
     {columnName: "Role"},
+];
+
+export const columnsForCustomRows: DataGridColumn[] = [
+    {columnName: "User ID"},
+    {columnName: "Name"},
+    {columnName: "Creation Date"},
+    {columnName: "Favorite color"},
 ];
 
 /**
@@ -77,6 +86,9 @@ import {DataGridRow, DataGridFilterResult, SortOrder} from "@dellstorage/clarity
         ],
     },
 ];
+
+// Data for pagination rows
+export const paginationRowsWithLinks = (linkFunction: Function) => getRowDataWithLink(linkFunction);
 
 /**
 * Data for Expandable Rows
@@ -378,3 +390,145 @@ export const sortColumns = [
         sort: {defaultSortOrder: SortOrder.ASC, sortFunction: sortFunction},
     },
 ];
+
+/**
+ * Data for Custom content rendering
+ */
+ export const customRows = [
+    {
+        rowData: [
+            {columnName: "User ID", cellData: 41512},
+            {columnName: "Name", cellData: "Georgia"},
+            {columnName: "Creation Date", cellData: "Sep 11, 2008"},
+            {
+                columnName: "Favorite color",
+                cellData: (
+                    <div>
+                        <Icon shape="time" />
+                        {"Critical"}
+                    </div>
+                ),
+            },
+        ],
+    },
+    {
+        rowData: [
+            {columnName: "User ID", cellData: 16166},
+            {columnName: "Name", cellData: "Brynn"},
+            {columnName: "Creation Date", cellData: "Aug 2, 2014"},
+            {
+                columnName: "Favorite color",
+                cellData: (
+                    <div>
+                        <Icon shape="time" />
+                        {"Critical"}
+                    </div>
+                ),
+            },
+        ],
+    },
+];
+
+/**
+ * Data for Footer
+ */
+ export const customFooter = {
+    footerData: "Total 2 users",
+    showFooter: true,
+};
+
+// Function to get some selection enabled rows
+export const getSelectableRowsData = (): DataGridRow[] => {
+    let disableRowSelection: boolean = true;
+    let updatedRows: DataGridRow[] = getRowData();
+    updatedRows.forEach((row: DataGridRow) => {
+        disableRowSelection = !disableRowSelection;
+        row.disableRowSelection = disableRowSelection;
+    });
+    return updatedRows;
+};
+
+/**
+ * Data for Batch Actions
+ */
+// Grid Action component
+type GridActionsState = {
+    selectedRows: any[];
+    showEdit: boolean;
+};
+
+export class GridActions extends React.PureComponent<any, GridActionsState> {
+    state = {
+        selectedRows: [],
+        showEdit: false,
+    };
+
+    updateActions(rows: any) {
+        this.setState({
+            selectedRows: rows,
+            showEdit: rows.length === 1 ? true : false,
+        });
+    }
+
+    render() {
+        const {selectedRows, showEdit} = this.state;
+        return (
+            <div>
+                <Button key="new">NEW</Button>
+                <Button key="edit" show={showEdit}>
+                    EDIT
+                </Button>
+                <Button
+                    key="delete"
+                    onClick={() => {
+                        alert("Deleted" + selectedRows.length);
+                    }}
+                >
+                    DELETE
+                </Button>
+            </div>
+        );
+    }
+}
+
+export function getRowDataWithLink(functionToAttach: Function) {
+    let rowValues: DataGridRow[] = [];
+    cellData.forEach(function(element: any, index: number) {
+        const row: DataGridRow = {
+            rowData: [
+                {
+                    columnName: "User ID",
+                    cellData: element[0],
+                },
+                {
+                    columnName: "Name",
+                    cellDisplayData: (
+                        // eslint-disable-next-line
+                        <a
+                            href="javascript:void(0);" // eslint-disable-line no-script-url
+                            className="nameLink"
+                            onClick={event => functionToAttach(index)}
+                        >
+                            {element[1]}
+                        </a>
+                    ),
+                    cellData: element[1],
+                },
+                {
+                    columnName: "Creation Date",
+                    cellData: element[2],
+                },
+                {
+                    columnName: "Favorite color",
+                    cellData: element[3],
+                },
+            ],
+            detailPaneData: {
+                detailPaneContent: <React.Fragment>Details Panel for : {element[1]}</React.Fragment>,
+            },
+        };
+
+        rowValues.push(row);
+    });
+    return rowValues;
+}

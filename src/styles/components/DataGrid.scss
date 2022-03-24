@@ -7,34 +7,35 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
- @import "../common/mixins";
- @import "../common/colors";
- @import "../common/fonts";
- @import "../common/layout";
+@import "../common/mixins";
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/layout";
 
 .datagrid-table {
-
     .datagrid-column {
         background-color: $grid-background-color;
         height: $grid-column-height;
-        border-color : $grid-border-color;
+        border-color: $grid-border-color;
         min-width: $grid-cell-min-width;
 
         .datagrid-column-title {
             @include grid-title;
+            &:focus {
+                outline: none !important;
+            }
         }
 
         .clr-dg-filter {
             top: $grid-filter-top;
         }
 
-        .datagrid-column-separator {            
-
+        .datagrid-column-separator {
             &:after {
                 height: $grid-column-separator-height;
                 background-color: $grid-selected-background-color;
                 margin-top: $grid-column-separator-margin-top;
-                top: -35%;        
+                top: $grid-column-separator-top;
             }
         }
     }
@@ -43,19 +44,26 @@
         background-color: $grid-background-color;
     }
 
+    .datagrid-row-detail-open.datagrid-row {
+        .datagrid-row-sticky {
+            background-color: $grid-background-color !important;
+        }
+    }
+
     .datagrid-row-sticky {
-        background-color: $grid-background-color;
+        background-color: $grid-background-color !important;
 
         .datagrid-select {
-
+            background-color: $grid-background-color;
             &.datagrid-fixed-column {
-
                 .datagrid-column-separator {
-                    
                     &:after {
                         content: none;
                     }
                 }
+            }
+            & .clr-control-label {
+                margin-top: unset;
             }
         }
 
@@ -63,13 +71,32 @@
             min-width: 100% !important;
         }
 
+        .datagrid-detail-caret-icon {
+            margin-top: 0;
+        }
+
+        .datagrid-detail-caret-button {
+            margin-top: 0.1rem;
+            &:focus {
+                outline: none !important;
+            }
+        }
+
         .datagrid-cell {
-
             &:last-child {
-
                 &:after {
                     background-color: $grid-background-color;
                 }
+            }
+        }
+
+        .btn {
+            &:focus {
+                outline: none !important;
+            }
+            &:active {
+                background-color: unset;
+                border: none;
             }
         }
     }
@@ -92,31 +119,43 @@
 
     .datagrid-container {
         background-color: $grid-background-color;
-        margin: $grid-container-margin-top $grid-container-margin-right $grid-container-margin-bottom $grid-container-margin-left;
+        margin: $grid-container-margin-top $grid-container-margin-right $grid-container-margin-bottom
+            $grid-container-margin-left;
         padding: 0rem;
     }
 }
 
 .datagrid-footer {
-    @include grid-cell;
+    font-size: $grid-footer-font-size-default;
+    color: $grid-text-default-color;
+    min-height: $datagrid-footer-min-height;
+
     background-color: $grid-background-color;
     border-color: $grid-border-color;
 
     .btn {
-      width: $grid-footer-btn-width;
-      display: flex;
-      justify-content: center;
-      &.btn-icon {
-          min-width: unset !important;
-      }
-      &:disabled {
-          border: none;
-          background-color: unset !important;
-      }
+        width: $grid-footer-btn-width;
+        display: flex;
+        justify-content: center;
+
+        &.column-toggle--action {
+            display: inline-block !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        &.btn-icon {
+            min-width: unset !important;
+        }
+        &:disabled {
+            border: none;
+            background-color: unset !important;
+        }
+        &:focus {
+            outline: none !important;
+        }
     }
 
     .column-switch {
-
         .switch-header {
             font-size: $grid-font-size-default;
             font-weight: $font-weight-medium;
@@ -125,6 +164,23 @@
         .clr-control-label {
             font-size: $grid-font-size-default;
             font-weight: $font-weight-regular;
+        }
+    }
+}
+
+.datagrid-compact {
+    .datagrid-table {
+        .datagrid-column {
+            height: $grid-compact-column-height;
+        }
+        .datagrid-cell {
+            min-height: $grid-compact-cell-min-height;
+        }
+        .datagrid-column-separator {
+            &:after {
+                height: $grid-compact-column-separator-height;
+                top: $grid-compact-column-separator-top;
+            }
         }
     }
 }
