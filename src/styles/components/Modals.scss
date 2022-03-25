@@ -10,8 +10,20 @@
 
 @import "../common/colors";
 @import "../common/fonts";
+@import "../common/mixins";
 
 .modal {
+    .modal-type {
+        &-danger {
+            @include modal-type($red-700);
+        }
+        &-warning {
+            @include modal-type($yellow-300);
+        }
+        &-info {
+            @include modal-type($blue-600);
+        }
+    }
     .modal-content {
         .modal-header {
             & .close {
