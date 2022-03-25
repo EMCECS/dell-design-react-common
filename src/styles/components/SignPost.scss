@@ -1,0 +1,39 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+@import "../common/colors";
+@import "../common/fonts";
+
+.signpost-content{
+    min-width: 16rem !important;
+    color: $gray-900;
+
+    .signpost-content-header{
+        margin-top: 1rem;
+        padding-left: 0.2rem;
+        
+        .signpost-heading{
+            font-size: 1rem;
+            font-weight: $font-weight-regular;
+            margin-left: 1rem;
+            padding-right: 4rem;
+        }
+    
+        .signpost-action {
+            margin-right: 1rem;
+        }
+    }
+    
+    .signpost-content-body{
+        margin-top: 1.2rem;
+        margin-bottom: 1rem;
+        line-height: 1.25rem;
+        font-size: 0.8rem;
+    }
+}
