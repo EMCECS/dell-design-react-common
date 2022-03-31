@@ -11,7 +11,8 @@
 import {storiesOf} from "@storybook/react";
 import {State, Store} from "@sambego/storybook-state";
 import {Modal, ModalSize, ModalBody, ModalFooter, ModalType} from "@dellstorage/clarity-react/modals/Modal";
-import {Button} from "@dellstorage/clarity-react/forms/button";
+import {Button, ButtonState} from "@dellstorage/clarity-react/forms/button";
+import {Icon} from "@dellstorage/clarity-react/icon";
 import "styles/components/Modals.scss";
 
 const storeSmall = new Store({
@@ -54,13 +55,23 @@ const storeTypeInfo = new Store({
     closable: true,
 });
 
+const storeTypeShowIcon = new Store({
+    isOpen: false,
+    closable: true,
+});
+
+const storeTypeCustomIcon = new Store({
+    isOpen: false,
+    closable: true,
+});
+
 storiesOf("Modals", module).add("Modal Sizes", () => (
     <div className="clr-row">
         <div className="clr-col-12">
             <State store={storeSmall}>
                 <Modal size={ModalSize.SMALL} onClose={() => storeSmall.set({isOpen: false})} title="Small modal">
                     <ModalBody>
-                        <p>I'm a small modal</p>
+                        <p>"I'm a small modal"</p>
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={() => storeSmall.set({isOpen: false})} link>
@@ -163,7 +174,7 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <Button onClick={() => storeTypeDanger.set({isOpen: false})} link>
                             CANCEL
                         </Button>
-                        <Button onClick={() => storeTypeDanger.set({isOpen: false})} primary={true}>
+                        <Button onClick={() => storeTypeDanger.set({isOpen: false})} state={ButtonState.DANGER}>
                             OK
                         </Button>
                     </ModalFooter>
@@ -173,13 +184,13 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
             <State store={storeTypeWarn}>
                 <Modal onClose={() => storeTypeWarn.set({isOpen: false})} title="Medium modal" type={ModalType.INFO}>
                     <ModalBody>
-                        <p>Warning Modal Title</p>
+                        <p>Info Modal Title</p>
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={() => storeTypeWarn.set({isOpen: false})} link>
                             CANCEL
                         </Button>
-                        <Button onClick={() => storeTypeWarn.set({isOpen: false})} primary={true}>
+                        <Button onClick={() => storeTypeWarn.set({isOpen: false})} primary={true} state={ButtonState.INFO}>
                             OK
                         </Button>
                     </ModalFooter>
@@ -195,12 +206,44 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                         <Button onClick={() => storeTypeInfo.set({isOpen: false})} link>
                             CANCEL
                         </Button>
-                        <Button onClick={() => storeTypeInfo.set({isOpen: false})} primary={true}>
+                        <Button onClick={() => storeTypeInfo.set({isOpen: false})} primary={true} state={ButtonState.WARNING}>
                             OK
                         </Button>
                     </ModalFooter>
                 </Modal>
                 <Button onClick={() => storeTypeInfo.set({isOpen: !storeTypeInfo.get("isOpen")})}>WARNING</Button>
+            </State>
+            <State store={storeTypeShowIcon}>
+                <Modal onClose={() => storeTypeShowIcon.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING} showIcon={false}>
+                    <ModalBody>
+                        <p>Info Modal Title</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => storeTypeShowIcon.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
+                        <Button onClick={() => storeTypeShowIcon.set({isOpen: false})} primary={true} state={ButtonState.WARNING}>
+                            OK
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+                <Button onClick={() => storeTypeShowIcon.set({isOpen: !storeTypeShowIcon.get("isOpen")})}>NO ICON</Button>
+            </State>
+            <State store={storeTypeCustomIcon}>
+                <Modal onClose={() => storeTypeCustomIcon.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING} customIcon={<Icon shape="eye"/>}>
+                    <ModalBody>
+                        <p>Info Modal Title</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => storeTypeCustomIcon.set({isOpen: false})} link>
+                            CANCEL
+                        </Button>
+                        <Button onClick={() => storeTypeCustomIcon.set({isOpen: false})} primary={true} state={ButtonState.WARNING}>
+                            OK
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+                <Button onClick={() => storeTypeCustomIcon.set({isOpen: !storeTypeCustomIcon.get("isOpen")})}>CUSTOM ICON</Button>
             </State>
         </div>
     </div>

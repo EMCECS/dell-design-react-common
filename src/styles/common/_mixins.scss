@@ -221,3 +221,13 @@
     font-size: $fontSize;
     line-height: $lineHeight;
 }
+
+@mixin progress-bar-color($color) {
+    &::-webkit-progress-value {
+        background: $color !important;
+    }
+
+    &::-moz-progress-bar {
+        background: $color !important;
+    }
+}
