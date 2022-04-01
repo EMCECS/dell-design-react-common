@@ -166,7 +166,7 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
     <div className="clr-row">
         <div className="clr-col-12">
             <State store={storeTypeDanger}>
-                <Modal onClose={() => storeTypeDanger.set({isOpen: false})} title="Medium modal" type={ModalType.DANGER}>
+                <Modal onClose={() => storeTypeDanger.set({isOpen: false})} title="Medium modal" type={ModalType.DANGER} showIcon={true}>
                     <ModalBody>
                         <p>Danger Modal Title</p>
                     </ModalBody>
@@ -182,7 +182,7 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                 <Button onClick={() => storeTypeDanger.set({isOpen: !storeTypeDanger.get("isOpen")})}>DANGER</Button>
             </State>
             <State store={storeTypeWarn}>
-                <Modal onClose={() => storeTypeWarn.set({isOpen: false})} title="Medium modal" type={ModalType.INFO}>
+                <Modal onClose={() => storeTypeWarn.set({isOpen: false})} title="Medium modal" type={ModalType.INFO} showIcon={true}>
                     <ModalBody>
                         <p>Info Modal Title</p>
                     </ModalBody>
@@ -198,7 +198,7 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                 <Button onClick={() => storeTypeWarn.set({isOpen: !storeTypeWarn.get("isOpen")})}>INFO</Button>
             </State>
             <State store={storeTypeInfo}>
-                <Modal onClose={() => storeTypeInfo.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING}>
+                <Modal onClose={() => storeTypeInfo.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING} showIcon={true}>
                     <ModalBody>
                         <p>Info Modal Title</p>
                     </ModalBody>
@@ -230,7 +230,7 @@ storiesOf("Modals", module).add("Modal Sizes", () => (
                 <Button onClick={() => storeTypeShowIcon.set({isOpen: !storeTypeShowIcon.get("isOpen")})}>NO ICON</Button>
             </State>
             <State store={storeTypeCustomIcon}>
-                <Modal onClose={() => storeTypeCustomIcon.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING} customIcon={<Icon shape="eye"/>}>
+                <Modal onClose={() => storeTypeCustomIcon.set({isOpen: false})} title="Medium modal" type={ModalType.WARNING} showIcon={true} customIcon={<Icon shape="eye"/>}>
                     <ModalBody>
                         <p>Info Modal Title</p>
                     </ModalBody>
