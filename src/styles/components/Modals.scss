@@ -14,10 +14,6 @@
 @import "../common/layout";
 
 .modal {
-    .modal-dialog {
-        width: $modal-width;
-        max-height: $modal-max-height;
-    }
     .modal-type {
         &-danger {
             @include modal-type($red-700);
@@ -28,18 +24,6 @@
         &-info {
             @include modal-type($blue-600);
         }
-    }
-    &-sm {
-        width: $modal-width !important;
-        max-height: $modal-max-height-sm !important;
-    }
-    &-lg {
-        width: $modal-width !important;
-        max-height: $modal-max-height-lg !important;
-    }
-    &-xl {
-        width: $modal-width-xl !important;
-        max-height: $modal-max-height-xl !important;
     }
     .modal-content {
         .modal-header {
