@@ -1,14 +1,14 @@
 {
   "name": "@dellstorage/dell-design-react-common",
   "description": "Override CSS of Clarity-React components to align it with Dell design standards",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "Apache-2.0",
   "private": false,
   "outDir": "dist",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@dellstorage/clarity-react": "^1.1.13",
+    "@dellstorage/clarity-react": "^1.1.14",
     "@types/node": "^12.14.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
