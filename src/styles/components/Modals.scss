@@ -11,6 +11,7 @@
 @import "../common/colors";
 @import "../common/fonts";
 @import "../common/mixins";
+@import "../common/layout";
 
 .modal {
     .modal-type {
@@ -40,6 +41,25 @@
                 font-weight: $font-weight-regular;
                 line-height: $modals-header-line-height;
                 font-size: $modals-header-font-size;
+            }
+
+            .modal-title-icon {
+                display: flex;
+                align-items: center;
+                & > clr-icon {
+                    height: 1.4rem;
+                    width: 1.7rem;
+                    margin-right: 0.3rem;
+                    &[shape="error-standard"] {
+                        fill: $red-700;
+                    }
+                    &[shape="info-standard"] {
+                        fill: $blue-600;
+                    }
+                    &[shape="warning-standard"] {
+                        fill: $yellow-300;
+                    }
+                } 
             }
         }
 
