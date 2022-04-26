@@ -10,7 +10,8 @@
 
 import React from 'react';
 import { storiesOf } from "@storybook/react";
-import DoughnutChart, { CHART_STATUS } from './DoughnutChart';
+import { DoughnutChart,  CHART_STATUS } from './DoughnutChart';
+import "styles/components/DoughnutChart.scss"
 
 const divStyle: any = {display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent:"space-around"}
 

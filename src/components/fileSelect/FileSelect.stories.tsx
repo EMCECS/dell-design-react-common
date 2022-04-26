@@ -10,7 +10,8 @@
 
 import { storiesOf } from "@storybook/react";
 import {action} from "@storybook/addon-actions";
-import FileSelect from "./FileSelect";
+import {FileSelect} from "./FileSelect";
+import "styles/components/FileSelect.scss"
 
 storiesOf("FileSelect", module)
     .add("Default", () => (

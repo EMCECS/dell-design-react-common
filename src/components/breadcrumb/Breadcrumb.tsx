@@ -9,7 +9,6 @@
  */
 
 import {ReactNode} from "react";
-import "styles/components/Breadcrumb.scss";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 /**

@@ -10,7 +10,6 @@
 
 import React, {ChangeEvent} from "react";
 
-import "styles/components/FileSelect.scss";
 import {Input} from "@dellstorage/clarity-react/forms/input/Input";
 import {Button, ButtonState} from "@dellstorage/clarity-react/forms/button";
 import {Icon} from "@dellstorage/clarity-react/icon";
@@ -59,7 +58,7 @@ const ERROR_ICON_SIZE = 25;
 const ENABLE_BUTTON_DEFAULT = -1;
 const EDIT_MODAL_TITLE = "Edit Files";
 
-export default class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
+export class FileSelect extends React.PureComponent<FileSelectProps, FileSelectState> {
     fileSelectRef: React.RefObject<HTMLInputElement>;
 
     constructor(props: FileSelectProps) {
