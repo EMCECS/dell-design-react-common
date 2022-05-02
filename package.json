@@ -1,7 +1,7 @@
 {
   "name": "@dellstorage/dell-design-react-common",
   "description": "Override CSS of Clarity-React components to align it with Dell design standards",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "Apache-2.0",
   "private": false,
   "outDir": "dist",
@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "eject": "react-scripts eject",
-    "build": "webpack --mode=production --node-env=production",
+    "build": "webpack --mode=production --node-env=production && tsc",
     "copy": "cp package.json ./dist/. && cp README.md ./dist/. ",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -44,8 +44,8 @@
     "package-major": "yarn run lint && yarn run build && yarn run version major --unsafe-perm",
     "package-minor": "yarn run lint && yarn run build && yarn run version minor --unsafe-perm",
     "package-patch": "yarn run lint && yarn run build && yarn run version patch --unsafe-perm",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development  && tsc",
+    "build:prod": "webpack --mode=production --node-env=production  && tsc",
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },

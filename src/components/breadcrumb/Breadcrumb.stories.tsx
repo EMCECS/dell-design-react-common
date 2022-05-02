@@ -12,6 +12,7 @@
  import {storiesOf} from "@storybook/react";
  import {Breadcrumbs,BreadcrumbItem} from "./Breadcrumb";
  import {action} from "@storybook/addon-actions";
+ import "styles/components/Breadcrumb.scss"
  
  const breadcrumbItems:Array<BreadcrumbItem> = [
     {title: "Dashboard", path: "#"},

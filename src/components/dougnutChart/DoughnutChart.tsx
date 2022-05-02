@@ -9,7 +9,6 @@
  */
 
 import React, { useEffect, useState, useRef } from "react";
-import "styles/components/DoughnutChart.scss"
 
 /**
  * Props for the doughnut chart
@@ -80,7 +79,7 @@ const getLabelYPosition = (center: number, showPercentage: boolean) => {
 }
 
 // Component function
-const DoughnutChart = (props: CircularProgressType) => {
+export const DoughnutChart = (props: CircularProgressType) => {
     const {
         size = DEFAULT_CHART_VALUES.SIZE,
         percentage,
@@ -159,4 +158,3 @@ const DoughnutChart = (props: CircularProgressType) => {
     )
 }
 
-export default DoughnutChart
