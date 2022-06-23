@@ -1,0 +1,170 @@
+@import '../../styles/common/colors';
+@import "../../styles/common/fonts";
+
+$table-border: 1px solid $gray-300;
+$isg-row-height: 40px;
+$csg-row-height: 48px;
+$compact-row-height: 32px;
+$isg-header-height: 48px;
+$csg-header-height: 56px;
+$compact-header-height: 40px;
+
+.expanded-row {
+    border-top: unset;
+    td {
+        padding: 24px 16px;
+    }
+}
+.header-cell {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    .column-sorting {
+        padding-left: 10px;
+        width: 40px;
+        height: 20px;
+    }
+}
+.table-body {
+    position: relative;
+}
+.spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: $primary-white;
+    opacity: 0.5;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: unset;
+}
+.dropdown-menu.show {
+    padding: 10px 20px;
+}
+.pagination {
+    p {
+        margin-bottom: unset;
+    }
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: space-between;
+    .page-selection-container {
+        * {
+            padding: 0 10px;
+        }
+        .dropdown-menu.show {
+            padding: unset;
+        }
+        span {
+            padding: unset;
+        }
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+    }
+    input {
+        max-width: 45px;
+        font-size: 13px;
+        border: 1px solid $gray-300;
+    }
+}
+
+.record-count {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+
+.column-select {
+    // making the button color to transparent
+    .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+        background-color: transparent;
+        border: unset;
+        padding: unset;
+    }
+    // removing the focus box shadow
+    .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+        box-shadow: unset;
+    }
+    // To remove drop down icon as it is not required in this case
+    .dropdown-toggle::after {
+        content: none;
+    }
+}
+
+
+// Icon styles
+.column-picker-icon {
+    max-width: 20px;
+    max-height: 20px;
+}
+.sorting-icons {
+    max-width: 8px;
+    line-height: 20px;
+}
+
+.isg-row {
+    height: $isg-row-height;
+    line-height: $isg-row-height;
+}
+.csg-row {
+    height: $csg-row-height;
+    line-height: $csg-row-height;
+}
+.compact-row {
+    height: $compact-row-height;
+    line-height: $compact-row-height;
+}
+
+.isg-header {
+    height: $isg-header-height;
+    line-height: $isg-header-height;
+}
+
+.csg-header {
+    height: $csg-header-height;
+    line-height: $csg-header-height;
+}
+
+.compact-header {
+    height: $compact-header-height;
+    line-height: $compact-header-height;
+}
+
+.isg-row, .csg-row, .compact-row, .isg-header, .csg-header, .compact-header {
+    td, th {
+        height: inherit;
+        line-height: inherit;
+    }
+}
+
+.row-select-title {
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.expansion-column {
+    padding: 0 16px;
+}
+.expansion-icon {
+    height: 14px;
+    width: 7.82px;
+    display: flex;
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+.expanded {
+    transform: rotate(90deg);
+}
