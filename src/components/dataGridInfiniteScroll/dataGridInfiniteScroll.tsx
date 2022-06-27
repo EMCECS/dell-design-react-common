@@ -19,9 +19,6 @@ type DataGridProps = {
     tableHeight?: number;
 }
 const DataGridInfiniteScroll = (props:DataGridProps) => {
-
-    console.log("Props",props);
-
     const data: any = props.data;
     const columns: any = props.column;
 
