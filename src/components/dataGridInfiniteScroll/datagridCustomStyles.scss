@@ -1,12 +1,13 @@
 @import '../../styles/common/colors';
 @import "../../styles/common/fonts";
+@import "../../styles/common/borders";
 
-$table-border: 1px solid $gray-300;
+// $table-border: 1px solid $gray-300;
 $isg-row-height: 40px;
 $csg-row-height: 48px;
 $compact-row-height: 32px;
 $isg-header-height: 48px;
-$csg-header-height: 56px;
+$csg-header-height:48px;
 $compact-header-height: 40px;
 
 .expanded-row {
@@ -18,7 +19,7 @@ $compact-header-height: 40px;
 .header-cell {
     display: flex;
     align-items: center;
-    font-family: inherit;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     .column-sorting {
         padding-left: 10px;
         width: 40px;
@@ -69,11 +70,11 @@ $compact-header-height: 40px;
         }
         display: flex;
         align-items: center;
-        font-size: 13px;
+        font-size: 14px;
     }
     input {
         max-width: 45px;
-        font-size: 13px;
+        font-size: 14px;
         border: 1px solid $gray-300;
     }
 }
@@ -120,6 +121,8 @@ $compact-header-height: 40px;
 .csg-row {
     height: $csg-row-height;
     line-height: $csg-row-height;
+    border: 1px solid #E4E4E4 !important;
+    
 }
 .compact-row {
     height: $compact-row-height;
@@ -143,8 +146,17 @@ $compact-header-height: 40px;
 
 .isg-row, .csg-row, .compact-row, .isg-header, .csg-header, .compact-header {
     td, th {
-        height: inherit;
-        line-height: inherit;
+        height: 48px;
+        line-height: inherit; 
+         padding-left: 9px;
+         padding-right: 9px;
+        border-top-style: solid;
+        border-top-width: 0.05rem;
+        border-top-color: #E4E4E4;
+        font-size: 14px;
+        margin: 4rem;
+        align-items: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 }
 
@@ -167,4 +179,16 @@ $compact-header-height: 40px;
 }
 .expanded {
     transform: rotate(90deg);
+}
+
+.table-css{
+    .table {
+
+    border-color: #E4E4E4;
+    border: 1px solid #E4E4E4 !important;
+
+    }
+    table {
+        border: solid 1px #E4E4E4;
+    }
 }

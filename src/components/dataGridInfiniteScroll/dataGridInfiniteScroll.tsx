@@ -2,7 +2,7 @@
 //import ReactDataGrid from 'react-data-grid';
 import React from "react";
 import { useTable } from "react-table";
-import "styles/components/DataGrid.scss";
+// import "styles/components/Data   Grid.scss";
 import './datagridCustomStyles.scss';
 
 type DataGridProps = {
@@ -42,8 +42,8 @@ const DataGridInfiniteScroll = (props:DataGridProps) => {
     });
 
     return (
-        <div>
-            <table {...getTableProps()}>
+        <div className="table-css">
+            <table {...getTableProps()} className="table-css">
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}
