@@ -95,7 +95,7 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                             <div className="dds__checkbox dds__checkbox--sm">
                                 <label className="dds__checkbox__label" htmlFor="sm-rad">
                                     <input type="checkbox" id="allSelect"
-                                           className="dds__checkbox__input" checked={allValues.filter(value=>value?.isChecked === false)}
+                                           className="dds__checkbox__input" checked={allValues.filter(value=>value?.isChecked !== true).length < 1}
                                            onChange={handleChange}/>
                                 </label>
                             </div>
