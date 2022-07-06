@@ -1,12 +1,15 @@
-
 //import ReactDataGrid from 'react-data-grid';
-import React from "react";
-import { useTable } from "react-table";
+import React, {useEffect, useState} from "react";
+import {useTable} from "react-table";
 // import "styles/components/Data   Grid.scss";
 import './datagridCustomStyles.scss';
 
 type DataGridProps = {
-    data: { [key: string]: any };
+    className?: string;
+    style?: any;
+    dataqa?: string;
+    id?: string;
+    row: { [key: string]: any };
     column: { [key: string]: any };
     sorting?: boolean;
     expandable?: boolean;
@@ -18,13 +21,31 @@ type DataGridProps = {
     defaultColumnWidth?: number;
     tableHeight?: number;
 }
-const DataGridInfiniteScroll = (props:DataGridProps) => {
-    const data: any = props.data;
+export type DataGridColumn = {
+    columnName: string;
+    displayName?: any;
+    tooltip?: any;
+    columnID?: number; // For internal use
+    className?: string;
+    style?: any;
+    filter?: React.ReactNode;
+    isVisible?: boolean;
+    width?: number;
+};
+export type DataGridRow = {
+    className?: string;
+    style?: any;
+    rowID?: number; // not to take from user
+    isSelected?: boolean;
+    disableRowSelection?: boolean;
+};
+const DataGridInfiniteScroll = (props: DataGridProps) => {
+    const data: any = props.row;
     const columns: any = props.column;
 
     const defaultColumn = React.useMemo(
         () => ({
-            width: props.defaultColumnWidth?props.defaultColumnWidth:200,
+            width: props.defaultColumnWidth ? props.defaultColumnWidth : 200,
         }),
         []
     )
@@ -37,10 +58,27 @@ const DataGridInfiniteScroll = (props:DataGridProps) => {
     } = useTable({
         columns,
         data,
-        initialState: { pageIndex: 0 },
+        initialState: {pageIndex: 0},
         defaultColumn,
     });
+    const [allValues, setIsChecked] = useState<any>([]);
+    useEffect(() => {
+        setIsChecked(rows)
+    }, []);
 
+    const handleChange = (e) => {
+        const {id, checked} = e.target;
+        console.log(e);
+        if (id === 'allSelect') {
+            let tempUser = allValues.map((val) =>{
+                return {...val , isChecked:checked}
+            });
+            setIsChecked(tempUser);
+        } else {
+            let tempUser = allValues.map(val => val.id === id ? {...val, isChecked: checked} : val)
+            setIsChecked(tempUser);
+        }
+    }
     return (
         <div className="table-css">
             <table {...getTableProps()} className="table-css">
@@ -48,6 +86,20 @@ const DataGridInfiniteScroll = (props:DataGridProps) => {
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}
                         className={'csg-header'}>
+                        <th scope="col">
+                            {/* <input
+                                type="checkbox"
+                                className="form-check-input"
+                                onChange={(e) => console.log(e)}
+                            />*/}
+                            <div className="dds__checkbox dds__checkbox--sm">
+                                <label className="dds__checkbox__label" htmlFor="sm-rad">
+                                    <input type="checkbox" id="allSelect"
+                                           className="dds__checkbox__input" checked={allValues.filter(value=>value?.isChecked === false)}
+                                           onChange={handleChange}/>
+                                </label>
+                            </div>
+                        </th>
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                         ))}
@@ -55,10 +107,33 @@ const DataGridInfiniteScroll = (props:DataGridProps) => {
                 ))}
                 </thead>
                 <tbody {...getTableBodyProps()} className="table-body">
-                {rows.map((row, i) => {
+                {allValues.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()} className={'csg-row'} >
+                        <tr {...row.getRowProps()} className={'csg-row'}>
+                            <th scope={row}>
+                                {/*      <input
+                                id={row.id}
+                                value={row.values}
+                                type="checkbox"
+                                className="form-check-input"
+                               // onChange={e=>handleChange(row)}
+                                onChange={e=>{
+                                    console.log(e)
+                                    console.log(JSON.parse(e.target.value))
+                                  //  setIsChecked(e.target.value)
+                                }}
+                               // onChange={(e) =>console.log(e.target.value,'Single value')}
+                            />*/}
+                                <div className="dds__checkbox dds__checkbox--sm">
+                                    <label className="dds__checkbox__label" htmlFor="sm-rad">
+                                        <input type="checkbox" id={row.id}
+                                               className="dds__checkbox__input"
+                                               onChange={handleChange}
+                                               checked={row?.isChecked || false}/>
+                                    </label>
+                                </div>
+                            </th>
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                             })}
