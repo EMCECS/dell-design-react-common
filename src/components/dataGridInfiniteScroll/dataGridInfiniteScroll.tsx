@@ -4,6 +4,16 @@ import {useTable} from "react-table";
 // import "styles/components/Data   Grid.scss";
 import './datagridCustomStyles.scss';
 
+
+/**
+ * Enum for GridSelectionType :
+ * @param {MULTI} for enabling multi row select
+ * @param {SINGLE} for enabling single row select
+ */
+export enum GridSelectionType {
+    MULTI = "multi",
+    SINGLE = "single",
+}
 type DataGridProps = {
     className?: string;
     style?: any;
@@ -11,6 +21,7 @@ type DataGridProps = {
     id?: string;
     row: { [key: string]: any };
     column: { [key: string]: any };
+    selectionType?: GridSelectionType;
     sorting?: boolean;
     expandable?: boolean;
     expandComponent?: any;
@@ -42,6 +53,7 @@ export type DataGridRow = {
 const DataGridInfiniteScroll = (props: DataGridProps) => {
     const data: any = props.row;
     const columns: any = props.column;
+    const selectionType: any = props.selectionType;
 
     const defaultColumn = React.useMemo(
         () => ({
@@ -63,12 +75,11 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
     });
     const [allValues, setIsChecked] = useState<any>([]);
     useEffect(() => {
-        setIsChecked(rows)
-    }, []);
+        setIsChecked(rows);
+    }, [rows]);
 
     const handleChange = (e) => {
         const {id, checked} = e.target;
-        console.log(e);
         if (id === 'allSelect') {
             let tempUser = allValues.map((val) =>{
                 return {...val , isChecked:checked}
@@ -86,20 +97,18 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}
                         className={'csg-header'}>
-                        <th scope="col">
-                            {/* <input
-                                type="checkbox"
-                                className="form-check-input"
-                                onChange={(e) => console.log(e)}
-                            />*/}
-                            <div className="dds__checkbox dds__checkbox--sm">
-                                <label className="dds__checkbox__label" htmlFor="sm-rad">
-                                    <input type="checkbox" id="allSelect"
-                                           className="dds__checkbox__input" checked={allValues.filter(value=>value?.isChecked !== true).length < 1}
-                                           onChange={handleChange}/>
-                                </label>
-                            </div>
-                        </th>
+                        {selectionType === GridSelectionType.MULTI &&
+                            <th scope="col">
+                                <div className="dds__checkbox dds__checkbox--sm">
+                                    <label className="dds__checkbox__label" htmlFor="sm-rad">
+                                        <input type="checkbox" id="allSelect"
+                                               className="dds__checkbox__input"
+                                               checked={allValues.filter(value => value?.isChecked !== true).length < 1}
+                                               onChange={handleChange}/>
+                                    </label>
+                                </div>
+                            </th>
+                        }
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                         ))}
@@ -111,20 +120,8 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                     prepareRow(row);
                     return (
                         <tr {...row.getRowProps()} className={'csg-row'}>
+                            {selectionType === GridSelectionType.MULTI &&
                             <th scope={row}>
-                                {/*      <input
-                                id={row.id}
-                                value={row.values}
-                                type="checkbox"
-                                className="form-check-input"
-                               // onChange={e=>handleChange(row)}
-                                onChange={e=>{
-                                    console.log(e)
-                                    console.log(JSON.parse(e.target.value))
-                                  //  setIsChecked(e.target.value)
-                                }}
-                               // onChange={(e) =>console.log(e.target.value,'Single value')}
-                            />*/}
                                 <div className="dds__checkbox dds__checkbox--sm">
                                     <label className="dds__checkbox__label" htmlFor="sm-rad">
                                         <input type="checkbox" id={row.id}
@@ -134,6 +131,7 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                                     </label>
                                 </div>
                             </th>
+                            }
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                             })}

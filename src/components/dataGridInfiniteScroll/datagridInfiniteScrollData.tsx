@@ -1,5 +1,5 @@
 export const DATA = {
-    data: [
+    rows: [
         {
             ip: '192.168.0.1',
             serial: '1234ECG88TGS',
