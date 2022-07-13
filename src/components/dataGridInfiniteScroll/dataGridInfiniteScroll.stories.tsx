@@ -12,10 +12,13 @@ const columns = [{accessor: "ip", Header: "IP"}, {accessor: "serial", Header: "S
 },];
 
 storiesOf("Data Grid with Infinite Scroll", module)
-    .add("Basic Data Grid", () => (<div>
+    .add("Basic Grid", () => (<div>
         <DataGridInfiniteScroll row={DATA.rows} column={columns}/>
     </div>))
-    .add("Multiselect", () => (<div>
+    .add("Grid with Multiselect", () => (<div>
         <DataGridInfiniteScroll row={DATA.rows} column={columns} selectionType={GridSelectionType.MULTI}/>
+    </div>))
+    .add("Grid with Sorting", () => (<div>
+        <DataGridInfiniteScroll row={DATA.rows} column={columns} sorting={true}/>
     </div>))
 

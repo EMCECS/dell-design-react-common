@@ -1,9 +1,6 @@
-//import ReactDataGrid from 'react-data-grid';
 import React, {useEffect, useState} from "react";
-import {useTable} from "react-table";
-// import "styles/components/Data   Grid.scss";
+import {useFilters, useSortBy, useTable} from "react-table";
 import './datagridCustomStyles.scss';
-
 
 /**
  * Enum for GridSelectionType :
@@ -14,6 +11,33 @@ export enum GridSelectionType {
     MULTI = "multi",
     SINGLE = "single",
 }
+
+/**
+ * Enum for sorting order :
+ * @param {DESC} to sort data in descending order
+ * @param {ASC} to sort data in ascending order
+ * @param {NONE} no sorting
+ */
+export enum SortOrder {
+    DESC = "descending",
+    ASC = "ascending ",
+    NONE = "none",
+}
+
+/**
+ * type for DataGridSort :
+ * @param {defaultSortOrder} if data in column by default sorted
+ * @param {sortFunction} function to perform sorting
+ * @param {isSorted} checks if column is currently sorted or not
+ * @param {hideSort} if true hides sort
+ */
+export type DataGridSort = {
+    defaultSortOrder: SortOrder;
+    sortFunction: (rows: DataGridRow[], order: SortOrder, columnName: string) => Promise<DataGridRow[]>;
+    isSorted?: boolean;
+    hideSort?: boolean;
+};
+
 type DataGridProps = {
     className?: string;
     style?: any;
@@ -42,6 +66,7 @@ export type DataGridColumn = {
     filter?: React.ReactNode;
     isVisible?: boolean;
     width?: number;
+    sort?: DataGridSort;
 };
 export type DataGridRow = {
     className?: string;
@@ -66,30 +91,35 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
         getTableBodyProps, // table body props from react-table
         headerGroups, // headerGroups, if your table has groupings
         rows, // rows for the table based on the data passed
-        prepareRow // Prepare the row (this function needs to be called for each row before getting the row props)
+        prepareRow// The useFilter Hook provides a way to set the filter
     } = useTable({
-        columns,
-        data,
-        initialState: {pageIndex: 0},
-        defaultColumn,
-    });
+            columns,
+            data,
+            initialState: {pageIndex: 0},
+            defaultColumn,
+        },
+        useFilters, // Adding the useFilters Hook to the table
+        useSortBy
+    );
     const [allValues, setIsChecked] = useState<any>([]);
     useEffect(() => {
         setIsChecked(rows);
     }, [rows]);
 
-    const handleChange = (e) => {
+    const handleChangeSorting = (e) => {
         const {id, checked} = e.target;
+        let tempSortValue;
         if (id === 'allSelect') {
-            let tempUser = allValues.map((val) =>{
-                return {...val , isChecked:checked}
+            tempSortValue = allValues.map((val) => {
+                return {...val, isChecked: checked}
             });
-            setIsChecked(tempUser);
+            setIsChecked(tempSortValue);
         } else {
-            let tempUser = allValues.map(val => val.id === id ? {...val, isChecked: checked} : val)
-            setIsChecked(tempUser);
+            tempSortValue = allValues.map(val => val.id === id ? {...val, isChecked: checked} : val)
+            setIsChecked(tempSortValue);
         }
     }
+
     return (
         <div className="table-css">
             <table {...getTableProps()} className="table-css">
@@ -104,13 +134,31 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                                         <input type="checkbox" id="allSelect"
                                                className="dds__checkbox__input"
                                                checked={allValues.filter(value => value?.isChecked !== true).length < 1}
-                                               onChange={handleChange}/>
+                                               onChange={handleChangeSorting}/>
                                     </label>
                                 </div>
                             </th>
                         }
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                            <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
+                                <div className="header-cell">
+                                    {column.render("Header")}
+                                    <span className="">
+                                                {column.isSorted
+                                                    ? column.isSortedDesc
+                                                        ? <div className=""><img
+                                                            src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-down.svg"
+                                                            height="30px" width="30px" alt="dds__icon--arrow-down"/>
+                                                        </div>
+                                                        : <div className=""><img
+                                                            src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-up.svg"
+                                                            height="32px" width="32px" alt="dds__icon--arrow-up"/>
+                                                        </div>
+                                                    : ''
+                                                }
+                                            </span>
+                                </div>
+                            </th>
                         ))}
                     </tr>
                 ))}
@@ -121,16 +169,16 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                     return (
                         <tr {...row.getRowProps()} className={'csg-row'}>
                             {selectionType === GridSelectionType.MULTI &&
-                            <th scope={row}>
-                                <div className="dds__checkbox dds__checkbox--sm">
-                                    <label className="dds__checkbox__label" htmlFor="sm-rad">
-                                        <input type="checkbox" id={row.id}
-                                               className="dds__checkbox__input"
-                                               onChange={handleChange}
-                                               checked={row?.isChecked || false}/>
-                                    </label>
-                                </div>
-                            </th>
+                                <th scope={row}>
+                                    <div className="dds__checkbox dds__checkbox--sm">
+                                        <label className="dds__checkbox__label" htmlFor="sm-rad">
+                                            <input type="checkbox" id={row.id}
+                                                   className="dds__checkbox__input"
+                                                   onChange={handleChangeSorting}
+                                                   checked={row?.isChecked || false}/>
+                                        </label>
+                                    </div>
+                                </th>
                             }
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
@@ -138,9 +186,9 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                         </tr>
                     );
                 })}
+
                 </tbody>
             </table>
-
         </div>
 
     )
