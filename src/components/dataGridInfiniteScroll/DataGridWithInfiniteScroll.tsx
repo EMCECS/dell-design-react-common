@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useFilters, useSortBy, useTable} from "react-table";
-import './datagridCustomStyles.scss';
+import './DatagridCustomStyles.scss';
 
 /**
  * Enum for GridSelectionType :
@@ -75,7 +75,7 @@ export type DataGridRow = {
     isSelected?: boolean;
     disableRowSelection?: boolean;
 };
-const DataGridInfiniteScroll = (props: DataGridProps) => {
+const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props.row;
     const columns: any = props.column;
     const selectionType: any = props.selectionType;
@@ -146,7 +146,8 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
                                     <span className="">
                                                 {column.isSorted
                                                     ? column.isSortedDesc
-                                                        ? <div className=""><img
+                                                        ? <div className="">
+                                                            <img
                                                             src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-down.svg"
                                                             height="30px" width="30px" alt="dds__icon--arrow-down"/>
                                                         </div>
@@ -193,4 +194,4 @@ const DataGridInfiniteScroll = (props: DataGridProps) => {
 
     )
 }
-export default DataGridInfiniteScroll;
+export default DataGridWithInfiniteScroll;

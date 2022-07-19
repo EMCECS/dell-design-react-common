@@ -1,7 +1,7 @@
 import {storiesOf} from "@storybook/react";
 import React from "react";
-import DataGridInfiniteScroll, {GridSelectionType} from "./dataGridInfiniteScroll";
-import {DATA} from "./datagridInfiniteScrollData";
+import DataGridWithInfiniteScroll, {GridSelectionType} from "./DataGridWithInfiniteScroll";
+import {DATA} from "./DatagridInfiniteScrollMockData";
 
 const columns = [{accessor: "ip", Header: "IP"}, {accessor: "serial", Header: "Serial"}, {
     accessor: "model",
@@ -13,12 +13,11 @@ const columns = [{accessor: "ip", Header: "IP"}, {accessor: "serial", Header: "S
 
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (<div>
-        <DataGridInfiniteScroll row={DATA.rows} column={columns}/>
+        <DataGridWithInfiniteScroll row={DATA.rows} column={columns}/>
     </div>))
     .add("Grid with Multiselect", () => (<div>
-        <DataGridInfiniteScroll row={DATA.rows} column={columns} selectionType={GridSelectionType.MULTI}/>
+        <DataGridWithInfiniteScroll row={DATA.rows} column={columns} selectionType={GridSelectionType.MULTI}/>
     </div>))
     .add("Grid with Sorting", () => (<div>
-        <DataGridInfiniteScroll row={DATA.rows} column={columns} sorting={true}/>
+        <DataGridWithInfiniteScroll row={DATA.rows} column={columns} sorting={true}/>
     </div>))
-
