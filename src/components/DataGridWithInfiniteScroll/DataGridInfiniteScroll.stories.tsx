@@ -1,6 +1,6 @@
 import {storiesOf} from "@storybook/react";
 import React from "react";
-import DataGridWithInfiniteScroll, {GridSelectionType} from "./DataGridWithInfiniteScroll";
+import DataGridWithInfiniteScroll, {GridRowType, GridSelectionType} from "./DataGridWithInfiniteScroll";
 import {DATA} from "./DatagridInfiniteScrollMockData";
 
 const columns = [{accessor: "ip", Header: "IP"}, {accessor: "serial", Header: "Serial"}, {
@@ -23,4 +23,8 @@ storiesOf("Data Grid with Infinite Scroll", module)
     </div>))
     .add("Grid with Sorting", () => (<div>
         <DataGridWithInfiniteScroll row={DATA.rows} column={columns} sorting={true}/>
-    </div>))
+    </div>)).add("Grid with Row Expansion", () => (<div>
+    <DataGridWithInfiniteScroll row={DATA.rows} column={columns} rowType={GridRowType.EXPANDABLE}/>
+</div>)).add("Grid with Filter", () => (<div>
+    <DataGridWithInfiniteScroll row={DATA.rows} column={columns} />
+</div>))

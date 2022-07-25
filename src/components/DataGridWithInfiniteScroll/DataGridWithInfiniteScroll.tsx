@@ -46,6 +46,7 @@ type DataGridProps = {
     row: { [key: string]: any };
     column: { [key: string]: any };
     selectionType?: GridSelectionType;
+    rowType?: GridRowType;
     sorting?: boolean;
     expandable?: boolean;
     expandComponent?: any;
@@ -74,12 +75,47 @@ export type DataGridRow = {
     rowID?: number; // not to take from user
     isSelected?: boolean;
     disableRowSelection?: boolean;
+    expandableRowData?: ExpandableRowDetails;
 };
+export type ExpandableRowDetails = {
+    isLoading?: boolean;
+    onRowExpand?: (row: DataGridRow) => Promise<any>;
+    onRowContract?: (row: DataGridRow) => void;
+    expandableContent?: any;
+    isExpanded?: boolean;
+    hideRowExpandIcon?: boolean;
+};
+/**
+ * Enum for RowTpye :
+ * @param {EXPANDABLE} for enabling expandable rows
+ * @param {COMPACT} for enabling compact rows
+ * @param {ROWS_WITH_DETAIL_PANE} for enabling detail pane for rows
+ * @param {EXPANDABLE_ROWS_WITH_DETAIL_PANE} for enabling detail pane for expandable rows
+ * @param {COMPACT_ROWS_WITH_DETAIL_PANE} for enabling detail pane for compact rows
+ */
+export enum GridRowType {
+    EXPANDABLE = "expandable",
+    COMPACT = "compact",
+    ROWS_WITH_DETAIL_PANE = "rows_with_detail_pane",
+    EXPANDABLE_ROWS_WITH_DETAIL_PANE = "expandable_rows_with_detail_pane",
+    COMPACT_ROWS_WITH_DETAIL_PANE = "compact_rows_with_detail_panes",
+}
+
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props.row;
+    console.log(props);
     const columns: any = props.column;
     const selectionType: any = props.selectionType;
+    const rowType: any = props.rowType;
 
+    // Check if datagrid need to render detail Pane for rows
+const isDatagridWithDetailPane = (): boolean => {
+        return rowType
+            ? rowType === GridRowType.ROWS_WITH_DETAIL_PANE ||
+            rowType === GridRowType.EXPANDABLE_ROWS_WITH_DETAIL_PANE ||
+            rowType === GridRowType.COMPACT_ROWS_WITH_DETAIL_PANE
+            : false;
+    };
     const defaultColumn = React.useMemo(
         () => ({
             width: props.defaultColumnWidth ? props.defaultColumnWidth : 200,
@@ -121,7 +157,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     }
     const handleRadioSelect=(e)=>{
         const {id, checked} = e.target;
-
         console.log(id,checked);
     }
     return (
@@ -208,6 +243,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
                 </tbody>
             </table>
+        {/*    <Button>DDS Chal Ja Kruti</Button>*/}
         </div>
 
     )
