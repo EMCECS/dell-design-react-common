@@ -18,6 +18,9 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Multiselect", () => (<div>
         <DataGridWithInfiniteScroll row={DATA.rows} column={columns} selectionType={GridSelectionType.MULTI}/>
     </div>))
+    .add("Grid with Single Select", () => (<div>
+        <DataGridWithInfiniteScroll row={DATA.rows} column={columns} selectionType={GridSelectionType.SINGLE}/>
+    </div>))
     .add("Grid with Sorting", () => (<div>
         <DataGridWithInfiniteScroll row={DATA.rows} column={columns} sorting={true}/>
     </div>))

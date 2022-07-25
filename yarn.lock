@@ -1231,15 +1231,10 @@
   "resolved" "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-10.1.0.tgz"
   "version" "10.1.0"
 
-"@dds/components@^2.14.0":
-  "integrity" "sha512-+jogCdIqN3uAJ9K29p+UgCEeyy9z3Cy/aPJ9GUIXT6Xm9fCsVM6izLw+dK+HQo/yOSHLQDfryOXC2NgMLrSimg=="
-  "resolved" "https://artifacts.dell.com:443/artifactory/api/npm/dx-npm-prod/@dds/components/-/@dds/components-2.14.0.tgz"
-  "version" "2.14.0"
-
-"@dds/web-components@^2.0.1":
-  "integrity" "sha1-FILn/svQ20q1GqDDipHS3TkOcFU="
-  "resolved" "https://artifacts.dell.com:443/artifactory/api/npm/dx-npm-prod/@dds/web-components/-/@dds/web-components-2.0.1.tgz"
-  "version" "2.0.1"
+"@dds/components@^2.15.0":
+  "integrity" "sha1-fvJK9M+Wsw2Ap+0otEgnbxQx4YM="
+  "resolved" "https://artifacts.dell.com:443/artifactory/api/npm/dx-npm-prod/@dds/components/-/@dds/components-2.15.0.tgz"
+  "version" "2.15.0"
 
 "@dellstorage/clarity-react@^1.1.13":
   "integrity" "sha512-QSenTM4eW6TSLTkaUekYZp7bv5KzK1gvXW+mv9FNWl8GENtdv7I9V9OSgSQT3gfLpRWCgIredqIvx01KsqS9RQ=="

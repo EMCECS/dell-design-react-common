@@ -89,6 +89,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.15.4",
+    "@dds/components": "^2.15.0",
     "@sambego/storybook-state": "^2.0.1",
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",

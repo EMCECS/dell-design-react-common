@@ -119,7 +119,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             setIsChecked(tempSortValue);
         }
     }
+    const handleRadioSelect=(e)=>{
+        const {id, checked} = e.target;
 
+        console.log(id,checked);
+    }
     return (
         <div className="table-css">
             <table {...getTableProps()} className="table-css">
@@ -138,6 +142,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                     </label>
                                 </div>
                             </th>
+                        }
+                        {selectionType === GridSelectionType.SINGLE &&
+                        <th>
+
+                        </th>
                         }
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
@@ -180,6 +189,15 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                         </label>
                                     </div>
                                 </th>
+                            }
+                            {selectionType===GridSelectionType.SINGLE &&
+                            <th>
+                                <div className="dds__radio-button dds__radio-button--sm">
+                                    <input className="dds__radio-button__input" type="radio" name="name-650298779"
+                                           id="radio-button-control-426423994" value={row}
+                                    onChange={handleRadioSelect}/>
+                                </div>
+                            </th>
                             }
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
