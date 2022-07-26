@@ -1,6 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {useFilters, useSortBy, useTable} from "react-table";
+import React, {useEffect, useRef, useState} from "react";
+import {useFilters, useSortBy, useTable,useExpanded} from "react-table";
+import { Button} from "@dellstorage/clarity-react/forms/button";
+import {Icon} from "@dellstorage/clarity-react/icon/Icon";
+import { Card, CardBlock, CardTitle } from '@dellstorage/clarity-react/cards'
+import { Table } from '@dellstorage/clarity-react/tables'
 import './DatagridCustomStyles.scss';
+import './DatagridCoulumnSelectionStyles.scss';
+import './DatagridDetailPanelStyles.scss';
 
 /**
  * Enum for GridSelectionType :
@@ -43,7 +49,7 @@ type DataGridProps = {
     style?: any;
     dataqa?: string;
     id?: string;
-    row: { [key: string]: any };
+    row?: { [key: string]: any };
     column: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
@@ -56,7 +62,10 @@ type DataGridProps = {
     tableType?: "csg" | "isg" | "compact";
     defaultColumnWidth?: number;
     tableHeight?: number;
+    detailPaneContent? : any;
+    detailPanelShow? : boolean;
 }
+
 export type DataGridColumn = {
     columnName: string;
     displayName?: any;
@@ -102,11 +111,45 @@ export enum GridRowType {
 }
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
-    const data: any = props.row;
-    console.log(props);
-    const columns: any = props.column;
-    const selectionType: any = props.selectionType;
+    const data: any = props?.row ? props?.row : [];
+    const columns: any = props?.column;
+    const selectionType: any = props?.selectionType;
+    const columnSelect : boolean = props?.columnSelect ? props?.columnSelect : false;
+    const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
+    const refParent : any = useRef();
+    const refChild : any = useRef();
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const [transformVal, settransformVal] = useState<any>("translateX(0px) translateY(0px)");
+    const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(false)
+    const [detailRowIndex, setDetailRowIndex] = useState<number>()
+    const [showDetailData, setShowDetailData] = useState<any>()
+    const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>()
+    let expandData: { key: string; value: any; }[];
     const rowType: any = props.rowType;
+
+    useEffect(() => {
+        setShowDetailsPanel(true);
+    }, [showDetailData]);
+
+    useEffect(() => {
+      if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+          refParent.current = refParent.current.getClientRects()[0];
+      refChild.current = refChild.current.getClientRects()[0];
+      }
+    }, []);
+
+  useEffect(() => {
+      if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+      const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
+      const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
+      const transformVal =
+      "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+      settransformVal(transformVal);
+      }
+
+  }, [refParent?.current?.getClientRects()[0]?.width]);
+
+
 
     // Check if datagrid need to render detail Pane for rows
 const isDatagridWithDetailPane = (): boolean => {
@@ -127,7 +170,8 @@ const isDatagridWithDetailPane = (): boolean => {
         getTableBodyProps, // table body props from react-table
         headerGroups, // headerGroups, if your table has groupings
         rows, // rows for the table based on the data passed
-        prepareRow// The useFilter Hook provides a way to set the filter
+        prepareRow, // The useFilter Hook provides a way to set the filter
+        allColumns // Get all columns of the datagrid
     } = useTable({
             columns,
             data,
@@ -135,12 +179,105 @@ const isDatagridWithDetailPane = (): boolean => {
             defaultColumn,
         },
         useFilters, // Adding the useFilters Hook to the table
-        useSortBy
+        useSortBy,
+        useExpanded
     );
     const [allValues, setIsChecked] = useState<any>([]);
+
     useEffect(() => {
-        setIsChecked(rows);
+        if(rows.length != 0){
+            setIsChecked(rows);
+        }
     }, [rows]);
+
+    const getColumnSelectionList = () => {
+        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
+            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
+            const transformVal =
+            "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+            settransformVal(transformVal);
+  }
+    setOpen(!isOpen);
+  }
+
+  const handleDetailsPanel = (row, i) => {
+    expandData = [
+        { key: 'Device Description', value: data[i].deviceDescription },
+        { key: 'Controller', value: data[i].controller },
+        { key: 'Operational State', value: data[i].operationalState },
+        {
+          key: 'Block Size',
+          value: data[i].blockSize },
+        { key: 'Failure Predicted', value: data[i].failurePredicted },
+        { key: 'Remaining Drive Life', value: data[i].remainingDriveLife },
+        { key: 'Power Status', value: data[i].powerStatus },
+        { key: 'Progress', value: data[i].progress },
+        {
+          key: 'Used RAID Disk space',
+          value: data[i].usedRAIDDiskSpace
+        },
+        {
+          key: 'Available RAID Disk space',
+          value: data[i].availableRAIDDiskSpace
+        },
+        {
+          key: 'Negotiated Speed',
+          value: data[i].negotiatedSpeed
+        },
+        {
+          key: 'Capable Speed',
+          value: data[i].capableSpeed
+        },
+        { key: 'SAS Address', value: data[i].SASAddress },
+        { key: 'Part Number', value: data[i].partNumber },
+        { key: 'Manufacturer', value: data[i].manufacturer },
+        { key: 'Product ID', value: data[i].productId },
+        { key: 'Revision', value: data[i].revision },
+        { key: 'Serial Number', value: data[i].serialNumber },
+      ]
+
+
+   setShowDetailData(expandData);
+   setShowDetailPanelTitle(data[i].name)
+    setDetailRowIndex(i);
+    setShowDetailsPanel(true);
+}
+
+const getDetailPanel = () => {
+    const detailPaneContent = props.detailPaneContent;
+    return (
+        <Card className='details-card'>
+        <CardTitle>
+          <div className='title-container'>
+            <h2 className='title'>{showDetailPanelTitle}</h2>
+          </div>
+        </CardTitle>
+        <CardBlock>
+
+          <Table isNonBordered className='borderless-table'>
+          { detailPaneContent ? detailPaneContent :
+            <tbody>
+              {showDetailData?.map((item: any) => (
+                <tr key={item.key}>
+                  <td>{item.key}</td>
+                  <td>{item.value}</td>
+                </tr>
+              ))}
+            </tbody>
+            }
+          </Table>
+            <Button
+              primary
+              className='medium-button'
+              onClick={() => setShowDetailsPanel(false)}
+              >
+              {"Close"}
+            </Button>
+        </CardBlock>
+      </Card>
+      )
+}
 
     const handleChangeSorting = (e) => {
         const {id, checked} = e.target;
@@ -160,12 +297,49 @@ const isDatagridWithDetailPane = (): boolean => {
         console.log(id,checked);
     }
     return (
-        <div className="table-css">
+
+    <div className='clr-row flex-container'>
+        {isOpen &&
+            <div
+            className="column-switch clr-popover-content"
+            ref={refChild}
+            role="dialog"
+            style={{
+                top: 0,
+                bottom: "auto",
+                right: "auto",
+                left: 0,
+                transform: transformVal,
+            }}>
+              <div className="ColumnSelect" >
+                <span className="ColumnSelect-header">Column Picker</span>
+
+                {allColumns.map((column) =>
+                    <div key={column.id}>
+                        <label>
+                            <input type='checkbox' id="allColumnSelect"  {...column.getToggleHiddenProps()} />
+                            <span className="ColumnSelect-header-names">{column.Header}</span>
+                        </label>
+                    </div>
+                )}
+          </div>
+                <div className="ColumnSelect-reset-button">
+
+                    <Button link className="Reset-button-margin-css"  >
+                    <span className="ColumnSelect-header">Reset Settings </span> </Button>
+
+                </div>
+          </div>
+        }
+
+        <div className="table-css" style={props.style} ref={refParent}>
+            <div className={showDetailsPanel ? 'clr-col-12' : 'clr-col-12'}>
             <table {...getTableProps()} className="table-css">
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}
                         className={'csg-header'}>
+                        {props.expandable?<th/>:null}
                         {selectionType === GridSelectionType.MULTI &&
                             <th scope="col">
                                 <div className="dds__checkbox dds__checkbox--sm">
@@ -191,28 +365,34 @@ const isDatagridWithDetailPane = (): boolean => {
                                                 {column.isSorted
                                                     ? column.isSortedDesc
                                                         ? <div className="">
-                                                            <img
-                                                            src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-down.svg"
-                                                            height="30px" width="30px" alt="dds__icon--arrow-down"/>
+                                                            <Icon shape={"arrow down"}/>
                                                         </div>
-                                                        : <div className=""><img
+                                                        :
+                                                        <Icon shape={"arrow up"}/>
+                                                    /*<div className=""><img
                                                             src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-up.svg"
                                                             height="32px" width="32px" alt="dds__icon--arrow-up"/>
-                                                        </div>
+                                                        </div>*/
                                                     : ''
                                                 }
                                             </span>
                                 </div>
                             </th>
                         ))}
+                           { columnSelect && <th>
+                                <Button link onClick={() => getColumnSelectionList()} icon={{shape: "settings", className:"is-solid" }}/>
+                           </th> }
                     </tr>
                 ))}
                 </thead>
-                <tbody {...getTableBodyProps()} className="table-body">
-                {allValues.map((row, i) => {
+
+
+                { data.length !== 0  ?
+                <tbody {...getTableBodyProps()} className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
+                {allValues ? allValues.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()} className={'csg-row'}>
+                        <tr {...row.getRowProps()} onClick={() => detailPanelShow ? handleDetailsPanel(row,i) : ''} className={'csg-row'}>
                             {selectionType === GridSelectionType.MULTI &&
                                 <th scope={row}>
                                     <div className="dds__checkbox dds__checkbox--sm">
@@ -234,17 +414,43 @@ const isDatagridWithDetailPane = (): boolean => {
                                 </div>
                             </th>
                             }
+                            {props.expandable?<td className="expansion-column" {...row.getRowProps(row.getToggleRowExpandedProps())}>{<div className={row.isExpanded?"expansion-icon expanded":"expansion-icon"}><Icon shape={"arrow right"}/></div>}</td>: null}
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                             })}
+                            <td/>
                         </tr>
-                    );
-                })}
 
+                    );
+                }) : <tr className="empty-table-border"/>
+                }
                 </tbody>
+                :
+                <tbody className="empty-datagrid">
+                 {/* <tr> */}
+                    <div className="datagrid-placeholder-container ng-star-inserted">
+                        <div className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
+                            <div className="datagrid-placeholder-image ng-star-inserted"/>
+                            No items found!
+                        </div>
+                    </div>
+                {/* // </tr>  */}
+                 </tbody>
+            }
+
+
             </table>
-        {/*    <Button>DDS Chal Ja Kruti</Button>*/}
+            </div>
+            <button className="dds__button">Primary Button</button>
         </div>
+        <div className={showDetailsPanel ? 'clr-col-4' : ''}>
+                {showDetailsPanel && showDetailData !== undefined &&
+                    <div className='details-pane'>
+                        {getDetailPanel()}
+                    </div>
+                }
+        </div>
+    </div>
 
     )
 }
