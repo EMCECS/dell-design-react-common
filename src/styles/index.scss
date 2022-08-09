@@ -7,7 +7,18 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
 */
-
+@use "@dds/components/src/scss/dds-reboot.scss";
+@use "@dds/components/src/scss/dds-fonts.scss";
+@use "@dds/components/src/scss/dds-icons.scss";
+@use "@dds/components/src/scss/dds-helpers.scss";
+@use "@dds/components/src/scss/dds-main.scss";
+@use "@dds/components/src/scss/dds-reboot-wrapper.scss";
+@import "~@dds/components/dist/css/dds-main.css";
+@import "~@dds/components/dist/css/dds-reboot.css";
+@import "~@dds/components/src/scss/_dds__version.scss";
+@import "~@dds/components/src/scss/_dds__tokens.scss";
+/*@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap";*/
 @import "./common/mixins";
 @import "./common/colors";
 @import "./common/fonts";
@@ -39,7 +50,11 @@
 @import "./components/FileSelect";
 @import "./components/Breadcrumb";
 @import "./components/DoughnutChart";
-
+@import "@dds/components/dist/css/dds-reboot.css";
+@import "@dds/components/dist/css/dds-fonts.css";
+@import "@dds/components/dist/css/dds-icons.css";
+@import "@dds/components/dist/css/dds-main.css";
+@import "@dds/components/dist/css/dds-helpers.css";
 body {
   margin: 0;
   font-family: $dell-font;
