@@ -147,7 +147,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
       <div className="checkbox">
         <label>
           <input type="checkbox" className="input-assumpte"  ref={resolvedRef} {...rest} />
-          <span>Reset Settings</span>
+          <span className="reset-button">Reset Settings</span>
         </label>
       </div>         
       );
