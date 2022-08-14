@@ -1247,7 +1247,7 @@
 
 "@dellstorage/dell-design-react-common@^0.1.7":
   version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@dellstorage/dell-design-react-common/-/dell-design-react-common-0.1.7.tgz#a6e5c24c59ae153c5750ff73e612833704e68287"
+  resolved "https://registry.npmjs.org/@dellstorage/dell-design-react-common/-/dell-design-react-common-0.1.7.tgz"
   integrity sha512-Ww2Z2elWA5JmCgoEbm7N+BjnynD7N53Know6f1O2DWsCEXifw0ulJo1GZ+z1Gjn8tYKIHY36vmVBXV/epUTpLQ==
   dependencies:
     "@dellstorage/clarity-react" "^1.1.13"
@@ -7951,6 +7951,11 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-extra@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/crypto-extra/-/crypto-extra-1.0.1.tgz"
+  integrity sha512-EDJ07p6UDdyX+7GL6Bb6FqCuCHY34GuII9esE/xXZtW7tlB+A7MYT9O/c1M/ov2aGTdwvw0b3z5OcO50zYBG5Q==
+
 crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-1.0.0.tgz"
@@ -8956,7 +8961,7 @@ ejs@^2.6.1, ejs@^2.7.4:
   resolved "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz"
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
-ejs@^3.1.5, ejs@^3.1.6:
+ejs@^3.1.5, ejs@^3.1.8:
   version "3.1.8"
   resolved "https://registry.npmjs.org/ejs/-/ejs-3.1.8.tgz"
   integrity sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ==
@@ -10827,7 +10832,7 @@ globby@8.0.2, globby@^8.0.1:
     pify "^3.0.0"
     slash "^1.0.0"
 
-globby@^11.0.1, globby@^11.0.2, globby@^11.0.3:
+globby@^11.0.1, globby@^11.0.2, globby@^11.0.3, globby@^11.1.0:
   version "11.1.0"
   resolved "https://registry.npmjs.org/globby/-/globby-11.1.0.tgz"
   integrity sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==
@@ -14440,17 +14445,17 @@ mem-fs-editor@^7.0.1:
     vinyl "^2.2.1"
 
 "mem-fs-editor@^8.1.2 || ^9.0.0":
-  version "9.4.0"
-  resolved "https://registry.npmjs.org/mem-fs-editor/-/mem-fs-editor-9.4.0.tgz"
-  integrity sha512-HSSOLSVRrsDdui9I6i96dDtG+oAez/4EB2g4cjSrNhgNQ3M+L57/+22NuPdORSoxvOHjIg/xeOE+C0wwF91D2g==
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/mem-fs-editor/-/mem-fs-editor-9.5.0.tgz#9368724bd37f76eebfcf24d71fc6624b01588969"
+  integrity sha512-7p+bBDqsSisO20YIZf2ntYvST27fFJINn7CKE21XdPUQDcLV62b/yB5sTOooQeEoiZ3rldZQ+4RfONgL/gbRoA==
   dependencies:
     binaryextensions "^4.16.0"
     commondir "^1.0.1"
     deep-extend "^0.6.0"
-    ejs "^3.1.6"
-    globby "^11.0.3"
+    ejs "^3.1.8"
+    globby "^11.1.0"
     isbinaryfile "^4.0.8"
-    minimatch "^3.0.4"
+    minimatch "^3.1.2"
     multimatch "^5.0.0"
     normalize-path "^3.0.0"
     textextensions "^5.13.0"
@@ -14957,6 +14962,13 @@ mute-stream@0.0.8:
   version "0.0.8"
   resolved "https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.8.tgz"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
+
+namor@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/namor/-/namor-2.0.4.tgz"
+  integrity sha512-fP/nmpFqzoaZk+RGASLktUpC5l7UXcEVuwGNMZ5JQj9RoI5GnYgvIUA3kNAzlgmSyjp5AJNI3mCg7zALESQdCQ==
+  dependencies:
+    crypto-extra "1.0.1"
 
 nan@^2.12.1, nan@^2.13.2:
   version "2.16.0"
@@ -17205,7 +17217,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -17714,6 +17726,27 @@ react-hotkeys@2.0.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-infinite-scroll-component@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.npmjs.org/react-infinite-scroll-component/-/react-infinite-scroll-component-6.1.0.tgz"
+  integrity sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==
+  dependencies:
+    throttle-debounce "^2.1.0"
+
+react-infinite-scroll-hook@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/react-infinite-scroll-hook/-/react-infinite-scroll-hook-4.0.3.tgz"
+  integrity sha512-5B3YuWODFq9j2m1J+Shk24QR2WDV0U9oQAaxR8ddFge8oC8Ls54EmkQxwelOjyv1jub4bP0jjSK7v+fM5QwWmg==
+  dependencies:
+    react-intersection-observer-hook "^2.0.4"
+
+react-infinite-scroller@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.npmjs.org/react-infinite-scroller/-/react-infinite-scroller-1.2.6.tgz"
+  integrity sha512-mGdMyOD00YArJ1S1F3TVU9y4fGSfVVl6p5gh/Vt4u99CJOptfVu/q5V/Wlle72TMgYlBwIhbxK5wF0C/R33PXQ==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-inspector@^5.1.0:
   version "5.1.1"
   resolved "https://registry.npmjs.org/react-inspector/-/react-inspector-5.1.1.tgz"
@@ -17722,6 +17755,11 @@ react-inspector@^5.1.0:
     "@babel/runtime" "^7.0.0"
     is-dom "^1.0.0"
     prop-types "^15.0.0"
+
+react-intersection-observer-hook@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/react-intersection-observer-hook/-/react-intersection-observer-hook-2.0.4.tgz"
+  integrity sha512-bBZSuv5+CNAH3eA5U52McmkR/Obn23igBL3/MuYzlRvALrweSxqvT35cwWnaFkqUh6SjvYRfJncDpaqejAr9oA==
 
 react-is@17.0.2, react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
