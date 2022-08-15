@@ -133,9 +133,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
   }, [refParent?.current?.getClientRects()[0]?.width,refParent?.current?.clientWidth]);
 
   // @ts-nocheck
-    const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
+    const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest } : any, ref) => {
       const defaultRef = useRef();
-      const resolvedRef = ref || defaultRef;
+      const resolvedRef : any = ref || defaultRef;
      
 
       useEffect(() => {
