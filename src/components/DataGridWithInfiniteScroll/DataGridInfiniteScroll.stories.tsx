@@ -14,6 +14,7 @@ import DataGridWithInfiniteScroll, {GridSelectionType,} from "./DataGridWithInfi
 import {DATA} from "./DatagridInfiniteScrollMockData";
 import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
 import DataTable,{ ExpanderComponentProps } from 'react-data-table-component';
+import FilterData from './FilterMockData.json'
 
 // A super simple expandable component.
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
@@ -51,6 +52,19 @@ type DataRow = {
     year: string;
 };
 
+const applyfilter = (obj: any): void => {
+    const filter: string[] = []
+    obj.map((item: any, index: number) => {
+      switch (index) {
+        case 0:
+          Object.entries(item).map((subItem: any) => {
+            subItem[1] && filter.push(subItem[0])
+          })
+      }
+    })
+  }
+
+
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
@@ -86,7 +100,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
     ))
     .add("Grid with Filter", () => (
         <div>
-            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData} isFilter={true}/>
+            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData} isFilter={true} filterData={FilterData.filterData} filterFunction={(obj: any) => applyfilter(obj)}/>
         </div>
     ))
      .add("Grid with Expandable Row", () => (

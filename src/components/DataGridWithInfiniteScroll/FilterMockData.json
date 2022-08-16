@@ -1,0 +1,12 @@
+{
+    "filterData": [
+      {
+        "title": "Status",
+        "data": ["good", "bad", "suspect"]
+      },
+      {
+        "title": "Lorem",
+        "data": ["lorem", "ipsum", "dolor"]
+      }
+    ]
+  }
