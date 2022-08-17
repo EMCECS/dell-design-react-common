@@ -48,12 +48,45 @@ export enum SortOrder {
  * @param {isSorted} checks if column is currently sorted or not
  * @param {hideSort} if true hides sort
  */
+
+export type ExpandableRowDetails = {
+    isLoading?: boolean;
+    onRowExpand?: (row: DataGridRow) => Promise<any>;
+    onRowContract?: (row: DataGridRow) => void;
+    expandableContent?: any;
+    isExpanded?: boolean;
+    hideRowExpandIcon?: boolean;
+};
+export type DataGridRow = {
+    className?: string;
+    style?: any;
+    rowID?: number; // not to take from user
+    isSelected?: boolean;
+    disableRowSelection?: boolean;
+    expandableRowData?: ExpandableRowDetails;
+};
 export type DataGridSort = {
     defaultSortOrder: SortOrder;
     sortFunction: (rows: DataGridRow[], order: SortOrder, columnName: string) => Promise<DataGridRow[]>;
     isSorted?: boolean;
     hideSort?: boolean;
 };
+
+/**
+ * Enum for RowTpye :
+ * @param {EXPANDABLE} for enabling expandable rows
+ * @param {COMPACT} for enabling compact rows
+ * @param {ROWS_WITH_DETAIL_PANE} for enabling detail pane for rows
+ * @param {EXPANDABLE_ROWS_WITH_DETAIL_PANE} for enabling detail pane for expandable rows
+ * @param {COMPACT_ROWS_WITH_DETAIL_PANE} for enabling detail pane for compact rows
+ */
+export enum GridRowType {
+    EXPANDABLE = "expandable",
+    COMPACT = "compact",
+    ROWS_WITH_DETAIL_PANE = "rows_with_detail_pane",
+    EXPANDABLE_ROWS_WITH_DETAIL_PANE = "expandable_rows_with_detail_pane",
+    COMPACT_ROWS_WITH_DETAIL_PANE = "compact_rows_with_detail_panes",
+}
 
 type DataGridProps = {
     className?: string;
@@ -92,38 +125,6 @@ export type DataGridColumn = {
     width?: number;
     sort?: DataGridSort;
 };
-export type DataGridRow = {
-    className?: string;
-    style?: any;
-    rowID?: number; // not to take from user
-    isSelected?: boolean;
-    disableRowSelection?: boolean;
-    expandableRowData?: ExpandableRowDetails;
-};
-export type ExpandableRowDetails = {
-    isLoading?: boolean;
-    onRowExpand?: (row: DataGridRow) => Promise<any>;
-    onRowContract?: (row: DataGridRow) => void;
-    expandableContent?: any;
-    isExpanded?: boolean;
-    hideRowExpandIcon?: boolean;
-};
-
-/**
- * Enum for RowTpye :
- * @param {EXPANDABLE} for enabling expandable rows
- * @param {COMPACT} for enabling compact rows
- * @param {ROWS_WITH_DETAIL_PANE} for enabling detail pane for rows
- * @param {EXPANDABLE_ROWS_WITH_DETAIL_PANE} for enabling detail pane for expandable rows
- * @param {COMPACT_ROWS_WITH_DETAIL_PANE} for enabling detail pane for compact rows
- */
-export enum GridRowType {
-    EXPANDABLE = "expandable",
-    COMPACT = "compact",
-    ROWS_WITH_DETAIL_PANE = "rows_with_detail_pane",
-    EXPANDABLE_ROWS_WITH_DETAIL_PANE = "expandable_rows_with_detail_pane",
-    COMPACT_ROWS_WITH_DETAIL_PANE = "compact_rows_with_detail_panes",
-}
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.row ? props?.row : [];
@@ -167,7 +168,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
     }, [refParent?.current?.getClientRects()[0]?.width]);
 
-    
+
     // Check if datagrid need to render detail Pane for rows
     const isDatagridWithDetailPane = (): boolean => {
         return rowType
@@ -392,16 +393,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const loadFilterIcon = () => {
         return (
             <div className="filter-icon" onClick={() => openFilter()}>
-                {/*<img
-                src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/c7fba900e82a7c5dd07f7c?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080825Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9966b1a038751cb05e171ef0f0115705b5f292ee94e487d88e09f471fd2411e7"
-                alt="" height="32px" width="32px"
-                className=" white-background max-full-height max-full-width spec-shadow"/>*/}
-
-                <Icon shape={"filter"}/>
-                {/*<img
-                  src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/9e90a51bbf649788467df3?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080736Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=52e193e255e9dccefe2bdd6c32257cb318226c841c9004e26f7a14f3d7c834ff"
-                  alt="" height="32" width="32"
-                  className=" white-background max-full-height max-full-width spec-shadow" onClick={()=>openFilter()}/>*/}
+                     <Icon shape={"filter"}/>
             </div>
         )
     }
@@ -410,8 +402,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         return (
             <div className={"container filter"}>
                 <div className={"row"}>
-                    <div className={"col-sm-8"}>
-                        <table  {...getTableProps()} className="table-css">
+                    <div className={"col-sm-12 table-css"} style={props.style}>
+                        <table {...getTableProps()} className="table-css">
                             <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
@@ -421,11 +413,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                 </tr>
                             ))}
                             </thead>
-                            <tbody {...getTableBodyProps()}>
+                            <tbody {...getTableBodyProps()}  className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
                             {rows.map((row, i) => {
                                 prepareRow(row);
                                 return (
-                                    <tr {...row.getRowProps()}>
+                                    <tr {...row.getRowProps()}  className={'csg-row'}>
                                         {row.cells.map(cell => {
                                             return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                                         })}
@@ -443,15 +435,18 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     }
     return (
         <div>
-           {loadFilterIcon()}
+            {loadFilterIcon()}
             {props.isFilter &&
                 <div className="row">
                     <div className="clr-col-8">  {designFilterTable()}</div>
-                    <div className="clr-col-4">
-                    { isFilterOpen && <div className='filter-pane'>
-                        <FilterPanel data={filterData} onChange={filterFunction} onClose={() => closeFilter()}/>
-                    </div> }
-            </div>
+                        {
+                            isFilterOpen &&
+                            <div className="clr-col-4">
+                                <div className='filter-pane'>
+                                    <FilterPanel data={filterData} onChange={filterFunction} onClose={() => closeFilter()}/>
+                                </div>
+                            </div>
+                        }
                 </div>
             }
             <div className='clr-row flex-container'>
@@ -628,7 +623,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                 }
             </div>
         </div>
-
     )
 }
 export default DataGridWithInfiniteScroll;

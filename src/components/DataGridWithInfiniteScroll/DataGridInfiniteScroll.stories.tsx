@@ -13,16 +13,16 @@ import React from "react";
 import DataGridWithInfiniteScroll, {GridSelectionType,} from "./DataGridWithInfiniteScroll";
 import {DATA} from "./DatagridInfiniteScrollMockData";
 import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
-import DataTable,{ ExpanderComponentProps } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import FilterData from './FilterMockData.json'
 
 // A super simple expandable component.
-const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
+const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 
 const columnsData = [
     {accessor: "ip", Header: "IP"},
     {accessor: "serial", Header: "Serial"},
-    { accessor: "model", Header: "Model"},
+    {accessor: "model", Header: "Model"},
     {accessor: "template", Header: "Template"},
     {accessor: "networking", Header: "Networking"},
     {accessor: "role", Header: "Role"}
@@ -31,19 +31,19 @@ const columnsData = [
 const detailColumns = [
     {accessor: "status", Header: "Status"},
     {accessor: "name", Header: "Disk"},
-    { accessor: "slot", Header: "Slot" },
+    {accessor: "slot", Header: "Slot"},
     {accessor: "serial", Header: "Serial#"},
     {accessor: "type", Header: "Type"},
-    { accessor: "capacityUsed",  Header: "Capacity Used" },
+    {accessor: "capacityUsed", Header: "Capacity Used"},
 ];
 const columnsExpansion = [
-    {name: 'Title',selector: row => row.title, },
-    {name: 'Year',selector: row => row.year},
+    {name: 'Title', selector: row => row.title,},
+    {name: 'Year', selector: row => row.year},
 ];
 
 const dataExpansion = [
-    {id: 1, title: 'Beetlejuice', year: '1988' },
-    {id: 2,title: 'Ghostbusters',year: '1984'},
+    {id: 1, title: 'Beetlejuice', year: '1988'},
+    {id: 2, title: 'Ghostbusters', year: '1984'},
 ];
 
 type DataRow = {
@@ -52,17 +52,17 @@ type DataRow = {
     year: string;
 };
 
-const applyfilter = (obj: any): void => {
+const applyFilter = (obj: any): void => {
     const filter: string[] = []
     obj.map((item: any, index: number) => {
-      switch (index) {
-        case 0:
-          Object.entries(item).map((subItem: any) => {
-            subItem[1] && filter.push(subItem[0])
-          })
-      }
+        switch (index) {
+            case 0:
+                Object.entries(item).map((subItem: any) => {
+                    subItem[1] && filter.push(subItem[0])
+                })
+        }
     })
-  }
+}
 
 
 storiesOf("Data Grid with Infinite Scroll", module)
@@ -100,14 +100,17 @@ storiesOf("Data Grid with Infinite Scroll", module)
     ))
     .add("Grid with Filter", () => (
         <div>
-            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData} isFilter={true} filterData={FilterData.filterData} filterFunction={(obj: any) => applyfilter(obj)}/>
+            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData} isFilter={true}
+                                        filterData={FilterData.filterData}
+                                        filterFunction={(obj: any) => applyFilter(obj)}/>
         </div>
     ))
-     .add("Grid with Expandable Row", () => (
-         <div>
-             <DataTable columns={columnsExpansion} data={dataExpansion} expandableRows expandableRowsComponent={ExpandedComponent} />
-         </div>
-     ))
+    .add("Grid with Expandable Row", () => (
+        <div>
+            <DataTable columns={columnsExpansion} data={dataExpansion} expandableRows
+                       expandableRowsComponent={ExpandedComponent}/>
+        </div>
+    ))
     .add("Grid with Column Hide/Show", () => (
         <div>
             <DataGridWithInfiniteScroll

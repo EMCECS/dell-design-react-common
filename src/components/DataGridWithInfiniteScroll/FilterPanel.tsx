@@ -16,7 +16,6 @@ import {Icon} from "@dellstorage/clarity-react/icon/Icon";
 import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
 import {Select, SelectOption} from "@dellstorage/clarity-react/forms/select";
 import Accordion from "react-bootstrap/Accordion";
-import {Button} from "@dds/components";
 import './FilterStyles.scss'
 import { CheckBox } from '@dellstorage/clarity-react/forms/checkbox/CheckBox'
 
@@ -33,7 +32,7 @@ const FilterPanel = (props: any) => {
     const renderDefaultSelectOptions = () => {
         const arr = [1, 2, 3]
         return arr.map(a => {
-            return a
+            return a;
         });
     }
 
@@ -67,14 +66,6 @@ const FilterPanel = (props: any) => {
     }
   
 
-    useEffect(() => {
-        [].forEach.call(
-            document.querySelectorAll('[data-toggle="dds__button"]'),
-            function (element) {
-                new Button(element);
-            }
-        );
-    });
 
     const loadFilterIcon = () => {
         return (
@@ -111,7 +102,6 @@ const FilterPanel = (props: any) => {
                             </CardText>
                             <CardText>TEST DEMO</CardText>
                             <CardText>TEST DEMO</CardText>
-                            <CardText><DatePicker/></CardText>
                             <CardText>
                                 <div>
                                     <Select>
@@ -155,12 +145,10 @@ const FilterPanel = (props: any) => {
                                     <Accordion.Item eventKey="1">
                                         <Accordion.Header>Date</Accordion.Header>
                                         <Accordion.Body>
-                                            Date Picker
+                                            <DatePicker/>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>
-
-
                             </CardText>
                         </CardBlock> 
                         </div>
