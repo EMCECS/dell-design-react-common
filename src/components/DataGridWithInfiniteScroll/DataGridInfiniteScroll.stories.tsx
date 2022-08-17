@@ -19,6 +19,24 @@ import FilterData from './FilterMockData.json'
 // A super simple expandable component.
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 
+const columns = [{accessor: "ip", Header: "IP", show: true}, {accessor: "serial", Header: "Serial", show: true}, {
+    accessor: "model",
+    Header: "Model", show: false
+}, {accessor: "template", Header: "Template", show: true}, {accessor: "networking", Header: "Networking", show: true}, {
+    accessor: "role",
+    Header: "Role", show: false
+},];
+
+const detailColumns = [
+    {accessor: "status", Header: "Status", show: true}, 
+    {accessor: "name", Header: "Disk", show: true}, 
+    {accessor: "slot", Header: "Slot", show: false },
+    {accessor: "serial", Header: "Serial#" , show: true }, 
+    {accessor: "type", Header: "Type", show: false}, 
+    {accessor: "capacityUsed", Header: "Capacity Used", show: true
+},];
+
+
 const columnsData = [
     {accessor: "ip", Header: "IP"},
     {accessor: "serial", Header: "Serial"},
@@ -28,14 +46,6 @@ const columnsData = [
     {accessor: "role", Header: "Role"}
 ];
 
-const detailColumns = [
-    {accessor: "status", Header: "Status"},
-    {accessor: "name", Header: "Disk"},
-    { accessor: "slot", Header: "Slot" },
-    {accessor: "serial", Header: "Serial#"},
-    {accessor: "type", Header: "Type"},
-    { accessor: "capacityUsed",  Header: "Capacity Used" },
-];
 const columnsExpansion = [
     {name: 'Title',selector: row => row.title, },
     {name: 'Year',selector: row => row.year},
@@ -108,30 +118,12 @@ storiesOf("Data Grid with Infinite Scroll", module)
              <DataTable columns={columnsExpansion} data={dataExpansion} expandableRows expandableRowsComponent={ExpandedComponent} />
          </div>
      ))
-    .add("Grid with Column Hide/Show", () => (
-        <div>
-            <DataGridWithInfiniteScroll
-                row={DETAILDATA.data}
-                column={detailColumns}
-                columnSelect={true}
-            />
-        </div>
-    ))
-    .add("Grid with Detail Panel", () => (
-        <div>
-            <DataGridWithInfiniteScroll
-                row={DETAILDATA.data}
-                column={detailColumns}
-                detailPanelShow={true}
-            />
-        </div>
-    ))
-    .add("Empty Datagrid", () => (
-        <div>
-            <DataGridWithInfiniteScroll
-                row={[]}
-                column={columnsData}
-                style={{height: "70vh"}}
-            />
-        </div>
-    ));
+     .add("Grid with Column Hide/Show", () => (<div>
+        <DataGridWithInfiniteScroll row={DETAILDATA.data} column={detailColumns}  columnSelect={true} defaultColumnHeader={"Status"}/>
+    </div>))
+    .add("Grid with Detail Panel", () => (<div>
+        <DataGridWithInfiniteScroll row={DETAILDATA.data} column={detailColumns} detailPanelShow={true}/>
+    </div>))
+    .add("Empty Datagrid", () => (<div>
+        <DataGridWithInfiniteScroll row={[]} column={columns} style={{height: "70vh"}}/>
+    </div>));

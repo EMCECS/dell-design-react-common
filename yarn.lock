@@ -1353,11 +1353,6 @@
   "resolved" "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-10.1.0.tgz"
   "version" "10.1.0"
 
-"@dds/components@^2.16.0":
-  "integrity" "sha1-1HQ2lacj2zSbzcolTMat5Z/zVQ0="
-  "resolved" "https://artifacts.dell.com:443/artifactory/api/npm/dx-npm-prod/@dds/components/-/@dds/components-2.16.0.tgz"
-  "version" "2.16.0"
-
 "@dellstorage/clarity-react@^1.1.13":
   "integrity" "sha512-QSenTM4eW6TSLTkaUekYZp7bv5KzK1gvXW+mv9FNWl8GENtdv7I9V9OSgSQT3gfLpRWCgIredqIvx01KsqS9RQ=="
   "resolved" "https://registry.npmjs.org/@dellstorage/clarity-react/-/clarity-react-1.1.19.tgz"
@@ -18636,6 +18631,20 @@
   dependencies:
     "prop-types" "^15.6.1"
 
+"react-infinite-scroll-component@^6.1.0":
+  "integrity" "sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ=="
+  "resolved" "https://registry.npmjs.org/react-infinite-scroll-component/-/react-infinite-scroll-component-6.1.0.tgz"
+  "version" "6.1.0"
+  dependencies:
+    "throttle-debounce" "^2.1.0"
+
+"react-infinite-scroll-hook@^4.0.3":
+  "integrity" "sha512-5B3YuWODFq9j2m1J+Shk24QR2WDV0U9oQAaxR8ddFge8oC8Ls54EmkQxwelOjyv1jub4bP0jjSK7v+fM5QwWmg=="
+  "resolved" "https://registry.npmjs.org/react-infinite-scroll-hook/-/react-infinite-scroll-hook-4.0.3.tgz"
+  "version" "4.0.3"
+  dependencies:
+    "react-intersection-observer-hook" "^2.0.4"
+
 "react-inspector@^5.1.0":
   "integrity" "sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg=="
   "resolved" "https://registry.npmjs.org/react-inspector/-/react-inspector-5.1.1.tgz"
@@ -18644,6 +18653,11 @@
     "@babel/runtime" "^7.0.0"
     "is-dom" "^1.0.0"
     "prop-types" "^15.0.0"
+
+"react-intersection-observer-hook@^2.0.4":
+  "integrity" "sha512-bBZSuv5+CNAH3eA5U52McmkR/Obn23igBL3/MuYzlRvALrweSxqvT35cwWnaFkqUh6SjvYRfJncDpaqejAr9oA=="
+  "resolved" "https://registry.npmjs.org/react-intersection-observer-hook/-/react-intersection-observer-hook-2.0.4.tgz"
+  "version" "2.0.4"
 
 "react-is@^16.12.0 || ^17.0.0 || ^18.0.0":
   "integrity" "sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg=="
@@ -18857,7 +18871,7 @@
   dependencies:
     "tslib" "^2.0.0"
 
-"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.13.1 || ^17.0.0", "react@^16.14 || ^17.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^16.8.3 || ^17.0.0-0 || ^18.0.0", "react@^16.8.4 || ^17.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 0.14.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.3", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.6.0", "react@>=16.8.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0", "react@17.0.2":
+"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.13.1 || ^17.0.0", "react@^16.14 || ^17.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^16.8.3 || ^17.0.0-0 || ^18.0.0", "react@^16.8.4 || ^17.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 0.14.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.3", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.0.0", "react@>=16.14.0", "react@>=16.6.0", "react@>=16.8.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
