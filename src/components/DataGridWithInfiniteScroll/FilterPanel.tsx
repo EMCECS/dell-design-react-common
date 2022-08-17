@@ -16,6 +16,7 @@ import {Icon} from "@dellstorage/clarity-react/icon/Icon";
 import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
 import {Select, SelectOption} from "@dellstorage/clarity-react/forms/select";
 import Accordion from "react-bootstrap/Accordion";
+// import {Button} from "@dds/components";
 import './FilterStyles.scss'
 import { CheckBox } from '@dellstorage/clarity-react/forms/checkbox/CheckBox'
 
@@ -66,6 +67,14 @@ const FilterPanel = (props: any) => {
     }
   
 
+    // useEffect(() => {
+    //     [].forEach.call(
+    //         document.querySelectorAll('[data-toggle="dds__button"]'),
+    //         function (element) {
+    //             new Button(element);
+    //         }
+    //     );
+    // });
 
     const loadFilterIcon = () => {
         return (
