@@ -22,6 +22,22 @@ import useInfiniteScroll from "react-infinite-scroll-hook";
 import makeData from "./DatagridInfiniteScrollMockDataCode";
 
 /**
+ * Enum for RowTpye :
+ * @param {EXPANDABLE} for enabling expandable rows
+ * @param {COMPACT} for enabling compact rows
+ * @param {ROWS_WITH_DETAIL_PANE} for enabling detail pane for rows
+ * @param {EXPANDABLE_ROWS_WITH_DETAIL_PANE} for enabling detail pane for expandable rows
+ * @param {COMPACT_ROWS_WITH_DETAIL_PANE} for enabling detail pane for compact rows
+ */
+export enum GridRowType {
+    EXPANDABLE = "expandable",
+    COMPACT = "compact",
+    ROWS_WITH_DETAIL_PANE = "rows_with_detail_pane",
+    EXPANDABLE_ROWS_WITH_DETAIL_PANE = "expandable_rows_with_detail_pane",
+    COMPACT_ROWS_WITH_DETAIL_PANE = "compact_rows_with_detail_panes",
+}
+
+/**
  * Enum for GridSelectionType :
  * @param {MULTI} for enabling multi row select
  * @param {SINGLE} for enabling single row select
@@ -31,6 +47,22 @@ export enum GridSelectionType {
     SINGLE = "single",
 }
 
+export type ExpandableRowDetails = {
+    isLoading?: boolean;
+    onRowExpand?: (row: DataGridRow) => Promise<any>;
+    onRowContract?: (row: DataGridRow) => void;
+    expandableContent?: any;
+    isExpanded?: boolean;
+    hideRowExpandIcon?: boolean;
+};
+export type DataGridRow = {
+    className?: string;
+    style?: any;
+    rowID?: number; // not to take from user
+    isSelected?: boolean;
+    disableRowSelection?: boolean;
+    expandableRowData?: ExpandableRowDetails;
+};
 /**
  * Enum for sorting order :
  * @param {DESC} to sort data in descending order
@@ -96,38 +128,7 @@ export type DataGridColumn = {
     width?: number;
     sort?: DataGridSort;
 };
-export type DataGridRow = {
-    className?: string;
-    style?: any;
-    rowID?: number; // not to take from user
-    isSelected?: boolean;
-    disableRowSelection?: boolean;
-    expandableRowData?: ExpandableRowDetails;
-};
-export type ExpandableRowDetails = {
-    isLoading?: boolean;
-    onRowExpand?: (row: DataGridRow) => Promise<any>;
-    onRowContract?: (row: DataGridRow) => void;
-    expandableContent?: any;
-    isExpanded?: boolean;
-    hideRowExpandIcon?: boolean;
-};
 
-/**
- * Enum for RowTpye :
- * @param {EXPANDABLE} for enabling expandable rows
- * @param {COMPACT} for enabling compact rows
- * @param {ROWS_WITH_DETAIL_PANE} for enabling detail pane for rows
- * @param {EXPANDABLE_ROWS_WITH_DETAIL_PANE} for enabling detail pane for expandable rows
- * @param {COMPACT_ROWS_WITH_DETAIL_PANE} for enabling detail pane for compact rows
- */
-export enum GridRowType {
-    EXPANDABLE = "expandable",
-    COMPACT = "compact",
-    ROWS_WITH_DETAIL_PANE = "rows_with_detail_pane",
-    EXPANDABLE_ROWS_WITH_DETAIL_PANE = "expandable_rows_with_detail_pane",
-    COMPACT_ROWS_WITH_DETAIL_PANE = "compact_rows_with_detail_panes",
-}
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.row ? props?.row : [];
