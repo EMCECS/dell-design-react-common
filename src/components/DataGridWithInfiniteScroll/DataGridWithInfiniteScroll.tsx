@@ -17,6 +17,7 @@ import './DatagridCustomStyles.scss';
 import './DatagridCoulumnSelectionStyles.scss';
 import './DatagridDetailPanelStyles.scss';
 import FilterPanel from "./FilterPanel";
+import FilterData from './FilterMockData.json'
 
 /**
  * Enum for GridSelectionType :
@@ -75,6 +76,8 @@ type DataGridProps = {
     tableHeight?: number;
     detailPaneContent?: any;
     detailPanelShow?: boolean;
+    filterData?: any;
+    filterFunction?: Function;
 }
 
 export type DataGridColumn = {
@@ -125,6 +128,8 @@ export enum GridRowType {
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.row ? props?.row : [];
     const columns: any = props?.column;
+    const filterData : any = props?.filterData;
+    const filterFunction : any = props?.filterFunction;
     const selectionType: any = props?.selectionType;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
     const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
@@ -138,6 +143,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>()
     let expandData: { key: string; value: any; }[];
     const rowType: any = props.rowType;
+    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
     useEffect(() => {
         setShowDetailsPanel(true);
@@ -161,7 +167,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
     }, [refParent?.current?.getClientRects()[0]?.width]);
 
-
+    
     // Check if datagrid need to render detail Pane for rows
     const isDatagridWithDetailPane = (): boolean => {
         return rowType
@@ -259,6 +265,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             setIsChecked(rows);
         }
     }, [rows]);
+
+    const closeFilter = () => {
+        setIsFilterOpen(false);
+    }
+    const openFilter = () => {
+        setIsFilterOpen(true);
+    }
 
     const getColumnSelectionList = () => {
         if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
@@ -375,6 +388,24 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         ),
         []
     );
+
+    const loadFilterIcon = () => {
+        return (
+            <div className="filter-icon" onClick={() => openFilter()}>
+                {/*<img
+                src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/c7fba900e82a7c5dd07f7c?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080825Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9966b1a038751cb05e171ef0f0115705b5f292ee94e487d88e09f471fd2411e7"
+                alt="" height="32px" width="32px"
+                className=" white-background max-full-height max-full-width spec-shadow"/>*/}
+
+                <Icon shape={"filter"}/>
+                {/*<img
+                  src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/9e90a51bbf649788467df3?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080736Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=52e193e255e9dccefe2bdd6c32257cb318226c841c9004e26f7a14f3d7c834ff"
+                  alt="" height="32" width="32"
+                  className=" white-background max-full-height max-full-width spec-shadow" onClick={()=>openFilter()}/>*/}
+            </div>
+        )
+    }
+
     const designFilterTable = () => {
         return (
             <div className={"container filter"}>
@@ -412,10 +443,15 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     }
     return (
         <div>
+           {loadFilterIcon()}
             {props.isFilter &&
                 <div className="row">
                     <div className="clr-col-8">  {designFilterTable()}</div>
-                    <div className="clr-col-4"><FilterPanel/></div>
+                    <div className="clr-col-4">
+                    { isFilterOpen && <div className='filter-pane'>
+                        <FilterPanel data={filterData} onChange={filterFunction} onClose={() => closeFilter()}/>
+                    </div> }
+            </div>
                 </div>
             }
             <div className='clr-row flex-container'>

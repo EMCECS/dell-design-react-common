@@ -17,9 +17,11 @@ import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker
 import {Select, SelectOption} from "@dellstorage/clarity-react/forms/select";
 import Accordion from "react-bootstrap/Accordion";
 import {Button} from "@dds/components";
+import './FilterStyles.scss'
+import { CheckBox } from '@dellstorage/clarity-react/forms/checkbox/CheckBox'
 
 
-const FilterPanel = () => {
+const FilterPanel = (props: any) => {
 
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const closeFilter = () => {
@@ -34,6 +36,36 @@ const FilterPanel = () => {
             return a
         });
     }
+
+    const [filterState, setFilterState] = useState<any>([])
+    useEffect(() => {
+      setFilterData()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    useEffect(() => {
+      props.onChange(filterState)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [filterState])
+  
+    const onFilterChanged = (checked: any, subItem: string, index: number) => {
+      const currentFilterState = filterState.slice()
+      currentFilterState[index]['data'][subItem[0]] = checked
+      setFilterState(currentFilterState)
+    }
+    const setFilterData = () => {
+      const filterArray: any = []
+      props.data.map((item: any) => {
+        const title = item.title
+        const filterData: any = {}
+        item.data.map((subItem: string) => {
+          filterData[subItem] = false
+        })
+        const obj = { title, data: filterData }
+        filterArray.push(obj)
+      })
+      setFilterState(filterArray)
+    }
+  
 
     useEffect(() => {
         [].forEach.call(
@@ -61,18 +93,18 @@ const FilterPanel = () => {
         )
     }
     return (
-        <div>
-            {loadFilterIcon()}
-
-            {isFilterOpen ?
-                <div>
+        <div className='filter-classes'>
+                <div className='filter-container'>
+                    { props.data ?
+                      
                     <Card>
-                        <CloseButton onClick={closeFilter} className={"align-close-icon"}/>
+                        <CloseButton onClick={props.onClose} className={"align-close-icon"}/>
                         <CardBlock>
                             <CardTitle>
                                 Filter
                             </CardTitle>
                         </CardBlock>
+                        <div className='filter-item-container'>
                         <CardBlock>
                             <CardText>
                                 Card content can contain text, links, images, data visualizations, lists and more.
@@ -89,14 +121,37 @@ const FilterPanel = () => {
                                 </div>
                             </CardText>
                             <CardText>
-
+                           { Object.entries(filterState).map((item: any, index: number) => {
+                                return (
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
-                                        <Accordion.Header>Status</Accordion.Header>
+                                        <Accordion.Header>
+                                        <p className='filter-item-title'>{item[1].title}</p>
+                                        </Accordion.Header>
                                         <Accordion.Body>
-                                            Status Body
+                                        {Object.entries(item[1].data).map(
+                                            (subItem: any, subIndex: number) => (
+                                            <span key={subIndex} className='filter-item-checkbox'>
+                                                <CheckBox
+                                                name={item[1].title}
+                                                label={subItem[0]}
+                                                checked={subItem[1]}
+                                                onClick={(evt: any) =>
+                                                    onFilterChanged(
+                                                    evt.target && evt.target.checked,
+                                                    subItem,
+                                                    index
+                                                    )
+                                                }
+                                                />
+                                            </span>
+                                            )
+                                        )}
                                         </Accordion.Body>
                                     </Accordion.Item>
+                                    </Accordion>
+                                )}) }
+                                    <Accordion>
                                     <Accordion.Item eventKey="1">
                                         <Accordion.Header>Date</Accordion.Header>
                                         <Accordion.Body>
@@ -105,11 +160,14 @@ const FilterPanel = () => {
                                     </Accordion.Item>
                                 </Accordion>
 
+
                             </CardText>
-                        </CardBlock>
-                    </Card>
-                </div> : null
-            }
+                        </CardBlock> 
+                        </div>
+                    </Card> : null }
+                </div> 
+                
+            
         </div>
     );
 }
