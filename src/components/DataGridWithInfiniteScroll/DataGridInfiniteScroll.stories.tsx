@@ -30,11 +30,12 @@ const columns = [{accessor: "ip", Header: "IP", show: true}, {accessor: "serial"
 const detailColumns = [
     {accessor: "status", Header: "Status", show: true},
     {accessor: "name", Header: "Disk", show: true},
-    {accessor: "slot", Header: "Slot", show: false },
-    {accessor: "serial", Header: "Serial#" , show: true },
+    {accessor: "slot", Header: "Slot", show: false},
+    {accessor: "serial", Header: "Serial#", show: true},
     {accessor: "type", Header: "Type", show: false},
-    {accessor: "capacityUsed", Header: "Capacity Used", show: true
-},];
+    {
+        accessor: "capacityUsed", Header: "Capacity Used", show: true
+    },];
 
 
 const columnsData = [
@@ -86,14 +87,14 @@ const applyFilter = (obj: any): void => {
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
-            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData}/>
+            <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData}/>
         </div>
     ))
     .add("Grid with Multiselect", () => (
         <div>
             <DataGridWithInfiniteScroll
-                row={DATA.rows}
-                column={columnsData}
+                rows={DATA.rows}
+                columns={columnsData}
                 selectionType={GridSelectionType.MULTI}
             />
         </div>
@@ -101,8 +102,8 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Single Select", () => (
         <div>
             <DataGridWithInfiniteScroll
-                row={DATA.rows}
-                column={columnsData}
+                rows={DATA.rows}
+                columns={columnsData}
                 selectionType={GridSelectionType.SINGLE}
             />
         </div>
@@ -110,30 +111,32 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Sorting", () => (
         <div>
             <DataGridWithInfiniteScroll
-                row={DATA.rows}
-                column={columnsData}
+                rows={DATA.rows}
+                columns={columnsData}
                 sorting={true}
             />
         </div>
     ))
     .add("Grid with Filter", () => (
         <div>
-            <DataGridWithInfiniteScroll row={DATA.rows} column={columnsData} isFilter={true}
+            <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} isFilter={true}
                                         filterData={FilterData.filterData}
                                         filterFunction={(obj: any) => applyFilter(obj)}/>
         </div>
     ))
-     .add("Grid with Expandable Row", () => (
-         <div>
-             <DataTable columns={columnsExpansion} data={dataExpansion} expandableRows expandableRowsComponent={ExpandedComponent} />
-         </div>
-     ))
-     .add("Grid with Column Hide/Show", () => (<div>
-        <DataGridWithInfiniteScroll row={DETAILDATA.data} column={detailColumns}  columnSelect={true} defaultColumnHeader={"Status"}/>
+    .add("Grid with Expandable Row", () => (
+        <div>
+            <DataTable columns={columnsExpansion} data={dataExpansion} expandableRows
+                       expandableRowsComponent={ExpandedComponent}/>
+        </div>
+    ))
+    .add("Grid with Column Hide/Show", () => (<div>
+        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} columnSelect={true}
+                                    defaultColumnHeader={"Status"}/>
     </div>))
     .add("Grid with Detail Panel", () => (<div>
-        <DataGridWithInfiniteScroll row={DETAILDATA.data} column={detailColumns} detailPanelShow={true}/>
+        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} detailPanelShow={true}/>
     </div>))
     .add("Empty Datagrid", () => (<div>
-        <DataGridWithInfiniteScroll row={[]} column={columns} style={{height: "70vh"}}/>
+        <DataGridWithInfiniteScroll rows={[]} columns={columns} style={{height: "70vh"}}/>
     </div>));

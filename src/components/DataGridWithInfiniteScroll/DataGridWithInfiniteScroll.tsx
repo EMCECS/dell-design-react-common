@@ -94,8 +94,8 @@ type DataGridProps = {
     style?: any;
     dataqa?: string;
     id?: string;
-    row?: { [key: string]: any };
-    column: { [key: string]: any };
+    rows?: { [key: string]: any };
+    columns: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
     sorting?: boolean;
@@ -131,8 +131,8 @@ export type DataGridColumn = {
 
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
-    const data: any = props?.row ? props?.row : [];
-    const columns: any = props?.column;
+    const data: any = props?.rows ? props?.rows : [];
+    const columns: any = props?.columns;
     const fetchMoreData: any = props?.fetchMoreData;
     const selectionType: any = props?.selectionType;
     const filterData : any = props?.filterData;
@@ -453,10 +453,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     );
     const designFilterTable = () => {
         return (
-            <div className={"container filter"}>
+            <div className={" filter"}>
                 <div className={"row"}>
-                    <div className={"col-sm-8"}>
-                        <table  {...getTableProps()} className="table-css">
+                    <div className={"col-sm-8 table-css"} style={props.style}>
+                        <table {...getTableProps()}>
                             <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
@@ -466,11 +466,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                 </tr>
                             ))}
                             </thead>
-                            <tbody {...getTableBodyProps()}>
+                            <tbody {...getTableBodyProps()}  className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
                             {rows.map((row, i) => {
                                 prepareRow(row);
                                 return (
-                                    <tr {...row.getRowProps()}>
+                                    <tr {...row.getRowProps()} className={'csg-row'}>
                                         {row.cells.map(cell => {
                                             return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                                         })}
