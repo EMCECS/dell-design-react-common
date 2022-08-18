@@ -105,7 +105,6 @@ type DataGridProps = {
     pagination?: boolean;
     columnSelect?: boolean;
     infiniteScroll?: boolean;
-    tableType?: "csg" | "isg" | "compact";
     defaultColumnWidth?: number;
     tableHeight?: number;
     detailPaneContent? : any;
@@ -132,13 +131,8 @@ export type DataGridColumn = {
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.rows ? props?.rows : [];
-    const columns: any = props?.columns;
-    const fetchMoreData: any = props?.fetchMoreData;
-    const selectionType: any = props?.selectionType;
-    const filterData : any = props?.filterData;
-    const filterFunction : any = props?.filterFunction;
+    const{columns,fetchMoreData,selectionType,filterData,filterFunction,defaultColumnHeader} = props;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
-    const defaultColumnHeader : any = props?.defaultColumnHeader;
     const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
     const refParent: any = useRef();
     const refChild: any = useRef();
@@ -426,8 +420,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         )
     }
 
-    const handleChangeSorting = (e) => {
-        const {id, checked} = e.target;
+    const handleChangeSorting = (event) => {
+        const {id, checked} = event.target;
         let tempSortValue;
         if (id === 'allSelect') {
             tempSortValue = allValues.map((val) => {
@@ -439,8 +433,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             setIsChecked(tempSortValue);
         }
     }
-    const handleRadioSelect = (e) => {
-        const {id, checked} = e.target;
+    const handleRadioSelect = (event) => {
+        const {id, checked} = event.target;
         console.log(id, checked);
     }
     const renderRowSubComponent = React.useCallback(
@@ -486,7 +480,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
         );
     }
-    const handleChangeSelect = (e) => {
+    const handleChangeSelect = () => {
         if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 215;
