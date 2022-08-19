@@ -14,8 +14,9 @@ import DataGridWithInfiniteScroll, {GridSelectionType,} from "./DataGridWithInfi
 import {DATA} from "./DatagridInfiniteScrollMockData";
 import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
 import DataTable from 'react-data-table-component';
-import FilterData from './FilterMockData.json'
-
+import FilterData from './FilterMockData.json';
+import '../../styles/components/DataGridWithInfinteScroll.scss';
+import "bootstrap/dist/css/bootstrap.css";
 // A super simple expandable component.
 const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 

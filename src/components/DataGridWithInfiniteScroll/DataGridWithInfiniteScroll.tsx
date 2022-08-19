@@ -12,14 +12,11 @@ import {Icon} from "@dellstorage/clarity-react/icon/Icon";
 import React, {forwardRef, useEffect, useRef, useState} from "react";
 import {useFilters, useSortBy, useTable, useBlockLayout, useResizeColumns,useExpanded} from "react-table";
 import { Card, CardBlock, CardTitle } from '@dellstorage/clarity-react/cards'
-import { Table } from '@dellstorage/clarity-react/tables'
-import './DatagridCustomStyles.scss';
-import './DatagridCoulumnSelectionStyles.scss';
-import './DatagridDetailPanelStyles.scss';
+import { Table } from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
-import InfiniteScroll from "react-infinite-scroll-component";
+/*import InfiniteScroll from "react-infinite-scroll-component";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import makeData from "./DatagridInfiniteScrollMockDataCode";
+import makeData from "./DatagridInfiniteScrollMockDataCode";*/
 
 /**
  * Enum for RowTpye :
@@ -447,9 +444,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     );
     const designFilterTable = () => {
         return (
-            <div className={" filter"}>
-                <div className={"row"}>
-                    <div className={"col-sm-8 table-css"} style={props.style}>
+            <div className={"filter"}>
+                    <div className={"table-css"} style={props.style}>
                         <table {...getTableProps()}>
                             <thead>
                             {headerGroups.map(headerGroup => (
@@ -475,7 +471,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                         </table>
 
                     </div>
-                </div>
             </div>
 
         );
@@ -515,26 +510,30 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         )
     }
 
-    const [sentryRef,{ rootRef }] = useInfiniteScroll({
+  /*  const [sentryRef,{ rootRef }] = useInfiniteScroll({
         loading: state.loading,
         hasNextPage: true,
-        onLoadMore: fetchMoreData
-    });
+      onLoadMore: fetchMoreData
+    });*/
 
     return (
         <div>
             {props.isFilter && loadFilterIcon()}
             {props.isFilter &&
+            <div className="container-fluid">
                 <div className="row">
-                    <div className="clr-col-8">  {designFilterTable()}</div>
-                        { isFilterOpen &&
-                        <div className="clr-col-4">
+                    <div className="col-sm-10 col-md-10 col-lg-9">
+                        {designFilterTable()}
+                    </div>
+                    {isFilterOpen &&
+                        <div className="col-sm-2 col-md-2 col-lg-3">
                             <div className='filter-pane'>
                                 <FilterPanel data={filterData} onChange={filterFunction} onClose={() => closeFilter()}/>
                             </div>
                         </div>
-                        }
+                    }
                 </div>
+            </div>
             }
 
             <div className='clr-row flex-container'>
@@ -634,7 +633,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                 </tr>
                             ))}
                             </thead>
-                            <InfiniteScroll
+                          {/*  <InfiniteScroll
                                 dataLength={rows.length}
                                 next={fetchMoreData}
                                 hasMore={!!fetchMoreData}
@@ -643,10 +642,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                 scrollableTarget="scrollableDiv"
                                 endMessage={
                                     <p style={{ textAlign: 'center' }}>
-                                        <b> </b>
-                                    </p>
-                                }
-                            >
+                                            <b> </b>
+                                     </p>
+                              }
+                           >*/}
                                 { allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body" }>
 
                                     { allValues.map((row, i) => {
@@ -706,8 +705,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                                 No items found!
                                             </div>
                                         </div></div>)}
-
-                            </InfiniteScroll>
+                      {/*  </InfiniteScroll>*/}
                         </table>
                     </div>
                 </div> }

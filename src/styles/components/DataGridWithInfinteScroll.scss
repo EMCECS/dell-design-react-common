@@ -1,0 +1,734 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+
+// $table-border: 1px solid $gray-300;
+$isg-row-height: 40px;
+$csg-row-height: 48px;
+$compact-row-height: 32px;
+$isg-header-height: 48px;
+$csg-header-height:48px;
+$compact-header-height: 40px;
+
+.expanded-row {
+  border-top: unset;
+  td {
+    padding: 24px 16px;
+  }
+}
+.header-cell {
+  display: flex;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .column-sorting {
+    padding-left: 10px;
+    width: 40px;
+    height: 20px;
+  }
+}
+.table-body {
+  position: relative;
+}
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: $primary-white;
+  opacity: 0.5;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: unset;
+}
+.dropdown-menu.show {
+  padding: 10px 20px;
+}
+.pagination {
+  p {
+    margin-bottom: unset;
+  }
+  display: flex;
+  flex:1;
+  align-items: center;
+  justify-content: space-between;
+  .page-selection-container {
+    * {
+      padding: 0 10px;
+    }
+    .dropdown-menu.show {
+      padding: unset;
+    }
+    span {
+      padding: unset;
+    }
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  input {
+    max-width: 45px;
+    font-size: 14px;
+    border: 1px solid $gray-300;
+  }
+}
+
+.record-count {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+
+.column-select {
+  // making the button color to transparent
+  .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+    background-color: transparent;
+    border: unset;
+    padding: unset;
+  }
+  // removing the focus box shadow
+  .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: unset;
+  }
+  // To remove drop down icon as it is not required in this case
+  .dropdown-toggle::after {
+    content: none;
+  }
+}
+
+
+// Icon styles
+.column-picker-icon {
+  max-width: 20px;
+  max-height: 20px;
+}
+.sorting-icons {
+  max-width: 8px;
+  line-height: 20px;
+}
+
+.isg-row {
+  height: $isg-row-height;
+  line-height: $isg-row-height;
+}
+.csg-row {
+  height: $csg-row-height;
+  line-height: $csg-row-height;
+  border: 1px solid #E4E4E4 !important;
+
+}
+.compact-row {
+  height: $compact-row-height;
+  line-height: $compact-row-height;
+}
+
+.isg-header {
+  height: $isg-header-height;
+  line-height: $isg-header-height;
+}
+
+.csg-header {
+  height: $csg-header-height;
+  line-height: $csg-header-height;
+}
+
+.compact-header {
+  height: $compact-header-height;
+  line-height: $compact-header-height;
+}
+
+.isg-row, .csg-row, .compact-row, .isg-header, .csg-header, .compact-header {
+  td, th {
+    height: 48px;
+    line-height: inherit;
+    padding-left: 9px;
+    padding-right: 9px;
+    border-top-style: solid;
+    border-top-width: 0.05rem;
+    border-top-color: #E4E4E4;
+    font-size: 14px;
+    // margin: 4rem;
+    // margin-top: 0rem;
+    align-items: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+.empty-datagrid-header-bottom {
+  td, th {
+    border-bottom-style: solid !important;
+    border-bottom-width: 0.02rem !important;
+    border-bottom-color: #E4E4E4 !important;
+  }
+}
+
+.row-select-title {
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.expansion-column {
+  padding: 0 16px;
+}
+.expansion-icon {
+  height: 14px;
+  width: 7.82px;
+  display: flex;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+.expanded {
+  transform: rotate(90deg);
+}
+
+.table-css{
+  .table {
+    border-color: #E4E4E4;
+  }
+  table {
+    border: solid 1px #E4E4E4;
+  }
+  //  display: inline-block;
+  //  overflow-y: scroll;
+  //  max-height: 1200px;
+}
+
+.detailPanelCSS{
+  width: 650px;
+  overflow-x: scroll;
+}
+
+.scroll-div{
+  height: 300px;
+  //   overflow-y: "auto";
+
+}
+
+.infinite-scroll-component {
+  overflow-x: hidden !important;
+}
+
+.details-card {
+  padding: 1.295rem 2.2585rem 1.7635rem 1.677rem;
+  margin-top: 0 ;
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      margin: unset;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.15rem;
+    }
+    .close-button {
+      height: 1.2rem !important;
+      margin: unset;
+    }
+  }
+
+  .borderless-table {
+    &.table.table-noborder td {
+      text-align: left;
+      border: unset;
+      min-width: 50%;
+      font-size: 0.65rem;
+      font-weight: 500;
+      line-height: 0.75rem;
+    }
+  }
+  .card-block {
+    padding: unset;
+    margin: unset;
+    table {
+      margin-top: unset;
+    }
+  }
+  .card-title {
+    margin-bottom: 1.19rem;
+  }
+  .medium-button {
+    margin: unset;
+    margin-top: 1.1975rem;
+    height: 1.6rem !important;
+  }
+}
+
+.empty-datagrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  font-size: 16px;
+  position: relative;
+}
+
+.empty-table-border{
+  border-top: 1px solid gray;
+}
+
+.resizer {
+  display: inline-block;
+  background: #E4E4E4;
+  width: 1px;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(50%);
+  z-index: 1;
+  touch-action:none;
+  color: #E4E4E4;
+  margin-top: 0.5rem;
+
+  &.isResizing {
+    background:  #E4E4E4;
+  }
+}
+
+.checkbox {
+  margin: 0.5em 0 0.5em 0.5em;
+}
+.checkbox .tag {
+  color: #595959;
+  display: block;
+  float: left;
+  font-weight: bold;
+  position: relative;
+  width: 120px;
+}
+.checkbox label {
+  display: inline;
+}
+.checkbox .input-assumpte {
+  display: none;
+}
+.input-assumpte + label:after {
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  transition-duration: 0.3s;
+  width: 16px;
+  height: 16px;
+  content: '';
+  margin-left: 10px;
+  opacity: 0;
+}
+.input-assumpte:checked + label:after {
+  background-color: #f5f3f3;
+  border-color: #E4E4E4;
+  opacity: 0;
+}
+
+.reset-button{
+  color: #0076CE;
+}
+
+.filter-icon{
+  float: right;
+  position: relative;
+}
+.filter{
+  display: block !important;
+}
+
+.expansion-column {
+  padding: 0 16px;
+}
+.expansion-icon {
+  height: 14px;
+  width: 7.82px;
+  display: flex;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+.expanded {
+  transform: rotate(90deg);
+}
+
+.align-close-icon {
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+.ColumnSelect{
+  padding: 10px;
+  padding-left: 10px;
+  width: max-content;
+}
+
+.ColumnSelect-header{
+  font-weight: 700 !important;
+}
+
+.ColumnSelect-reset-button{
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  padding-right: 0.5px;
+  padding-left: 0.5px;
+  height: 40px;
+  border: 1px solid lightgray;
+  width: 120px !important;
+}
+
+.Reset-button-margin-css{
+  margin: 0rem !important;
+}
+
+.ColumnSelect-header-names{
+  padding-left: 4px;
+}
+
+.column-switch {
+  border-radius: 0.15rem;
+  border-radius: var(--clr-global-borderradius, 0.15rem);
+  padding: 0.9rem;
+  background-color: #fff;
+  background-color: var(--clr-datagrid-popover-bg-color, white);
+  border-width: 0.05rem;
+  border-width: var(--clr-global-borderwidth, 0.05rem);
+  border-style: solid;
+  border-color: #ccc;
+  border-color: var(--clr-datagrid-popover-border-color, #cccccc);
+  // box-shadow: 0 0.05rem 0.15rem rgb(140 140 140 / 25%);
+  //box-shadow: 0 0.05rem 0.15rem var(--clr-datagrid-popovers-box-shadow-color, rgba(140, 140, 140, 0.25));
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1060;
+}
+
+.clr-popover-content {
+  position: fixed;
+  z-index: 5000;
+}
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+.disk-container {
+  margin: 0 1.3605rem;
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.887rem;
+    margin-top: 1.113rem;
+    .buttons {
+      max-height: 1.6rem;
+      margin-top: unset;
+      margin-bottom: unset;
+      margin-right: 0.4rem;
+      &:last-child {
+        margin-right: unset;
+      }
+    }
+  }
+  .datagrid-container {
+    display: flex;
+    padding: unset;
+    .datagrid {
+      width: 100%;
+      flex: 1;
+      margin: unset;
+      .datagrid {
+        border: unset;
+        .datagrid-header {
+          height: 2.4rem;
+        }
+      }
+    }
+    .details-pane {
+      flex: 1;
+      animation: expand 500ms ease-in-out;
+      animation-direction: alternate;
+      min-width: 1%;
+      max-width: 24.217rem;
+      max-height: 34.1985rem;
+      margin-left: 1.153rem;
+      .card {
+        margin-top: unset;
+      }
+    }
+    .filter-pane {
+      flex: 1;
+      animation: expand 500ms ease-in-out;
+      min-width: 1%;
+      max-width: 12rem;
+      min-height: 100%;
+      background-color: #ffffff;
+      border: 1px solid #e4e4e4;
+      margin-right: 1.153rem;
+    }
+  }
+}
+
+.search-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  .clr-form-control {
+    margin: unset;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .search-icon {
+    position: absolute;
+    right: 1.25rem;
+    top: 0.1rem;
+    color: #aaaaaa;
+    background-color: #eeeeee;
+    width: 2rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.addnode-datagrid-container {
+  display: flex;
+  flex: 1;
+  max-height: 50vh;
+  .datagrid {
+    margin-top: unset;
+  }
+}
+
+.small-button-size {
+  height: 1rem !important;
+  margin: unset;
+  &.btn.btn-link {
+    &:focus {
+      outline: unset !important;
+      outline-offset: 0 !important;
+    }
+  }
+}
+@keyframes expand {
+  0% {
+    flex: 0;
+  }
+  100% {
+    flex: 1;
+  }
+}
+
+.datagrid-placeholder-image {
+  height: 3rem;
+  width: 3rem;
+  margin-bottom: 0.6rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  //background-image: url(data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%2060%2072%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Cellipse%20id%3D%22path-1%22%20cx%3D%2230%22%20cy%3D%2261.7666667%22%20rx%3D%2215.4512904%22%20ry%3D%224.73333333%22%3E%3C%2Fellipse%3E%0A%20%20%20%20%20%20%20%20%3Cmask%20id%3D%22mask-2%22%20maskContentUnits%3D%22userSpaceOnUse%22%20maskUnits%3D%22objectBoundingBox%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2230.9025808%22%20height%3D%229.46666667%22%20fill%3D%22white%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cuse%20xlink%3Ahref%3D%22%23path-1%22%3E%3C%2Fuse%3E%0A%20%20%20%20%20%20%20%20%3C%2Fmask%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Artboard%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cuse%20id%3D%22Oval-10%22%20stroke%3D%22%23C1DFEF%22%20mask%3D%22url(%23mask-2)%22%20stroke-width%3D%222.8%22%20stroke-linecap%3D%22square%22%20stroke-dasharray%3D%223%2C6%2C3%2C5%22%20xlink%3Ahref%3D%22%23path-1%22%3E%3C%2Fuse%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M38.4613647%2C18.1642456%20L30.9890137%2C34.9141846%20L31%2C47%20L32.5977783%2C46.5167236%20L32.5977783%2C34.9141846%20L51.0673218%2C15.7560425%20C51.0673218%2C15.7560425%2048.6295166%2C16.6542969%2044.9628906%2C17.3392334%20C41.2962646%2C18.0241699%2038.4613647%2C18.1642456%2038.4613647%2C18.1642456%20Z%22%20id%3D%22Path-195%22%20fill%3D%22%23C1DFEF%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4.74639226%2C12.5661855%20L4.62065726%2C12.1605348%20L5.3515414%2C11.1625044%20L5.77622385%2C11.159939%20L6.20936309%2C12.5573481%20L4.74639226%2C12.5661855%20Z%20M6.20936309%2C12.5573481%20L6.32542632%2C12.9317954%20L28.4963855%2C34.8796718%20L28.4963855%2C47.8096691%20L32.6%2C46.4836513%20L32.6%2C34.8992365%20L53.973494%2C12.7035813%20L53.973494%2C12.2688201%20L6.20936309%2C12.5573481%20Z%20M55.373494%2C10.8603376%20L55.373494%2C13.2680664%20L34%2C35.4637216%20L34%2C47.5025401%20L27.0963855%2C49.7333333%20L27.0963855%2C35.4637219%20L5.09179688%2C13.680542%20L4.31325301%2C11.1687764%20L55.373494%2C10.8603376%20Z%22%20id%3D%22Path-149%22%20fill%3D%22%237FBDDD%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cellipse%20id%3D%22Oval-9%22%20fill%3D%22%23FFFFFF%22%20cx%3D%2230%22%20cy%3D%2211.785654%22%20rx%3D%2226%22%20ry%3D%226.78565401%22%3E%3C%2Fellipse%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M30%2C17.171308%20C36.8772177%2C17.171308%2043.3112282%2C16.4610701%2048.0312371%2C15.2292106%20C50.2777611%2C14.6428977%2052.0507619%2C13.9579677%2053.2216231%2C13.2354973%20C54.1938565%2C12.6355886%2054.6%2C12.1175891%2054.6%2C11.785654%20C54.6%2C11.4537189%2054.1938565%2C10.9357194%2053.2216231%2C10.3358107%20C52.0507619%2C9.61334032%2050.2777611%2C8.92841034%2048.0312371%2C8.34209746%20C43.3112282%2C7.11023795%2036.8772177%2C6.4%2030%2C6.4%20C23.1227823%2C6.4%2016.6887718%2C7.11023795%2011.9687629%2C8.34209746%20C9.72223886%2C8.92841034%207.94923814%2C9.61334032%206.77837689%2C10.3358107%20C5.8061435%2C10.9357194%205.4%2C11.4537189%205.4%2C11.785654%20C5.4%2C12.1175891%205.8061435%2C12.6355886%206.77837689%2C13.2354973%20C7.94923814%2C13.9579677%209.72223886%2C14.6428977%2011.9687629%2C15.2292106%20C16.6887718%2C16.4610701%2023.1227823%2C17.171308%2030%2C17.171308%20Z%20M30%2C18.571308%20C15.6405965%2C18.571308%204%2C15.5332672%204%2C11.785654%20C4%2C8.03804078%2015.6405965%2C5%2030%2C5%20C44.3594035%2C5%2056%2C8.03804078%2056%2C11.785654%20C56%2C15.5332672%2044.3594035%2C18.571308%2030%2C18.571308%20Z%22%20id%3D%22Oval-9-Copy%22%20fill%3D%22%237FBDDD%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M18.2608643%2C7.14562988%20L22.727356%2C16.9047241%20C22.727356%2C16.9047241%2015.3006592%2C16.3911743%2010.276001%2C14.7511597%20C5.25134277%2C13.111145%205.38031006%2C11.8284302%205.38031006%2C11.6882935%20C5.38031006%2C10.4832831%208.16633152%2C9.41877716%2011.114563%2C8.57324219%20C14.549319%2C7.58817492%2018.2608643%2C7.14562988%2018.2608643%2C7.14562988%20Z%22%20id%3D%22Path-196%22%20fill%3D%22%23C1DFEF%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E);
+  //background-image: url(emptyDatagrid.svg)
+}
+
+.clr-align-items-center {
+  align-items: center!important;
+}
+
+.clr-justify-content-center {
+  justify-content: center!important;
+}
+
+.clr-align-items-center {
+  align-items: center !important;
+}
+
+.datagrid-placeholder-container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  // border-top-style: solid;
+  // border-top-color: #ccc;
+  border-top-color: var(--clr-table-border-color, #cccccc);
+  border-top-width: 0.05rem;
+  border-top-width: var(--clr-global-borderwidth, 0.05rem);
+}
+
+.clr-align-items-center {
+  align-items: center!important;
+}
+.clr-justify-content-center {
+  justify-content: center!important;
+}
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+.filter-container {
+  background-color: #ffffff;
+  padding: 0.5rem;
+  min-width: 10rem;
+  position: relative;
+  .filter-item-container {
+    .filter-item-title {
+      font-weight: bold;
+    }
+  }
+  .filter-item-checkbox {
+    display: flex;
+    padding: 0.5rem;
+    border-style: solid;
+    border-width: 0.5px 0.5px 0 0.5px;
+    border-color: #ccc;
+    &:last-child {
+      border-width: 0.5px 0.5px 0.5px 0.5px;
+    }
+  }
+  .filter-close-button {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    max-height: 1rem;
+  }
+}
+
+.filter-pane {
+  flex: 1;
+  animation: expand 500ms ease-in-out;
+  /*   min-width: 1%;
+     max-width: 12rem;*/
+  min-height: 100%;
+  background-color: white;
+  border: 1px solid #e4e4e4;;
+  margin-right: 1.153rem;
+}
+
+.filter-classes{
+  .clr-control-container datepicker-container{
+    width: 10rem;
+  }
+
+  .clr-select{
+    width: 9.5rem !important;
+  }
+
+  .accordion-header{
+    margin-top: 0rem !important;
+  }
+
+  .accordion-button{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .accordion-item:first-of-type {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+    border: none;
+  }
+
+  .accordion-button:focus {
+/*    border-color: none;*/
+    box-shadow: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+ /*   color: none;
+    background-color: none;*/
+    box-shadow: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+   /* color: none;
+    background-color: none;*/
+  }
+
+  .clr-control-container .clr-select-wrapper {
+    width: 9rem !important;
+  }
+
+  .datepicker-container .clr-input-wrapper {
+    width: 9.7rem !important;
+  }
+
+  .btn-close {
+    width: 0.35rem;
+    height: 0.35rem;
+  }
+
+  .card{
+    margin: 0;
+    border: none;
+    box-shadow: none !important;
+  }
+
+  .align-close-icon {
+    margin: 16px;
+  }
+
+  .card-header, .card-title {
+    font-size: 0.8rem;
+  }
+  .accordion-body {
+    padding: 0;
+    padding-left: 0.8rem;
+  }
+
+  .filter-container .filter-item-checkbox {
+    border-style: solid;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: white;
+    box-shadow:none;
+  }
+
+  .accordion {
+    --bs-accordion-btn-icon-width: 0.85rem;
+  }
+
+  .accordion-button::after {
+    margin-top: 1rem;
+  }
+
+  .filter-container .filter-item-checkbox {
+    border-style: none !important;
+  }
+}

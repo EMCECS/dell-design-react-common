@@ -12,14 +12,10 @@ import 'react-bootstrap';
 import React, {useEffect, useState} from "react";
 import {Card, CardBlock, CardText, CardTitle} from "@dellstorage/clarity-react/cards";
 import CloseButton from 'react-bootstrap/CloseButton';
-import {Icon} from "@dellstorage/clarity-react/icon/Icon";
 import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
 import {Select, SelectOption} from "@dellstorage/clarity-react/forms/select";
 import Accordion from "react-bootstrap/Accordion";
-// import {Button} from "@dds/components";
-import './FilterStyles.scss'
 import { CheckBox } from '@dellstorage/clarity-react/forms/checkbox/CheckBox'
-
 
 const FilterPanel = (props: any) => {
 
@@ -40,11 +36,9 @@ const FilterPanel = (props: any) => {
     const [filterState, setFilterState] = useState<any>([])
     useEffect(() => {
       setFilterData()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => {
       props.onChange(filterState)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterState])
   
     const onFilterChanged = (checked: any, subItem: string, index: number) => {
@@ -65,38 +59,10 @@ const FilterPanel = (props: any) => {
       })
       setFilterState(filterArray)
     }
-  
-
-    // useEffect(() => {
-    //     [].forEach.call(
-    //         document.querySelectorAll('[data-toggle="dds__button"]'),
-    //         function (element) {
-    //             new Button(element);
-    //         }
-    //     );
-    // });
-
-    const loadFilterIcon = () => {
-        return (
-            <div className="filter-icon" onClick={() => openFilter()}>
-                {/*<img
-                src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/c7fba900e82a7c5dd07f7c?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080825Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9966b1a038751cb05e171ef0f0115705b5f292ee94e487d88e09f471fd2411e7"
-                alt="" height="32px" width="32px"
-                className=" white-background max-full-height max-full-width spec-shadow"/>*/}
-
-                <Icon shape={"filter"}/>
-                {/*<img
-                  src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/9e90a51bbf649788467df3?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080736Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=52e193e255e9dccefe2bdd6c32257cb318226c841c9004e26f7a14f3d7c834ff"
-                  alt="" height="32" width="32"
-                  className=" white-background max-full-height max-full-width spec-shadow" onClick={()=>openFilter()}/>*/}
-            </div>
-        )
-    }
     return (
         <div className='filter-classes'>
                 <div className='filter-container'>
                     { props.data ?
-                      
                     <Card>
                         <CloseButton onClick={props.onClose} className={"align-close-icon"}/>
                         <CardBlock>
@@ -162,9 +128,7 @@ const FilterPanel = (props: any) => {
                         </CardBlock> 
                         </div>
                     </Card> : null }
-                </div> 
-                
-            
+                </div>
         </div>
     );
 }
