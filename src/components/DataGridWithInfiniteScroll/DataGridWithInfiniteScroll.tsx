@@ -128,8 +128,13 @@ export type DataGridColumn = {
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.rows ? props?.rows : [];
-    const{columns,fetchMoreData,selectionType,filterData,filterFunction,defaultColumnHeader} = props;
+    const columns: any = props?.columns;
+    const fetchMoreData: any = props?.fetchMoreData;
+    const selectionType: any = props?.selectionType;
+    const filterData : any = props?.filterData;
+    const filterFunction : any = props?.filterFunction;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
+    const defaultColumnHeader : any = props?.defaultColumnHeader;
     const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
     const refParent: any = useRef();
     const refChild: any = useRef();
