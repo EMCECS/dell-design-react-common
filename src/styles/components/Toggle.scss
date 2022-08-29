@@ -11,8 +11,7 @@
 @import "../common/colors";
 
 .clr-toggle-wrapper {
-    margin-bottom: 0.8rem;
-
+    
     input[type="checkbox"]{
         &:checked{
             & + label::before{
