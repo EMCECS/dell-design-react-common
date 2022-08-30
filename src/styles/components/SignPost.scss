@@ -10,23 +10,49 @@
 @import "../common/colors";
 @import "../common/fonts";
 
+.signpost {
+    font-family: $dell-font;
+    &-action {
+        width: initial;
+        white-space: break-spaces;
+        display: inline-flex;
+        align-items: flex-start;
+        color: $blue-600 !important;
+        overflow: visible;
+    }
+
+    .btn {
+        &-link {
+            &:focus {
+                outline: none !important;
+            }
+        }
+
+    }
+}
+
 .signpost-content{
     min-width: 16rem !important;
     color: $gray-900;
 
     .signpost-content-header{
         margin-top: 1rem;
-        padding-left: 0.2rem;
         
         .signpost-heading{
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: $font-weight-regular;
             margin-left: 1rem;
-            padding-right: 4rem;
+            padding-right: 4.9rem;
         }
     
         .signpost-action {
             margin-right: 1rem;
+        }
+
+        .close {
+            &:focus {
+                outline: none;
+            }
         }
     }
     
@@ -34,6 +60,7 @@
         margin-top: 1.2rem;
         margin-bottom: 1rem;
         line-height: 1.25rem;
-        font-size: 0.8rem;
+        font-size: 0.65rem;
+        text-align: left;
     }
 }
