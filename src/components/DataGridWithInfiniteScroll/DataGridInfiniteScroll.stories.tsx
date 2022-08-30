@@ -14,10 +14,10 @@ import DataGridWithInfiniteScroll, {GridSelectionType,} from "./DataGridWithInfi
 import {DATA} from "./DatagridInfiniteScrollMockData";
 import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
 import DataTable from 'react-data-table-component';
-import FilterData from './FilterMockData.json';
 import '../../styles/components/DataGridWithInfinteScroll.scss';
 import "bootstrap/dist/css/bootstrap.css";
-// A super simple expandable component.
+
+//  expandable component.
 const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 
 const columns = [{accessor: "ip", Header: "IP", show: true}, {accessor: "serial", Header: "Serial", show: true}, {
@@ -48,14 +48,6 @@ const columnsData = [
     {accessor: "role", Header: "Role"}
 ];
 
-/*const detailColumns = [
-    {accessor: "status", Header: "Status"},
-    {accessor: "name", Header: "Disk"},
-    {accessor: "slot", Header: "Slot"},
-    {accessor: "serial", Header: "Serial#"},
-    {accessor: "type", Header: "Type"},
-    {accessor: "capacityUsed", Header: "Capacity Used"},
-];*/
 const columnsExpansion = [
     {name: 'Title', selector: row => row.title,},
     {name: 'Year', selector: row => row.year},
@@ -65,12 +57,6 @@ const dataExpansion = [
     {id: 1, title: 'Beetlejuice', year: '1988'},
     {id: 2, title: 'Ghostbusters', year: '1984'},
 ];
-
-type DataRow = {
-    title: string;
-    director: string;
-    year: string;
-};
 
 const applyFilter = (obj: any): void => {
     const filter: string[] = []
@@ -83,7 +69,6 @@ const applyFilter = (obj: any): void => {
         }
     })
 }
-
 
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
@@ -114,14 +99,14 @@ storiesOf("Data Grid with Infinite Scroll", module)
             <DataGridWithInfiniteScroll
                 rows={DATA.rows}
                 columns={columnsData}
-                sorting={true}
+                isSorting={true}
             />
         </div>
     ))
     .add("Grid with Filter", () => (
         <div>
             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} isFilter={true}
-                                        filterData={FilterData.filterData}
+                                        filterData={DATA.filterData}
                                         filterFunction={(obj: any) => applyFilter(obj)}/>
         </div>
     ))
@@ -136,7 +121,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
                                     defaultColumnHeader={"Status"}/>
     </div>))
     .add("Grid with Detail Panel", () => (<div>
-        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} detailPanelShow={true}/>
+        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} showDetailPanel={true}/>
     </div>))
     .add("Empty Datagrid", () => (<div>
         <DataGridWithInfiniteScroll rows={[]} columns={columns} style={{height: "70vh"}}/>

@@ -10,13 +10,10 @@
 import {Button} from "@dellstorage/clarity-react/forms/button";
 import {Icon} from "@dellstorage/clarity-react/icon/Icon";
 import React, {forwardRef, useEffect, useRef, useState} from "react";
-import {useFilters, useSortBy, useTable, useBlockLayout, useResizeColumns,useExpanded} from "react-table";
-import { Card, CardBlock, CardTitle } from '@dellstorage/clarity-react/cards'
-import { Table } from '@dellstorage/clarity-react/tables';
+import {useBlockLayout, useExpanded, useFilters, useResizeColumns, useSortBy, useTable} from "react-table";
+import {Card, CardBlock, CardTitle} from '@dellstorage/clarity-react/cards'
+import {Table} from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
-/*import InfiniteScroll from "react-infinite-scroll-component";
-import useInfiniteScroll from "react-infinite-scroll-hook";
-import makeData from "./DatagridInfiniteScrollMockDataCode";*/
 
 /**
  * Enum for RowTpye :
@@ -44,14 +41,6 @@ export enum GridSelectionType {
     SINGLE = "single",
 }
 
-export type ExpandableRowDetails = {
-    isLoading?: boolean;
-    onRowExpand?: (row: DataGridRow) => Promise<any>;
-    onRowContract?: (row: DataGridRow) => void;
-    expandableContent?: any;
-    isExpanded?: boolean;
-    hideRowExpandIcon?: boolean;
-};
 export type DataGridRow = {
     className?: string;
     style?: any;
@@ -60,6 +49,15 @@ export type DataGridRow = {
     disableRowSelection?: boolean;
     expandableRowData?: ExpandableRowDetails;
 };
+export type ExpandableRowDetails = {
+    isLoading?: boolean;
+    onRowExpand?: (row: DataGridRow) => Promise<any>;
+    onRowContract?: (row: DataGridRow) => void;
+    expandableContent?: any;
+    isExpanded?: boolean;
+    hideRowExpandIcon?: boolean;
+};
+
 /**
  * Enum for sorting order :
  * @param {DESC} to sort data in descending order
@@ -89,13 +87,12 @@ export type DataGridSort = {
 type DataGridProps = {
     className?: string;
     style?: any;
-    dataqa?: string;
     id?: string;
     rows?: { [key: string]: any };
     columns: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
-    sorting?: boolean;
+    isSorting?: boolean;
     isFilter?: boolean;
     expandable?: boolean;
     expandComponent?: any;
@@ -104,12 +101,12 @@ type DataGridProps = {
     infiniteScroll?: boolean;
     defaultColumnWidth?: number;
     tableHeight?: number;
-    detailPaneContent? : any;
-    detailPanelShow? : boolean;
-    defaultColumnHeader? : any;
-    fetchMoreData? : Function;
-    filterFunction? : Function;
-    filterData? : any;
+    detailPaneContent?: any;
+    showDetailPanel?: boolean;
+    defaultColumnHeader?: any;
+    fetchMoreData?: Function;
+    filterFunction?: Function;
+    filterData?: any;
 }
 
 export type DataGridColumn = {
@@ -125,20 +122,21 @@ export type DataGridColumn = {
     sort?: DataGridSort;
 };
 
+const idForSorting = 'allSelect';
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const data: any = props?.rows ? props?.rows : [];
     const columns: any = props?.columns;
     const fetchMoreData: any = props?.fetchMoreData;
     const selectionType: any = props?.selectionType;
-    const filterData : any = props?.filterData;
-    const filterFunction : any = props?.filterFunction;
+    const filterData: any = props?.filterData;
+    const filterFunction: any = props?.filterFunction;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
-    const defaultColumnHeader : any = props?.defaultColumnHeader;
-    const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
+    const defaultColumnHeader: any = props?.defaultColumnHeader;
+    const showDetailPanel: boolean = props?.showDetailPanel ? props?.showDetailPanel : false;
     const refParent: any = useRef();
     const refChild: any = useRef();
-    const refSetting : any = useRef();
+    const refSetting: any = useRef();
     const [isOpen, setOpen] = useState<boolean>(false);
     const [transformVal, settransformVal] = useState<any>("translateX(0px) translateY(0px)");
     const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(false)
@@ -150,33 +148,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
-            refParent.current = refParent.current.getClientRects()[0];
-            refChild.current = refChild.current.getClientRects()[0];
-        }
-    }, []);
-
-    useEffect(() => {
-        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
-
-    }, [refParent?.current?.getClientRects()[0]?.width,refParent?.current?.clientWidth]);
-
-    const [state, setState] = useState({
-        items: [],
-        loading: false
-    });
-    let count = 0;
-    let [resetVal, setResetVal] = useState<boolean>(false);
-
-
-    useEffect(() => {
-        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
             refParent.current = refParent.current.getClientRects()[0];
             refChild.current = refChild.current.getClientRects()[0];
         }
@@ -191,10 +163,36 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             settransformVal(transformVal);
         }
 
-    }, [refParent?.current?.getClientRects()[0]?.width,refParent?.current?.clientWidth]);
+    }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
+
+    const [state, setState] = useState({
+        items: [],
+        loading: false
+    });
+    let count = 0;
+    let [resetVal, setResetVal] = useState<boolean>(false);
+
 
     useEffect(() => {
-        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
+            refParent.current = refParent.current.getClientRects()[0];
+            refChild.current = refChild.current.getClientRects()[0];
+        }
+    }, []);
+
+    useEffect(() => {
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
+            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
+            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
+            const transformVal =
+                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+            settransformVal(transformVal);
+        }
+
+    }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
+
+    useEffect(() => {
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
             const transformVal =
@@ -273,9 +271,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     );
 
     // @ts-nocheck
-    const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest } : any, ref) => {
+    const IndeterminateCheckbox = forwardRef(({indeterminate, ...rest}: any, ref) => {
         const defaultRef = useRef();
-        const resolvedRef : any = ref || defaultRef;
+        const resolvedRef: any = ref || defaultRef;
 
         useEffect(() => {
             resolvedRef.current.indeterminate = indeterminate;
@@ -292,7 +290,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         return (
             <div className="checkbox">
                 <label>
-                    <input type="checkbox" className="input-assumpte"  ref={resolvedRef} {...rest} />
+                    <input type="checkbox" className="input-assumpte" ref={resolvedRef} {...rest} />
                     <span className="reset-button">Reset Settings</span>
                 </label>
             </div>
@@ -314,8 +312,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             columns,
             columnsExpand,
             data,
-            initialState: {pageIndex: 0,
-                hiddenColumns: columns.filter(column => !column.show).map(column => column.Header)},
+            initialState: {
+                pageIndex: 0,
+                hiddenColumns: columns.filter(column => !column.show).map(column => column.Header)
+            },
         },
         useFilters, // Adding the useFilters Hook to the table
         useSortBy,
@@ -327,7 +327,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
 
     useEffect(() => {
-        if (rows.length != 0) {
+        if (rows.length !== 0) {
             setIsChecked(rows);
         }
     }, [rows]);
@@ -422,10 +422,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         )
     }
 
-    const handleChangeSorting = (event) => {
+    const handleSorting = (event) => {
         const {id, checked} = event.target;
         let tempSortValue;
-        if (id === 'allSelect') {
+        if (id === idForSorting) {
             tempSortValue = allValues.map((val) => {
                 return {...val, isChecked: checked}
             });
@@ -435,14 +435,14 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             setIsChecked(tempSortValue);
         }
     }
-    const handleRadioSelect = (event) => {
+    const handleRadioSelection = (event) => {
         const {id, checked} = event.target;
         console.log(id, checked);
     }
     const renderRowSubComponent = React.useCallback(
         ({row}) => (
             <h3>
-                my god, I can't belive I spent a whole afternoon reading the wrong stuff
+                Row Sub Component is working
             </h3>
         ),
         []
@@ -450,38 +450,37 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const designFilterTable = () => {
         return (
             <div className={"filter"}>
-                    <div className={"table-css"} style={props.style}>
-                        <table {...getTableProps()}>
-                            <thead>
-                            {headerGroups.map(headerGroup => (
-                                <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
-                                    {headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-                                    ))}
+                <div className={"table-css"} style={props.style}>
+                    <table {...getTableProps()}>
+                        <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
+                                {headerGroup.headers.map(column => (
+                                    <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                                ))}
+                            </tr>
+                        ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()} className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
+                        {rows.map((row, i) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()} className={'csg-row'}>
+                                    {row.cells.map(cell => {
+                                        return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                    })}
                                 </tr>
-                            ))}
-                            </thead>
-                            <tbody {...getTableBodyProps()}  className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
-                            {rows.map((row, i) => {
-                                prepareRow(row);
-                                return (
-                                    <tr {...row.getRowProps()} className={'csg-row'}>
-                                        {row.cells.map(cell => {
-                                            return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                        })}
-                                    </tr>
-                                );
-                            })}
-                            </tbody>
-                        </table>
-
-                    </div>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         );
     }
     const handleChangeSelect = () => {
-        if(refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null){
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 215;
             const transformVal =
@@ -501,30 +500,52 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const loadFilterIcon = () => {
         return (
             <div className="filter-icon" onClick={() => openFilter()}>
-                {/*<img
-            src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/c7fba900e82a7c5dd07f7c?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080825Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9966b1a038751cb05e171ef0f0115705b5f292ee94e487d88e09f471fd2411e7"
-            alt="" height="32px" width="32px"
-            className=" white-background max-full-height max-full-width spec-shadow"/>*/}
-
                 <Icon shape={"filter"}/>
-                {/*<img
-              src="https://zeroheight-uploads.s3-accelerate.amazonaws.com/9e90a51bbf649788467df3?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA3AVNYHQK4QFFEFF5%2F20220805%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220805T080736Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=52e193e255e9dccefe2bdd6c32257cb318226c841c9004e26f7a14f3d7c834ff"
-              alt="" height="32" width="32"
-              className=" white-background max-full-height max-full-width spec-shadow" onClick={()=>openFilter()}/>*/}
             </div>
         )
     }
-
-  /*  const [sentryRef,{ rootRef }] = useInfiniteScroll({
-        loading: state.loading,
-        hasNextPage: true,
-      onLoadMore: fetchMoreData
-    });*/
-
-    return (
-        <div>
-            {props.isFilter && loadFilterIcon()}
-            {props.isFilter &&
+    const renderMultiSelectDataGridHeader = () => {
+        return (
+            <th scope="col">
+                <div className="dds__checkbox dds__checkbox--sm">
+                    <label className="dds__checkbox__label" htmlFor="sm-rad">
+                        <input type="checkbox" id="allSelect"
+                               className="dds__checkbox__input"
+                               checked={allValues.filter(value => value?.isChecked !== true).length < 1}
+                               onChange={handleSorting}/>
+                    </label>
+                </div>
+            </th>
+        )
+    }
+    const renderMultiSelectDataGridRow = (row) => {
+        return (
+            <th scope={row}>
+                <div className="dds__checkbox dds__checkbox--sm">
+                    <label className="dds__checkbox__label" htmlFor="sm-rad">
+                        <input type="checkbox" id={row.id}
+                               className="dds__checkbox__input"
+                               onChange={handleSorting}
+                               checked={row?.isChecked || false}/>
+                    </label>
+                </div>
+            </th>
+        )
+    }
+    const renderSingleSelectDataGridRow = (row) => {
+        return (
+            <th>
+                <div className="dds__radio-button dds__radio-button--sm">
+                    <input className="dds__radio-button__input" type="radio"
+                           name="name-650298779"
+                           id="radio-button-control-426423994" value={row}
+                           onChange={handleRadioSelection}/>
+                </div>
+            </th>
+        )
+    }
+    const renderFilter = () => {
+        return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-10 col-md-10 col-lg-9">
@@ -539,6 +560,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     }
                 </div>
             </div>
+        )
+    }
+    return (
+        <div>
+            {props.isFilter && loadFilterIcon()}
+            {props.isFilter &&
+                renderFilter()
             }
 
             <div className='clr-row flex-container'>
@@ -554,22 +582,22 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                             left: 0,
                             transform: transformVal,
                         }}>
-                        <div className="ColumnSelect" >
+                        <div className="ColumnSelect">
                             <span className="ColumnSelect-header">Column Picker</span>
 
                             {allColumns.map((column) =>
                                     <div key={column.id}>
 
                                         <label>
-                                            { column.Header !== defaultColumnHeader &&
-                                                <><input type='checkbox' onClick={handleChangeSelect} id="allColumnSelect" {...column.getToggleHiddenProps()} />
+                                            {column.Header !== defaultColumnHeader &&
+                                                <><input type='checkbox' onClick={handleChangeSelect}
+                                                         id="allColumnSelect" {...column.getToggleHiddenProps()} />
                                                     <span className="ColumnSelect-header-names">{column.Header}
                           </span></>
                                             }
                                         </label>
 
                                     </div>
-
                             )}
                         </div>
                         <div className="ColumnSelect-reset-button">
@@ -578,142 +606,97 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     </div>
                 }
 
-                { !props.isFilter && <div id="scrollableDiv"  className="scroll-div table-css" style={props.style} >
-                    <div  className={showDetailsPanel && detailPanelShow ? "detailPanelCSS" : 'clr-col-12'}>
-                        <table {...getTableProps()}  ref={refParent}>
+                {!props.isFilter && <div id="scrollableDiv" className="scroll-div table-css" style={props.style}>
+                    <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12'}>
+                        <table {...getTableProps()} ref={refParent}>
                             <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}
                                     className={'csg-header'}>
                                     {props.expandable ? <th/> : null}
                                     {selectionType === GridSelectionType.MULTI &&
-                                        <th scope="col">
-                                            <div className="dds__checkbox dds__checkbox--sm">
-                                                <label className="dds__checkbox__label" htmlFor="sm-rad">
-                                                    <input type="checkbox" id="allSelect"
-                                                           className="dds__checkbox__input"
-                                                           checked={allValues.filter(value => value?.isChecked !== true).length < 1}
-                                                           onChange={handleChangeSorting}/>
-                                                </label>
-                                            </div>
-                                        </th>
+                                        renderMultiSelectDataGridHeader()
                                     }
                                     {selectionType === GridSelectionType.SINGLE &&
-                                        <th>
-
-                                        </th>
+                                        <th/>
                                     }
                                     {headerGroup.headers.map(column => (
 
-                                        <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
-                                            <div ref={refSetting}  className="header-cell">
+                                        <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}>
+                                            <div ref={refSetting} className="header-cell">
                                                 {column.render("Header")}
                                                 <span className="">
                                                   {column.isSorted
-                                                      ? column.isSortedDesc
-                                                          ? <div className="">
-                                                              <Icon shape={"arrow down"}/>
-                                                          </div>
-                                                          :
-                                                          <Icon shape={"arrow up"}/>
-                                                      /*<div className=""><img
-                                                              src="https://dds.dell.com/svgs/2.4.0/dds__icon--arrow-up.svg"
-                                                              height="32px" width="32px" alt="dds__icon--arrow-up"/>
-                                                          </div>*/
-                                                      : ''
+                                                      ? column.isSortedDesc ?
+                                                          <div className=""><Icon shape={"arrow down"}/></div> :
+                                                          <Icon shape={"arrow up"}/> : ''
                                                   }
                                               </span>
                                             </div>
                                             <div
                                                 {...column.getResizerProps()}
                                                 className={`resizer ${
-                                                    column.isResizing ? 'isResizing' : '' }`}
-                                            > </div>
+                                                    column.isResizing ? 'isResizing' : ''}`}
+                                            ></div>
                                         </th>
 
                                     ))}
-                                    { columnSelect && <th >
-                                        <Button link onClick={() => getColumnSelectionList()} icon={{shape: "settings", className:"is-solid" }}/>
-                                    </th> }
+                                    {columnSelect && <th>
+                                        <Button link onClick={() => getColumnSelectionList()}
+                                                icon={{shape: "settings", className: "is-solid"}}/>
+                                    </th>}
                                 </tr>
                             ))}
                             </thead>
-                          {/*  <InfiniteScroll
-                                dataLength={rows.length}
-                                next={fetchMoreData}
-                                hasMore={!!fetchMoreData}
-                                height={550}
-                                loader={<h5>Loading...</h5>}
-                                scrollableTarget="scrollableDiv"
-                                endMessage={
-                                    <p style={{ textAlign: 'center' }}>
-                                            <b> </b>
-                                     </p>
-                              }
-                           >*/}
-                                { allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body" }>
+                            {allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body"}>
 
-                                    { allValues.map((row, i) => {
-                                        prepareRow(row);
-                                        return (
-                                            <tr {...row.getRowProps()} onClick={() => detailPanelShow ? handleDetailsPanel(row,i) : ''} className={'csg-row'}>
-                                                {selectionType === GridSelectionType.MULTI &&
-                                                    <th scope={row}>
-                                                        <div className="dds__checkbox dds__checkbox--sm">
-                                                            <label className="dds__checkbox__label" htmlFor="sm-rad">
-                                                                <input type="checkbox" id={row.id}
-                                                                       className="dds__checkbox__input"
-                                                                       onChange={handleChangeSorting}
-                                                                       checked={row?.isChecked || false}/>
-                                                            </label>
-                                                        </div>
-                                                    </th>
-                                                }
-                                                {selectionType === GridSelectionType.SINGLE &&
-                                                    <th>
-                                                        <div className="dds__radio-button dds__radio-button--sm">
-                                                            <input className="dds__radio-button__input" type="radio"
-                                                                   name="name-650298779"
-                                                                   id="radio-button-control-426423994" value={row}
-                                                                   onChange={handleRadioSelect}/>
-                                                        </div>
-                                                    </th>
-                                                }
-                                                {props.expandable ? <td className="expansion-column"
-                                                                        {...row.getRowProps(row.getToggleRowExpandedProps())}>
-                                                    {<div
-                                                        className={row.isExpanded ? "expansion-icon expanded" : "expansion-icon"}>
-                                                        <tr>
-                                                            <td colSpan={visibleColumns.length}>
+                                {allValues.map((row, i) => {
+                                    prepareRow(row);
+                                    return (
+                                        <tr {...row.getRowProps()}
+                                            onClick={() => showDetailPanel ? handleDetailsPanel(row, i) : ''}
+                                            className={'csg-row'}>
+                                            {selectionType === GridSelectionType.MULTI &&
+                                                renderMultiSelectDataGridRow(row)
+                                            }
+                                            {selectionType === GridSelectionType.SINGLE &&
+                                                renderSingleSelectDataGridRow(row)
+                                            }
+                                            {props.expandable ? <td className="expansion-column"
+                                                                    {...row.getRowProps(row.getToggleRowExpandedProps())}>
+                                                {<div
+                                                    className={row.isExpanded ? "expansion-icon expanded" : "expansion-icon"}>
+                                                    <tr>
+                                                        <td colSpan={visibleColumns.length}>
+                                                            {renderRowSubComponent({row})}
+                                                        </td>
+                                                    </tr>
+                                                    <Icon shape={"arrow right"}/>
+                                                </div>}
 
-                                                                {renderRowSubComponent({row})}
-                                                            </td>
-                                                        </tr>
-                                                        <Icon shape={"arrow right"}/>
-                                                    </div>}
-
-                                                </td> : null}
-                                                {row.cells.map(cell => {
-                                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                                })}
-                                                <td/>
-                                            </tr>
-                                        );
-                                    })
-                                    }
-                                    </tbody>
-                                    :
-                                    (<div style={{ textAlign: 'center', paddingTop: "210px" }}>
-                                        <div className="datagrid-placeholder-container ng-star-inserted">
-                                            <div className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-                                                <div className="datagrid-placeholder-image ng-star-inserted"/>
-                                                No items found!
-                                            </div>
-                                        </div></div>)}
-                      {/*  </InfiniteScroll>*/}
+                                            </td> : null}
+                                            {row.cells.map(cell => {
+                                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                            })}
+                                            <td/>
+                                        </tr>
+                                    );
+                                })
+                                }
+                                </tbody>
+                                :
+                                (<div style={{textAlign: 'center', paddingTop: "210px"}}>
+                                    <div className="datagrid-placeholder-container ng-star-inserted">
+                                        <div
+                                            className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
+                                            <div className="datagrid-placeholder-image ng-star-inserted"/>
+                                            No items found!
+                                        </div>
+                                    </div>
+                                </div>)}
                         </table>
                     </div>
-                </div> }
+                </div>}
                 <div className={showDetailsPanel ? 'clr-col-4' : ''}>
                     {showDetailsPanel && showDetailData !== undefined &&
                         <div className='details-pane'>
