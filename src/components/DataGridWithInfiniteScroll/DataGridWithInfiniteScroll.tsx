@@ -14,9 +14,6 @@ import {useFilters, useSortBy, useTable, useBlockLayout, useResizeColumns,useExp
 import { Card, CardBlock, CardTitle } from '@dellstorage/clarity-react/cards'
 import { Table } from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
-/*import InfiniteScroll from "react-infinite-scroll-component";
-import useInfiniteScroll from "react-infinite-scroll-hook";
-import makeData from "./DatagridInfiniteScrollMockDataCode";*/
 
 /**
  * Enum for RowTpye :
@@ -86,6 +83,18 @@ export type DataGridSort = {
     hideSort?: boolean;
 };
 
+ /**
+ * type for datagrid row detail pane data :
+ * @param {title} title for detail pane
+ * @param {columnNames} ColumnNames is for detail panel column display
+ * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON 
+ */
+  export type DetailPaneData = {
+    title?: any;
+    columnNames?: any;
+    detailPaneContentJSON: any;
+};
+
 type DataGridProps = {
     className?: string;
     style?: any;
@@ -110,6 +119,10 @@ type DataGridProps = {
     fetchMoreData? : Function;
     filterFunction? : Function;
     filterData? : any;
+    handleDetailsPanelData? : any;
+    detailDataProps? : DetailPaneData;
+    detailPanelContentFunction ? : any;
+    apiLink? : any;
 }
 
 export type DataGridColumn = {
@@ -134,7 +147,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const filterData : any = props?.filterData;
     const filterFunction : any = props?.filterFunction;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
+    const detailDataProps : any = props?.detailDataProps;
     const defaultColumnHeader : any = props?.defaultColumnHeader;
+    const detailPanelContentFunction : any = props?.detailPanelContentFunction;
     const detailPanelShow: boolean = props?.detailPanelShow ? props?.detailPanelShow : false;
     const refParent: any = useRef();
     const refChild: any = useRef();
@@ -145,7 +160,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const [detailRowIndex, setDetailRowIndex] = useState<number>()
     const [showDetailData, setShowDetailData] = useState<any>()
     const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>()
-    let expandData: { key: string; value: any; }[];
+    let expandData: { key: string; value: any; }[]=[{key : "", value: ""}];
     const rowType: any = props.rowType;
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
@@ -344,45 +359,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     }
 
     const handleDetailsPanel = (row, i) => {
-        expandData = [
-            {key: 'Device Description', value: data[i].deviceDescription},
-            {key: 'Controller', value: data[i].controller},
-            {key: 'Operational State', value: data[i].operationalState},
-            {
-                key: 'Block Size',
-                value: data[i].blockSize
-            },
-            {key: 'Failure Predicted', value: data[i].failurePredicted},
-            {key: 'Remaining Drive Life', value: data[i].remainingDriveLife},
-            {key: 'Power Status', value: data[i].powerStatus},
-            {key: 'Progress', value: data[i].progress},
-            {
-                key: 'Used RAID Disk space',
-                value: data[i].usedRAIDDiskSpace
-            },
-            {
-                key: 'Available RAID Disk space',
-                value: data[i].availableRAIDDiskSpace
-            },
-            {
-                key: 'Negotiated Speed',
-                value: data[i].negotiatedSpeed
-            },
-            {
-                key: 'Capable Speed',
-                value: data[i].capableSpeed
-            },
-            {key: 'SAS Address', value: data[i].SASAddress},
-            {key: 'Part Number', value: data[i].partNumber},
-            {key: 'Manufacturer', value: data[i].manufacturer},
-            {key: 'Product ID', value: data[i].productId},
-            {key: 'Revision', value: data[i].revision},
-            {key: 'Serial Number', value: data[i].serialNumber},
-        ]
-
-
+        let detailPanelKeys = Object.keys(detailDataProps?.columnNames);
+        for (let j = 0; j < detailPanelKeys.length; j++) {
+            let keyValue = {key: detailDataProps?.columnNames[detailPanelKeys[j]], value: String(detailDataProps?.detailPaneContentJSON[i][detailPanelKeys[j]])};
+            expandData.push(keyValue);
+        } 
         setShowDetailData(expandData);
-        setShowDetailPanelTitle(data[i].name)
+        setShowDetailPanelTitle(detailDataProps?.detailPaneContentJSON[i][detailDataProps?.title])
         setDetailRowIndex(i);
         setShowDetailsPanel(true);
     }
@@ -397,19 +380,20 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     </div>
                 </CardTitle>
                 <CardBlock>
-
+                {detailPaneContent ? detailPaneContent() :
                     <Table isNonBordered className='borderless-table'>
-                        {detailPaneContent ? detailPaneContent :
+                       
                             <tbody>
                             {showDetailData?.map((item: any) => (
                                 <tr key={item.key}>
                                     <td>{item.key}</td>
-                                    <td>{item.value}</td>
+                                    <td className="value-width">{item.value}</td>
                                 </tr>
                             ))}
                             </tbody>
-                        }
+                        
                     </Table>
+                }
                     <Button
                         primary
                         className='medium-button'
@@ -514,12 +498,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             </div>
         )
     }
-
-  /*  const [sentryRef,{ rootRef }] = useInfiniteScroll({
-        loading: state.loading,
-        hasNextPage: true,
-      onLoadMore: fetchMoreData
-    });*/
 
     return (
         <div>
@@ -638,25 +616,12 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                 </tr>
                             ))}
                             </thead>
-                          {/*  <InfiniteScroll
-                                dataLength={rows.length}
-                                next={fetchMoreData}
-                                hasMore={!!fetchMoreData}
-                                height={550}
-                                loader={<h5>Loading...</h5>}
-                                scrollableTarget="scrollableDiv"
-                                endMessage={
-                                    <p style={{ textAlign: 'center' }}>
-                                            <b> </b>
-                                     </p>
-                              }
-                           >*/}
                                 { allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body" }>
 
                                     { allValues.map((row, i) => {
                                         prepareRow(row);
                                         return (
-                                            <tr {...row.getRowProps()} onClick={() => detailPanelShow ? handleDetailsPanel(row,i) : ''} className={'csg-row'}>
+                                            <tr {...row.getRowProps()} onClick={() => detailPanelShow ? (detailPanelContentFunction ? detailPanelContentFunction(row,i) : handleDetailsPanel(row,i)) : ''} className={'csg-row'}>
                                                 {selectionType === GridSelectionType.MULTI &&
                                                     <th scope={row}>
                                                         <div className="dds__checkbox dds__checkbox--sm">
@@ -710,7 +675,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                                 No items found!
                                             </div>
                                         </div></div>)}
-                      {/*  </InfiniteScroll>*/}
                         </table>
                     </div>
                 </div> }

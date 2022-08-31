@@ -17,6 +17,7 @@ import DataTable from 'react-data-table-component';
 import FilterData from './FilterMockData.json';
 import '../../styles/components/DataGridWithInfinteScroll.scss';
 import "bootstrap/dist/css/bootstrap.css";
+import { issueData } from './DetailData'
 // A super simple expandable component.
 const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 
@@ -84,6 +85,21 @@ const applyFilter = (obj: any): void => {
     })
 }
 
+const detailColumnName = {
+	acknowledged: "Acknowledge",
+    clearType: "Clear Type",
+    id: "Id",
+    message: "Message",
+    namespace: "Namespace",
+    reason: "Reason",
+    remedies: "Remedies"
+}
+
+const detailDataProps = {
+    columnNames: detailColumnName,
+    detailPaneContentJSON: issueData.node,
+    title: "namespace"
+  }
 
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
@@ -136,7 +152,8 @@ storiesOf("Data Grid with Infinite Scroll", module)
                                     defaultColumnHeader={"Status"}/>
     </div>))
     .add("Grid with Detail Panel", () => (<div>
-        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} detailPanelShow={true}/>
+        {/* <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} detailPanelShow={true}/> */}
+        <DataGridWithInfiniteScroll  rows={DETAILDATA.data} columns={detailColumns} detailPanelShow={true} detailDataProps={detailDataProps}/>
     </div>))
     .add("Empty Datagrid", () => (<div>
         <DataGridWithInfiniteScroll rows={[]} columns={columns} style={{height: "70vh"}}/>

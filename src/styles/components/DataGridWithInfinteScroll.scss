@@ -739,3 +739,8 @@ $compact-header-height: 40px;
     border-style: none !important;
   }
 }
+
+.value-width{
+  max-width: 12rem !important;
+  word-wrap: break-word !important;
+}
