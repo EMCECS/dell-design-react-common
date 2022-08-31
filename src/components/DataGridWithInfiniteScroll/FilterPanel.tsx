@@ -18,14 +18,6 @@ import Accordion from "react-bootstrap/Accordion";
 import { CheckBox } from '@dellstorage/clarity-react/forms/checkbox/CheckBox'
 
 const FilterPanel = (props: any) => {
-
-    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-    const closeFilter = () => {
-        setIsFilterOpen(false);
-    }
-    const openFilter = () => {
-        setIsFilterOpen(true);
-    }
     const renderDefaultSelectOptions = () => {
         const arr = [1, 2, 3]
         return arr.map(a => {
