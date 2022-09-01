@@ -443,9 +443,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
     );
     const designFilterTable = () => {
         return (
-            <div className={"filter"}>
-                <div className={"table-css"} style={props.style}>
-                    <table {...getTableProps()}>
+                <div className={"table-css table-responsive"} style={props.style}>
+                    <table className={"table"} {...getTableProps()} ref={refParent} style={props.style}>
                         <thead>
                         {headerGroups.map(headerGroup => (
                             <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
@@ -459,7 +458,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                         {rows.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <tr {...row.getRowProps()} className={'csg-row'}>
+                                <tr {...row.getRowProps()}  className={'csg-row'}>
                                     {row.cells.map(cell => {
                                         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                                     })}
@@ -469,8 +468,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                         </tbody>
                     </table>
                 </div>
-            </div>
-
         );
     }
     const handleChangeSelect = () => {
@@ -651,9 +648,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                                             </div>
                                             <div
                                                 {...column.getResizerProps()}
-                                                className={`resizer ${
-                                                    column.isResizing ? 'isResizing' : ''}`}
-                                            ></div>
+    className={`resizer ${
+        column.isResizing ? 'isResizing' : ''}`}
+    />
                                         </th>
 
                                     ))}

@@ -137,7 +137,6 @@ $compact-header-height: 40px;
 .csg-row {
   height: $csg-row-height;
   line-height: $csg-row-height;
-
 }
 .compact-row {
   height: $compact-row-height;
@@ -353,10 +352,6 @@ $compact-header-height: 40px;
   float: right;
   position: relative;
 }
-.filter{
-  display: block !important;
-}
-
 .expansion-column {
   padding: 0 1rem;
 }
