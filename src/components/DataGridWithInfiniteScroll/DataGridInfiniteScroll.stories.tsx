@@ -16,6 +16,9 @@ import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
 import DataTable from 'react-data-table-component';
 import '../../styles/components/DataGridWithInfinteScroll.scss';
 import "bootstrap/dist/css/bootstrap.css";
+import {CardText} from "@dellstorage/clarity-react/cards";
+import Accordion from "react-bootstrap/Accordion";
+import {DatePicker} from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
 
 //  expandable component.
 const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
@@ -69,7 +72,30 @@ const applyFilter = (obj: any): void => {
         }
     })
 }
+const filterComponent =()=>{
+    return (
+        [
+<div>
+    <CardText>TEST DEMO</CardText>
+    <CardText>TEST DEMO</CardText>
+    <CardText>
+        <div>
+           Testing
+        </div>
+    </CardText>
 
+    <Accordion>
+        <Accordion.Item eventKey="1">
+            <Accordion.Header>Date</Accordion.Header>
+            <Accordion.Body>
+                <DatePicker/>
+            </Accordion.Body>
+        </Accordion.Item>
+    </Accordion>
+</div>
+        ]
+    )
+}
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
@@ -106,8 +132,8 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Filter", () => (
         <div>
             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} isFilter={true}
-                                        filterData={DATA.filterData}
-                                        filterFunction={(obj: any) => applyFilter(obj)}/>
+                                            filterData={filterComponent()}
+                                            filterFunction={(obj: any) => applyFilter(obj)}/>
         </div>
     ))
     .add("Grid with Expandable Row", () => (

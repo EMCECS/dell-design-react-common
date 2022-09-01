@@ -109,6 +109,11 @@ type DataGridProps = {
     filterData?: any;
 }
 
+type FilterProps ={
+    title?: string;
+    children?:Function
+}
+
 export type DataGridColumn = {
     columnName: string;
     displayName?: any;
@@ -124,13 +129,14 @@ export type DataGridColumn = {
 
 const idForSorting = 'allSelect';
 
-const DataGridWithInfiniteScroll = (props: DataGridProps) => {
+const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProps) => {
     const data: any = props?.rows ? props?.rows : [];
     const columns: any = props?.columns;
     const fetchMoreData: any = props?.fetchMoreData;
     const selectionType: any = props?.selectionType;
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
+    const title: any = filterProps?.title;
     const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
     const defaultColumnHeader: any = props?.defaultColumnHeader;
     const showDetailPanel: boolean = props?.showDetailPanel ? props?.showDetailPanel : false;
@@ -554,7 +560,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     {isFilterOpen &&
                         <div className="col-sm-2 col-md-2 col-lg-3">
                             <div className='filter-pane'>
-                                <FilterPanel data={filterData} onChange={filterFunction} onClose={() => closeFilter()}/>
+                                <FilterPanel data={filterData} title="Filter" onChange={filterFunction} onClose={() => closeFilter()}/>
                             </div>
                         </div>
                     }

@@ -31,16 +31,6 @@ export const DATA = {
             role: 'Data, Monitor',
         }
     ],
-    "filterData": [
-        {
-            "title": "Status",
-            "data": ["good", "bad", "suspect"]
-        },
-        {
-            "title": "Lorem",
-            "data": ["lorem", "ipsum", "dolor"]
-        }
-    ]
 }
 for(let i=0;i<5;i++){
     DATA.rows.push({
