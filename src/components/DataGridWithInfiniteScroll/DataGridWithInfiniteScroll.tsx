@@ -550,7 +550,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                     {isFilterOpen &&
                         <div className="col-sm-2 col-md-2 col-lg-3">
                             <div className='filter-pane'>
-                                <FilterPanel data={filterData} title="Filter" onChange={filterFunction} onClose={() => closeFilter()}/>
+                                <FilterPanel data={filterData} title="Filters" onChange={filterFunction} onClose={() => closeFilter()}/>
                             </div>
                         </div>
                     }

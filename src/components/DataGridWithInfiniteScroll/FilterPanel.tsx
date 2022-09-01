@@ -22,7 +22,7 @@ const FilterPanel = (props: any) => {
                         <CloseButton onClick={props.onClose} className={"align-close-icon"}/>
                         <CardBlock>
                             <CardTitle>
-                                Filter
+                                {props.title}
                             </CardTitle>
                         </CardBlock>
                         <div className='filter-item-container'>

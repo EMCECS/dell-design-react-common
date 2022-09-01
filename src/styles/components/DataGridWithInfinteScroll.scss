@@ -582,9 +582,15 @@ $compact-header-height: 40px;
   min-width: 10rem;
   position: relative;
   .filter-item-container {
-    .filter-item-title {
-      font-weight: bold;
-    }
+   overflow-y: auto;
+    height: 250px;
+  }
+  .filter-item-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  .filter-item-container::-webkit-scrollbar-thumb {
+    background: $gray-400;
+    border-radius: 10px;
   }
   .filter-item-checkbox {
     display: flex;

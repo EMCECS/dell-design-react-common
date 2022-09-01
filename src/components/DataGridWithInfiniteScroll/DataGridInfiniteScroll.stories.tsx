@@ -75,17 +75,15 @@ const filterComponent =()=>{
     return (
         [
 <div>
-    <CardText>TEST DEMO</CardText>
-    <CardText>TEST DEMO</CardText>
-    <CardText>
-        <div>
-           Testing
-        </div>
-    </CardText>
-
-    <Accordion>
+      <Accordion>
         <Accordion.Item eventKey="1">
             <Accordion.Header>Date</Accordion.Header>
+            <Accordion.Body>
+                <DatePicker/>
+            </Accordion.Body>
+        </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Status</Accordion.Header>
             <Accordion.Body>
                 <DatePicker/>
             </Accordion.Body>
