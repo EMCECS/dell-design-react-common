@@ -11,8 +11,7 @@
 import {storiesOf} from "@storybook/react";
 import React from "react";
 import DataGridWithInfiniteScroll, {GridSelectionType,} from "./DataGridWithInfiniteScroll";
-import {DATA} from "./DatagridInfiniteScrollMockData";
-import {DETAILDATA} from "./DatagridInfiniteScrollDetailPanelMockData";
+import {DATA, DETAILDATA, issueData} from "./DatagridInfiniteScrollMockData";
 import DataTable from 'react-data-table-component';
 import '../../styles/components/DataGridWithInfinteScroll.scss';
 import "bootstrap/dist/css/bootstrap.css";
@@ -96,6 +95,22 @@ const filterComponent =()=>{
         ]
     )
 }
+const detailColumnName = {
+	acknowledged: "Acknowledge",
+    clearType: "Clear Type",
+    id: "Id",
+    message: "Message",
+    namespace: "Namespace",
+    reason: "Reason",
+    remedies: "Remedies"
+}
+
+const detailDataProps = {
+    columnNames: detailColumnName,
+    detailPaneContentJSON: issueData.node,
+    title: "namespace"
+  }
+
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
@@ -143,11 +158,11 @@ storiesOf("Data Grid with Infinite Scroll", module)
         </div>
     ))
     .add("Grid with Column Hide/Show", () => (<div>
-        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} columnSelect={true}
+        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} showColumnSelect={true}
                                     defaultColumnHeader={"Status"}/>
     </div>))
     .add("Grid with Detail Panel", () => (<div>
-        <DataGridWithInfiniteScroll rows={DETAILDATA.data} columns={detailColumns} showDetailPanel={true}/>
+        <DataGridWithInfiniteScroll  rows={DETAILDATA.data} columns={detailColumns} showDetailPanel={true} detailDataProps={detailDataProps}/>
     </div>))
     .add("Empty Datagrid", () => (<div>
         <DataGridWithInfiniteScroll rows={[]} columns={columns} style={{height: "70vh"}}/>

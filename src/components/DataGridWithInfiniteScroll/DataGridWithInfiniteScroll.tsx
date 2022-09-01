@@ -84,6 +84,36 @@ export type DataGridSort = {
     hideSort?: boolean;
 };
 
+ /**
+ * type for datagrid row detail pane data :
+ * @param {title} title for detail pane
+ * @param {columnNames} ColumnNames is for detail panel column display
+ * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON
+ */
+  export type DetailPaneData = {
+    title?: any;
+    columnNames?: any;
+    detailPaneContentJSON: any;
+};
+
+ /**
+ * @param {className} CSS class names
+ * @param {style} CSS styles
+ * @param {id} unique ID for datagrid
+ * @param {rows} rows data
+ * @param {columns} column details
+ * @param {selectionType} row selection type that is multi or single
+ * @param {pagination} pagination support
+ * @param {rowType} Expandable or compact row type
+ * @param {pagination} pagination support
+ * @param {showColumnSelect} showColumnSelect is boolean value for column selection flag
+ * @param {detailDataProps} detailDataProps is to get the detail panel data of type DetailPaneData
+ * @param {detailPaneContent} detailPaneContent is to display funtion in detail panel instean of key value
+ * @param {showDetailPanel} showDetailPanel is to display detail panel
+ * @param {defaultColumnHeader} defaultColumnHeader is to set one default column to show
+ * @param {filterFunction} filterFunction to get the functioning part of filter
+ * @param {filterData} filterData to get data to be filtered.
+ */
 type DataGridProps = {
     className?: string;
     style?: any;
@@ -92,19 +122,16 @@ type DataGridProps = {
     columns: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
-    isSorting?: boolean;
-    isFilter?: boolean;
-    expandable?: boolean;
-    expandComponent?: any;
+    isSorting?: boolean; //--- add
+    isFilter?: boolean;  // -- add
+    expandable?: boolean; // -- add
+    expandComponent?: any; // -- add
     pagination?: boolean;
-    columnSelect?: boolean;
-    infiniteScroll?: boolean;
-    defaultColumnWidth?: number;
-    tableHeight?: number;
+    showColumnSelect?: boolean;
+    detailDataProps? : DetailPaneData;
     detailPaneContent?: any;
     showDetailPanel?: boolean;
     defaultColumnHeader?: any;
-    fetchMoreData?: Function;
     filterFunction?: Function;
     filterData?: any;
 }
@@ -132,12 +159,12 @@ const idForSorting = 'allSelect';
 const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProps) => {
     const data: any = props?.rows ? props?.rows : [];
     const columns: any = props?.columns;
-    const fetchMoreData: any = props?.fetchMoreData;
     const selectionType: any = props?.selectionType;
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
     const title: any = filterProps?.title;
-    const columnSelect: boolean = props?.columnSelect ? props?.columnSelect : false;
+    const showColumnSelect: boolean = props?.showColumnSelect ? props?.showColumnSelect : false;
+    const detailDataProps : any = props?.detailDataProps;
     const defaultColumnHeader: any = props?.defaultColumnHeader;
     const showDetailPanel: boolean = props?.showDetailPanel ? props?.showDetailPanel : false;
     const refParent: any = useRef();
@@ -146,10 +173,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
     const [isOpen, setOpen] = useState<boolean>(false);
     const [transformVal, settransformVal] = useState<any>("translateX(0px) translateY(0px)");
     const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(false)
-    const [detailRowIndex, setDetailRowIndex] = useState<number>()
+    const [, setDetailRowIndex] = useState<number>()
     const [showDetailData, setShowDetailData] = useState<any>()
     const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>()
-    let expandData: { key: string; value: any; }[];
+    let expandData: { key: string; value: any; }[]=[{key : "", value: ""}];
     const rowType: any = props.rowType;
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
@@ -170,14 +197,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
         }
 
     }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
-
-    const [state, setState] = useState({
-        items: [],
-        loading: false
-    });
-    let count = 0;
-    let [resetVal, setResetVal] = useState<boolean>(false);
-
 
     useEffect(() => {
         if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
@@ -350,45 +369,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
     }
 
     const handleDetailsPanel = (row, i) => {
-        expandData = [
-            {key: 'Device Description', value: data[i].deviceDescription},
-            {key: 'Controller', value: data[i].controller},
-            {key: 'Operational State', value: data[i].operationalState},
-            {
-                key: 'Block Size',
-                value: data[i].blockSize
-            },
-            {key: 'Failure Predicted', value: data[i].failurePredicted},
-            {key: 'Remaining Drive Life', value: data[i].remainingDriveLife},
-            {key: 'Power Status', value: data[i].powerStatus},
-            {key: 'Progress', value: data[i].progress},
-            {
-                key: 'Used RAID Disk space',
-                value: data[i].usedRAIDDiskSpace
-            },
-            {
-                key: 'Available RAID Disk space',
-                value: data[i].availableRAIDDiskSpace
-            },
-            {
-                key: 'Negotiated Speed',
-                value: data[i].negotiatedSpeed
-            },
-            {
-                key: 'Capable Speed',
-                value: data[i].capableSpeed
-            },
-            {key: 'SAS Address', value: data[i].SASAddress},
-            {key: 'Part Number', value: data[i].partNumber},
-            {key: 'Manufacturer', value: data[i].manufacturer},
-            {key: 'Product ID', value: data[i].productId},
-            {key: 'Revision', value: data[i].revision},
-            {key: 'Serial Number', value: data[i].serialNumber},
-        ]
-
-
+        let detailPanelKeys = Object.keys(detailDataProps?.columnNames);
+        for (let j = 0; j < detailPanelKeys.length; j++) {
+            let keyValue = {key: detailDataProps?.columnNames[detailPanelKeys[j]], value: String(detailDataProps?.detailPaneContentJSON[i][detailPanelKeys[j]])};
+            expandData.push(keyValue);
+        }
         setShowDetailData(expandData);
-        setShowDetailPanelTitle(data[i].name)
+        setShowDetailPanelTitle(detailDataProps?.detailPaneContentJSON[i][detailDataProps?.title])
         setDetailRowIndex(i);
         setShowDetailsPanel(true);
     }
@@ -403,19 +390,20 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                     </div>
                 </CardTitle>
                 <CardBlock>
-
+                {detailPaneContent ? detailPaneContent() :
                     <Table isNonBordered className='borderless-table'>
-                        {detailPaneContent ? detailPaneContent :
+
                             <tbody>
                             {showDetailData?.map((item: any) => (
                                 <tr key={item.key}>
                                     <td>{item.key}</td>
-                                    <td>{item.value}</td>
+                                    <td className="value-width">{item.value}</td>
                                 </tr>
                             ))}
                             </tbody>
-                        }
+
                     </Table>
+                }
                     <Button
                         primary
                         className='medium-button'
@@ -510,6 +498,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
             </div>
         )
     }
+
     const renderMultiSelectDataGridHeader = () => {
         return (
             <th scope="col">
@@ -550,6 +539,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
             </th>
         )
     }
+
     const renderFilter = () => {
         return (
             <div className="container-fluid">
@@ -568,17 +558,24 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
             </div>
         )
     }
-    return (
-        <div>
-            {props.isFilter && loadFilterIcon()}
-            {props.isFilter &&
-                renderFilter()
-            }
 
-            <div className='clr-row flex-container'>
-                {isOpen &&
-                    <div
-                        className="column-switch clr-popover-content"
+    const renderEmptyDatagrid = () => {
+        return(
+            <div className="empty-datagrid-style">
+                 <div className="datagrid-placeholder-container ng-star-inserted">
+                        <div
+                            className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
+                            <div className="datagrid-placeholder-image ng-star-inserted"/>
+                            No items found!
+                        </div>
+                </div>
+            </div>
+        )
+    }
+
+    const renderColumnSelection = () => {
+        return (
+            <div className="column-switch clr-popover-content"
                         ref={refChild}
                         role="dialog"
                         style={{
@@ -610,11 +607,24 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                             <IndeterminateCheckbox {...getToggleHideAllColumnsProps()} />
                         </div>
                     </div>
+        )
+    }
+
+    return (
+        <div>
+            {props.isFilter && loadFilterIcon()}
+            {props.isFilter &&
+                renderFilter()
+            }
+
+            <div className='clr-row flex-container'>
+                {isOpen &&
+                    renderColumnSelection()
                 }
 
-                {!props.isFilter && <div id="scrollableDiv" className="scroll-div table-css" style={props.style}>
+                {!props.isFilter && <div id="scrollableDiv" className="scroll-div table-css" >
                     <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12'}>
-                        <table {...getTableProps()} ref={refParent}>
+                        <table {...getTableProps()} ref={refParent} style={props.style}>
                             <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}
@@ -647,13 +657,16 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                                         </th>
 
                                     ))}
-                                    {columnSelect && <th>
+                                    {showColumnSelect &&
+                                    <th>
                                         <Button link onClick={() => getColumnSelectionList()}
                                                 icon={{shape: "settings", className: "is-solid"}}/>
-                                    </th>}
+                                    </th>
+                                    }
                                 </tr>
                             ))}
                             </thead>
+
                             {allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body"}>
 
                                 {allValues.map((row, i) => {
@@ -691,15 +704,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
                                 }
                                 </tbody>
                                 :
-                                (<div style={{textAlign: 'center', paddingTop: "210px"}}>
-                                    <div className="datagrid-placeholder-container ng-star-inserted">
-                                        <div
-                                            className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-                                            <div className="datagrid-placeholder-image ng-star-inserted"/>
-                                            No items found!
-                                        </div>
-                                    </div>
-                                </div>)}
+                                (
+                                    renderEmptyDatagrid()
+                                )}
                         </table>
                     </div>
                 </div>}
