@@ -443,7 +443,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
     );
     const designFilterTable = () => {
         return (
-                <div className={"table-css table-responsive"} style={props.style}>
+                <div className={"table-css table-responsive filter-table"} style={props.style}>
                     <table className={"table"} {...getTableProps()} ref={refParent} style={props.style}>
                         <thead>
                         {headerGroups.map(headerGroup => (
@@ -490,8 +490,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps:FilterProp
 
     const loadFilterIcon = () => {
         return (
-            <div className="filter-icon" onClick={() => openFilter()}>
-                <Icon shape={"filter"}/>
+            <div className={isFilterOpen ? 'filter-open' : 'filter-icon'} onClick={() => openFilter()}>
+
             </div>
         )
     }

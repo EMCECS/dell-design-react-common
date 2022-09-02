@@ -1,1 +1,10 @@
-<svg id="dds__icon--filter" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>dds__icon--filter</title><path d="M30.2 2.54h-28.4v3.46l10.9 13.58v9.88l6.54-2.76v-7.12l10.96-13.58v-3.46zM28 5.3l-10.9 13.52v6.46l-2.26 0.96v-7.42l-0.48-0.58-10.36-12.92v-0.64h24v0.62z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#666666;}
+</style>
+<path id="XMLID_9834_" class="st0" d="M30,4L30,4L30,4L18.5,16.4L18,17v0.8V28h-4V17.8V17l-0.5-0.6L2,4.1l0,0l0,0C2,4,2,4,2,4H30
+	L30,4 M30,2H2C0.2,2-0.7,4.2,0.6,5.5L12,17.8V30h8V17.8L31.4,5.5C32.7,4.2,31.8,2,30,2L30,2z"/>
+</svg>
