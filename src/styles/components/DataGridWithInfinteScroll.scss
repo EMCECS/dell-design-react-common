@@ -366,9 +366,9 @@ $compact-header-height: 40px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
- // background-color: $blue-600;
-  filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
- background-image: url("filter.svg");
+  background-color: $blue-600;
+  -webkit-mask:  url(filter-solid.svg) no-repeat 50% 50%;
+  mask: url(filter-solid.svg) no-repeat 50% 50%;
 }
 .expansion-column {
   padding: 0 1rem;
@@ -622,11 +622,12 @@ $compact-header-height: 40px;
     max-height: 1rem;
   }
 }
+
 .filter-table {
   .table {
     margin-top: 0;
-    .table td{
-      height: $csg-row-height;
+    table td{
+      height: $csg-row-height !important;
       line-height: $csg-row-height;
     }
   }
