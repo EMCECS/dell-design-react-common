@@ -145,7 +145,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Filter", () => (
         <div>
             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} isFilter={true}
-                                            filterData={filterComponent()}
+                                            filterData={filterComponent()}   selectionType={GridSelectionType.MULTI} isSorting={true}
                                             filterFunction={(obj: any) => applyFilter(obj)}/>
         </div>
     ))
