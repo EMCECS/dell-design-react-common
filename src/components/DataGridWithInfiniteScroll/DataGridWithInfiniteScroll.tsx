@@ -42,6 +42,15 @@ export enum GridSelectionType {
     MULTI = "multi",
     SINGLE = "single",
 }
+/**
+ * type for DataGridRow :
+ * @param {rowData} row data
+ * @param {rowID} unique ID to identify row
+ * @param {isSelected} set to true if row is selected
+ * @param {className} CSS class name
+ * @param {style} CSS style
+ * @param {expandableRowData} Expandable row content
+ */
 
 export type DataGridRow = {
     className?: string;
@@ -51,6 +60,15 @@ export type DataGridRow = {
     disableRowSelection?: boolean;
     expandableRowData?: ExpandableRowDetails;
 };
+/**
+ * type for datagrid expandable row data :
+ * @param {isLoading} if true then show loading icon for expandable row
+ * @param {onRowExpand} callback function to  fetch expandable row contents
+ * @param {onRowContract} callback function for additional logic after row contracts
+ * @param {expandableContent} content to show after row expand
+ * @param {isExpanded} true if row is already expanded
+ * @param {hideRowExpandIcon} if true then hide icon for expandable row
+ */
 export type ExpandableRowDetails = {
     isLoading?: boolean;
     onRowExpand?: (row: DataGridRow) => Promise<any>;
