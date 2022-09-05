@@ -190,13 +190,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }, []);
 
     useEffect(() => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
     }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
 
@@ -208,13 +202,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }, []);
 
     useEffect(() => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
     }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
 
@@ -304,15 +292,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
 
         useEffect(() => {
             resolvedRef.current.indeterminate = indeterminate;
+            returnPositionColumnSelectionPop()
         }, [resolvedRef, indeterminate]);
 
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
         return (
             <div className="checkbox">
@@ -359,7 +342,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         }
     }, [rows]);
 
-    const getColumnSelectionList = () => {
+    /**
+     * This function is to return the position of the column selection popup
+     */
+    const returnPositionColumnSelectionPop = () =>{
         if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
@@ -367,6 +353,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
             settransformVal(transformVal);
         }
+    }
+
+    const getColumnSelectionList = () => {
+        returnPositionColumnSelectionPop()
         setOpen(!isOpen);
     }
 
