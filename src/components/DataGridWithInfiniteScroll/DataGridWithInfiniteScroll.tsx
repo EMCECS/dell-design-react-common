@@ -107,6 +107,8 @@ export type DetailPaneData = {
  * @param {selectionType} row selection type that is multi or single
  * @param {pagination} pagination support
  * @param {rowType} Expandable or compact row type
+ * @param {isSorting} sorting true or false
+ * @param {isFilter} filtering true or false
  * @param {pagination} pagination support
  * @param {showColumnSelect} showColumnSelect is boolean value for column selection flag
  * @param {detailDataProps} detailDataProps is to get the detail panel data of type DetailPaneData
@@ -124,10 +126,9 @@ type DataGridProps = {
     columns: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
-    isSorting?: boolean; //--- add
-    isFilter?: boolean;  // -- add
-    expandable?: boolean; // -- add
-    expandComponent?: any; // -- add
+    isSorting?: boolean;
+    isFilter?: boolean;
+    expandable?: boolean;
     pagination?: boolean;
     showColumnSelect?: boolean;
     detailDataProps?: DetailPaneData;
@@ -286,7 +287,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             },
         },
         useFilters, // Adding the useFilters Hook to the table
-        useSortBy,
+        useSortBy, // Adding for sorting to the table
         useExpanded,
         useBlockLayout,
         useResizeColumns
@@ -377,7 +378,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }
     const handleRadioSelection = (event) => {
         const {id, checked} = event.target;
-        console.log(id, checked);
+        return {id,checked};
     }
     const renderRowSubComponent = React.useCallback(
         ({row}) => (
