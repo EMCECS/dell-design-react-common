@@ -239,64 +239,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 rowType === GridRowType.COMPACT_ROWS_WITH_DETAIL_PANE
                 : false)
     };
-
-    const columnsExpand = React.useMemo(
-        () => [
-            {
-                // Build our expander column
-                id: "expander", // Make sure it has an ID
-                Header: ({getToggleAllRowsExpandedProps, isAllRowsExpanded}) => (
-                    <span {...getToggleAllRowsExpandedProps()}>
-             {isAllRowsExpanded ? "👇" : "👉"}
-           </span>
-                ),
-                Cell: ({row}) => (
-                    // Use Cell to render an expander for each row.
-                    // We can use the getToggleRowExpandedProps prop-getter
-                    // to build the expander.
-                    <span {...row.getToggleRowExpandedProps()}>
-             {row.isExpanded ? "👇" : "👉"}
-           </span>
-                )
-            },
-            {
-                Header: "Name",
-                columns: [
-                    {
-                        Header: "First Name",
-                        accessor: "firstName"
-                    },
-                    {
-                        Header: "Last Name",
-                        accessor: "lastName"
-                    }
-                ]
-            },
-            {
-                Header: "Info",
-                columns: [
-                    {
-                        Header: "Age",
-                        accessor: "age"
-                    },
-                    {
-                        Header: "Visits",
-                        accessor: "visits"
-                    },
-                    {
-                        Header: "Status",
-                        accessor: "status"
-                    },
-                    {
-                        Header: "Profile Progress",
-                        accessor: "progress"
-                    }
-                ]
-            }
-        ],
-        []
-    );
-
     // @ts-nocheck
     const IndeterminateCheckbox = forwardRef(({indeterminate, ...rest}: any, ref) => {
         const defaultRef = useRef();
@@ -337,7 +279,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         resetResizing //Reset resizing of columns
     } = useTable({
             columns,
-            columnsExpand,
             data,
             initialState: {
                 pageIndex: 0,
