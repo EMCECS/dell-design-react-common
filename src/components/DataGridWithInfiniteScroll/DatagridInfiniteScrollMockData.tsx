@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
@@ -7,7 +9,6 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-import React from "react";
 
 export const DATA = {
     rows: [
@@ -52,7 +53,8 @@ for(let i=0;i<150;i++){
         role: 'Data, Monitor',
     })
 }
-
+//  expandable component.
+export const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 export const DETAILDATA = {
     data: [
             {
