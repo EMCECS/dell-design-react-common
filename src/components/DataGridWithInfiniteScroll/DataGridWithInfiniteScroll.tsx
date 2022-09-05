@@ -118,6 +118,7 @@ export type DetailPaneData = {
  * @param {filterData} filterData to get data to be filtered.
  * @param {getInfiniteScrollData} getInfiniteScrollData to get the data from function calling the infinite data
  * @param {fetchMoreData} fetchMoreData is function prop to get next data
+ * @param {datagridBodyHeight} datagridBodyHeight is fixed height for the body of the datagrid
  */
 type DataGridProps = {
     className?: string;
@@ -141,6 +142,7 @@ type DataGridProps = {
     filterData?: any;
     getInfiniteScrollData? : any;
     fetchMoreData? : any;
+    datagridBodyHeight? : any;
 }
 
 type FilterProps = {
@@ -170,6 +172,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
     const getInfiniteScrollData : any = props?.getInfiniteScrollData;
+    const datagridBodyHeight : any = props?.datagridBodyHeight;
     const title: any = filterProps?.title;
     const showColumnSelect: boolean = props?.showColumnSelect ? props?.showColumnSelect : false;
     const detailDataProps: any = props?.detailDataProps;
@@ -189,7 +192,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const rowType: any = props.rowType;
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
-    
+    const defaultDatagridBodyHeight = 550;
 
 
     useEffect(() => {
@@ -697,7 +700,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                 dataLength={rows.length}
                                 next={fetchMoreData}
                                 hasMore={!!fetchMoreData}
-                                height={550}
+                                height={datagridBodyHeight ? datagridBodyHeight : defaultDatagridBodyHeight}
                                 loader={<h5>Loading...</h5>}
                                 scrollableTarget="scrollableDiv"
                                 endMessage={
