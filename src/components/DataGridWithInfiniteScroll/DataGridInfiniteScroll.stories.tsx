@@ -53,8 +53,8 @@ const columnsData = [
 ];
 
 const columnsExpansion = [
-    { name: "Title", selector: (row) => row.title },
-    { name: "Year", selector: (row) => row.year },
+    { name: "Title", selector: (row:any) => row.title },
+    { name: "Year", selector: (row:any) => row.year },
 ];
 
 const dataExpansion = [

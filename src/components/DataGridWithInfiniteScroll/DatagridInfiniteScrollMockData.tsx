@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
@@ -54,7 +52,7 @@ for(let i=0;i<150;i++){
     })
 }
 //  expandable component.
-export const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
+export const ExpandedComponent = ({data}:any) => <pre>{JSON.stringify(data.title, null, 2)}</pre>;
 export const DETAILDATA = {
     data: [
             {
