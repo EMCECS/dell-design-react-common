@@ -108,6 +108,8 @@ export type DetailPaneData = {
  * @param {selectionType} row selection type that is multi or single
  * @param {pagination} pagination support
  * @param {rowType} Expandable or compact row type
+ * @param {isSorting} sorting true or false
+ * @param {isFilter} filtering true or false
  * @param {pagination} pagination support
  * @param {showColumnSelect} showColumnSelect is boolean value for column selection flag
  * @param {detailDataProps} detailDataProps is to get the detail panel data of type DetailPaneData
@@ -128,10 +130,9 @@ type DataGridProps = {
     columns: { [key: string]: any };
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
-    isSorting?: boolean; //--- add
-    isFilter?: boolean;  // -- add
-    expandable?: boolean; // -- add
-    expandComponent?: any; // -- add
+    isSorting?: boolean;
+    isFilter?: boolean;
+    expandable?: boolean;
     pagination?: boolean;
     showColumnSelect?: boolean;
     detailDataProps?: DetailPaneData;
@@ -240,64 +241,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 rowType === GridRowType.COMPACT_ROWS_WITH_DETAIL_PANE
                 : false)
     };
-
-    const columnsExpand = React.useMemo(
-        () => [
-            {
-                // Build our expander column
-                id: "expander", // Make sure it has an ID
-                Header: ({getToggleAllRowsExpandedProps, isAllRowsExpanded}) => (
-                    <span {...getToggleAllRowsExpandedProps()}>
-             {isAllRowsExpanded ? "👇" : "👉"}
-           </span>
-                ),
-                Cell: ({row}) => (
-                    // Use Cell to render an expander for each row.
-                    // We can use the getToggleRowExpandedProps prop-getter
-                    // to build the expander.
-                    <span {...row.getToggleRowExpandedProps()}>
-             {row.isExpanded ? "👇" : "👉"}
-           </span>
-                )
-            },
-            {
-                Header: "Name",
-                columns: [
-                    {
-                        Header: "First Name",
-                        accessor: "firstName"
-                    },
-                    {
-                        Header: "Last Name",
-                        accessor: "lastName"
-                    }
-                ]
-            },
-            {
-                Header: "Info",
-                columns: [
-                    {
-                        Header: "Age",
-                        accessor: "age"
-                    },
-                    {
-                        Header: "Visits",
-                        accessor: "visits"
-                    },
-                    {
-                        Header: "Status",
-                        accessor: "status"
-                    },
-                    {
-                        Header: "Profile Progress",
-                        accessor: "progress"
-                    }
-                ]
-            }
-        ],
-        []
-    );
-
     // @ts-nocheck
     const IndeterminateCheckbox = forwardRef(({indeterminate, ...rest}: any, ref) => {
         const defaultRef = useRef();
@@ -333,7 +276,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         resetResizing //Reset resizing of columns
     } = useTable({
             columns,
-            columnsExpand,
             data,
             initialState: {
                 pageIndex: 0,
@@ -341,7 +283,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             },
         },
         useFilters, // Adding the useFilters Hook to the table
-        useSortBy,
+        useSortBy, // Adding for sorting to the table
         useExpanded,
         useBlockLayout,
         useResizeColumns
@@ -439,7 +381,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }
     const handleRadioSelection = (event) => {
         const {id, checked} = event.target;
-        console.log(id, checked);
+        return {id,checked};
     }
     const renderRowSubComponent = React.useCallback(
         ({row}) => (
