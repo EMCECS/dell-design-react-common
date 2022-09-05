@@ -14,6 +14,8 @@ import {useBlockLayout, useExpanded, useFilters, useResizeColumns, useSortBy, us
 import {Card, CardBlock, CardTitle} from '@dellstorage/clarity-react/cards'
 import {Table} from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
+import  filter from "../../assets/images/filter.svg";
+import filterOpen from '../../assets/images/filter-solid.svg'
 
 /**
  * Enum for RowTpye :
@@ -508,7 +510,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const loadFilterIcon = () => {
         return (
             <div className={isFilterOpen ? 'filter-open' : 'filter-icon'} onClick={() => openFilter()}>
-
+                {isFilterOpen ?
+                   <img src={filterOpen} alt={filterOpen}/>
+                    :<img src={filter} alt={filter}/>
+                }
             </div>
         )
     }
