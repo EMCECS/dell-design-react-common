@@ -15,7 +15,8 @@ import {Card, CardBlock, CardTitle} from '@dellstorage/clarity-react/cards'
 import {Table} from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
 import  filter from "../../assets/images/filter.svg";
-import filterOpen from '../../assets/images/filter-solid.svg'
+import filterOpen from '../../assets/images/filter-solid.svg';
+import emptyDatagrid from '../../assets/images/emptyDatagrid.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 /**
@@ -530,7 +531,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 <div className="datagrid-placeholder-container ng-star-inserted">
                     <div
                         className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-                        <div className="datagrid-placeholder-image ng-star-inserted"/>
+                        <div className="ng-star-inserted"/>
+                        <img src={emptyDatagrid} alt={emptyDatagrid}/>
                         No items found!
                     </div>
                 </div>
