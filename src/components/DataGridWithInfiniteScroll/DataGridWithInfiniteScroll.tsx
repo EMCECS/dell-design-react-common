@@ -16,6 +16,8 @@ import {Table} from '@dellstorage/clarity-react/tables';
 import FilterPanel from "./FilterPanel";
 import filter from "assets/images/filter.svg";
 import filterOpen from 'assets/images/filter-solid.svg'
+import emptyDatagrid from 'assets/images/emptyDatagrid.svg';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 /**
  * Enum for RowTpye :
@@ -135,6 +137,10 @@ export type DetailPaneData = {
  * @param {defaultColumnHeader} defaultColumnHeader is to set one default column to show
  * @param {filterFunction} filterFunction to get the functioning part of filter
  * @param {filterData} filterData to get data to be filtered.
+ * @param {getInfiniteScrollData} getInfiniteScrollData to get the data from function calling the infinite data
+ * @param {fetchMoreData} fetchMoreData is function prop to get next data
+ * @param {datagridBodyHeight} datagridBodyHeight is fixed height for the body of the datagrid
+
  */
 type DataGridProps = {
     className?: string;
@@ -155,6 +161,9 @@ type DataGridProps = {
     defaultColumnHeader?: any;
     filterFunction?: Function;
     filterData?: any;
+    getInfiniteScrollData? : any;
+    fetchMoreData? : any;
+    datagridBodyHeight? : any;
 }
 
 type FilterProps = {
@@ -183,6 +192,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const selectionType: any = props?.selectionType;
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
+    const getInfiniteScrollData : any = props?.getInfiniteScrollData;
+    const datagridBodyHeight : any = props?.datagridBodyHeight;
+    const fetchMoreData: any = props?.fetchMoreData;
+    const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
+    const defaultDatagridBodyHeight = 550;
     const title: any = filterProps?.title;
     const showColumnSelect: boolean = props?.showColumnSelect ? props?.showColumnSelect : false;
     const detailDataProps: any = props?.detailDataProps;
@@ -209,13 +223,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }, []);
 
     useEffect(() => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
     }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
 
@@ -227,24 +235,12 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }, []);
 
     useEffect(() => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
     }, [refParent?.current?.getClientRects()[0]?.width, refParent?.current?.clientWidth]);
 
     useEffect(() => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
     }, [refParent?.current?.getClientRects()[0]?.width]);
 
@@ -264,16 +260,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         const resolvedRef: any = ref || defaultRef;
 
         useEffect(() => {
+            returnPositionColumnSelectionPop()
             resolvedRef.current.indeterminate = indeterminate;
         }, [resolvedRef, indeterminate]);
 
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
 
         return (
             <div className="checkbox">
@@ -316,14 +307,18 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         }
     }, [rows]);
 
+    const returnPositionColumnSelectionPop = () =>{
+            if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
+                const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
+                const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
+                const transformVal =
+                    "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+                settransformVal(transformVal);
+            }
+    }
+
     const getColumnSelectionList = () => {
-        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-            const transformVal =
-                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-            settransformVal(transformVal);
-        }
+        returnPositionColumnSelectionPop()
         setOpen(!isOpen);
     }
 
@@ -542,7 +537,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 <div className="datagrid-placeholder-container ng-star-inserted">
                     <div
                         className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-                        <div className="datagrid-placeholder-image ng-star-inserted"/>
+                        <div className="ng-star-inserted"/>
+                        <img src={emptyDatagrid} alt={emptyDatagrid}/>
                         No items found!
                     </div>
                 </div>
@@ -650,6 +646,19 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                             ))}
                             </thead>
 
+                            <InfiniteScroll
+                                dataLength={rows.length}
+                                next={fetchMoreData}
+                                hasMore={!!fetchMoreData}
+                                height={datagridBodyHeight ? datagridBodyHeight : defaultDatagridBodyHeight}
+                                loader={<h5>Loading...</h5>}
+                                scrollableTarget="scrollableDiv"
+                                endMessage={
+                                    <p style={{ textAlign: 'center' }}>
+                                            <b> </b>
+                                     </p>
+                              }
+                           >
                             {allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body"}>
 
                                 {allValues.map((row:any, i:number) => {
@@ -690,6 +699,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                 (
                                     renderEmptyDatagrid()
                                 )}
+                                </InfiniteScroll>
                         </table>
                     </div>
                 </div>}
