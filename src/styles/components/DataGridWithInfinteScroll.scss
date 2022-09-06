@@ -612,15 +612,6 @@ $compact-header-height: 40px;
   }
 }
 
-.filter-table {
-  .table {
-    margin-top: 0;
-    table td{
-      height: $csg-row-height !important;
-      line-height: $csg-row-height;
-    }
-  }
-}
 .filter-pane {
   flex: 1;
   animation: expand 500ms ease-in-out;

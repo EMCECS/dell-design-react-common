@@ -46,7 +46,7 @@
  const columnsData = [
      { accessor: "ip", Header: "IP" },
      { accessor: "serial", Header: "Serial" },
-     { accessor: "model", Header: "Model" },
+     { accessor: "model", Header: "Model",disableSortBy : true},
      { accessor: "template", Header: "Template" },
      { accessor: "networking", Header: "Networking" },
      { accessor: "role", Header: "Role" },
@@ -112,7 +112,7 @@
  storiesOf("Data Grid with Infinite Scroll", module)
      .add("Basic Grid", () => (
          <div>
-             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} />
+             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData}/>
          </div>
      ))
      .add("Grid with Multiselect", () => (

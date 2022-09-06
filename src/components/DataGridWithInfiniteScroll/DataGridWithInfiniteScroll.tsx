@@ -18,6 +18,7 @@ import filter from "assets/images/filter.svg";
 import filterOpen from 'assets/images/filter-solid.svg'
 import emptyDatagrid from 'assets/images/emptyDatagrid.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
+import {Spinner,SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 
 /**
  * Enum for RowTpye :
@@ -164,6 +165,7 @@ type DataGridProps = {
     getInfiniteScrollData? : any;
     fetchMoreData? : any;
     datagridBodyHeight? : any;
+    isLoading?: boolean;
 }
 
 type FilterProps = {
@@ -190,6 +192,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const data: any = props?.rows ? props?.rows : [];
     const columns: any = props?.columns;
     const selectionType: any = props?.selectionType;
+    const isLoading: any = props?.isLoading;
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
     const getInfiniteScrollData : any = props?.getInfiniteScrollData;
@@ -398,49 +401,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         ),
         []
     );
-    const designFilterTable = () => {
-        return (
-            <div className={"table-css table-responsive filter-table"}>
-                <table className={"table"} {...getTableProps()} ref={refParent} style={props.style}>
-                    <thead>
-                    {headerGroups.map((headerGroup:any) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} className={'csg-header'}>
-                            {selectionType === GridSelectionType.MULTI &&
-                                renderMultiSelectDataGridHeader()
-                            }
-                            {selectionType === GridSelectionType.SINGLE &&
-                                <th/>
-                            }
-                            {headerGroup.headers.map((column:any) => (
-                                <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}>
-                                    {props.isSorting && renderSorting(column)}
-                                    {!props.isSorting && column.render("Header")}</th>
-                            ))}
-                        </tr>
-                    ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()} className={data.length !== 0 ? "table-body" : "empty-datagrid"}>
-                    {rows.map((row:any, i:number) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()} className={'csg-row'}>
-                                {selectionType === GridSelectionType.MULTI &&
-                                    renderMultiSelectDataGridRow(row)
-                                }
-                                {selectionType === GridSelectionType.SINGLE &&
-                                    renderSingleSelectDataGridRow(row)
-                                }
-                                {row.cells.map((cell:any) => {
-                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                })}
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
+
     const handleChangeSelect = () => {
         if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
@@ -508,26 +469,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                            onChange={handleRadioSelection}/>
                 </div>
             </th>
-        )
-    }
-
-    const renderFilter = () => {
-        return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-sm-10 col-md-10 col-lg-9">
-                        {designFilterTable()}
-                    </div>
-                    {isFilterOpen &&
-                        <div className="col-sm-2 col-md-2 col-lg-3">
-                            <div className='filter-pane'>
-                                <FilterPanel data={filterData} title="Filters" onChange={filterFunction}
-                                             onClose={() => closeFilter()}/>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
         )
     }
 
@@ -600,18 +541,21 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
 
     return (
         <div>
-            {props.isFilter && loadFilterIcon()}
-            {props.isFilter &&
-                renderFilter()
-            }
 
-            <div className='clr-row flex-container'>
+            {isLoading? (
+                    <Spinner size={SpinnerSize.SMALL} />
+                )
+               : ( <div className={props.isFilter?'':'clr-row flex-container'}>
                 {isOpen &&
                     renderColumnSelection()
                 }
+                  {props.isFilter && loadFilterIcon()}
 
-                {!props.isFilter && <div id="scrollableDiv" className="scroll-div table-css">
-                    <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12'}>
+
+               <div id="scrollableDiv" className={props.isFilter?'container-fluid':'scroll-div table-css'}>
+                    <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter?'row':'clr-col-12'}>
+                        <div className={props.isFilter? "col-sm-10 col-md-10 col-lg-9" :''}>
+                       <div className={props.isFilter? "table-css table-responsive filter-table" :''}>
                         <table {...getTableProps()} ref={refParent} style={props.style}>
                             <thead>
                             {headerGroups.map((headerGroup:any) => (
@@ -659,7 +603,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                      </p>
                               }
                            >
-                            {allValues.length !== 0 ? <tbody {...getTableBodyProps()} className={"table-body"}>
+                            {allValues.length !== 0 ?
+                                <tbody {...getTableBodyProps()} className={"table-body"}>
 
                                 {allValues.map((row:any, i:number) => {
                                     prepareRow(row);
@@ -701,8 +646,20 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                 )}
                                 </InfiniteScroll>
                         </table>
+
+                        </div>
+                        </div>
+                        {isFilterOpen &&
+                            <div className="col-sm-2 col-md-2 col-lg-3">
+                                <div className='filter-pane'>
+                                    <FilterPanel data={filterData} title="Filters" onChange={filterFunction}
+                                                 onClose={() => closeFilter()}/>
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>}
+                </div>
+
                 <div className={showDetailsPanel ? 'clr-col-4' : ''}>
                     {showDetailsPanel && showDetailData !== undefined &&
                         <div className='details-pane'>
@@ -711,6 +668,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                     }
                 </div>
             </div>
+                )
+            }
         </div>
     )
 }
