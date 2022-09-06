@@ -376,7 +376,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         )
     }
 
-    const handleSorting = (event:any) => {
+    const handleMultiSelect = (event:any) => {
         const {id, checked} = event.target;
         let tempSortValue;
         if (id === idForSorting) {
@@ -439,7 +439,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                         <input type="checkbox" id="allSelect"
                                className="dds__checkbox__input"
                                checked={allValues.filter((value:any) => value?.isChecked !== true).length < 1}
-                               onChange={handleSorting}/>
+                               onChange={handleMultiSelect}/>
                     </label>
                 </div>
             </th>
@@ -452,7 +452,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                     <label className="dds__checkbox__label" htmlFor="sm-rad">
                         <input type="checkbox" id={row.id}
                                className="dds__checkbox__input"
-                               onChange={handleSorting}
+                               onChange={handleMultiSelect}
                                checked={row?.isChecked || false}/>
                     </label>
                 </div>
