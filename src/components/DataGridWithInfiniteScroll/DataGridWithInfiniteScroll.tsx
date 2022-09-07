@@ -166,6 +166,7 @@ type DataGridProps = {
     fetchMoreData? : any;
     datagridBodyHeight? : any;
     isLoading?: boolean;
+    callbackFromParent?:Function;
 }
 
 type FilterProps = {
@@ -198,6 +199,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const getInfiniteScrollData : any = props?.getInfiniteScrollData;
     const datagridBodyHeight : any = props?.datagridBodyHeight;
     const fetchMoreData: any = props?.fetchMoreData;
+    const callbackFromParent: any = props?.callbackFromParent;
     const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
     const defaultDatagridBodyHeight = 550;
     const title: any = filterProps?.title;
@@ -377,6 +379,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }
 
     const handleMultiSelect = (event:any) => {
+        console.log(event)
         const {id, checked} = event.target;
         let tempSortValue;
         if (id === idForSorting) {
@@ -446,6 +449,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         )
     }
     const renderMultiSelectDataGridRow = (row:any) => {
+        console.log('Row',row)
         return (
             <th scope={row}>
                 <div className="dds__checkbox dds__checkbox--sm">
@@ -523,7 +527,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </div>
         )
     }
-
+    const [sortField, setSortField] = useState("");
+    const [order, setOrder] = useState("asc");
     const renderSorting=(column:any)=>{
         return(
             <div ref={refSetting} className="header-cell">
@@ -538,6 +543,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </div>
         )
     }
+const handleSortingChange= (Header:string)=>{
+      console.log(Header,"HEader");
+      return Header;
+}
 
     return (
         <div>
@@ -554,8 +563,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
 
                <div id="scrollableDiv" className={props.isFilter?'container-fluid':'scroll-div table-css'}>
                     <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter?'row':'clr-col-12'}>
-                        <div className={props.isFilter? "col-sm-10 col-md-10 col-lg-9" :''}>
-                       <div className={props.isFilter? "table-css table-responsive filter-table" :''}>
+                        <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" :'clr-col-12'}>
+                        <div className={props.isFilter? "table-css table-responsive filter-table" :''}>
                         <table {...getTableProps()} ref={refParent} style={props.style}>
                             <thead>
                             {headerGroups.map((headerGroup:any) => (
@@ -569,8 +578,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                         <th/>
                                     }
                                     {headerGroup.headers.map((column:any) => (
-
-                                        <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}>
+                                        <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
+                                            onClick={() => callbackFromParent("Child working",column)}
+                                        >
                                             {renderSorting(column)}
                                             <div
                                                 {...column.getResizerProps()}

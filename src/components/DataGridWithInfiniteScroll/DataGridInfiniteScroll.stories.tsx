@@ -9,7 +9,7 @@
  */
 
  import { storiesOf } from "@storybook/react";
- import React from "react";
+ import React,{useState} from "react";
  import DataGridWithInfiniteScroll, {
      GridSelectionType,
  } from "./DataGridWithInfiniteScroll";
@@ -24,7 +24,8 @@
  import "bootstrap/dist/css/bootstrap.css";
  import Accordion from "react-bootstrap/Accordion";
  import { DatePicker } from "@dellstorage/clarity-react/forms/datepicker/DatePicker";
- 
+
+
  const columns = [
      { accessor: "ip", Header: "IP", show: true },
      { accessor: "serial", Header: "Serial", show: true },
@@ -46,7 +47,7 @@
  const columnsData = [
      { accessor: "ip", Header: "IP" },
      { accessor: "serial", Header: "Serial" },
-     { accessor: "model", Header: "Model",disableSortBy : true},
+     { accessor: "model", Header: "Model" },
      { accessor: "template", Header: "Template" },
      { accessor: "networking", Header: "Networking" },
      { accessor: "role", Header: "Role" },
@@ -108,11 +109,14 @@
      detailPaneContentJSON: issueData.node,
      title: "namespace",
  };
- 
- storiesOf("Data Grid with Infinite Scroll", module)
+const myCallback = (dataFromChild:any) => {
+    console.log('dataFromChild --',dataFromChild)
+    //  [...we will use the dataFromChild here...]
+};
+storiesOf("Data Grid with Infinite Scroll", module)
      .add("Basic Grid", () => (
          <div>
-             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData}/>
+             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} />
          </div>
      ))
      .add("Grid with Multiselect", () => (
@@ -141,6 +145,15 @@
                  isSorting={true}
              />
          </div>
+     ))     .add("Grid with Sorting column", () => (
+         <div>
+             <DataGridWithInfiniteScroll
+                 rows={DATA.rows}
+                 columns={columnsData}
+                 isSorting={true}
+                 callbackFromParent={myCallback}
+             />
+         </div>
      ))
      .add("Grid with Filter", () => (
          <div>
@@ -149,8 +162,6 @@
                  columns={columnsData}
                  isFilter={true}
                  filterData={filterComponent()}
-                 selectionType={GridSelectionType.MULTI}
-                 isSorting={true}
                  filterFunction={(obj: any) => applyFilter(obj)}
              />
          </div>
