@@ -379,7 +379,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     }
 
     const handleMultiSelect = (event:any) => {
-        console.log(event)
         const {id, checked} = event.target;
         let tempSortValue;
         if (id === idForSorting) {
@@ -449,7 +448,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         )
     }
     const renderMultiSelectDataGridRow = (row:any) => {
-        console.log('Row',row)
         return (
             <th scope={row}>
                 <div className="dds__checkbox dds__checkbox--sm">
@@ -574,14 +572,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                     }
                                     {headerGroup.headers.map((column:any) => (
                                         <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
-
                                             onClick={(e) => {
                                                 //trigger the react-table header onClick manually
                                                 column
                                                     .getHeaderProps(column.getSortByToggleProps())
                                                     .onClick(e);
 
-                                                //Our Custom onclick functionallity to pass columnName
+                                                //Our Custom onclick functionality to pass columnName
                                                 callbackForColumnName(column);
                                             }}
                                         >

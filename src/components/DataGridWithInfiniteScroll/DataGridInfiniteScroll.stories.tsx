@@ -109,13 +109,7 @@
      title: "namespace",
  };
 const getColumnNameAndOrder = (columnData:any) => {
-    debugger;
-    console.log(columnData)
-        if(columnData.isSorted) {
-            console.log('Inside if', columnData.isSortedDesc)
-        return [columnData.Header, columnData.isSortedDesc];
-    }
-    else return '';
+    return [columnData.Header, columnData.isSortedDesc];
 };
 storiesOf("Data Grid with Infinite Scroll", module)
      .add("Basic Grid", () => (
