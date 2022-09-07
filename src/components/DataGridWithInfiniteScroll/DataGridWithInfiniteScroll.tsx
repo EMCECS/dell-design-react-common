@@ -18,7 +18,7 @@ import filter from "assets/images/filter.svg";
 import filterOpen from 'assets/images/filter-solid.svg'
 import emptyDatagrid from 'assets/images/emptyDatagrid.svg';
 import InfiniteScroll from "react-infinite-scroll-component";
-import {Spinner,SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
+import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 
 /**
  * Enum for RowTpye :
@@ -45,6 +45,7 @@ export enum GridSelectionType {
     MULTI = "multi",
     SINGLE = "single",
 }
+
 /**
  * type for DataGridRow :
  * @param {rowData} row data
@@ -162,11 +163,11 @@ type DataGridProps = {
     defaultColumnHeader?: any;
     filterFunction?: Function;
     filterData?: any;
-    getInfiniteScrollData? : any;
-    fetchMoreData? : any;
-    datagridBodyHeight? : any;
+    getInfiniteScrollData?: any;
+    fetchMoreData?: any;
+    datagridBodyHeight?: any;
     isLoading?: boolean;
-    callbackForColumnName?:Function;
+    callbackForColumnName?: Function;
 }
 
 type FilterProps = {
@@ -196,8 +197,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const isLoading: any = props?.isLoading;
     const filterData: any = props?.filterData;
     const filterFunction: any = props?.filterFunction;
-    const getInfiniteScrollData : any = props?.getInfiniteScrollData;
-    const datagridBodyHeight : any = props?.datagridBodyHeight;
+    const getInfiniteScrollData: any = props?.getInfiniteScrollData;
+    const datagridBodyHeight: any = props?.datagridBodyHeight;
     const fetchMoreData: any = props?.fetchMoreData;
     const callbackForColumnName: any = props?.callbackForColumnName;
     const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
@@ -312,14 +313,14 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         }
     }, [rows]);
 
-    const returnPositionColumnSelectionPop = () =>{
-            if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-                const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-                const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-                const transformVal =
-                    "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-                settransformVal(transformVal);
-            }
+    const returnPositionColumnSelectionPop = () => {
+        if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
+            const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
+            const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
+            const transformVal =
+                "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+            settransformVal(transformVal);
+        }
     }
 
     const getColumnSelectionList = () => {
@@ -327,7 +328,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         setOpen(!isOpen);
     }
 
-    const handleDetailsPanel = (row:any, i:number) => {
+    const handleDetailsPanel = (row: any, i: number) => {
         let detailPanelKeys = Object.keys(detailDataProps?.columnNames);
         for (let j = 0; j < detailPanelKeys.length; j++) {
             let keyValue = {
@@ -378,22 +379,22 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         )
     }
 
-    const handleMultiSelect = (event:any) => {
+    const handleMultiSelect = (event: any) => {
         const {id, checked} = event.target;
         let tempSortValue;
         if (id === idForSorting) {
-            tempSortValue = allValues.map((val:any) => {
+            tempSortValue = allValues.map((val: any) => {
                 return {...val, isChecked: checked}
             });
             setIsChecked(tempSortValue);
         } else {
-            tempSortValue = allValues.map((val:any) => val.id === id ? {...val, isChecked: checked} : val)
+            tempSortValue = allValues.map((val: any) => val.id === id ? {...val, isChecked: checked} : val)
             setIsChecked(tempSortValue);
         }
     }
-    const handleRadioSelection = (event:any) => {
+    const handleRadioSelection = (event: any) => {
         const {id, checked} = event.target;
-        return {id,checked};
+        return {id, checked};
     }
     const renderRowSubComponent = React.useCallback(
         ({row}) => (
@@ -426,8 +427,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         return (
             <div className={isFilterOpen ? 'filter-open' : 'filter-icon'} onClick={() => openFilter()}>
                 {isFilterOpen ?
-                   <img src={filterOpen} alt={filterOpen}/>
-                    :<img src={filter} alt={filter}/>
+                    <img src={filterOpen} alt={filterOpen}/>
+                    : <img src={filter} alt={filter}/>
                 }
             </div>
         )
@@ -440,14 +441,14 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                     <label className="dds__checkbox__label" htmlFor="sm-rad">
                         <input type="checkbox" id="allSelect"
                                className="dds__checkbox__input"
-                               checked={allValues.filter((value:any) => value?.isChecked !== true).length < 1}
+                               checked={allValues.filter((value: any) => value?.isChecked !== true).length < 1}
                                onChange={handleMultiSelect}/>
                     </label>
                 </div>
             </th>
         )
     }
-    const renderMultiSelectDataGridRow = (row:any) => {
+    const renderMultiSelectDataGridRow = (row: any) => {
         return (
             <th scope={row}>
                 <div className="dds__checkbox dds__checkbox--sm">
@@ -461,7 +462,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </th>
         )
     }
-    const renderSingleSelectDataGridRow = (row:any) => {
+    const renderSingleSelectDataGridRow = (row: any) => {
         return (
             <th>
                 <div className="dds__radio-button dds__radio-button--sm">
@@ -504,7 +505,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                 <div className="ColumnSelect">
                     <span className="ColumnSelect-header">Column Picker</span>
 
-                    {allColumns.map((column:any) =>
+                    {allColumns.map((column: any) =>
                         <div key={column.id}>
 
                             <label>
@@ -526,8 +527,8 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
         )
     }
 
-    const renderSorting=(column:any)=>{
-        return(
+    const renderSorting = (column: any) => {
+        return (
             <div ref={refSetting} className="header-cell">
                 {column.render("Header")}
                 <span className="">
@@ -540,145 +541,144 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </div>
         )
     }
+    const displayFilterPanel = () => {
+        return (
+            <div className="col-sm-2 col-md-2 col-lg-3">
+                <div className='filter-pane'>
+                    <FilterPanel data={filterData} title="Filters" onChange={filterFunction}
+                                 onClose={() => closeFilter()}/>
+                </div>
+            </div>
+        )
+    }
+    const displayDetailPanel = () => {
+        return (
+            <div className={showDetailsPanel ? 'clr-col-4' : ''}>
+                <div className='details-pane'>
+                    {getDetailPanel()}
+                </div>
 
+            </div>
+        )
+    }
     return (
         <div>
 
-            {isLoading? (
-                    <Spinner size={SpinnerSize.SMALL} />
+            {isLoading ?
+                (<Spinner size={SpinnerSize.SMALL}/>
                 )
-               : ( <div className={props.isFilter?'':'clr-row flex-container'}>
-                {isOpen &&
-                    renderColumnSelection()
-                }
-                  {props.isFilter && loadFilterIcon()}
+                : (<div className={props.isFilter ? '' : 'clr-row flex-container'}>
+                        {isOpen && renderColumnSelection()  }
+                        {props.isFilter && loadFilterIcon()}
+                        <div id="scrollableDiv" className={props.isFilter ? 'container-fluid' : 'scroll-div table-css'}>
+                            <div
+                                className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter ? 'row' : 'clr-col-12'}>
+                                <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : 'clr-col-12'}>
+                                    <div className={props.isFilter ? "table-css table-responsive filter-table" : ''}>
+                                        <table {...getTableProps()} ref={refParent} style={props.style}>
+                                            <thead>
+                                            {headerGroups.map((headerGroup: any) => (
+                                                <tr {...headerGroup.getHeaderGroupProps()}
+                                                    className={'csg-header'}>
+                                                    {props.expandable ? <th/> : null}
+                                                    {selectionType === GridSelectionType.MULTI &&
+                                                        renderMultiSelectDataGridHeader()
+                                                    }
+                                                    {selectionType === GridSelectionType.SINGLE &&
+                                                        <th/>
+                                                    }
+                                                    {headerGroup.headers.map((column: any) => (
+                                                        <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
+                                                            onClick={(e) => {
+                                                                if(props.isSorting) {
+                                                                    //trigger the react-table header onClick manually
+                                                                    column.getHeaderProps(column.getSortByToggleProps()).onClick(e);
 
+                                                                    //Our Custom onclick functionality to pass columnName
+                                                                    callbackForColumnName(column);
+                                                                }
+                                                            }}
+                                                        >
+                                                            {renderSorting(column)}
+                                                            <div
+                                                                {...column.getResizerProps()}
+                                                                className={`resizer ${
+                                                                    column.isResizing ? 'isResizing' : ''}`}
+                                                            />
+                                                        </th>
 
-               <div id="scrollableDiv" className={props.isFilter?'container-fluid':'scroll-div table-css'}>
-                    <div className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter?'row':'clr-col-12'}>
-                        <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" :'clr-col-12'}>
-                        <div className={props.isFilter? "table-css table-responsive filter-table" :''}>
-                        <table {...getTableProps()} ref={refParent} style={props.style}>
-                            <thead>
-                            {headerGroups.map((headerGroup:any) => (
-                                <tr {...headerGroup.getHeaderGroupProps()}
-                                    className={'csg-header'}>
-                                    {props.expandable ? <th/> : null}
-                                    {selectionType === GridSelectionType.MULTI &&
-                                        renderMultiSelectDataGridHeader()
-                                    }
-                                    {selectionType === GridSelectionType.SINGLE &&
-                                        <th/>
-                                    }
-                                    {headerGroup.headers.map((column:any) => (
-                                        <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
-                                            onClick={(e) => {
-                                                //trigger the react-table header onClick manually
-                                                column
-                                                    .getHeaderProps(column.getSortByToggleProps())
-                                                    .onClick(e);
+                                                    ))}
+                                                    {showColumnSelect &&
+                                                        <th>
+                                                            <Button link onClick={() => getColumnSelectionList()}
+                                                                    icon={{shape: "settings", className: "is-solid"}}/>
+                                                        </th>
+                                                    }
+                                                </tr>
+                                            ))}
+                                            </thead>
 
-                                                //Our Custom onclick functionality to pass columnName
-                                                callbackForColumnName(column);
-                                            }}
-                                        >
-                                            {renderSorting(column)}
-                                            <div
-                                                {...column.getResizerProps()}
-                                                className={`resizer ${
-                                                    column.isResizing ? 'isResizing' : ''}`}
-                                            />
-                                        </th>
+                                            <InfiniteScroll
+                                                dataLength={rows.length}
+                                                next={fetchMoreData}
+                                                hasMore={!!fetchMoreData}
+                                                height={datagridBodyHeight ? datagridBodyHeight : defaultDatagridBodyHeight}
+                                                loader={<h5>Loading...</h5>}
+                                                scrollableTarget="scrollableDiv"
+                                                endMessage={
+                                                    <p style={{textAlign: 'center'}}>
+                                                        <b> </b>
+                                                    </p>
+                                                }
+                                            >
+                                                {allValues.length !== 0 ?
+                                                    <tbody {...getTableBodyProps()} className={"table-body"}>
 
-                                    ))}
-                                    {showColumnSelect &&
-                                        <th>
-                                            <Button link onClick={() => getColumnSelectionList()}
-                                                    icon={{shape: "settings", className: "is-solid"}}/>
-                                        </th>
-                                    }
-                                </tr>
-                            ))}
-                            </thead>
+                                                    {allValues.map((row: any, i: number) => {
+                                                        prepareRow(row);
+                                                        return (
+                                                            <tr {...row.getRowProps()}
+                                                                onClick={() => showDetailPanel ? handleDetailsPanel(row, i) : ''}
+                                                                className={'csg-row'}>
+                                                                {selectionType === GridSelectionType.MULTI &&
+                                                                    renderMultiSelectDataGridRow(row)
+                                                                }
+                                                                {selectionType === GridSelectionType.SINGLE &&
+                                                                    renderSingleSelectDataGridRow(row)
+                                                                }
+                                                                {props.expandable ? <td className="expansion-column"
+                                                                                        {...row.getRowProps(row.getToggleRowExpandedProps())}>
+                                                                    {<div
+                                                                        className={row.isExpanded ? "expansion-icon expanded" : "expansion-icon"}>
+                                                                        <tr>
+                                                                            <td colSpan={visibleColumns.length}>
+                                                                                {renderRowSubComponent({row})}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <Icon shape={"arrow right"}/>
+                                                                    </div>}
 
-                            <InfiniteScroll
-                                dataLength={rows.length}
-                                next={fetchMoreData}
-                                hasMore={!!fetchMoreData}
-                                height={datagridBodyHeight ? datagridBodyHeight : defaultDatagridBodyHeight}
-                                loader={<h5>Loading...</h5>}
-                                scrollableTarget="scrollableDiv"
-                                endMessage={
-                                    <p style={{ textAlign: 'center' }}>
-                                            <b> </b>
-                                     </p>
-                              }
-                           >
-                            {allValues.length !== 0 ?
-                                <tbody {...getTableBodyProps()} className={"table-body"}>
-
-                                {allValues.map((row:any, i:number) => {
-                                    prepareRow(row);
-                                    return (
-                                        <tr {...row.getRowProps()}
-                                            onClick={() => showDetailPanel ? handleDetailsPanel(row, i) : ''}
-                                            className={'csg-row'}>
-                                            {selectionType === GridSelectionType.MULTI &&
-                                                renderMultiSelectDataGridRow(row)
-                                            }
-                                            {selectionType === GridSelectionType.SINGLE &&
-                                                renderSingleSelectDataGridRow(row)
-                                            }
-                                            {props.expandable ? <td className="expansion-column"
-                                                                    {...row.getRowProps(row.getToggleRowExpandedProps())}>
-                                                {<div
-                                                    className={row.isExpanded ? "expansion-icon expanded" : "expansion-icon"}>
-                                                    <tr>
-                                                        <td colSpan={visibleColumns.length}>
-                                                            {renderRowSubComponent({row})}
-                                                        </td>
-                                                    </tr>
-                                                    <Icon shape={"arrow right"}/>
-                                                </div>}
-
-                                            </td> : null}
-                                            {row.cells.map((cell:any) => {
-                                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                            })}
-                                            <td/>
-                                        </tr>
-                                    );
-                                })
-                                }
-                                </tbody>
-                                :
-                                (
-                                    renderEmptyDatagrid()
-                                )}
-                                </InfiniteScroll>
-                        </table>
-
-                        </div>
-                        </div>
-                        {isFilterOpen &&
-                            <div className="col-sm-2 col-md-2 col-lg-3">
-                                <div className='filter-pane'>
-                                    <FilterPanel data={filterData} title="Filters" onChange={filterFunction}
-                                                 onClose={() => closeFilter()}/>
+                                                                </td> : null}
+                                                                {row.cells.map((cell: any) => {
+                                                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                                                })}
+                                                                <td/>
+                                                            </tr>
+                                                        );
+                                                    })
+                                                    }
+                                                    </tbody>
+                                                    :
+                                                    (renderEmptyDatagrid())}
+                                            </InfiniteScroll>
+                                        </table>
+                                    </div>
                                 </div>
+                                {isFilterOpen && displayFilterPanel()}
                             </div>
-                        }
-                    </div>
-                </div>
-
-                <div className={showDetailsPanel ? 'clr-col-4' : ''}>
-                    {showDetailsPanel && showDetailData !== undefined &&
-                        <div className='details-pane'>
-                            {getDetailPanel()}
                         </div>
-                    }
-                </div>
-            </div>
+                        {showDetailsPanel && showDetailData !== undefined && displayDetailPanel()}
+                    </div>
                 )
             }
         </div>
