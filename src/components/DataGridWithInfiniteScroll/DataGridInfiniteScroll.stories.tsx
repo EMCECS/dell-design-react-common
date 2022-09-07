@@ -9,7 +9,6 @@
  */
 
  import { storiesOf } from "@storybook/react";
- import React,{useState} from "react";
  import DataGridWithInfiniteScroll, {
      GridSelectionType,
  } from "./DataGridWithInfiniteScroll";
@@ -109,8 +108,9 @@
      detailPaneContentJSON: issueData.node,
      title: "namespace",
  };
-const myCallback = (dataFromChild:any) => {
-    console.log('dataFromChild --',dataFromChild)
+const getColumnNameAndOrder = (columnData:any) => {
+    console.log('dataFromChild --',columnData)
+    return columnData.Header;
     //  [...we will use the dataFromChild here...]
 };
 storiesOf("Data Grid with Infinite Scroll", module)
@@ -151,7 +151,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
                  rows={DATA.rows}
                  columns={columnsData}
                  isSorting={true}
-                 callbackFromParent={myCallback}
+                 callbackForColumnName={getColumnNameAndOrder}
              />
          </div>
      ))

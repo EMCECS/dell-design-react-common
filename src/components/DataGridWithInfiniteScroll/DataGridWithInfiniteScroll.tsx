@@ -166,7 +166,7 @@ type DataGridProps = {
     fetchMoreData? : any;
     datagridBodyHeight? : any;
     isLoading?: boolean;
-    callbackFromParent?:Function;
+    callbackForColumnName?:Function;
 }
 
 type FilterProps = {
@@ -199,7 +199,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
     const getInfiniteScrollData : any = props?.getInfiniteScrollData;
     const datagridBodyHeight : any = props?.datagridBodyHeight;
     const fetchMoreData: any = props?.fetchMoreData;
-    const callbackFromParent: any = props?.callbackFromParent;
+    const callbackForColumnName: any = props?.callbackForColumnName;
     const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
     const defaultDatagridBodyHeight = 550;
     const title: any = filterProps?.title;
@@ -527,8 +527,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </div>
         )
     }
-    const [sortField, setSortField] = useState("");
-    const [order, setOrder] = useState("asc");
+
     const renderSorting=(column:any)=>{
         return(
             <div ref={refSetting} className="header-cell">
@@ -543,10 +542,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
             </div>
         )
     }
-const handleSortingChange= (Header:string)=>{
-      console.log(Header,"HEader");
-      return Header;
-}
 
     return (
         <div>
@@ -579,7 +574,7 @@ const handleSortingChange= (Header:string)=>{
                                     }
                                     {headerGroup.headers.map((column:any) => (
                                         <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
-                                            onClick={() => callbackFromParent("Child working",column)}
+                                            onClick={() => callbackForColumnName(column)}
                                         >
                                             {renderSorting(column)}
                                             <div
