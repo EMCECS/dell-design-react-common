@@ -574,7 +574,16 @@ const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterPro
                                     }
                                     {headerGroup.headers.map((column:any) => (
                                         <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
-                                            onClick={() => callbackForColumnName(column)}
+
+                                            onClick={(e) => {
+                                                //trigger the react-table header onClick manually
+                                                column
+                                                    .getHeaderProps(column.getSortByToggleProps())
+                                                    .onClick(e);
+
+                                                //Our Custom onclick functionallity to pass columnName
+                                                callbackForColumnName(column);
+                                            }}
                                         >
                                             {renderSorting(column)}
                                             <div

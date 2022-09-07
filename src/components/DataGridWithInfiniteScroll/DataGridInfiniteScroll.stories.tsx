@@ -109,9 +109,13 @@
      title: "namespace",
  };
 const getColumnNameAndOrder = (columnData:any) => {
-    console.log('dataFromChild --',columnData)
-    return columnData.Header;
-    //  [...we will use the dataFromChild here...]
+    debugger;
+    console.log(columnData)
+        if(columnData.isSorted) {
+            console.log('Inside if', columnData.isSortedDesc)
+        return [columnData.Header, columnData.isSortedDesc];
+    }
+    else return '';
 };
 storiesOf("Data Grid with Infinite Scroll", module)
      .add("Basic Grid", () => (
@@ -145,7 +149,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
                  isSorting={true}
              />
          </div>
-     ))     .add("Grid with Sorting column", () => (
+     )).add("Grid with Sorting column", () => (
          <div>
              <DataGridWithInfiniteScroll
                  rows={DATA.rows}
