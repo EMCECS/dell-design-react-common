@@ -208,13 +208,12 @@ $compact-header-height: 40px;
 .table-css{
   .table {
     border-color: #E4E4E4;
+        width: 100%;
   }
   table {
     border: solid 1px #E4E4E4;
+    width: 100%;
   }
-  //  display: inline-block;
-  //  overflow-y: scroll;
-  //  max-height: 1200px;
 }
 
 .detailPanelCSS{

@@ -14,9 +14,9 @@
     "react": "^17.0.2",
     "react-bootstrap": "2.1.2",
     "react-data-table-component": "^7.5.2",
+    "react-dom": "17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-infinite-scroll-hook": "^4.0.3",
-    "react-dom": "17.0.2",
     "react-table": "7.7.0",
     "sb": "^6.3.8",
     "styled-components": "^5.3.5",
@@ -90,6 +90,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.15.4",
+    "@faker-js/faker": "^7.5.0",
     "@sambego/storybook-state": "^2.0.1",
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",
@@ -103,6 +104,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
+    "@types/react": "17.0.14",
+    "@types/react-dom": "17.0.14",
+    "@types/react-table": "7.7.9",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "@webpack-cli/generators": "^2.4.1",
@@ -147,14 +151,11 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.0.0",
-    "webpack-dev-server": "^4.6.0",
-    "@types/react": "17.0.14",
-    "@types/react-dom": "17.0.14",
-    "@types/react-table": "7.7.9"
+    "webpack-dev-server": "^4.6.0"
   },
   "resolutions": {
     "@types/react": "17.0.14"
-    },
+  },
   "jest": {
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"

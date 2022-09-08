@@ -98,7 +98,7 @@ const detailColumnName = {
 
 const detailDataProps = {
     columnNames: detailColumnName,
-    detailPaneContentJSON: issueData.node,
+    detailPaneContentJSON: issueData,
     title: "namespace",
 };
 const getColumnNameAndOrder = (columnData: any) => {
@@ -163,7 +163,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Column Hide/Show", () => (
         <div>
             <DataGridWithInfiniteScroll
-                rows={DETAILDATA.data}
+                rows={DETAILDATA}
                 columns={detailColumns}
                 showColumnSelect={true}
                 defaultColumnHeader={"Status"}
@@ -173,7 +173,7 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Grid with Detail Panel", () => (
         <div>
             <DataGridWithInfiniteScroll
-                rows={DETAILDATA.data}
+                rows={DETAILDATA}
                 columns={detailColumns}
                 showDetailPanel={true}
                 detailDataProps={detailDataProps}
