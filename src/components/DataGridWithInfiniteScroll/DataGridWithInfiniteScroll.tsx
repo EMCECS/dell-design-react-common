@@ -7,18 +7,27 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
+
  import {Button} from "@dellstorage/clarity-react/forms/button";
  import {Icon} from "@dellstorage/clarity-react/icon/Icon";
  import React, {forwardRef, useEffect, useRef, useState} from "react";
- import {useBlockLayout, useExpanded, useFilters, useResizeColumns, useSortBy, useTable} from "react-table";
+ import {Cell, HeaderGroup, Row, useBlockLayout, useResizeColumns, useSortBy, useTable,} from "react-table";
  import {Card, CardBlock, CardTitle} from '@dellstorage/clarity-react/cards'
  import {Table} from '@dellstorage/clarity-react/tables';
- import FilterPanel from "./FilterPanel";
+ import FilterPanel from "components/DataGridWithInfiniteScroll/FilterPanel";
  import filter from "assets/images/filter.svg";
  import filterOpen from 'assets/images/filter-solid.svg'
  import emptyDatagrid from 'assets/images/emptyDatagrid.svg';
  import InfiniteScroll from "react-infinite-scroll-component";
  import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
+ import {Constants} from 'components/DataGridWithInfiniteScroll/Constants';
+ 
+ 
+ /**
+  * General component description :
+  * DataGridWithInfiniteScroll :
+  * Datagrids are for organizing large volumes of data that users can perform actions on.
+  */
  
  /**
   * Enum for RowTpye :
@@ -42,8 +51,7 @@
   * @param {SINGLE} for enabling single row select
   */
  export enum GridSelectionType {
-     MULTI = "multi",
-     SINGLE = "single",
+     MULTI = "multi", SINGLE = "single",
  }
  
  /**
@@ -57,12 +65,8 @@
   */
  
  export type DataGridRow = {
-     className?: string;
-     style?: any;
-     rowID?: number; // not to take from user
-     isSelected?: boolean;
-     disableRowSelection?: boolean;
-     expandableRowData?: ExpandableRowDetails;
+     className?: string; style?: any; rowID?: number; // not to take from user
+     isSelected?: boolean; disableRowSelection?: boolean; expandableRowData?: ExpandableRowDetails;
  };
  /**
   * type for datagrid expandable row data :
@@ -74,12 +78,7 @@
   * @param {hideRowExpandIcon} if true then hide icon for expandable row
   */
  export type ExpandableRowDetails = {
-     isLoading?: boolean;
-     onRowExpand?: (row: DataGridRow) => Promise<any>;
-     onRowContract?: (row: DataGridRow) => void;
-     expandableContent?: any;
-     isExpanded?: boolean;
-     hideRowExpandIcon?: boolean;
+     isLoading?: boolean; onRowExpand?: (row: DataGridRow) => Promise<any>; onRowContract?: (row: DataGridRow) => void; expandableContent?: any; isExpanded?: boolean; hideRowExpandIcon?: boolean;
  };
  
  /**
@@ -89,9 +88,7 @@
   * @param {NONE} no sorting
   */
  export enum SortOrder {
-     DESC = "descending",
-     ASC = "ascending ",
-     NONE = "none",
+     DESC = "descending", ASC = "ascending ", NONE = "none",
  }
  
  /**
@@ -102,10 +99,7 @@
   * @param {hideSort} if true hides sort
   */
  export type DataGridSort = {
-     defaultSortOrder: SortOrder;
-     sortFunction: (rows: DataGridRow[], order: SortOrder, columnName: string) => Promise<DataGridRow[]>;
-     isSorted?: boolean;
-     hideSort?: boolean;
+     defaultSortOrder: SortOrder; sortFunction: (rows: DataGridRow[], order: SortOrder, columnName: string) => Promise<DataGridRow[]>; isSorted?: boolean; hideSort?: boolean;
  };
  
  /**
@@ -115,9 +109,7 @@
   * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON
   */
  export type DetailPaneData = {
-     title?: any;
-     columnNames?: any;
-     detailPaneContentJSON: any;
+     title?: any; columnNames?: any; detailPaneContentJSON: any;
  };
  
  /**
@@ -127,82 +119,37 @@
   * @param {rows} rows data
   * @param {columns} column details
   * @param {selectionType} row selection type that is multi or single
-  * @param {pagination} pagination support
   * @param {rowType} Expandable or compact row type
-  * @param {isSorting} sorting true or false
-  * @param {isFilter} filtering true or false
-  * @param {pagination} pagination support
-  * @param {showColumnSelect} showColumnSelect is boolean value for column selection flag
-  * @param {detailDataProps} detailDataProps is to get the detail panel data of type DetailPaneData
+  * @param {isSorting} if true, sorting on datagrid will appear else not
+  * @param {isFilter} if true, Filter panel will appear else not
+  * @param {showColumnSelect} showColumnSelect is boolean value if true,column can be show or hide
+  * @param {detailDataProps} detailDataProps is to get the data for detail panel in key value format
   * @param {detailPaneContent} detailPaneContent is to display funtion in detail panel instean of key value
-  * @param {showDetailPanel} showDetailPanel is to display detail panel
-  * @param {defaultColumnHeader} defaultColumnHeader is to set one default column to show
-  * @param {filterFunction} filterFunction to get the functioning part of filter
-  * @param {filterData} filterData to get data to be filtered.
+  * @param {showDetailPanel} if true, detail panel on datagrid will appear else not
+  * @param {defaultColumnHeader} defaultColumnHeader is to set one default column on Column Show Hide functionality to show that column on DataGrid
+  * @param {filterData} filterData is set of html components which can be shown in Filter Panel.
   * @param {getInfiniteScrollData} getInfiniteScrollData to get the data from function calling the infinite data
-  * @param {fetchMoreData} fetchMoreData is function prop to get next data
-  * @param {datagridBodyHeight} datagridBodyHeight is fixed height for the body of the datagrid
+  * @param {fetchMoreData} fetchMoreData will fetch next set of record in Infinite Scroll once user is end of the page
+  * @param {datagridBodyHeight}  is fixed height for the body of the datagrid
+  * @param {isLoading} if true then show loading icon for expandable row
+  * @param {callbackForColumnName} callback function to send columnName which user had clicked for sorting
+ 
   */
  type DataGridProps = {
-     className?: string;
-     style?: any;
-     id?: string;
-     rows?: { [key: string]: any };
-     columns: { [key: string]: any };
-     selectionType?: GridSelectionType;
-     rowType?: GridRowType;
-     isSorting?: boolean;
-     isFilter?: boolean;
-     expandable?: boolean;
-     pagination?: boolean;
-     showColumnSelect?: boolean;
-     detailDataProps?: DetailPaneData;
-     detailPaneContent?: any;
-     showDetailPanel?: boolean;
-     defaultColumnHeader?: any;
-     filterFunction?: Function;
-     filterData?: any;
-     getInfiniteScrollData?: any;
-     fetchMoreData?: any;
-     datagridBodyHeight?: any;
-     isLoading?: boolean;
-     callbackForColumnName?: Function;
+     className?: string; style?: any; id?: string; rows?: { [key: string]: any }; columns: { [key: string]: any }; selectionType?: GridSelectionType; rowType?: GridRowType; isSorting?: boolean; isFilter?: boolean; expandable?: boolean; showColumnSelect?: boolean; detailDataProps?: DetailPaneData; detailPaneContent?: any; showDetailPanel?: boolean; defaultColumnHeader?: any; filterData?: any; getInfiniteScrollData?: any; fetchMoreData?: any; datagridBodyHeight?: any; isLoading?: boolean; callbackForColumnName?: Function;
  }
  
- type FilterProps = {
-     title?: string;
-     children?: Function
- }
- 
- export type DataGridColumn = {
-     columnName: string;
-     displayName?: any;
-     tooltip?: any;
-     columnID?: number; // For internal use
-     className?: string;
-     style?: any;
-     filter?: React.ReactNode;
-     isVisible?: boolean;
-     width?: number;
-     sort?: DataGridSort;
- };
- 
- const idForSorting = 'allSelect';
- 
- const DataGridWithInfiniteScroll = (props: DataGridProps, filterProps: FilterProps) => {
+ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
      const data: any = props?.rows ? props?.rows : [];
      const columns: any = props?.columns;
      const selectionType: any = props?.selectionType;
      const isLoading: any = props?.isLoading;
      const filterData: any = props?.filterData;
-     const filterFunction: any = props?.filterFunction;
      const getInfiniteScrollData: any = props?.getInfiniteScrollData;
      const datagridBodyHeight: any = props?.datagridBodyHeight;
      const fetchMoreData: any = props?.fetchMoreData;
      const callbackForColumnName: any = props?.callbackForColumnName;
      const [infiniteScrollData, setinfiniteScrollData] = useState(getInfiniteScrollData);
-     const defaultDatagridBodyHeight = 550;
-     const title: any = filterProps?.title;
      const showColumnSelect: boolean = props?.showColumnSelect ? props?.showColumnSelect : false;
      const detailDataProps: any = props?.detailDataProps;
      const defaultColumnHeader: any = props?.defaultColumnHeader;
@@ -237,8 +184,6 @@
  
      }, [refParent?.current?.getClientRects()[0]?.width]);
  
- 
- 
      /**
       * This funtion is to get the Reset Setting for column selection, which shows all the columns
       */
@@ -252,55 +197,50 @@
          }, [resolvedRef, indeterminate]);
  
          returnPositionColumnSelectionDropdown()
- 
-         return (
-             <div className="checkbox">
+         return (<div className="checkbox">
                  <label>
                      <input type="checkbox" className="input-assumpte" ref={resolvedRef} {...rest} />
-                     <span className="reset-button">Reset Settings</span>
+                     <span className="reset-button">{Constants.RESET_SETTINGS}</span>
                  </label>
-             </div>
-         );
+             </div>);
      });
  
+     /**
+      * @param {getTableProps} is a function to resolve any props needed by the react table wrapper.
+      * @param {getTableBodyProps } to render table body of react table
+      * @param {headerGroups } return headers which is going to be the headers of the table
+      * @param {rows} display rows of the datagrid
+      * @param {allColumns} display all columns of the datagrid
+      * @param {prepareRow} is a function that must be called on any row to be displayed. It is responsible for preparing a row for rendering.
+      * @param {getToggleHideAllColumnsProps} If datagrid have hide show column functionality
+      * @param {useSortBy} to add sorting functionality on datagrid
+      * @param {useResizeColumns} this is default functionality of react table to provide column resize
+      * @param {useTable } hook takes options and plugins to build a table instance. The basic options are columns and row data.
+      * @param {useBlockLayout }is a react-table plugin hook that adds support for headers and cells to be rendered as inline-block divs (or other non-table elements) with explicit width.
+      * @param {getSortByToggleProps } getSortByToggleProps() is a function that resolves any props needed while toggling the sort direction.
+      */
      const {
-         getTableProps, // table props from react-table
-         getTableBodyProps, // table body props from react-table
-         headerGroups, // headerGroups, if your table has groupings
-         rows, // rows for the table based on the data passed
-         prepareRow, // The useFilter Hook provides a way to set the filter
-         allColumns, // Get all columns of the datagrid
-         visibleColumns,
-         getToggleHideAllColumnsProps,
+         getTableProps, getTableBodyProps, headerGroups, rows, allColumns, prepareRow, getToggleHideAllColumnsProps,
      } = useTable({
-             columns,
-             data,
-         },
-         useFilters, // Adding the useFilters Hook to the table
-         useSortBy, // Adding for sorting to the table
-         useExpanded,
-         useBlockLayout,
-         useResizeColumns
-     );
+         columns, data,
+     }, useSortBy, useBlockLayout, useResizeColumns);
+ 
      const [allValues, setIsChecked] = useState<any>([]);
- 
- 
      useEffect(() => {
          if (rows.length !== 0) {
              setIsChecked(rows);
          }
      }, [rows]);
-
+ 
      /**
       * returnPositionColumnSelectionDropdown function
       * This function returns the positions of the column selection dropdown as the table size varies (columns hidden/shown)
       */
      const returnPositionColumnSelectionDropdown = () => {
          if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 180;
-             const transformVal =
-                 "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
+             const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + Constants.COLUMN_SELECTION_MENU_TOP;
+             const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - Constants.COLUMN_SELECTION_MENU_LEFT;
+             const transformVal = "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
              settransformVal(transformVal);
          }
      }
@@ -314,7 +254,7 @@
          setOpen(!isOpen);
      }
  
-      /**
+     /**
       * handleDetailsPanel function
       * This function returns the details for detail panel content
       */
@@ -338,48 +278,40 @@
       */
      const getDetailPanel = () => {
          const detailPaneContent = props.detailPaneContent;
-         return (
-             <Card className='details-card'>
+         return (<Card className='details-card'>
                  <CardTitle>
                      <div className='title-container'>
                          <h2 className='title'>{showDetailPanelTitle}</h2>
                      </div>
                  </CardTitle>
                  <CardBlock>
-                     {detailPaneContent ? detailPaneContent() :
-                         <Table isNonBordered className='borderless-table'>
- 
-                             <tbody>
-                             {showDetailData?.map((item: any) => (
-                                 <tr key={item.key}>
-                                     <td>{item.key}</td>
-                                     <td className="value-width">{item.value}</td>
-                                 </tr>
-                             ))}
-                             </tbody>
- 
-                         </Table>
-                     }
+                     {detailPaneContent ? detailPaneContent() : <Table isNonBordered className='borderless-table'>
+                         <tbody>
+                         {showDetailData?.map((item: any) => (<tr key={item.key}>
+                                 <td>{item.key}</td>
+                                 <td className="value-width">{item.value}</td>
+                             </tr>))}
+                         </tbody>
+                     </Table>}
                      <Button
                          primary
                          className='medium-button'
                          onClick={() => setShowDetailsPanel(false)}
                      >
-                         {"Close"}
+                         {Constants.CLOSE}
                      </Button>
                  </CardBlock>
-             </Card>
-         )
+             </Card>)
      }
  
-    /**
-     * handleMultiSelect function is to handle the multi select functionality
-     * 
-     */    
+     /**
+      * handleMultiSelect function is to handle the multi select functionality
+      *
+      */
      const handleMultiSelect = (event: any) => {
          const {id, checked} = event.target;
          let tempSortValue;
-         if (id === idForSorting) {
+         if (id === Constants.ID_FOR_SORTING) {
              tempSortValue = allValues.map((val: any) => {
                  return {...val, isChecked: checked}
              });
@@ -389,42 +321,29 @@
              setIsChecked(tempSortValue);
          }
      }
-
+ 
      /**
-     * This function is to handle the single select functionality
-     * 
-     */    
-     const handleRadioSelection = (event: any) => {
-         const {id, checked} = event.target;
-         return {id, checked};
+      * This function is to handle the single select functionality
+      *
+      */
+     const handleRadioSelection = (value: Row) => {
+         return value;
      }
-     const renderRowSubComponent = React.useCallback(
-         ({row}) => (
-             <h3>
-                 Row Sub Component is working
-             </h3>
-         ),
-         []
-     );
+ 
  
      /**
       *  handleColumnSelectionChange function is to position the column selection dropdown after selecting/deselecting the column
       */
      const handleColumnSelectionChange = () => {
-        returnPositionColumnSelectionDropdown()
-        //  if (refParent.current !== null && refParent.current !== undefined && refChild.current !== undefined && refChild.current !== null) {
-        //      const HideShowColumnsMenuTop = refParent.current.getClientRects()[0].top + 50;
-        //      const HideShowColumnsMenuLeft = refParent.current.getClientRects()[0].width - 215;
-        //      const transformVal =
-        //          "translateX(" + HideShowColumnsMenuLeft + "px) " + "translateY(" + HideShowColumnsMenuTop + "px)";
-        //      settransformVal(transformVal);
-        //  }
- 
+         returnPositionColumnSelectionDropdown()
      }
  
+     /*Function to close Filter Panel*/
      const closeFilter = () => {
          setIsFilterOpen(false);
      }
+ 
+     /* Function to Open Filter Panel*/
      const openFilter = () => {
          setIsFilterOpen(true);
      }
@@ -433,284 +352,217 @@
       * This function returns the filter icon on the top to open the filter panel
       */
      const loadFilterIcon = () => {
-         return (
-             <div className={isFilterOpen ? 'filter-open' : 'filter-icon'} onClick={() => openFilter()}>
-                 {isFilterOpen ?
-                     <img src={filterOpen} alt={filterOpen}/>
-                     : <img src={filter} alt={filter}/>
-                 }
-             </div>
-         )
+         return (<div className={isFilterOpen ? 'filter-open' : 'filter-icon'} onClick={() => openFilter()}>
+                 {isFilterOpen ? <img src={filterOpen} alt={filterOpen}/> : <img src={filter} alt={filter}/>}
+             </div>)
      }
  
-
+     /*Function to display multiselect Header*/
      const renderMultiSelectDataGridHeader = () => {
-         return (
-             <th scope="col">
-                 <div className="dds__checkbox dds__checkbox--sm">
-                     <label className="dds__checkbox__label" htmlFor="sm-rad">
+         return (<th scope="col">
+                 <div>
+                     <label>
                          <input type="checkbox" id="allSelect"
-                                className="dds__checkbox__input"
                                 checked={allValues.filter((value: any) => value?.isChecked !== true).length < 1}
                                 onChange={handleMultiSelect}/>
                      </label>
                  </div>
-             </th>
-         )
+             </th>)
      }
-
+ 
+     /*Function to display multiselect rows*/
      const renderMultiSelectDataGridRow = (row: any) => {
-         return (
-             <th scope={row}>
-                 <div className="dds__checkbox dds__checkbox--sm">
-                     <label className="dds__checkbox__label" htmlFor="sm-rad">
+         return (<th scope={row}>
+                 <div>
+                     <label>
                          <input type="checkbox" id={row.id}
-                                className="dds__checkbox__input"
                                 onChange={handleMultiSelect}
                                 checked={row?.isChecked || false}/>
                      </label>
                  </div>
-             </th>
-         )
+             </th>)
      }
+ 
+     /*Function to render Single Select Row*/
      const renderSingleSelectDataGridRow = (row: any) => {
-         return (
-             <th>
-                 <div className="dds__radio-button dds__radio-button--sm">
-                     <input className="dds__radio-button__input" type="radio"
-                            name="name-650298779"
-                            id="radio-button-control-426423994" value={row}
-                            onChange={handleRadioSelection}/>
+         return (<th>
+                 <div>
+                     <input type="radio"
+                            name="radio-group"
+                            id="radio-button-control" value={row}
+                            onClick={() => handleRadioSelection(row)}
+                     />
                  </div>
-             </th>
-         )
+             </th>)
      }
  
      /**
       * renderEmptyDatagrid function returns the empty datagrid message and images in the table body
-      * 
+      *
       */
      const renderEmptyDatagrid = () => {
-         return (
-             <div className="empty-datagrid-style">
-                 <div className="datagrid-placeholder-container ng-star-inserted">
+         return (<div className="empty-datagrid-style">
+                 <div className="datagrid-placeholder-container">
                      <div
                          className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-                         <div className="ng-star-inserted"/>
+                         <div/>
                          <img src={emptyDatagrid} alt={emptyDatagrid}/>
-                         No items found!
+                         {Constants.EMPTY_DATA_GRID_NO_ITEMS_FOUND}
                      </div>
                  </div>
-             </div>
-         )
+             </div>)
      }
  
      /**
-      * renderColumnSelection function returns the column selection 
+      * renderColumnSelection function returns the column selection
       */
      const renderColumnSelection = () => {
-         return (
-             <div className="column-switch clr-popover-content"
-                  ref={refChild}
-                  role="dialog"
-                  style={{
-                      top: 0,
-                      bottom: "auto",
-                      right: "auto",
-                      left: 0,
-                      transform: transformVal,
-                  }}>
+         return (<div className="column-switch clr-popover-content"
+                      ref={refChild}
+                      role="dialog"
+                      style={{
+                          top: 0, bottom: "auto", right: "auto", left: 0, transform: transformVal,
+                      }}>
                  <div className="ColumnSelect">
-                     <span className="ColumnSelect-header">Column Picker</span>
+                     <span className="ColumnSelect-header">{Constants.COLUMN_PICKER}</span>
  
-                     {allColumns.map((column: any) =>
-                         <div key={column.id}>
- 
-                             <label>
-                                 {column.Header !== defaultColumnHeader &&
-                                     <><input type='checkbox' onClick={handleColumnSelectionChange}
-                                              id="allColumnSelect" {...column.getToggleHiddenProps()} />
-                                         <span className="ColumnSelect-header-names">{column.Header}
-                           </span></>
-                                 }
-                             </label>
- 
-                         </div>
-                     )}
+                     {allColumns.map((column: any) => <div key={column.id}>
+                         <label>
+                             {column.Header !== defaultColumnHeader && <><input type='checkbox'
+                                                                                onClick={handleColumnSelectionChange}
+                                                                                id="allColumnSelect" {...column.getToggleHiddenProps()} />
+                                 <span className="ColumnSelect-header-names">{column.Header}
+                           </span></>}
+                         </label>
+                     </div>)}
                  </div>
                  <div className="ColumnSelect-reset-button">
                      <IndeterminateCheckbox {...getToggleHideAllColumnsProps()} />
                  </div>
-             </div>
-         )
+             </div>)
      }
  
      /**
-      * renderSorting returns the sorting icon on the column where sorting is called. 
+      * renderSorting returns the sorting icon on the column where sorting is called.
       */
      const renderSorting = (column: any) => {
-         return (
-             <div ref={refSetting} className="header-cell">
+         return (<div ref={refSetting} className="header-cell">
                  {column.render("Header")}
                  <span className="">
-                   {column.isSorted
-                       ? column.isSortedDesc ?
-                           <div className=""><Icon shape={"arrow down"}/></div> :
-                           <Icon shape={"arrow up"}/> : ''
-                   }
+                   {column.isSorted ? column.isSortedDesc ? <div className=""><Icon shape={"arrow down"}/></div> :
+                       <Icon shape={"arrow up"}/> : ''}
                </span>
-             </div>
-         )
+             </div>)
      }
-
+ 
      /**
       * This function is to return the filter panel when clicked on filter icon
       */
      const displayFilterPanel = () => {
-         return (
-             <div className="col-sm-2 col-md-2 col-lg-3">
+         return (<div className="col-sm-2 col-md-2 col-lg-3">
                  <div className='filter-pane'>
-                     <FilterPanel data={filterData} title="Filters" onChange={filterFunction}
+                     <FilterPanel data={filterData} title="Filters"
                                   onClose={() => closeFilter()}/>
                  </div>
-             </div>
-         )
+             </div>)
      }
-
+ 
      /**
       * This function is to return detail panel
       */
      const displayDetailPanel = () => {
-         return (
-             <div className={showDetailsPanel ? 'clr-col-4' : ''}>
+         return (<div className={showDetailsPanel ? 'clr-col-4' : ''}>
                  <div className='details-pane'>
                      {getDetailPanel()}
                  </div>
- 
-             </div>
-         )
+             </div>)
      }
-     return (
-         <div>
  
-             {isLoading ?
-                 (<Spinner size={SpinnerSize.SMALL}/>
-                 )
-                 : (<div className={props.isFilter ? '' : 'clr-row flex-container'}>
-                         {isOpen && renderColumnSelection()  }
-                         {props.isFilter && loadFilterIcon()}
-                         <div id="scrollableDiv" className={props.isFilter ? 'container-fluid' : 'scroll-div table-css'}>
-                             <div
-                                 className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter ? 'row' : 'clr-col-12'}>
-                                 <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : 'clr-col-12'}>
-                                     <div className={props.isFilter ? "table-css table-responsive filter-table" : 'table-css'}>
-                                         <table {...getTableProps()} className={'table-width'} ref={refParent} style={props.style}>
-                                             <thead>
-                                             {headerGroups.map((headerGroup: any) => (
-                                                 <tr {...headerGroup.getHeaderGroupProps()}
-                                                     className={'csg-header'}>
-                                                     {props.expandable ? <th/> : null}
-                                                     {selectionType === GridSelectionType.MULTI &&
-                                                         renderMultiSelectDataGridHeader()
-                                                     }
-                                                     {selectionType === GridSelectionType.SINGLE &&
-                                                         <th/>
-                                                     }
-                                                     {headerGroup.headers.map((column: any) => (
-                                                         <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
-                                                             onClick={(e) => {
-                                                                 if(props.isSorting) {
-                                                                     //trigger the react-table header onClick manually
-                                                                     column.getHeaderProps(column.getSortByToggleProps()).onClick(e);
  
-                                                                     //Our Custom onclick functionality to pass columnName
-                                                                     callbackForColumnName(column);
-                                                                 }
-                                                             }}
-                                                         >
-                                                             {renderSorting(column)}
-                                                             <div
-                                                                 {...column.getResizerProps()}
-                                                                 className={`resizer ${
-                                                                     column.isResizing ? 'isResizing' : ''}`}
-                                                             />
-                                                         </th>
+     return (<div>
+             {isLoading ? (<Spinner size={SpinnerSize.SMALL}/>) : (
+                 <div className={props.isFilter ? '' : 'clr-row flex-container'}>
+                     {isOpen && renderColumnSelection()}
+                     {props.isFilter && loadFilterIcon()}
+                     <div id="scrollableDiv" className={props.isFilter ? 'container-fluid' : 'scroll-div table-css'}>
+                         <div
+                             className={showDetailsPanel && showDetailPanel ? "detailPanelCSS" : 'clr-col-12' || props.isFilter ? 'row' : 'clr-col-12'}>
+                             <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : 'clr-col-12'}>
+                                 <div className={props.isFilter ? "table-css table-responsive filter-table" : ''}>
+                                     <table {...getTableProps()} ref={refParent} style={props.style}>
+                                         <thead>
  
-                                                     ))}
-                                                     {showColumnSelect &&
-                                                         <th>
-                                                             <Button link onClick={() => getColumnSelectionList()}
-                                                                     icon={{shape: "settings", className: "is-solid"}}/>
-                                                         </th>
-                                                     }
-                                                 </tr>
-                                             ))}
-                                             </thead>
+                                         {headerGroups.map((headerGroup: HeaderGroup) => (
+                                             <tr {...headerGroup.getHeaderGroupProps()}
+                                                 className={'csg-header'}>
+                                                 {props.expandable ? <th/> : null}
+                                                 {selectionType === GridSelectionType.MULTI && renderMultiSelectDataGridHeader()}
+                                                 {selectionType === GridSelectionType.SINGLE && <th/>}
+                                                 {headerGroup.headers.map((column: any) => (
+                                                     <th {...column.getHeaderProps(props.isSorting ? column.getSortByToggleProps() : "")}
+                                                         onClick={(e) => {
+                                                             if (props.isSorting) {
+                                                                 //trigger the react-table header onClick manually
+                                                                 column.getHeaderProps(column.getSortByToggleProps()).onClick(e);
  
-                                             <InfiniteScroll
-                                                 dataLength={rows.length}
-                                                 next={fetchMoreData}
-                                                 hasMore={!!fetchMoreData}
-                                                 height={datagridBodyHeight ? datagridBodyHeight : defaultDatagridBodyHeight}
-                                                 loader={<h5>Loading...</h5>}
-                                                 scrollableTarget="scrollableDiv"
-                                                 endMessage={
-                                                     <p style={{textAlign: 'center'}}>
-                                                         <b> </b>
-                                                     </p>
-                                                 }
-                                             >
-                                                 {allValues.length !== 0 ?
-                                                     <tbody {...getTableBodyProps()} className={"table-body"}>
+                                                                 //Our Custom onclick functionality to pass columnName
+                                                                 callbackForColumnName(column);
+                                                             }
+                                                         }}
+                                                     >
+                                                         {renderSorting(column)}
+                                                         <div
+                                                             {...column.getResizerProps()}
+                                                             className={`resizer ${column.isResizing ? 'isResizing' : ''}`}
+                                                         />
+                                                     </th>
  
-                                                     {allValues.map((row: any, i: number) => {
-                                                         prepareRow(row);
-                                                         return (
-                                                             <tr {...row.getRowProps()}
+                                                 ))}
+                                                 {showColumnSelect && <th>
+                                                     <Button link onClick={() => getColumnSelectionList()}
+                                                             icon={{shape: "settings", className: "is-solid"}}/>
+                                                 </th>}
+                                             </tr>))}
+                                         </thead>
+ 
+                                         <InfiniteScroll
+                                             dataLength={rows.length}
+                                             next={fetchMoreData}
+                                             hasMore={!!fetchMoreData}
+                                             height={datagridBodyHeight ? datagridBodyHeight : Constants.DEFAULT_DATAGRID_BODY_HEIGHT}
+                                             loader={<h5>{Constants.LOADING_INFINITE_SCROLL}</h5>}
+                                             scrollableTarget="scrollableDiv"
+                                             endMessage={<p className={"infinite-scroll-end-message"}>
+                                                 <b> </b>
+                                             </p>}
+                                         >
+                                             {allValues.length !== 0 ?
+                                                 <tbody {...getTableBodyProps()} className={"table-body"}>
+ 
+                                                 {allValues.map((row: Row, i: number) => {
+                                                     prepareRow(row); // This line is necessary to prepare the rows and get the row props from react-table dynamically
+                                                     return (<tr {...row.getRowProps()}
                                                                  onClick={() => showDetailPanel ? handleDetailsPanel(row, i) : ''}
                                                                  className={'csg-row'}>
-                                                                 {selectionType === GridSelectionType.MULTI &&
-                                                                     renderMultiSelectDataGridRow(row)
-                                                                 }
-                                                                 {selectionType === GridSelectionType.SINGLE &&
-                                                                     renderSingleSelectDataGridRow(row)
-                                                                 }
-                                                                 {props.expandable ? <td className="expansion-column"
-                                                                                         {...row.getRowProps(row.getToggleRowExpandedProps())}>
-                                                                     {<div
-                                                                         className={row.isExpanded ? "expansion-icon expanded" : "expansion-icon"}>
-                                                                         <tr>
-                                                                             <td colSpan={visibleColumns.length}>
-                                                                                 {renderRowSubComponent({row})}
-                                                                             </td>
-                                                                         </tr>
-                                                                         <Icon shape={"arrow right"}/>
-                                                                     </div>}
- 
-                                                                 </td> : null}
-                                                                 {row.cells.map((cell: any) => {
-                                                                     return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                                                 })}
-                                                                 <td/>
-                                                             </tr>
-                                                         );
-                                                     })
-                                                     }
-                                                     </tbody>
-                                                     :
-                                                     (renderEmptyDatagrid())}
-                                             </InfiniteScroll>
-                                         </table>
-                                     </div>
+                                                             {selectionType === GridSelectionType.MULTI && renderMultiSelectDataGridRow(row)}
+                                                             {selectionType === GridSelectionType.SINGLE && renderSingleSelectDataGridRow(row)}
+                                                             {row.cells.map((cell: Cell) => {
+                                                                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                                             })}
+                                                             <td/>
+                                                         </tr>);
+                                                 })}
+                                                 </tbody> : (renderEmptyDatagrid())}
+                                         </InfiniteScroll>
+                                     </table>
                                  </div>
-                                 {isFilterOpen && displayFilterPanel()}
                              </div>
+                             {isFilterOpen && displayFilterPanel()}
                          </div>
-                         {showDetailsPanel && showDetailData !== undefined && displayDetailPanel()}
                      </div>
-                 )
-             }
-         </div>
-     )
+                     {showDetailsPanel && showDetailData !== undefined && displayDetailPanel()}
+                 </div>)}
+         </div>)
  }
  export default DataGridWithInfiniteScroll;
+ 
