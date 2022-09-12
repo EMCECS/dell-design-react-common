@@ -41,11 +41,6 @@ import { Constants } from "components/DataGridWithInfiniteScroll/Constants";
 
 
 /**
- * TODO:
- * Type Any need to be changes to specific types while writing wrappers for props.
- */
-
-/**
  * Enum for RowTpye :
  * @param {EXPANDABLE} for enabling expandable rows
  * @param {COMPACT} for enabling compact rows
@@ -102,6 +97,10 @@ export type ExpandableRowDetails = {
     isLoading?: boolean;
     onRowExpand?: (row: DataGridRow) => Promise<any>;
     onRowContract?: (row: DataGridRow) => void;
+/**
+ * TODO:
+ * Type 'Any' will be changed to specific types while writing wrappers for props.
+ */
     expandableContent?: any;
     isExpanded?: boolean;
     hideRowExpandIcon?: boolean;
@@ -144,6 +143,10 @@ export type DataGridSort = {
  * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON
  */
 export type DetailPaneData = {
+/**
+ * TODO:
+ * Type 'Any' will be changed to specific types while writing wrappers for props.
+ */
     title?: any;
     columnNames?: any;
     detailPaneContentJSON: any;
@@ -174,6 +177,10 @@ export type DetailPaneData = {
 
  */
 
+/**
+ * TODO:
+ * Type 'Any' will be changed to specific types while writing wrappers for props.
+ */
 type DataGridProps = {
     className?: string;
     style?: any;
@@ -211,6 +218,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         fetchMoreData,
         loadingMessage,
     } = props;
+/**
+ * TODO:
+ * Type 'Any' will be changed to specific types while writing wrappers for props.
+ */
     const callbackForColumnName: any = props?.callbackForColumnName;
     const [infiniteScrollData, setinfiniteScrollData] = useState(
         getInfiniteScrollData
@@ -434,6 +445,10 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
      * handleMultiSelect function is to handle the multi select functionality
      *
      */
+    /**
+     * TODO:
+     * Type 'Any' will be changed to specific types while writing wrappers for props.
+     */
     const handleMultiSelect = (event: any) => {
         const { id, checked } = event.target;
         let tempSortValue;
@@ -515,6 +530,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     };
 
     /*Function to display multiselect rows*/
+
+    /**
+     * TODO:
+     * Type 'Any' will be changed to specific types while writing wrappers for props.
+     */
     const renderMultiSelectDataGridRow = (row: any) => {
         return (
             <th scope={row}>
@@ -533,6 +553,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     };
 
     /*Function to render Single Select Row*/
+
+    /**
+     * TODO:
+     * Type 'Any' will be changed to specific types while writing wrappers for props.
+     */
     const renderSingleSelectDataGridRow = (row: any) => {
         return (
             <th>
@@ -616,6 +641,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
     /**
      * renderSorting returns the sorting icon on the column where sorting is called.
+     */
+
+    /**
+     * TODO:
+     * Type 'Any' will be changed to specific types while writing wrappers for props.
      */
     const renderSorting = (column: any) => {
         return (
