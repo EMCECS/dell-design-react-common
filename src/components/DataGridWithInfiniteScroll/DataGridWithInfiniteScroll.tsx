@@ -39,12 +39,6 @@ import { Constants } from "components/DataGridWithInfiniteScroll/Constants";
  * Datagrids are for organizing large volumes of data that users can perform actions on.
  */
 
-
-/**
- * TODO:
- * Type Any need to be changes to specific types while writing wrappers for props.
- */
-
 /**
  * Enum for RowTpye :
  * @param {EXPANDABLE} for enabling expandable rows
@@ -73,7 +67,6 @@ export enum GridSelectionType {
 
 /**
  * type for DataGridRow :
- * @param {rowData} row data
  * @param {rowID} unique ID to identify row
  * @param {isSelected} set to true if row is selected
  * @param {className} CSS class name
@@ -102,7 +95,7 @@ export type ExpandableRowDetails = {
     isLoading?: boolean;
     onRowExpand?: (row: DataGridRow) => Promise<any>;
     onRowContract?: (row: DataGridRow) => void;
-    expandableContent?: any;
+    expandableContent?: any; // TODO : Change "any" to specific type while writing wrappers
     isExpanded?: boolean;
     hideRowExpandIcon?: boolean;
 };
@@ -144,9 +137,9 @@ export type DataGridSort = {
  * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON
  */
 export type DetailPaneData = {
-    title?: any;
-    columnNames?: any;
-    detailPaneContentJSON: any;
+    title?: any; // TODO : Change "any" to specific type while writing wrappers
+    columnNames?: any; // TODO : Change "any" to specific type while writing wrappers
+    detailPaneContentJSON: any; // TODO : Change "any" to specific type while writing wrappers
 };
 
 /**
@@ -171,7 +164,6 @@ export type DetailPaneData = {
  * @param {isLoading} if true then show loading icon for expandable row
  * @param {callbackForColumnName} callback function to send columnName which user had clicked for sorting
  * @param {loadingMessage} message to be passed while the infinite scroll loads nect data
-
  */
 
 type DataGridProps = {
@@ -179,7 +171,7 @@ type DataGridProps = {
     style?: any;
     id?: string;
     rows?: Array<object>;
-    columns: any;
+    columns: any; // TODO : Change "any" to specific type while writing wrappers
     selectionType?: GridSelectionType;
     rowType?: GridRowType;
     isSorting?: boolean;
@@ -187,12 +179,12 @@ type DataGridProps = {
     expandable?: boolean;
     showColumnSelect?: boolean;
     detailDataProps?: DetailPaneData;
-    detailPaneContent?: any;
+    detailPaneContent?: any; // TODO : Change "any" to specific type while writing wrappers
     showDetailPanel?: boolean;
     defaultColumnHeader?: string;
-    filterData?: ReactElement<any>;
-    getInfiniteScrollData?: any;
-    fetchMoreData?: any;
+    filterData?: ReactElement<any>; // TODO : Change "any" to specific type while writing wrappers
+    getInfiniteScrollData?: any; // TODO : Change "any" to specific type while writing wrappers
+    fetchMoreData?: any; // TODO : Change "any" to specific type while writing wrappers
     datagridBodyHeight?: string;
     isLoading?: boolean;
     callbackForColumnName?: Function;
@@ -211,7 +203,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         fetchMoreData,
         loadingMessage,
     } = props;
-    const callbackForColumnName: any = props?.callbackForColumnName;
+    const callbackForColumnName: any = props?.callbackForColumnName;  // TODO : Change "any" to specific type while writing wrappers
     const [infiniteScrollData, setinfiniteScrollData] = useState(
         getInfiniteScrollData
     );
@@ -229,14 +221,14 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [transformVal, settransformVal] = useState<any>(
         "translateX(0px) translateY(0px)"
-    );
+    ); // TODO : Change "any" to specific type while writing wrappers
     const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(false);
     const [, setDetailRowIndex] = useState<number>();
     const [showDetailData, setShowDetailData] =
         useState<{ key: string; value: "" }[]>();
     const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>();
-    let expandData: { key: string; value: any }[] = [{ key: "", value: "" }];
-    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+    let expandData: { key: string; value: any }[] = [{ key: "", value: "" }]; // TODO : Change "any" to specific type while writing wrappers
+    const [isFilterOpen, toggleFilter] = useState<boolean>(false);
 
     useEffect(() => {
         if (
@@ -265,9 +257,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
      * This funtion is to get the Reset Setting for column selection, which shows all the columns
      */
     const IndeterminateCheckbox = forwardRef(
-        ({ indeterminate, ...rest }: any, ref) => {
+        ({ indeterminate, ...rest }: any, ref) => { //Can not change any type, as this are in built func
             const defaultRef = useRef();
-            const resolvedRef: any = ref || defaultRef;
+            const resolvedRef: any = ref || defaultRef; // TODO : Change "any" to specific type while writing wrappers
 
             useEffect(() => {
                 returnPositionColumnSelectionDropdown();
@@ -323,7 +315,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         useResizeColumns
     );
 
-    const [allValues, setIsChecked] = useState<any>([]);
+    const [allValues, setIsChecked] = useState<any>([]); // TODO : Change "any" to specific type while writing wrappers
     useEffect(() => {
         if (rows.length !== 0) {
             setIsChecked(rows);
@@ -371,22 +363,22 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
      * handleDetailsPanel function
      * This function returns the details for detail panel content
      */
-    const handleDetailsPanel = (row: Row, i: number) => {
+    const handleDetailsPanel = (row: Row, index: number) => {
         let detailPanelKeys = Object.keys(detailDataProps?.columnNames);
         for (let j = 0; j < detailPanelKeys.length; j++) {
             let keyValue = {
                 key: detailDataProps?.columnNames[detailPanelKeys[j]],
                 value: String(
-                    detailDataProps?.detailPaneContentJSON[i][detailPanelKeys[j]]
+                    detailDataProps?.detailPaneContentJSON[index][detailPanelKeys[j]]
                 ),
             };
             expandData.push(keyValue);
         }
         setShowDetailData(expandData);
         setShowDetailPanelTitle(
-            detailDataProps?.detailPaneContentJSON[i][detailDataProps?.title]
+            detailDataProps?.detailPaneContentJSON[index][detailDataProps?.title]
         );
-        setDetailRowIndex(i);
+        setDetailRowIndex(index);
         setShowDetailsPanel(true);
     };
 
@@ -433,7 +425,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
      * handleMultiSelect function is to handle the multi select functionality
      *
      */
-    const handleMultiSelect = (event: any) => {
+    const handleMultiSelect = (event: any) => {  // TODO : Change "any" to specific type while writing wrappers
         const { id, checked } = event.target;
         let tempSortValue;
         if (id === Constants.ID_FOR_SORTING) {
@@ -442,7 +434,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
             });
             setIsChecked(tempSortValue);
         } else {
-            tempSortValue = allValues.map((val: any) =>
+            tempSortValue = allValues.map((val: any) =>  // TODO : Change "any" to specific type while writing wrappers
                 val.id === id ? { ...val, isChecked: checked } : val
             );
             setIsChecked(tempSortValue);
@@ -466,12 +458,12 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
 
     /*Function to close Filter Panel*/
     const closeFilter = () => {
-        setIsFilterOpen(false);
+        toggleFilter(false);
     };
 
     /* Function to Open Filter Panel*/
     const openFilter = () => {
-        setIsFilterOpen(true);
+        toggleFilter(true);
     };
 
     /**
@@ -489,6 +481,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     <img src={filter} alt={filter} />
                 )}
             </div>
+            //TODO to replace image tag with icon/CSS in future
         );
     };
 
@@ -500,8 +493,9 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     <label>
                         <input
                             type="checkbox"
-                            id="allSelect"
+                            id={Constants.ID_FOR_SORTING}
                             checked={
+                                // TODO : Change "any" to specific type while writing wrappers
                                 allValues.filter((value: any) => value?.isChecked !== true)
                                     .length < 1
                             }
@@ -514,7 +508,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     };
 
     /*Function to display multiselect rows*/
-    const renderMultiSelectDataGridRow = (row: any) => {
+    const renderMultiSelectDataGridRow = (row: any) => { // TODO : Change "any" to specific type while writing wrappers
         return (
             <th scope={row}>
                 <div>
@@ -532,14 +526,13 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     };
 
     /*Function to render Single Select Row*/
-    const renderSingleSelectDataGridRow = (row: any) => {
+    const renderSingleSelectDataGridRow = (row: any) => { // TODO : Change "any" to specific type while writing wrappers
         return (
             <th>
                 <div>
                     <input
                         type="radio"
                         name="radio-group"
-                        id="radio-button-control"
                         value={row}
                         onClick={() => handleRadioSelection(row)}
                     />
@@ -586,7 +579,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                 <div className="ColumnSelect">
                     <span className="ColumnSelect-header">{Constants.COLUMN_PICKER}</span>
 
-                    {allColumns.map((column: any) => (
+                    {allColumns.map((column: any) => ( // TODO : Change "any" to specific type while writing wrappers
                         <div key={column.id}>
                             <label>
                                 {column.Header !== defaultColumnHeader && (
@@ -594,7 +587,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                         <input
                                             type="checkbox"
                                             onClick={handleColumnSelectionChange}
-                                            id="allColumnSelect"
+                                            id={Constants.ID_FOR_ALL_COLUMN_SELECT}
                                             {...column.getToggleHiddenProps()}
                                         />
                                         <span className="ColumnSelect-header-names">
@@ -616,7 +609,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
     /**
      * renderSorting returns the sorting icon on the column where sorting is called.
      */
-    const renderSorting = (column: any) => {
+    const renderSorting = (column: any) => { // TODO : Change "any" to specific type while writing wrappers
         return (
             <div ref={refSetting} className="header-cell">
                 {column.render("Header")}
@@ -646,7 +639,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                 <div className="filter-pane">
                     <FilterPanel
                         data={filterData}
-                        title="Filters"
+                        title={Constants.DEFAULT_FILTER_TITLE}
                         onClose={() => closeFilter()}
                     />
                 </div>
@@ -674,7 +667,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                     {isOpen && renderColumnSelection()}
                     {props.isFilter && loadFilterIcon()}
                     <div
-                        id="scrollableDiv"
+                        id={Constants.ID_FOR_SCROLLBAR}
                         className={
                             props.isFilter ? "container-fluid" : "scroll-div table-css"
                         }
@@ -715,7 +708,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                                 {selectionType === GridSelectionType.MULTI &&
                                                     renderMultiSelectDataGridHeader()}
                                                 {selectionType === GridSelectionType.SINGLE && <th />}
-                                                {headerGroup.headers.map((column: any) => (
+                                                {headerGroup.headers.map((column: any) => ( // TODO : Change "any" to specific type while writing wrappers
                                                     <th
                                                         {...column.getHeaderProps(
                                                             props.isSorting
@@ -783,14 +776,14 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                                     {...getTableBodyProps()}
                                                     className={"table-body"}
                                                 >
-                                                {allValues.map((row: Row, i: number) => {
+                                                {allValues.map((row: Row, index: number) => {
                                                     prepareRow(row); // This line is necessary to prepare the rows and get the row props from react-table dynamically
                                                     return (
                                                         <tr
                                                             {...row.getRowProps()}
                                                             onClick={() =>
                                                                 showDetailPanel
-                                                                    ? handleDetailsPanel(row, i)
+                                                                    ? handleDetailsPanel(row, index)
                                                                     : ""
                                                             }
                                                             className={"csg-row"}
