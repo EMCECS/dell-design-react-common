@@ -145,7 +145,7 @@ export const applyFilter = (obj: any): void => {
     });
 };
 export const filterComponent = () => {
-    return [
+    return (
         <div>
             <Accordion>
                 <Accordion.Item eventKey="1">
@@ -161,8 +161,8 @@ export const filterComponent = () => {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
-        </div>,
-    ];
+        </div>
+);
 };
 export const detailColumnName = {
     acknowledged: "Acknowledge",
