@@ -66,5 +66,11 @@
         .modal-body {
                 color: $gray-900;
         }
+
+        .modal-footer {
+            & .btn-link {
+                margin-right: 0px;
+            }
+        }
     }
 }
