@@ -39,6 +39,12 @@ import { Constants } from "components/DataGridWithInfiniteScroll/Constants";
  * Datagrids are for organizing large volumes of data that users can perform actions on.
  */
 
+
+/**
+ * TODO:
+ * Type Any need to be changes to specific types while writing wrappers for props.
+ */
+
 /**
  * Enum for RowTpye :
  * @param {EXPANDABLE} for enabling expandable rows
@@ -164,6 +170,7 @@ export type DetailPaneData = {
  * @param {datagridBodyHeight}  is fixed height for the body of the datagrid
  * @param {isLoading} if true then show loading icon for expandable row
  * @param {callbackForColumnName} callback function to send columnName which user had clicked for sorting
+ * @param {loadingMessage} message to be passed while the infinite scroll loads nect data
 
  */
 
@@ -186,9 +193,10 @@ type DataGridProps = {
     filterData?: any;
     getInfiniteScrollData?: any;
     fetchMoreData?: any;
-    datagridBodyHeight?: any;
+    datagridBodyHeight?: string;
     isLoading?: boolean;
     callbackForColumnName?: Function;
+    loadingMessage?: string;
 };
 
 const DataGridWithInfiniteScroll = (props: DataGridProps) => {
@@ -201,6 +209,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         getInfiniteScrollData,
         datagridBodyHeight,
         fetchMoreData,
+        loadingMessage,
     } = props;
     const callbackForColumnName: any = props?.callbackForColumnName;
     const [infiniteScrollData, setinfiniteScrollData] = useState(
@@ -762,7 +771,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                                                     ? datagridBodyHeight
                                                     : Constants.DEFAULT_DATAGRID_BODY_HEIGHT
                                             }
-                                            loader={<h5>{Constants.LOADING_INFINITE_SCROLL}</h5>}
+                                            loader={<h5>{loadingMessage ? loadingMessage : Constants.DEFAULT_LOADING_INFINITE_SCROLL_TEXT}</h5>}
                                             scrollableTarget="scrollableDiv"
                                             endMessage={
                                                 <p className={"infinite-scroll-end-message"}>
