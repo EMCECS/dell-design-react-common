@@ -12,6 +12,11 @@ import "react-bootstrap";
 import { Card, CardBlock, CardTitle } from "@dellstorage/clarity-react/cards";
 import CloseButton from "react-bootstrap/CloseButton";
 
+
+/**
+ * TODO:
+ * Type 'Any' will be changed to specific types while writing wrappers for props.
+ */
 const FilterPanel = (props: any) => {
     return (
         <div className="filter-classes">
