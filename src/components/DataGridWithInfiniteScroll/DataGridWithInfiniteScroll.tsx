@@ -10,7 +10,7 @@
 
 import { Button } from "@dellstorage/clarity-react/forms/button";
 import { Icon } from "@dellstorage/clarity-react/icon/Icon";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, {forwardRef, ReactElement, ReactHTMLElement, useEffect, useRef, useState} from "react";
 import {
     Cell,
     HeaderGroup,
@@ -197,7 +197,7 @@ type DataGridProps = {
     detailPaneContent?: any;
     showDetailPanel?: boolean;
     defaultColumnHeader?: string;
-    filterData?: any;
+    filterData?: ReactElement<any>;
     getInfiniteScrollData?: any;
     fetchMoreData?: any;
     datagridBodyHeight?: string;
@@ -247,7 +247,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         useState<{ key: string; value: "" }[]>();
     const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>();
     let expandData: { key: string; value: any }[] = [{ key: "", value: "" }];
-    const rowType: any = props.rowType;
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -453,7 +452,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
         const { id, checked } = event.target;
         let tempSortValue;
         if (id === Constants.ID_FOR_SORTING) {
-            tempSortValue = allValues.map((val: any) => {
+            tempSortValue = allValues.map((val: object) => {
                 return { ...val, isChecked: checked };
             });
             setIsChecked(tempSortValue);
