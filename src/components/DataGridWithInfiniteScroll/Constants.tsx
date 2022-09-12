@@ -16,7 +16,7 @@ type typeConstants = {
     EMPTY_DATA_GRID_NO_ITEMS_FOUND: string;
     ID_FOR_SORTING: string;
     DEFAULT_DATAGRID_BODY_HEIGHT: number;
-    LOADING_INFINITE_SCROLL: string;
+    DEFAULT_LOADING_INFINITE_SCROLL_TEXT: string;
     COLUMN_PICKER: string;
     CLOSE: string;
 };
@@ -29,7 +29,7 @@ export const Constants: typeConstants = {
     EMPTY_DATA_GRID_NO_ITEMS_FOUND: "No items found!",
     ID_FOR_SORTING: "allSelect",
     DEFAULT_DATAGRID_BODY_HEIGHT: 550,
-    LOADING_INFINITE_SCROLL: "Loading...",
+    DEFAULT_LOADING_INFINITE_SCROLL_TEXT: "Loading...",
     COLUMN_PICKER: "Column Picker",
     CLOSE: "Close",
 };
