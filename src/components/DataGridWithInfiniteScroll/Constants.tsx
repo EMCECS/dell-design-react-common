@@ -18,6 +18,8 @@ type typeConstants = {
     ID_FOR_ALL_COLUMN_SELECT: string;
     ID_FOR_SCROLLBAR: string;
     DEFAULT_FILTER_TITLE: string;
+    DEFAULT_COLUMN_SELECTION_ROLE: string;
+    DEFAULT_RADIO_GROUP_NAME: string;
     DEFAULT_DATAGRID_BODY_HEIGHT: number;
     DEFAULT_LOADING_INFINITE_SCROLL_TEXT: string;
     COLUMN_PICKER: string;
@@ -34,9 +36,10 @@ export const Constants: typeConstants = {
     ID_FOR_ALL_COLUMN_SELECT: "allColumnSelect",
     ID_FOR_SCROLLBAR: "scrollableDiv",
     DEFAULT_FILTER_TITLE: "Filters",
+    DEFAULT_COLUMN_SELECTION_ROLE: "dialog",
+    DEFAULT_RADIO_GROUP_NAME: "radio-group",
     DEFAULT_DATAGRID_BODY_HEIGHT: 550,
     DEFAULT_LOADING_INFINITE_SCROLL_TEXT: "Loading...",
     COLUMN_PICKER: "Column Picker",
     CLOSE: "Close",
 };
-
