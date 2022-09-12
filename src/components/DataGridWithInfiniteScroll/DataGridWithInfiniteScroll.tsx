@@ -208,8 +208,11 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
   datagridBodyHeight,
   fetchMoreData,
   loadingMessage,
+  expandable,
+  detailPaneContent
  } = props;
  const isFilter: boolean | undefined = props?.isFilter;
+ const isSorting: boolean | undefined = props?.isSorting;
  const style: any = props?.style;
  const callbackForColumnName: any = props?.callbackForColumnName; // TODO : Change "any" to specific type while writing wrappers
  const [infiniteScrollData, setinfiniteScrollData] = useState(
@@ -395,7 +398,6 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
   * This function is to return a panel (Box) of detail panel component
   */
  const getDetailPanel = () => {
-  const detailPaneContent = props.detailPaneContent;
   return (
       <Card className="details-card">
        <CardTitle>
@@ -711,7 +713,7 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                         {...headerGroup.getHeaderGroupProps()}
                         className={"csg-header"}
                     >
-                     {props.expandable ? <th /> : null}
+                     {expandable ? <th /> : null}
                      {selectionType === GridSelectionType.MULTI &&
                          renderMultiSelectDataGridHeader()}
                      {selectionType === GridSelectionType.SINGLE && <th />}
@@ -721,12 +723,12 @@ const DataGridWithInfiniteScroll = (props: DataGridProps) => {
                          ) => (
                              <th
                                  {...column.getHeaderProps(
-                                     props.isSorting
+                                     isSorting
                                          ? column.getSortByToggleProps()
                                          : ""
                                  )}
                                  onClick={(e) => {
-                                  if (props.isSorting) {
+                                  if (isSorting) {
                                    //trigger the react-table header onClick manually
                                    column
                                        .getHeaderProps(
