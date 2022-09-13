@@ -48,7 +48,10 @@
         color: $badge-default-font-color;
         @include basic-badge($blue-100!important);
     }
-    &.badge-blue, &.badge-3 {
+    &.badge-blue {
+        @include basic-badge($blue-600!important);
+    }
+    &.badge-3 {
         @include basic-badge($blue-800!important);
     }
     &.badge-purple, &.badge-2 {
