@@ -18,7 +18,6 @@
         font-weight: $font-weight-medium;
         width: max-content ;
         border-radius: $btn-border-radius;
-        line-height: $btn-line-height;
         font-size: $btn-font-size !important;
         text-transform: lowercase;
         letter-spacing: 0 !important;
@@ -46,7 +45,7 @@
         }
 
         &::first-line {
-        text-transform: capitalize;
+            text-transform: capitalize;
         }
 
     &.btn-link{
@@ -173,4 +172,17 @@
 
 .fluid-button-size{
     @include btn-style($btn-fluid-width, $btn-fluid-height);
+}
+
+.btn-group {
+    & .radio.btn input[type=radio]:checked+label {
+        background-color: $btn-default;
+    }
+
+    &.btn-primary {
+        & .btn {
+            border: none;
+            background-color: $btn-default;
+        }
+    }
 }

@@ -9,6 +9,8 @@
  */
 import {storiesOf} from "@storybook/react";
 import {Button, ButtonGroup} from "@dellstorage/clarity-react/forms/button";
+import {RadioButton} from "@dellstorage/clarity-react/forms/radio";
+import {action} from "@storybook/addon-actions";
 
 storiesOf("ButtonGroup", module)
     .add("ButtonGroup Primary", () => (
@@ -62,7 +64,8 @@ storiesOf("ButtonGroup", module)
                 </ButtonGroup>
             </div>
         </div>
-    )).add("ButtonGroup Tertiary", () => (
+    ))
+    .add("ButtonGroup Tertiary", () => (
         <div>
             <div>
                 {"Buttons Enabled: "}
@@ -87,7 +90,8 @@ storiesOf("ButtonGroup", module)
                 </ButtonGroup>
             </div>
         </div>
-    )).add("ButtonGroup with all different buttons", ()=> (
+    ))
+    .add("ButtonGroup with all different buttons", () => (
         <div>
             <ButtonGroup name="Different Buttons">
                 <Button primary>Primary</Button>
@@ -95,4 +99,12 @@ storiesOf("ButtonGroup", module)
                 <Button link>Tertiary</Button>
             </ButtonGroup>
         </div>
+    ))
+    .add("Radio ButtonGroup", () => (
+        <ButtonGroup defaultValue="apples" name="fruit" onChange={action("Changed")}>
+            <RadioButton key="1" value="apples" label="apples" />
+            <RadioButton key="2" value="oranges" label="oranges" />
+            <RadioButton key="3" value="kiwi" label="kiwi" />
+            <RadioButton key="4" value="pears" label="pears" />
+        </ButtonGroup>
     ));
