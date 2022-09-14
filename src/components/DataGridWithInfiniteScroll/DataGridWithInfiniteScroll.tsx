@@ -35,8 +35,7 @@ type DataGridProps = {
 function DataGridWithInfiniteScroll(props: DataGridProps) {
     const columns = props?.columns;
     const data = props?.rows;
-    const style = props?.style;
-    const isLoading = props?.isLoading;
+    const {style, isLoading} = props;
 
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
         columns,
