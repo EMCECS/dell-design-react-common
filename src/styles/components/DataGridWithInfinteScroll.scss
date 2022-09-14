@@ -18,7 +18,7 @@
  $isg-header-height: 48px;
  $csg-header-height: 48px;
  $compact-header-height: 40px;
- 
+ $table-border: 1px solid $gray-300;
  .expanded-row {
    border-top: unset;
  
@@ -767,4 +767,64 @@
    padding-top: 10.625rem;
    border-top: 1px solid #E4E4E4;
  }
- 
+
+.table-body {
+  position: relative;
+}
+
+table {
+  width: 100%;
+  flex: 1;
+  border: $table-border;
+}
+thead {
+  border: $table-border;
+  border-bottom: unset;
+}
+tbody {
+  border: $table-border;
+  tr {
+    &:hover {
+      background-color: $gray-100;
+    }
+    &:focus {
+      background-color: $blue-50;
+    }
+    &:active {
+      background-color: $blue-100;
+    }
+  }
+}
+
+tr {
+  border-top: $table-border;
+}
+
+th {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: $gray-900;
+  height: 56px;
+  line-height: 35px; // To vertically align content in case of inline block
+  ::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 25%;
+    bottom: 0;
+    color: transparent;
+    border-right: $table-border;
+    max-height: 24px;
+  }
+  &:last-child{
+    ::after {
+      content: "";
+      border: unset;
+    }
+  }
+}
+
+td, th {
+  padding: 0 0 0 15px;
+}
