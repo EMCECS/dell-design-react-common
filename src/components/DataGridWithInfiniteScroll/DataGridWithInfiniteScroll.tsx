@@ -41,34 +41,43 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         columns,
         data,
     });
-
+    const renderTableHeader = () => {
+        return (
+            <thead>
+                {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
+                        {headerGroup.headers.map((column) => (
+                            <th {...column.getHeaderProps()}>
+                                {column.render("Header")}
+                                <div className={"datagrid-column-separator"} />
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+        );
+    };
+    const renderTableRow = () => {
+        return (
+            <tbody {...getTableBodyProps()} className="table-body">
+                {rows.map((row) => {
+                    prepareRow(row);
+                    return (
+                        <tr {...row.getRowProps()} className={"csg-row"}>
+                            {row.cells.map((cell) => {
+                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                            })}
+                        </tr>
+                    );
+                })}
+            </tbody>
+        );
+    };
     const renderTable = () => {
         return (
-            <table {...getTableProps()} style={style}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
-                            {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
-                                    <div className={"datagrid-column-separator"} />
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()} className="table-body">
-                    {rows.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()} className={"csg-row"}>
-                                {row.cells.map((cell) => {
-                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
+            <table {...getTableProps()} style={style} className={"data-grid-inifnite-table"}>
+                {renderTableHeader()}
+                {renderTableRow()}
             </table>
         );
     };
