@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-export const DATA = {
+export const rowData = {
     rows: [
         {
             ip: "192.168.0.1",
@@ -21,7 +21,7 @@ export const DATA = {
     ],
 };
 for (let i = 0; i < 5; i++) {
-    DATA.rows.push({
+    rowData.rows.push({
         ip: "192.168.0." + i,
         serial: "1234ECG88TGS",
         model: "PI-12345672",
@@ -34,8 +34,8 @@ for (let i = 0; i < 5; i++) {
 export const columnsData = [
     { accessor: "ip", Header: "IP" },
     { accessor: "serial", Header: "Serial" },
-    { accessor: "model", Header: "Model", },
+    { accessor: "model", Header: "Model" },
     { accessor: "template", Header: "Template" },
     { accessor: "networking", Header: "Networking" },
-    { accessor: "role", Header: "Role"},
+    { accessor: "role", Header: "Role" },
 ];

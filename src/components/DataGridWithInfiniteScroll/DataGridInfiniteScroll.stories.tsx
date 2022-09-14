@@ -12,7 +12,7 @@ import { storiesOf } from "@storybook/react";
 import DataGridWithInfiniteScroll from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
 import {
     columnsData,
-    DATA,
+    rowData,
 } from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
@@ -20,6 +20,6 @@ import "bootstrap/dist/css/bootstrap.css";
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
-            <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} />
+            <DataGridWithInfiniteScroll rows={rowData.rows} columns={columnsData} />
         </div>
     ))
