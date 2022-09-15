@@ -8,21 +8,30 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import {useTable, Column} from "react-table";
+import {useTable, Column, useRowSelect, Hooks, Cell, UseRowSelectRowProps} from "react-table";
 import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
-
+import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
 /**
  * General component description :
  * DataGridWithInfiniteScroll :
  * Datagrids are for organizing large volumes of data that users can perform actions on.
  */
-
+/**
+ * Enum for GridSelectionType :
+ * @param {MULTI} for enabling multi row select
+ * @param {SINGLE} for enabling single row select
+ */
+export enum GridSelectionType {
+    MULTI = "multi",
+    SINGLE = "single",
+}
 /**
  * @param {rows} rows data
  * @param {columns} column details
  * @param {className} CSS class names
  * @param {style} to add custom CSS styles
  * @param {isLoading} if true then show loading icon before table is rendered
+ * @param {selectionType} row selection type that is multi or single
  */
 type DataGridProps = {
     rows: {[key: string]: any}[];
@@ -30,17 +39,38 @@ type DataGridProps = {
     className?: string;
     style?: any;
     isLoading?: boolean;
+    selectionType?: GridSelectionType;
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
     const columns = props?.columns;
     const data = props?.rows;
     const {style, isLoading} = props;
+    const selectionType= props.selectionType;
 
-    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
+    const tableHooks = (hooks:Hooks)=>{
+        if(selectionType === GridSelectionType.MULTI) {
+            hooks.visibleColumns.push((columns: Column<{[key: string]: any}>[]) => [
+                {
+                    id: 'selection',
+                    Header: ({getToggleAllRowsSelectedProps}: Hooks) => (
+                        <CheckBox {...getToggleAllRowsSelectedProps()} />
+                    ),
+                    Cell: ({row}: Hooks) => <CheckBox {...row.getToggleRowSelectedProps()} />
+                },
+                ...columns
+            ])
+        }
+    }
+
+    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows} = useTable({
         columns,
         data,
-    });
+    },
+        useRowSelect,
+        tableHooks
+    );
+
     const renderTableHeader = () => {
         return (
             <thead>
@@ -75,10 +105,23 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     };
     const renderTable = () => {
         return (
+            <>
             <table {...getTableProps()} style={style} className={"data-grid-inifnite-table"}>
                 {renderTableHeader()}
                 {renderTableRow()}
             </table>
+                <pre>
+        <code>
+          {JSON.stringify(
+              {
+                  selectedFlatRows: selectedFlatRows.map(row => [row.original, row.index])
+              },
+              null,
+              2
+          )}
+        </code>
+      </pre>
+            </>
         );
     };
 
