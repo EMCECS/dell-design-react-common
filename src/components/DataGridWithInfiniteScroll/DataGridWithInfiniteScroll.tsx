@@ -96,6 +96,7 @@ import { Constants } from "./Constants";
    
     //RenderColumnSelection function returns the column selection 
     const renderColumnSelection = () => {
+        const toggleHideAllColumnProps : any = {...getToggleHideAllColumnsProps()};
         return (
             <div className="column-switch clr-popover-content column-select-popup">
               <div className="ColumnSelect">
@@ -119,8 +120,9 @@ import { Constants } from "./Constants";
                </div>
                <hr></hr>
                 <div className="ColumnSelect-reset-button">     
-                    <IndeterminateCheckbox {...getToggleHideAllColumnsProps()} />
-                    (<label> <span className="reset-button">{Constants.RESET_SETTINGS}</span> </label>)
+                    { toggleHideAllColumnProps.indeterminate != 0 ?  <IndeterminateCheckbox {...getToggleHideAllColumnsProps()} />
+                    : (<label> <span className="reset-button">{Constants.RESET_SETTINGS}</span> </label>)
+                    }
                 </div>
             </div>
         );
