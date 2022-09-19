@@ -26,7 +26,7 @@ import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
  */
 export enum GridSelectionType {
     MULTI = "multi",
-    SINGLE = "single",
+    SINGLE = "single",,
 }
 /**
  * @param {rows} rows data
@@ -85,16 +85,16 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const renderTableHeader = () => {
         return (
             <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
-                        {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
-                                {column.render("Header")}
-                                <div className={"datagrid-column-separator"} />
-                            </th>
-                        ))}
-                    </tr>
-                ))}
+            {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
+                    {headerGroup.headers.map((column) => (
+                        <th {...column.getHeaderProps()}>
+                            {column.render("Header")}
+                            <div className={"datagrid-column-separator"} />
+                        </th>
+                    ))}
+                </tr>
+            ))}
             </thead>
         );
     };
@@ -102,16 +102,16 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const renderTableRow = () => {
         return (
             <tbody {...getTableBodyProps()} className="table-body">
-                {rows.map((row) => {
-                    prepareRow(row);
-                    return (
-                        <tr {...row.getRowProps()} className={"csg-row"}>
-                            {row.cells.map((cell) => {
-                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                            })}
-                        </tr>
-                    );
-                })}
+            {rows.map((row) => {
+                prepareRow(row);
+                return (
+                    <tr {...row.getRowProps()} className={"csg-row"}>
+                        {row.cells.map((cell) => {
+                            return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                        })}
+                    </tr>
+                );
+            })}
             </tbody>
         );
     };
