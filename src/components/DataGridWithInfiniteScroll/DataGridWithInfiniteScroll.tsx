@@ -26,7 +26,7 @@ import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
  */
 export enum GridSelectionType {
     MULTI = "multi",
-    SINGLE = "single",
+    SINGLE = "single"
 }
 /**
  * @param {rows} rows data
@@ -34,6 +34,7 @@ export enum GridSelectionType {
  * @param {className} CSS class names
  * @param {style} to add custom CSS styles
  * @param {isLoading} if true then show loading icon before table is rendered
+ * @param {selectionType} row selection type that is multi or single
  * @param {selectionType} row selection type that is multi or single
  */
 type DataGridProps = {
@@ -70,7 +71,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             data
         },
         useRowSelect,
-        tableHooks,
+        tableHooks
     );
 
     const renderTableHeader = () => {
