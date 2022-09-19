@@ -15,6 +15,7 @@
 $csg-row-height: 48px;
 $csg-header-height: 48px;
 $table-border: 1px solid $gray-300;
+$csg-table-th-padding: 0.563rem;
 
 .data-grid-inifnite-table {
   width: 100%;
@@ -109,8 +110,8 @@ $table-border: 1px solid $gray-300;
     th {
       height: 48px;
       line-height: inherit;
-      padding-left: 0.563rem;
-      padding-right: 0.563rem;
+      padding-left: $csg-table-th-padding;
+      padding-right: $csg-table-th-padding;
       border-top-style: solid;
       border-top-width: 0.05rem;
       border-top-color: $gray-300;
