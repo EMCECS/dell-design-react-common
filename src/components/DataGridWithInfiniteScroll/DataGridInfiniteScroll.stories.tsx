@@ -23,3 +23,12 @@ storiesOf("Data Grid with Infinite Scroll", module)
             <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} />
         </div>
     ))
+    .add("Grid with Column Hide/Show", () => (
+        <div>
+            <DataGridWithInfiniteScroll
+                rows={DATA.rows} columns={columnsData}
+                showColumnSelect={true}
+                defaultColumnHeader={"Serial"}
+            />
+        </div>
+    ))      

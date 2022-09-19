@@ -377,6 +377,7 @@
  
  .reset-button {
    color: $blue-600;
+   font-weight: 500;
  }
  
  .filter-icon {
@@ -423,8 +424,14 @@
  }
  
  .ColumnSelect {
-   padding: 0.625rem;
    width: max-content;
+   padding-bottom: 0rem !important;
+    padding-top: 1rem !important;
+    padding-left: 1.4rem !important;
+    padding: 0rem;
+    width: max-content;
+    align-items: center;
+    text-align: justify;
  }
  
  .ColumnSelect-header {
@@ -432,14 +439,16 @@
  }
  
  .ColumnSelect-reset-button {
-   padding-bottom: 0 !important;
-   padding-top: 0 !important;
-   padding-right: 0.031rem;
-   padding-left: 0.031rem;
    height: 40px;
-   border: 1px solid lightgray;
-   width: 120px !important;
+   padding-bottom: 0.3rem !important;
+    padding-top: 0rem !important;
+    padding-right: 0rem;
+    padding-left: 1.5rem;
+    .checkbox {
+        margin: 0em; 
+  }
  }
+
  
  .Reset-button-margin-css {
    margin: 0 !important;
@@ -451,15 +460,25 @@
  
  .column-switch {
    border-radius: var(--clr-global-borderradius, 0.15rem);
-   padding: 0.9rem;
    background-color: var(--clr-datagrid-popover-bg-color, white);
    border-width: var(--clr-global-borderwidth, 0.05rem);
    border-style: solid;
+   padding: 0rem;
    border-color: var(--clr-datagrid-popover-border-color, #cccccc);
    width: 9rem;
    display: flex;
    flex-direction: column;
    z-index: 1060;
+
+   .hr{
+    margin: 0rem 0;
+    margin-top: 1rem;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: 0.25;
+   }
+  
  }
  
  .clr-popover-content {
@@ -827,4 +846,44 @@ th {
 
 td, th {
   padding: 0 0 0 15px;
+}
+
+.column-select-icon{
+  float:right;
+  padding: 0rem !important;
+  .btn{
+    clr-icon {
+      width: 25px !important;
+      height: 20px !important;
+    }
+  }
+  
+}
+
+.column-select-popup{
+  float: right;
+  position: absolute !important;
+  top: 55px !important;
+  right: 43px !important;
+  .btn {
+    .btn-link:focus {
+    outline: none !important;
+    outline-offset: 0 !important;
+    }
+  }
+  .btn.btn-link:hover {
+    color: transparent !important;
+  }
+  .btn.btn-link:focus {
+      outline: none !important;
+      outline-offset: 0px !important;
+  }
+  .btn:hover {
+    border-color: transparent !important;
+  }
+
+  .btn:focus {
+    outline: none!important; 
+    outline-offset: 0px !important; 
+  }
 }
