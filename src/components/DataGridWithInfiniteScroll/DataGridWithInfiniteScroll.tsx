@@ -26,7 +26,7 @@ import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
  */
 export enum GridSelectionType {
     MULTI = "multi",
-    SINGLE = "single"
+    SINGLE = "single",
 }
 /**
  * @param {rows} rows data
@@ -64,29 +64,38 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             ]);
         }
     };
-
+    
+/**
+ * @param {getTableProps} is a function to resolve any props needed by the react table wrapper.
+ * @param {getTableBodyProps } to render table body of react table
+ * @param {headerGroups } return headers which is going to be the headers of the table
+ * @param {rows} display rows of the datagrid
+ * @param {prepareRow} is a function that must be called on any row to be displayed. It is responsible for preparing a row for rendering.
+ * @param {useTable } hook takes options and plugins to build a table instance. The basic options are columns and row data.
+ * @param {useRowSelect } to select a dataGrid row
+ */
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable(
         {
             columns,
-            data
+            data,
         },
         useRowSelect,
-        tableHooks
+        tableHooks,
     );
 
     const renderTableHeader = () => {
         return (
             <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
-                        {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
-                                {column.render("Header")}
-                                <div className={"datagrid-column-separator"} />
-                            </th>
-                        ))}
-                    </tr>
-                ))}
+            {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()} className={"csg-header"}>
+                    {headerGroup.headers.map((column) => (
+                        <th {...column.getHeaderProps()}>
+                            {column.render("Header")}
+                            <div className={"datagrid-column-separator"} />
+                        </th>
+                    ))}
+                </tr>
+            ))}
             </thead>
         );
     };
@@ -94,16 +103,16 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const renderTableRow = () => {
         return (
             <tbody {...getTableBodyProps()} className="table-body">
-                {rows.map((row) => {
-                    prepareRow(row);
-                    return (
-                        <tr {...row.getRowProps()} className={"csg-row"}>
-                            {row.cells.map((cell) => {
-                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                            })}
-                        </tr>
-                    );
-                })}
+            {rows.map((row) => {
+                prepareRow(row);
+                return (
+                    <tr {...row.getRowProps()} className={"csg-row"}>
+                        {row.cells.map((cell) => {
+                            return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                        })}
+                    </tr>
+                );
+            })}
             </tbody>
         );
     };
