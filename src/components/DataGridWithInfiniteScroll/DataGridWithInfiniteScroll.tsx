@@ -46,7 +46,6 @@ type DataGridProps = {
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
-
     const {style, isLoading, columns, selectionType} = props;
     const data = props?.rows;
 
@@ -68,10 +67,10 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable(
         {
             columns,
-            data,
+            data
         },
         useRowSelect,
-        tableHooks
+        tableHooks,
     );
 
     const renderTableHeader = () => {
@@ -107,7 +106,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             </tbody>
         );
     };
-    
+
     const renderTable = () => {
         return (
             <table {...getTableProps()} style={style} className={"data-grid-inifnite-table"}>
