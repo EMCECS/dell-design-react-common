@@ -19,7 +19,7 @@
         width: max-content ;
         border-radius: $btn-border-radius;
         font-size: $btn-font-size !important;
-        text-transform: lowercase;
+        text-transform: none;
         letter-spacing: 0 !important;
         border-color: $btn-default;
         size: $btn-size;
@@ -42,10 +42,6 @@
         &:disabled{
             @include button-disabled($gray-500 $border-default solid, $disabled-background-color, $disabled-color, $font-size-7);
             
-        }
-
-        &::first-line {
-            text-transform: capitalize;
         }
 
     &.btn-link{

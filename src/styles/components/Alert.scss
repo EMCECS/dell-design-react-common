@@ -19,7 +19,9 @@
     font-size: $alert-font-size!important;
     line-height: $line-height-20;
     min-height: $alert-height;
-    margin-bottom: 1rem;
+    margin-bottom: $alert-masthead-gap;
+    display: flex;
+    align-items: center;
     .alert-carousal-text {
         width: auto;
     }
@@ -65,11 +67,16 @@
         }
         
         .alert-item {
+            min-height: unset !important;
             .btn {
                 font-size: $alert-btn-font-size;
                 font-weight: $font-weight-medium;
                 margin-left: 1rem;
                 text-transform: unset;
+            }
+            .alert-icon-wrapper {
+                margin-top: unset !important;
+                padding-top: 0.1rem !important;
             }
         }
         .alert-carousal {
@@ -91,7 +98,6 @@
             }
         }
         .alert-actions {
-            height: 24px;
             .alert-action {
                 margin-top: 0px;
                 height: 24px!important;
@@ -120,11 +126,11 @@
         margin-right: $alert-close-margin-right;
         height: 32px;
     }
-    .alert-items {
-        padding: 0.5rem 0rem 0.5rem .75rem!important;
-    }
+
     .alert-actions {
         height: 20px;
+        display: flex;
+        align-items: center;
         .alert-action {
             margin-top: 0px;
             height: 20px!important;
