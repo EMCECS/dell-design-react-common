@@ -35,7 +35,6 @@ export enum GridSelectionType {
  * @param {style} to add custom CSS styles
  * @param {isLoading} if true then show loading icon before table is rendered
  * @param {selectionType} row selection type that is multi or single
- * @param {selectionType} row selection type that is multi or single
  */
 type DataGridProps = {
     rows: {[key: string]: any}[];
