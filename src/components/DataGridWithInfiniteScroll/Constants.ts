@@ -8,9 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-type typeConstants = {
-    ID_FOR_MULTI_SELECT: string;
-};
-export const Constants: typeConstants = {
-    ID_FOR_MULTI_SELECT: "selection",
-};
+export enum Constants  {
+    DEFAULT_COLUMN_HEADER='Header',
+    DEFAULT_CELL_VALUE='Cell'
+}

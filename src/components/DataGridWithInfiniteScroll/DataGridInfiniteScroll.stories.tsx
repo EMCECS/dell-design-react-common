@@ -9,7 +9,7 @@
  */
 
 import { storiesOf } from "@storybook/react";
-import DataGridWithInfiniteScroll, { GridSelectionType } from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
+import DataGridWithInfiniteScroll  from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
 import {
     columnsData,
     rowData
@@ -21,9 +21,5 @@ storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
             <DataGridWithInfiniteScroll rows={rowData.rows} columns={columnsData} />
-        </div>
-    )).add("DataGrid with multi select option", () => (
-        <div>
-            <DataGridWithInfiniteScroll rows={rowData.rows} columns={columnsData} selectionType={GridSelectionType.MULTI} />
         </div>
     ))

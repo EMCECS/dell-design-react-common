@@ -11,115 +11,58 @@
 @import "../common/colors";
 @import "../common/fonts";
 @import "../common/borders";
+@import "../common/layout";
 
-$csg-row-height: 48px;
-$csg-header-height: 48px;
-$table-border: 1px solid $gray-300;
-$csg-table-th-padding: 0.563rem;
+$table-tr-height: 48px;
 
-.data-grid-inifnite-table {
+.data-grid-infinite-table {
     width: 100%;
-    flex: 1;
     border: $table-border;
 
-    thead {
-        border: $table-border;
-        border-bottom: unset;
+    & thead {
+        >tr {
+            height: $table-tr-height;
+
+            >th {
+                position: relative;
+                font-weight: $font-weight-medium;
+                color: $gray-900;
+                padding: 0 0 0 14px;
+
+                ::after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 25%;
+                    bottom: 0;
+                    color: transparent;
+                    border-right: $table-border;
+                    height: 24px;
+                }
+
+                &:last-child {
+                    ::after {
+                        content: "";
+                        border: unset;
+                    }
+                }
+            }
+        }
     }
 
-    tbody {
-        border: $table-border;
+    & tbody {
+        >tr {
+            border-top: $table-border;
+            height: $table-tr-height;
 
-        tr {
-            &:hover {
+            &:hover,
+            &:focus,
+            &:active {
                 background-color: $gray-100;
             }
 
-            &:focus {
-                background-color: $blue-50;
-            }
-
-            &:active {
-                background-color: $blue-100;
-            }
-        }
-    }
-
-    tr {
-        border-top: $table-border;
-    }
-
-    th {
-        position: relative;
-        font-size: 14px;
-        font-weight: 500;
-        color: $gray-900;
-        height: 56px;
-        line-height: 35px; // To vertically align content in case of inline block
-
-        ::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 25%;
-            bottom: 0;
-            color: transparent;
-            border-right: $table-border;
-            max-height: 24px;
-        }
-
-        &:last-child {
-            ::after {
-                content: "";
-                border: unset;
-            }
-        }
-    }
-
-    td,
-    th {
-        padding: 0 0 0 15px;
-    }
-
-    .header-cell {
-        display: flex;
-        align-items: center;
-        font-family: $dell-font;
-
-        .arrow-up:hover,
-        .arrow-down:hover {
-            color: $blue-600;
-        }
-    }
-
-    .csg-row {
-        height: $csg-row-height;
-        line-height: $csg-row-height;
-    }
-
-    .csg-header {
-        height: $csg-header-height;
-        line-height: $csg-header-height;
-        font-weight: 500;
-    }
-
-    .csg-row,
-    .csg-header {
-        td,
-        th {
-            height: 48px;
-            line-height: inherit;
-            padding-left: $csg-table-th-padding;
-            padding-right: $csg-table-th-padding;
-            border-top-style: solid;
-            border-top-width: 0.05rem;
-            border-top-color: $gray-300;
-            font-size: 14px;
-            align-items: center;
-            font-family: $dell-font;
-
-            .clr-checkbox-wrapper {
-                position: initial;
+            >td {
+                padding: 0 0 0 15px;
             }
         }
     }
