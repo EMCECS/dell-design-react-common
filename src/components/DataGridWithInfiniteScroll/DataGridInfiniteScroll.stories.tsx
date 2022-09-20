@@ -20,6 +20,6 @@ import "bootstrap/dist/css/bootstrap.css";
 storiesOf("Data Grid with Infinite Scroll", module)
     .add("Basic Grid", () => (
         <div>
-            <DataGridWithInfiniteScroll rows={rowData.rows} columns={columnsData} />
+            <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} />
         </div>
     ))

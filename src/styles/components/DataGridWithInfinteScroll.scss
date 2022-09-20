@@ -13,7 +13,7 @@
 @import "../common/borders";
 @import "../common/layout";
 
-$table-tr-height: 48px;
+$table-padding: 0 0 0 0.8rem;
 
 .data-grid-infinite-table {
     width: 100%;
@@ -21,13 +21,13 @@ $table-tr-height: 48px;
 
     & thead {
         >tr {
-            height: $table-tr-height;
+            height: $grid-column-height;
 
             >th {
                 position: relative;
                 font-weight: $font-weight-medium;
                 color: $gray-900;
-                padding: 0 0 0 14px;
+                padding: $table-padding;
 
                 ::after {
                     content: "";
@@ -53,7 +53,7 @@ $table-tr-height: 48px;
     & tbody {
         >tr {
             border-top: $table-border;
-            height: $table-tr-height;
+            height: $grid-column-height;
 
             &:hover,
             &:focus,
@@ -62,7 +62,7 @@ $table-tr-height: 48px;
             }
 
             >td {
-                padding: 0 0 0 15px;
+                padding: $table-padding;
             }
         }
     }
