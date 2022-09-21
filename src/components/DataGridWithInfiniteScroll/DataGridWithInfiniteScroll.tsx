@@ -24,16 +24,18 @@ import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
  * @param {className} CSS class names
  * @param {style} to add custom CSS styles
  * @param {isLoading} if true then show loading icon before table is rendered
+ * @param {className} is to get a custom class to be applied or else default class is applied.
  */
 type DataGridProps = {
     rows: {[key: string]: any}[];
     columns: Column<{[key: string]: any}>[];
     style?: any;
     isLoading?: boolean;
+    className?:string;
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
-    const {style, isLoading, columns} = props;
+    const {style, isLoading, columns, className} = props;
     const data = props.rows;
 
     /**
@@ -79,7 +81,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
      */
     const renderTableRow = () => {
         return (
-            <tbody {...getTableBodyProps()}>
+            <tbody {...getTableBodyProps()} className={className}>
             {rows.map((row) => {
                 prepareRow(row);
                 return (
