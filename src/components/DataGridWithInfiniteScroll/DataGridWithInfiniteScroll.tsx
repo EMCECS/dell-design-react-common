@@ -49,6 +49,12 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         data,
     });
 
+    /**
+     * Function to render react table Header
+     * @param {getHeaderGroupProps} to map the headerGroups to show the individual <tr> by getting the getHeaderGroupProps()
+     * @param {render}  spread the column prop along with its equivalent getHeaderProps() function. render() function takes in a string “Header” that will act as a reference when we will structure our data.
+     */
+
     const renderTableHeader = () => {
         return (
             <thead>
@@ -66,6 +72,11 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         );
     };
 
+    /**
+     * Function to render react table Row
+     * @param {cell.getCellProps} Return an array of prop objects and react-table will merge them appropriately
+     * @param {cell.render } function takes in a string “Cell” that will act as a reference when we will structure our data.
+     */
     const renderTableRow = () => {
         return (
             <tbody {...getTableBodyProps()}>
@@ -83,6 +94,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         );
     };
 
+    //Function to render react table with Table Header and Table Rows
     const renderTable = () => {
         return (
             <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>

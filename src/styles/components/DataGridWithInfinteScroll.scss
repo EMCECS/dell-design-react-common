@@ -29,19 +29,19 @@ $table-padding: 0 0 0 0.8rem;
                 color: $gray-900;
                 padding: $table-padding;
 
-                ::after {
+                &::after {
                     content: "";
                     position: absolute;
                     right: 0;
-                    top: 25%;
+                    top: 20%;
                     bottom: 0;
                     color: transparent;
                     border-right: $table-border;
-                    height: 24px;
+                    height: $grid-column-separator-height;
                 }
 
                 &:last-child {
-                    ::after {
+                    &::after {
                         content: "";
                         border: unset;
                     }

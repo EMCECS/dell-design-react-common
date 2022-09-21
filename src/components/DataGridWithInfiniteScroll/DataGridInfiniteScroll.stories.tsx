@@ -8,18 +8,14 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import { storiesOf } from "@storybook/react";
-import DataGridWithInfiniteScroll  from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
-import {
-    columnsData,
-    rowData
-} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
+import {storiesOf} from "@storybook/react";
+import DataGridWithInfiniteScroll from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
+import {columnsData, rowData} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
-storiesOf("Data Grid with Infinite Scroll", module)
-    .add("Basic Grid", () => (
-        <div>
-            <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} />
-        </div>
-    ))
+storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} />
+    </div>
+));
