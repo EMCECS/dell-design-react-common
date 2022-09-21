@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-export enum Constants  {
-    DEFAULT_COLUMN_HEADER='Header',
-    DEFAULT_CELL_VALUE='Cell'
+export enum Constants {
+    DEFAULT_COLUMN_HEADER = "Header",
+    DEFAULT_CELL_VALUE = "Cell",
 }
