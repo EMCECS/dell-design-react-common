@@ -34,3 +34,4 @@ export const columnsData: Array<any> = [
     {accessor: "networking", Header: "Networking"},
     {accessor: "role", Header: "Role"},
 ];
+
