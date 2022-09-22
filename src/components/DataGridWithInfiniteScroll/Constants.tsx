@@ -24,6 +24,9 @@
     DEFAULT_LOADING_INFINITE_SCROLL_TEXT: string;
     COLUMN_PICKER: string;
     CLOSE: string;
+    DEFAULT_COLUMN_HEADER:string;
+    DEFAULT_CELL_VALUE:string;
+    ID_FOR_MULTI_SELECT:string
 };
 export const Constants: typeConstants = {
     COLUMN_SELECTION_MENU_TOP: 50,
@@ -42,4 +45,7 @@ export const Constants: typeConstants = {
     DEFAULT_LOADING_INFINITE_SCROLL_TEXT: "Loading...",
     COLUMN_PICKER: "Column Picker",
     CLOSE: "Close",
+    DEFAULT_COLUMN_HEADER : "Header",
+    DEFAULT_CELL_VALUE : "Cell",
+    ID_FOR_MULTI_SELECT: "selection",
 };

@@ -7,28 +7,22 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-
-import { storiesOf } from "@storybook/react";
-import DataGridWithInfiniteScroll from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
-import {
-    columnsData,
-    DATA,
-} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
+import {storiesOf} from "@storybook/react";
+import DataGridWithInfiniteScroll,{GridSelectionType} from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
+import {columnsData, rowData} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
-storiesOf("Data Grid with Infinite Scroll", module)
-    .add("Basic Grid", () => (
-        <div>
-            <DataGridWithInfiniteScroll rows={DATA.rows} columns={columnsData} />
-        </div>
-    ))
-    .add("Grid with Column Hide/Show", () => (
-        <div>
-            <DataGridWithInfiniteScroll
-                rows={DATA.rows} columns={columnsData}
-                showColumnSelect={true}
-                defaultColumnHeader={"Serial"}
-            />
-        </div>
-    ))      
+storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} />
+    </div>
+)).add("DataGrid with multi select option", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} selectionType={GridSelectionType.MULTI} />
+    </div>
+)).add("DataGrid with sorting", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isSorting={true} />
+    </div>
+));
