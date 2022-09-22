@@ -85,9 +85,9 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         return (<div ref={refSetting} className="header-cell">
                 {column.render("Header")}
                 <span className="">
-                 {column.isSorted && (column.isSortedDesc ? (<div>
+                 {column.isSorted && (column.isSortedDesc ? (
                          <Icon shape={"arrow down"}/>
-                     </div>) : (<Icon shape={"arrow up"}/>))}
+                     ) : (<Icon shape={"arrow up"}/>))}
         </span>
             </div>);
     };
