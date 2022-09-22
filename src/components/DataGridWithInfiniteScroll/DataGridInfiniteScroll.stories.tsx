@@ -19,7 +19,11 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     </div>
 )).add("DataGrid with multi select option", () => (
     <div>
-        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} selectionType={GridSelectionType.MULTI} />
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isSorting={true} selectionType={GridSelectionType.MULTI} />
+    </div>
+)).add("DataGrid with single select option", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} selectionType={GridSelectionType.SINGLE} />
     </div>
 )).add("DataGrid with sorting", () => (
     <div>

@@ -91,11 +91,24 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         </span>
             </div>);
     };
+    /*Function to render Single Select Row*/
+    const renderSingleSelectDataGridRow = (row: any) => {
+        return (
+            <th>
+                    <input
+                        type="radio"
+                        name={Constants.DEFAULT_RADIO_GROUP_NAME}
+                        value={row}
+                    />
+            </th>
+        );
+    };
     const renderTableHeader = () => {
         return (
             <thead>
             {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
+                    {selectionType === GridSelectionType.SINGLE && <th />}
                     {headerGroup.headers.map((column:any) => (
                         <th {...column.getHeaderProps(isSorting?column.getSortByToggleProps():'')}
                             onClick={() => isSorting ? column.toggleSortBy(!column.isSortedDesc):''}
@@ -123,6 +136,8 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
                 prepareRow(row);
                 return (
                     <tr {...row.getRowProps()}>
+                        {selectionType === GridSelectionType.SINGLE &&
+                            renderSingleSelectDataGridRow(row)}
                         {row.cells.map((cell) => {
                             return <td {...cell.getCellProps()}>{cell.render(Constants.DEFAULT_CELL_VALUE)}</td>;
                         })}

@@ -12,6 +12,7 @@
 @import "../common/fonts";
 @import "../common/borders";
 @import "../common/layout";
+@import "../common/mixins";
 
 $table-padding: 0 0 0 0.8rem;
 
@@ -59,6 +60,15 @@ $table-padding: 0 0 0 0.8rem;
       &:focus,
       &:active {
         background-color: $gray-100;
+      }
+       & input[type='radio']{
+        top: 0.25rem;
+        left: 0;
+        height: 0.8rem;
+        width: 0.8rem;
+      }
+      >th{
+        padding-left: $radio-button-label-padding-left;
       }
 
       >td {
