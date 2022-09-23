@@ -7,13 +7,16 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-import {useRef} from "react";
+import {useRef,useState} from "react";
 import {useTable, Column,useRowSelect, Hooks,useSortBy} from "react-table";
 import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
 import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
 import {Icon} from "@dellstorage/clarity-react/icon";
-
+import filter from "assets/filter.svg";
+import filterOpen from "assets/filter-solid.svg";
+import { Card, CardBlock, CardTitle } from "@dellstorage/clarity-react/cards";
+import CloseButton from "react-bootstrap/CloseButton";
 /**
  * General component description :
  * DataGridWithInfiniteScroll :
@@ -38,13 +41,16 @@ type DataGridProps = {
     isLoading?: boolean;
     className?:string;
     selectionType?: GridSelectionType;
-    isSorting?:boolean
+    isSorting?:boolean;
+    isFilter?:boolean;
+    filterData?:any;
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
-    const {style, isLoading, columns, className,selectionType,isSorting} = props;
+    const {style, isLoading, columns, className,selectionType,isSorting,isFilter,filterData} = props;
     const refSetting: any = useRef();
     const data = props.rows;
+    const [isFilterOpen, toggleFilter] = useState<boolean>(false);
     const tableHooks = (hooks: Hooks) => {
         if (selectionType === GridSelectionType.MULTI) {
             hooks.visibleColumns.push((columns: Column<{[key: string]: any}>[]) => [
@@ -81,6 +87,16 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
      * @param {getHeaderGroupProps} to map the headerGroups to show the individual <tr> by getting the getHeaderGroupProps()
      * @param {render}  spread the column prop along with its equivalent getHeaderProps() function. render() function takes in a string “Header” that will act as a reference when we will structure our data.
      */
+    /*Function to close Filter Panel*/
+    const closeFilter = () => {
+        toggleFilter(false);
+    };
+
+    /* Function to Open Filter Panel*/
+    const openFilter = () => {
+        toggleFilter(true);
+    };
+
     const renderSorting = (column: any) => {
         return (<div ref={refSetting} className="header-cell">
                 {column.render("Header")}
@@ -147,14 +163,49 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             </tbody>
         );
     };
-
+const showFilterIcon =()=>{
+    return(
+        <div
+            className={"filter-icon"}
+            onClick={() => openFilter()}
+        >
+            {isFilterOpen ? (
+                <img src={filterOpen} alt={filterOpen} />
+            ) : (
+                <img src={filter} alt={filter} />
+            )}
+        </div>
+    )
+}
+    const displayFilterPanel = () => {
+        return (
+            <div className="col-sm-2 col-md-2 col-lg-3">
+                <div className="filter-pane">
+                    <Card>
+                        <CloseButton
+                            onClick={() => closeFilter()}
+                            className={"align-close-icon"}
+                        />
+                        <CardBlock>
+                            <CardTitle>{Constants.DEFAULT_FILTER_TITLE}</CardTitle>
+                        </CardBlock>
+                        <div className="filter-item-container">{filterData}</div>
+                    </Card>
+                </div>
+            </div>
+        );
+    };
     //Function to render react table with Table Header and Table Rows
     const renderTable = () => {
         return (
+            <>
+          {isFilter?showFilterIcon():''}
             <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
                 {renderTableHeader()}
                 {renderTableRow()}
             </table>
+                {isFilterOpen && displayFilterPanel()}
+            </>
         );
     };
 

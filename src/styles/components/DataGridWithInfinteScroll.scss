@@ -15,11 +15,13 @@
 @import "../common/mixins";
 
 $table-padding: 0 0 0 0.8rem;
-
+.filter-icon{
+  position: relative;
+  float: right;
+}
 .data-grid-infinite-table {
   width: 100%;
   border: $table-border;
-
   & thead {
     >tr {
       height: $grid-column-height;

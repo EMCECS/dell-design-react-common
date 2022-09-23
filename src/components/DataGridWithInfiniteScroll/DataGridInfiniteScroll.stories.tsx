@@ -29,4 +29,8 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     <div>
         <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isSorting={true} />
     </div>
+)).add("DataGrid with Panel Filter", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} />
+    </div>
 ));
