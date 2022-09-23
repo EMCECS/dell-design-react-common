@@ -9,24 +9,23 @@
  */
 
 import "styles/components/Select.scss";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { Select, SelectOption, SelectOptionGroup } from "@dellstorage/clarity-react/forms/select";
+import {storiesOf} from "@storybook/react";
+import {action} from "@storybook/addon-actions";
+import {Select, SelectOption, SelectOptionGroup} from "@dellstorage/clarity-react/forms/select";
 
+const divClassname = "clr-row clr-justify-content-start field-comp-margin";
 const renderDefaultSelectOptions = () => (
     <>
         <SelectOption value="1">One</SelectOption>
         <SelectOption value="2">Two</SelectOption>
         <SelectOption value="3">Three</SelectOption>
     </>
-)
+);
 
 storiesOf("Select", module)
     .add("Basic select", () => (
         <div>
-            <Select onChange={action("basic change")}>
-                {renderDefaultSelectOptions()}
-            </Select>
+            <Select onChange={action("basic change")}>{renderDefaultSelectOptions()}</Select>
         </div>
     ))
     .add("Basic select with select option", () => (
@@ -103,9 +102,7 @@ storiesOf("Select", module)
     .add("Select Option Group", () => (
         <div>
             <Select onChange={action("Option group select - change")}>
-                <SelectOptionGroup label="Group 1">
-                    {renderDefaultSelectOptions()}
-                </SelectOptionGroup>
+                <SelectOptionGroup label="Group 1">{renderDefaultSelectOptions()}</SelectOptionGroup>
                 <SelectOptionGroup label="Group 2">
                     <SelectOption value="7">Seven</SelectOption>
                     <SelectOption value="8">Eight</SelectOption>
@@ -126,5 +123,15 @@ storiesOf("Select", module)
                     <SelectOption value="9">Nine</SelectOption>
                 </SelectOptionGroup>
             </Select>
+        </div>
+    ))
+    .add("Form field - select box with label", () => (
+        <div className={divClassname}>
+            <span className="clr-col-2 clr-align-self-center" style={{marginTop: "1.5rem"}}>
+                {"Label"}
+            </span>
+            <div className="clr-col clr-align-self-center">
+                <Select onChange={action("basic change")}>{renderDefaultSelectOptions()}</Select>
+            </div>
         </div>
     ));
