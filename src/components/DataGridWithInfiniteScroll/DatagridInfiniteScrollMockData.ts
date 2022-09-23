@@ -9,7 +9,7 @@
  */
 import {faker} from "@faker-js/faker";
 
-export const rowData: Array<object> = [];
+export const rowData: Array<any> = [];
 
 function createRowData() {
     return {
@@ -34,4 +34,3 @@ export const columnsData: Array<any> = [
     {accessor: "networking", Header: "Networking"},
     {accessor: "role", Header: "Role"},
 ];
-

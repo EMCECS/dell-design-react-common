@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import {useTable, Column} from "react-table";
+import {useTable, Column, Row} from "react-table";
 import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
 
@@ -27,8 +27,8 @@ import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
  * @param {className} is to get a custom class to be applied or else default class is applied.
  */
 type DataGridProps = {
-    rows: {[key: string]: any}[];
-    columns: Column<{[key: string]: any}>[];
+    rows: Row[];
+    columns: Column<Row>[];
     style?: any;
     isLoading?: boolean;
     className?:string;
@@ -51,12 +51,8 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         data,
     });
 
-    /**
-     * Function to render react table Header
-     * @param {getHeaderGroupProps} to map the headerGroups to show the individual <tr> by getting the getHeaderGroupProps()
-     * @param {render}  spread the column prop along with its equivalent getHeaderProps() function. render() function takes in a string “Header” that will act as a reference when we will structure our data.
-     */
 
+    // Function to render react table Header
     const renderTableHeader = () => {
         return (
             <thead>
@@ -74,12 +70,9 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         );
     };
 
-    /**
-     * Function to render react table Row
-     * @param {cell.getCellProps} Return an array of prop objects and react-table will merge them appropriately
-     * @param {cell.render } function takes in a string “Cell” that will act as a reference when we will structure our data.
-     */
-    const renderTableRow = () => {
+
+        // Function to render react table Row
+        const renderTableRow = () => {
         return (
             <tbody {...getTableBodyProps()} className={className}>
             {rows.map((row) => {
