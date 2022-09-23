@@ -1,0 +1,69 @@
+/**
+ * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/borders";
+@import "../common/layout";
+
+$table-padding: 0 0 0 0.8rem;
+
+.data-grid-infinite-table {
+    width: 100%;
+    border: $table-border;
+
+    & thead {
+        >tr {
+            height: $grid-column-height;
+
+            >th {
+                position: relative;
+                font-weight: $font-weight-medium;
+                color: $gray-900;
+                padding: $table-padding;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 20%;
+                    bottom: 0;
+                    color: transparent;
+                    border-right: $table-border;
+                    height: $grid-column-separator-height;
+                }
+
+                &:last-child {
+                    &::after {
+                        content: "";
+                        border: unset;
+                    }
+                }
+            }
+        }
+    }
+
+    & tbody {
+        >tr {
+            border-top: $table-border;
+            height: $grid-column-height;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $gray-100;
+            }
+
+            >td {
+                padding: $table-padding;
+            }
+        }
+    }
+}
