@@ -208,3 +208,25 @@ $table-padding: 0 0 0 0.8rem;
   .Reset-button-margin-css {
     margin: 0 !important;
   }
+
+  .empty-datagrid-style {
+    text-align: center;
+    padding-top: 10.625rem;
+    border-top: 1px solid #E4E4E4;
+  }
+
+  .datagrid-placeholder-container {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    border-top-color: var(--clr-table-border-color, #cccccc);
+    border-top-width: var(--clr-global-borderwidth, 0.05rem);
+  }
+
+  .clr-align-items-center {
+    align-items: center !important;
+  }
+  
+  .clr-justify-content-center {
+    justify-content: center !important;
+  }

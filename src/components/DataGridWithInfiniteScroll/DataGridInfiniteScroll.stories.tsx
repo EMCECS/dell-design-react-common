@@ -42,4 +42,13 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
             defaultColumnHeader={"Serial"}
         />
     </div>
+))
+.add("Empty Datagrid", () => (
+    <div>
+        <DataGridWithInfiniteScroll
+            rows={[]}
+            columns={columnsData}
+            style={{ height: "70vh" }}
+        />
+    </div>
 ));

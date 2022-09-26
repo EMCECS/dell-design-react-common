@@ -16,6 +16,7 @@ import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
 import {Icon} from "@dellstorage/clarity-react/icon";
 import filter from "assets/filter.svg";
 import filterOpen from "assets/filter-solid.svg";
+import emptyDatagrid from "assets/images/emptyDatagrid.svg";
 import { Card, CardBlock, CardTitle } from "@dellstorage/clarity-react/cards";
 import CloseButton from "react-bootstrap/CloseButton";
 /**
@@ -89,6 +90,13 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         useSortBy,
         useRowSelect,
         );
+    
+    const [allValues, setIsChecked] = useState<any>([]); // TODO : Change "any" to specific type while writing wrappers
+        useEffect(() => {
+         if (rows.length !== 0) {
+          setIsChecked(rows);
+         }
+        }, [rows]);
 
     /**
      * Function to render react table Header
@@ -264,6 +272,24 @@ const showFilterIcon =()=>{
         );
     };
 
+     /**
+  * renderEmptyDatagrid function returns the empty datagrid message and images in the table body
+  */
+    const renderEmptyDatagrid = () => {
+        // TODO replace with CSS/ICON
+        return (
+            <div className="empty-datagrid-style">
+            <div className="datagrid-placeholder-container">
+            <div className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
+            <div />
+            <img src={emptyDatagrid} alt={emptyDatagrid} />
+            {Constants.EMPTY_DATA_GRID_NO_ITEMS_FOUND}
+            </div>
+            </div>
+            </div>
+        );
+    };
+
     //Function to render react table with Table Header and Table Rows
     const renderTable = () => {
         return (
@@ -282,7 +308,7 @@ const showFilterIcon =()=>{
             )}
             <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
                 {renderTableHeader()}
-                {renderTableRow()}
+                {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
             </table>
                 {isFilterOpen && displayFilterPanel()}
             </>
