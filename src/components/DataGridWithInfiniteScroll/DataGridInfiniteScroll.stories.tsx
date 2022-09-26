@@ -9,7 +9,7 @@
  */
 import {storiesOf} from "@storybook/react";
 import DataGridWithInfiniteScroll,{GridSelectionType} from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
-import {columnsData, rowData,filterComponent} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
+import {columnsData, rowData, filterComponent, detailColumns,DETAILDATA,detailDataProps,} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -19,7 +19,7 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     </div>
 )).add("DataGrid with multi select option", () => (
     <div>
-        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} selectionType={GridSelectionType.MULTI} />
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData}  selectionType={GridSelectionType.MULTI} />
     </div>
 )).add("DataGrid with single select option", () => (
     <div>
@@ -31,7 +31,7 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     </div>
 )).add("DataGrid with Panel Filter", () => (
     <div>
-        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} filterData={filterComponent()}/>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} filterData={filterComponent()} />
     </div>
 ))
 .add("Grid with Column Hide/Show", () => (
@@ -40,6 +40,16 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
             rows={rowData} columns={columnsData}
             showColumnSelect={true}
             defaultColumnHeader={"Serial"}
+        />
+    </div>
+))
+.add("Grid with Detail Panel", () => (
+    <div>
+        <DataGridWithInfiniteScroll
+            rows={DETAILDATA}
+            columns={detailColumns}
+            showDetailPanel={true}
+            detailDataProps={detailDataProps}
         />
     </div>
 ))

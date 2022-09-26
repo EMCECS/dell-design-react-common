@@ -54,10 +54,8 @@ export const filterComponent = () => {
                             />
                             <CheckBox
                                 label="Complete"
-                                checked={false}
                             /> <CheckBox
                                 label="In Queue"
-                                checked={false}
                             />
                         </div>
                     </Accordion.Body>
@@ -71,4 +69,85 @@ export const filterComponent = () => {
             </Accordion>
         </>
     );
+};
+
+export const DETAILDATA: any = [];
+
+export function createRandomData() {
+    return {
+        status: faker.helpers.arrayElement(["good", "bad", "suspect"]),
+        name: faker.helpers.arrayElement(["Disk 2", "Disk 1"]),
+        slot: faker.helpers.arrayElement(["1", "2"]),
+        serial: faker.lorem.word(),
+        type: faker.helpers.arrayElement(["Read/Write", "Read"]),
+        capacityUsed: faker.helpers.arrayElement(["100 GiB", "200 GiB"]),
+        controller: faker.helpers.arrayElement(["1"]),
+        blockSize: faker.helpers.arrayElement(["512 bytes"]),
+        operationalState: faker.helpers.arrayElement(["N/A"]),
+        remainingDriveLife: faker.helpers.arrayElement(["N/A"]),
+        progress: faker.helpers.arrayElement(["N/A"]),
+        usedRAIDDiskSpace: faker.helpers.arrayElement(["0 GB"]),
+        availableRAIDDiskSpace: faker.helpers.arrayElement(["0 GB"]),
+        negotiatedSpeed: faker.helpers.arrayElement(["6 Gbps"]),
+        capableSpeed: faker.helpers.arrayElement(["6 Gbps"]),
+        serialNumber: faker.lorem.word(),
+        revision: faker.lorem.word(),
+        productId: faker.lorem.word(),
+        manufacturer: faker.lorem.word(),
+        partNumber: faker.lorem.word(),
+        SASAddress: faker.lorem.word(),
+        powerStatus: faker.lorem.word(),
+        failurePredicted: faker.helpers.arrayElement(["Yes", "No"]),
+        deviceDescription: faker.lorem.sentence(),
+        capacityAvailable: faker.helpers.arrayElement(["200 GiB", "100 Gib"]),
+    };
+}
+
+Array.from({ length: 20 }).forEach(() => {
+    DETAILDATA.push(createRandomData());
+});
+
+export const issueData: any = [];
+
+export function createRandomIssues() {
+    return {
+        acknowledged: faker.helpers.arrayElement(["true", "false"]),
+        clearType: faker.helpers.arrayElement(["Manual", "Auto"]),
+        id: faker.helpers.arrayElement([
+            "SXNzdWU6ZGVja3MtYXRsYW50aWMtVXBkYXRlLUFwcGxpY2F0aW9uLWF0bGFudGljLWRlY2tz",
+        ]),
+        message: faker.lorem.sentence(),
+        namespace: faker.lorem.word(),
+        reason: faker.lorem.word(),
+        remedies: [faker.lorem.sentence()],
+    };
+}
+
+Array.from({ length: 20 }).forEach(() => {
+    issueData.push(createRandomIssues());
+});
+
+export const detailColumns = [
+    { accessor: "status", Header: "Status", show: true },
+    { accessor: "name", Header: "Disk", show: true},
+    { accessor: "slot", Header: "Slot", show: false },
+    { accessor: "serial", Header: "Serial#",  show: true},
+    { accessor: "type", Header: "Type", show: false },
+    { accessor: "capacityUsed", Header: "Capacity Used", show: true },
+];
+
+export const detailColumnName = {
+    acknowledged: "Acknowledge",
+    clearType: "Clear Type",
+    id: "Id",
+    message: "Message",
+    namespace: "Namespace",
+    reason: "Reason",
+    remedies: "Remedies",
+};
+
+export const detailDataProps = {
+    columnNames: detailColumnName,
+    detailPaneContentJSON: issueData,
+    title: "namespace",
 };

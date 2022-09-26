@@ -19,6 +19,8 @@ import filterOpen from "assets/filter-solid.svg";
 import emptyDatagrid from "assets/emptyDatagrid.svg";
 import { Card, CardBlock, CardTitle } from "@dellstorage/clarity-react/cards";
 import CloseButton from "react-bootstrap/CloseButton";
+import { Table } from "@dellstorage/clarity-react/tables";
+
 /**
  * General component description :
  * DataGridWithInfiniteScroll :
@@ -28,6 +30,20 @@ export enum GridSelectionType {
     MULTI = "multi",
     SINGLE = "single",
 }
+
+/**
+ * type for datagrid row detail pane data :
+ * @param {title} title for detail pane
+ * @param {columnNames} ColumnNames is for detail panel column display
+ * @param {detailPaneContentJSON} detailPaneContentJSON  to fetch row detail pane contents in JSON
+ */
+    type DetailPaneData = {
+    title?: any; // TODO : Change "any" to specific type while writing wrappers
+    columnNames?: any; // TODO : Change "any" to specific type while writing wrappers
+    detailPaneContentJSON: any; // TODO : Change "any" to specific type while writing wrappers
+};
+
+
 /**
  * @param {rows} rows data
  * @param {columns} column details
@@ -36,7 +52,10 @@ export enum GridSelectionType {
  * @param {isLoading} if true then show loading icon before table is rendered
  * @param {className} is to get a custom class to be applied or else default class is applied.
  * @param {showColumnSelect} showColumnSelect is boolean value if true,column can be show or hide
- * @param {defaultColumnHeader} defaultColumnHeader is to set one default@param {defaultColumnHeader} defaultColumnHeader is to set one default column on Column Show Hide functionality to show that column on DataGrid column on Column Show Hide functionality to show that column on DataGrid
+ * @param {defaultColumnHeader} defaultColumnHeader is to set one default
+ * @param {detailDataProps} detailDataProps is to get the data for detail panel in key value format
+ * @param {detailPaneContent} detailPaneContent is to display funtion in detail panel instean of key value
+ * @param {showDetailPanel} if true, detail panel on datagrid will appear else not
  */
 type DataGridProps = {
     rows: {[key: string]: any}[];
@@ -50,16 +69,29 @@ type DataGridProps = {
     filterData?:any;
     showColumnSelect?: boolean;
     defaultColumnHeader?: string;
+    detailDataProps?: DetailPaneData;
+    detailPaneContent?: any; // TODO : Change "any" to specific type while writing wrappers
+    showDetailPanel?: boolean;
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
     const {style, isLoading, columns, className,selectionType,isSorting,isFilter,filterData} = props;
     const refSetting: any = useRef();
     const data = props.rows;
+    const detailPaneContent = props?.detailPaneContent;
+    const detailDataProps: DetailPaneData | undefined = props?.detailDataProps;
+    const showDetailPanel = props?.showDetailPanel
     const [isFilterOpen, toggleFilter] = useState<boolean>(false);
     const showColumnSelect = props?.showColumnSelect;
     const defaultColumnHeader  = props?.defaultColumnHeader;
     const [isOpen, setOpen] = useState<boolean>(false);
+    const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(false);
+    const [, setDetailRowIndex] = useState<number>();
+    const [showDetailData, setShowDetailData] =
+        useState<{ key: string; value: "" }[]>();
+    const [showDetailPanelTitle, setShowDetailPanelTitle] = useState<string>();
+    let expandData: { key: string; value: any }[] = [{ key: "", value: "" }]; // TODO : Change "any" to specific type while writing wrappers
+
     const tableHooks = (hooks: Hooks) => {
         if (selectionType === GridSelectionType.MULTI) {
             hooks.visibleColumns.push((columns: Column<{[key: string]: any}>[]) => [
@@ -97,6 +129,68 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
           setIsChecked(rows);
          }
         }, [rows]);
+
+    /**
+  * handleDetailsPanel function
+  * This function returns the details for detail panel content
+  */
+ const handleDetailsPanel = (row: any, index: number) => {
+    let detailPanelKeys = Object.keys(detailDataProps?.columnNames);
+    for (let j = 0; j < detailPanelKeys.length; j++) {
+     let keyValue = {
+      key: detailDataProps?.columnNames[detailPanelKeys[j]],
+      value: String(
+          detailDataProps?.detailPaneContentJSON[index][detailPanelKeys[j]]
+      ),
+     };
+     expandData.push(keyValue);
+    }
+    setShowDetailData(expandData);
+    setShowDetailPanelTitle(
+        detailDataProps?.detailPaneContentJSON[index][detailDataProps?.title]
+    );
+    setDetailRowIndex(index);
+    setShowDetailsPanel(true);
+   };
+
+   /**
+    * This function is to return a panel (Box) of detail panel component
+    */
+   const getDetailPanel = () => {
+    return (
+        <Card className="details-card">
+         <CardTitle>
+          <div className="title-container">
+           <h2 className="title">{showDetailPanelTitle}</h2>
+          </div>
+         </CardTitle>
+         <CardBlock>
+          {detailPaneContent ? (
+              detailPaneContent()
+          ) : (
+              <Table isNonBordered className="borderless-table">
+               <tbody>
+               {showDetailData?.map((item: { key: string; value: "" }) => (
+                   <tr key={item.key}>
+                    <td>{item.key}</td>
+                    <td className="value-width">{item.value}</td>
+                   </tr>
+               ))}
+               </tbody>
+              </Table>
+          )}
+          <Button
+              primary
+              className="medium-button"
+              onClick={() => setShowDetailsPanel(false)}
+          >
+           {Constants.CLOSE}
+          </Button>
+         </CardBlock>
+        </Card>
+    );
+   };
+
 
     /**
      * Function to render react table Header
@@ -164,10 +258,14 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const renderTableRow = () => {
         return (
             <tbody {...getTableBodyProps()} className={className}>
-            {rows.map((row) => {
+            {rows.map((row,index) => {
                 prepareRow(row);
                 return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} onClick={() =>
+                        showDetailPanel
+                            ? handleDetailsPanel(row, index)
+                            : ""
+                    }>
                         {selectionType === GridSelectionType.SINGLE &&
                             renderSingleSelectDataGridRow(row)}
                         {row.cells.map((cell) => {
@@ -179,6 +277,18 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             </tbody>
         );
     };
+
+    /**
+  * This function is to return detail panel
+  */
+ const displayDetailPanel = () => {
+    return (
+        // <div className={showDetailsPanel ? "clr-col-4" : ""}>
+         <div className="details-pane">{getDetailPanel()}</div>
+        // </div>
+    );
+   };
+
 const showFilterIcon =()=>{
     return(
         <div
@@ -278,11 +388,13 @@ const showFilterIcon =()=>{
         return (
             <div className="empty-datagrid-style">
             <div className="datagrid-placeholder-container">
-            <div className="datagrid-placeholder datagrid-empty clr-align-items-center clr-justify-content-center">
-            <div />
-            <img src={emptyDatagrid} alt={emptyDatagrid} />
-            {Constants.EMPTY_DATA_GRID_NO_ITEMS_FOUND}
-            </div>
+             <div className="datagrid-placeholder clr-align-items-center clr-justify-content-center">
+              <div />
+              <tbody>
+              <img src={emptyDatagrid} alt={emptyDatagrid} />
+              {Constants.EMPTY_DATA_GRID_NO_ITEMS_FOUND}
+              </tbody>
+             </div>
             </div>
             </div>
         );
@@ -304,25 +416,33 @@ const showFilterIcon =()=>{
                               className={"column-select-icon"}
                           />
             )}
-          {isFilter &&
-              <div className={"row"}>
-                  <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : "clr-col-12"}>
-                  <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
-                      {renderTableHeader()}
-                      {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
-                  </table>
-                  </div>
-                  {isFilterOpen && displayFilterPanel()}
-              </div>
-          }
+
+                {isFilter &&
+                    <div className={"row"}>
+                        <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : "clr-col-12"}>
+                            <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
+                                {renderTableHeader()}
+                                {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
+                            </table>
+                        </div>
+                        {isFilterOpen && displayFilterPanel()}
+                    </div>
+                }
                 {!isFilter &&
+                    <div className={showDetailsPanel && showDetailPanel ? "clr-row" : ""}>
+                        <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
                     <table {...getTableProps()} style={style}
                            className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9 data-grid-infinite-table" : "data-grid-infinite-table"}>
                         {renderTableHeader()}
                         {allValues.length !== 0 ? renderTableRow() : renderEmptyDatagrid()}
                     </table>
+                        </div>
+                        {showDetailsPanel &&
+                            showDetailData !== undefined &&
+                            <div className="clr-col-4">  {displayDetailPanel()} </div>}
+                    </div>
                 }
-         </>
+            </>
         );
     };
 
