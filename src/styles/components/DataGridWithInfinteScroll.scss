@@ -79,3 +79,132 @@ $table-padding: 0 0 0 0.8rem;
     }
   }
 }
+
+.ColumnSelect-header-names {
+  padding-left: 4px;
+}
+
+.column-switch {
+  border-radius: var(--clr-global-borderradius, 0.15rem);
+  background-color: var(--clr-datagrid-popover-bg-color, white);
+  border-width: var(--clr-global-borderwidth, 0.05rem);
+  border-style: solid;
+  padding: 0rem;
+  border-color: var(--clr-datagrid-popover-border-color, #cccccc);
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1060;
+
+  .hr{
+   margin: 0rem 0;
+   margin-top: 1rem;
+   color: inherit;
+   border: 0;
+   border-top: 1px solid;
+   opacity: 0.25;
+  }
+}
+
+.clr-popover-content {
+  position: fixed;
+  z-index: 5000;
+}
+
+.column-picker-icon {
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.column-select {
+  // making the button color to transparent
+  .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+    background-color: transparent;
+    border: unset;
+    padding: unset;
+  
+}
+  // removing the focus box shadow
+  .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: unset;
+  }
+}
+
+.checkbox {
+  margin: 0.5em 0 0.5em 0.5em;
+}
+
+.reset-button {
+  color: $blue-600;
+  font-weight: 500;
+}
+
+.column-select-icon{
+    float:right;
+    padding: 0rem !important;
+    .btn{
+      clr-icon {
+        width: 25px !important;
+        height: 20px !important;
+      }
+    }
+  
+  }
+  
+  .column-select-popup{
+    float: right;
+    position: absolute !important;
+    top: 55px !important;
+    right: 43px !important;
+    .btn {
+      .btn-link:focus {
+      outline: none !important;
+      outline-offset: 0 !important;
+      }
+    }
+    .btn.btn-link:hover {
+      color: transparent !important;
+    }
+    .btn.btn-link:focus {
+        outline: none !important;
+        outline-offset: 0px !important;
+    }
+    .btn:hover {
+      border-color: transparent !important;
+    }
+  
+    .btn:focus {
+      outline: none!important; 
+      outline-offset: 0px !important; 
+    }
+  }
+
+  .ColumnSelect {
+    width: max-content;
+    padding-bottom: 0rem !important;
+     padding-top: 1rem !important;
+     padding-left: 1.4rem !important;
+     padding: 0rem;
+     width: max-content;
+     align-items: center;
+     text-align: justify;
+  }
+  
+  .ColumnSelect-header {
+    font-weight: 700 !important;
+  }
+  
+  .ColumnSelect-reset-button {
+    height: 40px;
+    padding-bottom: 0.3rem !important;
+     padding-top: 0rem !important;
+     padding-right: 0rem;
+     padding-left: 1.5rem;
+     .checkbox {
+         margin: 0em; 
+   }
+  } 
+  
+  .Reset-button-margin-css {
+    margin: 0 !important;
+  }

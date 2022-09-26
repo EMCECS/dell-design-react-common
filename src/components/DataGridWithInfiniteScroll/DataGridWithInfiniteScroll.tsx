@@ -7,7 +7,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-import {useRef,useState} from "react";
+import {useRef,useState, forwardRef, useEffect} from "react";
+import { Button } from "@dellstorage/clarity-react/forms/button";
 import {useTable, Column,useRowSelect, Hooks,useSortBy} from "react-table";
 import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
@@ -33,6 +34,8 @@ export enum GridSelectionType {
  * @param {style} to add custom CSS styles
  * @param {isLoading} if true then show loading icon before table is rendered
  * @param {className} is to get a custom class to be applied or else default class is applied.
+ * @param {showColumnSelect} showColumnSelect is boolean value if true,column can be show or hide
+ * @param {defaultColumnHeader} defaultColumnHeader is to set one default@param {defaultColumnHeader} defaultColumnHeader is to set one default column on Column Show Hide functionality to show that column on DataGrid column on Column Show Hide functionality to show that column on DataGrid
  */
 type DataGridProps = {
     rows: {[key: string]: any}[];
@@ -44,6 +47,8 @@ type DataGridProps = {
     isSorting?:boolean;
     isFilter?:boolean;
     filterData?:any;
+    showColumnSelect?: boolean;
+    defaultColumnHeader?: string;
 };
 
 function DataGridWithInfiniteScroll(props: DataGridProps) {
@@ -51,6 +56,9 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     const refSetting: any = useRef();
     const data = props.rows;
     const [isFilterOpen, toggleFilter] = useState<boolean>(false);
+    const showColumnSelect = props?.showColumnSelect;
+    const defaultColumnHeader  = props?.defaultColumnHeader;
+    const [isOpen, setOpen] = useState<boolean>(false);
     const tableHooks = (hooks: Hooks) => {
         if (selectionType === GridSelectionType.MULTI) {
             hooks.visibleColumns.push((columns: Column<{[key: string]: any}>[]) => [
@@ -73,7 +81,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
      * @param {prepareRow} is a function that must be called on any row to be displayed. It is responsible for preparing a row for rendering.
      * @param {useTable } hook takes options and plugins to build a table instance. The basic options are columns and row data
      */
-    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
+    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns, getToggleHideAllColumnsProps} = useTable({
         columns,
         data,
     },
@@ -195,11 +203,83 @@ const showFilterIcon =()=>{
             </div>
         );
     };
+
+    // This funtion is to get the Reset Setting for column selection, which shows all the columns
+    const IndeterminateCheckbox = forwardRef(
+        ({ indeterminate, ...rest }: any, ref) => {
+        //Can not change any type, as this are in built func
+        const defaultRef = useRef();
+        const resolvedRef: any = ref || defaultRef; // TODO : Change "any" to specific type while writing wrappers
+
+        useEffect(() => {
+        resolvedRef.current.indeterminate = indeterminate;
+        }, [resolvedRef, indeterminate]);
+        return (
+            <div className="checkbox">
+            <label>
+            <input
+                type="checkbox"
+                className="input-assumpte"
+                ref={resolvedRef}
+                {...rest}
+            />
+            <span className="reset-button">{Constants.RESET_SETTINGS}</span> 
+            </label> 
+            </div>
+        );
+        }
+    );
+
+    //RenderColumnSelection function returns the column selection 
+    const renderColumnSelection = () => {
+        const toggleHideAllColumnProps : any = {...getToggleHideAllColumnsProps()};
+        return (
+            <div className="column-switch clr-popover-content column-select-popup">
+              <div className="ColumnSelect">
+                <span className="ColumnSelect-header">{Constants.COLUMN_PICKER}</span>
+    
+                    {allColumns.map(
+                        (
+                            column: any // TODO : Change "any" to specific type while writing wrappers
+                        ) => (
+                            <div key={column.id}>
+                            {column.Header !== defaultColumnHeader && 
+                            (
+                            <label>
+                                    <input type="checkbox" id={Constants.ID_FOR_ALL_COLUMN_SELECT} {...column.getToggleHiddenProps()} />
+                                    <span className="ColumnSelect-header-names">{column.Header}</span>                               
+                            </label>
+                            )}
+                            </div>
+                        )
+                    )}
+               </div>
+               <hr></hr>
+                <div className="ColumnSelect-reset-button">     
+                    { toggleHideAllColumnProps.indeterminate != 0 ?  <IndeterminateCheckbox {...getToggleHideAllColumnsProps()} />
+                    : (<label> <span className="reset-button">{Constants.RESET_SETTINGS}</span> </label>)
+                    }
+                </div>
+            </div>
+        );
+    };
+
     //Function to render react table with Table Header and Table Rows
     const renderTable = () => {
         return (
             <>
           {isFilter?showFilterIcon():''}
+          {isOpen && renderColumnSelection()}
+            {showColumnSelect && (                         
+                          <Button
+                              link
+                              onClick={() => setOpen(!isOpen)}
+                              icon={{
+                               shape:"view-columns"                               
+                              }}
+                              className={"column-select-icon"}
+                          />
+            )}
             <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
                 {renderTableHeader()}
                 {renderTableRow()}
