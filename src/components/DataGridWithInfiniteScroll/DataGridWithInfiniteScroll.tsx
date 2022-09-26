@@ -16,7 +16,7 @@ import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
 import {Icon} from "@dellstorage/clarity-react/icon";
 import filter from "assets/filter.svg";
 import filterOpen from "assets/filter-solid.svg";
-import emptyDatagrid from "assets/images/emptyDatagrid.svg";
+import emptyDatagrid from "assets/emptyDatagrid.svg";
 import { Card, CardBlock, CardTitle } from "@dellstorage/clarity-react/cards";
 import CloseButton from "react-bootstrap/CloseButton";
 /**
@@ -196,17 +196,15 @@ const showFilterIcon =()=>{
     const displayFilterPanel = () => {
         return (
             <div className="col-sm-2 col-md-2 col-lg-3">
-                <div className="filter-pane">
-                    <Card>
-                        <CloseButton
-                            onClick={() => closeFilter()}
-                            className={"align-close-icon"}
-                        />
-                        <CardBlock>
-                            <CardTitle>{Constants.DEFAULT_FILTER_TITLE}</CardTitle>
-                        </CardBlock>
-                        <div className="filter-item-container">{filterData}</div>
-                    </Card>
+                <div className="filter-panel">
+                    <section className={"filter_header"}>
+                        {Constants.DEFAULT_FILTER_TITLE}
+                        <span  onClick={() => closeFilter()} className={"align-close-icon"}>
+                        <Icon shape={"window-close"}/>
+                        </span>
+                    </section>
+                    <div className="filter_divider"/>
+                   <div className="filter-item-container">{filterData}</div>
                 </div>
             </div>
         );
@@ -306,12 +304,25 @@ const showFilterIcon =()=>{
                               className={"column-select-icon"}
                           />
             )}
-            <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
-                {renderTableHeader()}
-                {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
-            </table>
-                {isFilterOpen && displayFilterPanel()}
-            </>
+          {isFilter &&
+              <div className={"row"}>
+                  <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : "clr-col-12"}>
+                  <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
+                      {renderTableHeader()}
+                      {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
+                  </table>
+                  </div>
+                  {isFilterOpen && displayFilterPanel()}
+              </div>
+          }
+                {!isFilter &&
+                    <table {...getTableProps()} style={style}
+                           className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9 data-grid-infinite-table" : "data-grid-infinite-table"}>
+                        {renderTableHeader()}
+                        {allValues.length !== 0 ? renderTableRow() : renderEmptyDatagrid()}
+                    </table>
+                }
+         </>
         );
     };
 
