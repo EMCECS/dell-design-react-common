@@ -297,6 +297,24 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     );
    };
 
+const showColumnSelectIcon =()=>{
+    return(
+        <div
+            className={"filter-icon"}
+            onClick={() => setOpen(!isOpen)}
+        >
+           <Button
+                              link
+                             
+                              icon={{
+                               shape:"view-columns"                               
+                              }}
+                              className={"column-select-icon"}
+                          />
+        </div>
+    )
+}
+
 const showFilterIcon =()=>{
     return(
         <div
@@ -311,6 +329,8 @@ const showFilterIcon =()=>{
         </div>
     )
 }
+
+
     const displayFilterPanel = () => {
         return (
             <div className="col-sm-2 col-md-2 col-lg-3">
@@ -413,17 +433,9 @@ const showFilterIcon =()=>{
         return (
             <>
           {isFilter?showFilterIcon():''}
+          {showColumnSelect ? (showColumnSelectIcon()) : ""}
           {isOpen && renderColumnSelection()}
-            {showColumnSelect && (                         
-                          <Button
-                              link
-                              onClick={() => setOpen(!isOpen)}
-                              icon={{
-                               shape:"view-columns"                               
-                              }}
-                              className={"column-select-icon"}
-                          />
-            )}
+            
 
 
                 {isFilter &&
@@ -441,7 +453,7 @@ const showFilterIcon =()=>{
                     </div>
                 }
                 {!isFilter &&
-                    <div className={showDetailsPanel && showDetailPanel ? "clr-row" : ""}>
+                    <div className={showDetailsPanel && showDetailPanel ? "clr-row" : "nonflex-row"}>
                         <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
                     <table {...getTableProps()} style={style}
                            className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9 data-grid-infinite-table" : "data-grid-infinite-table"}>

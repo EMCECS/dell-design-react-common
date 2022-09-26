@@ -410,3 +410,10 @@ text-align: right;
 .text-alingment-center{
   padding-top: 0.5rem !important;
 }
+
+.nonflex-row{
+  display: contents !important;
+  .row {
+    display: contents !important;
+  }
+}
