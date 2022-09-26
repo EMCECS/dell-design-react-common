@@ -155,7 +155,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
     setDetailRowIndex(index);
     setShowDetailsPanel(true);
    };
-  
+
    /**
     * This function is to return a panel (Box) of detail panel component
     */
@@ -193,7 +193,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         </Card>
     );
    };
-  
+
 
     /**
      * Function to render react table Header
@@ -250,7 +250,6 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
                                       column.isResizing ? "isResizing" : ""
                                   }`}
                               />
-                            {/* <div className={"datagrid-column-separator"} /> */}
                         </th>
                     ))}
                 </tr>
@@ -315,17 +314,15 @@ const showFilterIcon =()=>{
     const displayFilterPanel = () => {
         return (
             <div className="col-sm-2 col-md-2 col-lg-3">
-                <div className="filter-pane">
-                    <Card>
-                        <CloseButton
-                            onClick={() => closeFilter()}
-                            className={"align-close-icon"}
-                        />
-                        <CardBlock>
-                            <CardTitle>{Constants.DEFAULT_FILTER_TITLE}</CardTitle>
-                        </CardBlock>
-                        <div className="filter-item-container">{filterData}</div>
-                    </Card>
+                <div className="filter-panel">
+                    <section className={"filter_header"}>
+                        {Constants.DEFAULT_FILTER_TITLE}
+                        <span  onClick={() => closeFilter()} className={"align-close-icon"}>
+                        <Icon shape={"window-close"}/>
+                        </span>
+                    </section>
+                    <div className="filter_divider"/>
+                   <div className="filter-item-container">{filterData}</div>
                 </div>
             </div>
         );
@@ -407,7 +404,7 @@ const showFilterIcon =()=>{
               </tbody>
              </div>
             </div>
-           </div>
+            </div>
         );
     };
 
@@ -427,18 +424,36 @@ const showFilterIcon =()=>{
                               className={"column-select-icon"}
                           />
             )}
-            <div className={showDetailsPanel && showDetailPanel ? "clr-row" : ""}>
-              <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
-                <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
-                    {renderTableHeader()}
-                    {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
-                </table>
-             </div>
-                    {isFilterOpen && displayFilterPanel()}
-                    {showDetailsPanel &&
-                showDetailData !== undefined &&
-                <div className="clr-col-4">  {displayDetailPanel()} </div>}
-            </div>
+
+
+                {isFilter &&
+                    <div className={showDetailsPanel && showDetailPanel ? "clr-row" : "row"}>
+                        <div className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9" : "clr-col-12"}>
+                            <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
+                                {renderTableHeader()}
+                                {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
+                            </table>
+                        </div>
+                        {isFilterOpen && displayFilterPanel()}
+                        {showDetailsPanel &&
+                            showDetailData !== undefined &&
+                            <div className="clr-col-4">  {displayDetailPanel()} </div>}
+                    </div>
+                }
+                {!isFilter &&
+                    <div className={showDetailsPanel && showDetailPanel ? "clr-row" : ""}>
+                        <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
+                    <table {...getTableProps()} style={style}
+                           className={isFilterOpen ? "col-sm-10 col-md-10 col-lg-9 data-grid-infinite-table" : "data-grid-infinite-table"}>
+                        {renderTableHeader()}
+                        {allValues.length !== 0 ? renderTableRow() : renderEmptyDatagrid()}
+                    </table>
+                        </div>
+                        {showDetailsPanel &&
+                            showDetailData !== undefined &&
+                            <div className="clr-col-4">  {displayDetailPanel()} </div>}
+                    </div>
+                }
             </>
         );
     };

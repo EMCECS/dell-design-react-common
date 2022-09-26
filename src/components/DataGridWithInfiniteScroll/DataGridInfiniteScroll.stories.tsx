@@ -9,7 +9,7 @@
  */
 import {storiesOf} from "@storybook/react";
 import DataGridWithInfiniteScroll,{GridSelectionType} from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
-import {columnsData, rowData, detailColumns,DETAILDATA,detailDataProps,} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
+import {columnsData, rowData, filterComponent, detailColumns,DETAILDATA,detailDataProps,} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -19,7 +19,7 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     </div>
 )).add("DataGrid with multi select option", () => (
     <div>
-        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isSorting={true} selectionType={GridSelectionType.MULTI} />
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData}  selectionType={GridSelectionType.MULTI} />
     </div>
 )).add("DataGrid with single select option", () => (
     <div>
@@ -31,7 +31,7 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
     </div>
 )).add("DataGrid with Panel Filter", () => (
     <div>
-        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} />
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} filterData={filterComponent()} />
     </div>
 ))
 .add("DataGrid with Column Resize", () => (
