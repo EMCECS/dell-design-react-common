@@ -9,7 +9,7 @@
  */
 import {storiesOf} from "@storybook/react";
 import DataGridWithInfiniteScroll,{GridSelectionType} from "components/DataGridWithInfiniteScroll/DataGridWithInfiniteScroll";
-import {columnsData, rowData} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
+import {columnsData, rowData, detailColumns,DETAILDATA,detailDataProps,} from "components/DataGridWithInfiniteScroll/DatagridInfiniteScrollMockData";
 import "styles/components/DataGridWithInfinteScroll.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -40,6 +40,16 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
             rows={rowData} columns={columnsData}
             showColumnSelect={true}
             defaultColumnHeader={"Serial"}
+        />
+    </div>
+))
+.add("Grid with Detail Panel", () => (
+    <div>
+        <DataGridWithInfiniteScroll
+            rows={DETAILDATA}
+            columns={detailColumns}
+            showDetailPanel={true}
+            detailDataProps={detailDataProps}
         />
     </div>
 ))

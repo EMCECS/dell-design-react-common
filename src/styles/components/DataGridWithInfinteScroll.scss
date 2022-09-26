@@ -211,8 +211,9 @@ $table-padding: 0 0 0 0.8rem;
 
   .empty-datagrid-style {
     text-align: center;
-    padding-top: 10.625rem;
+    padding-top: 7rem;
     border-top: 1px solid #E4E4E4;
+    display: flex;
   }
 
   .datagrid-placeholder-container {
@@ -227,6 +228,119 @@ $table-padding: 0 0 0 0.8rem;
     align-items: center !important;
   }
   
+  .table body{
+    position: relative;
+  }
   .clr-justify-content-center {
     justify-content: center !important;
   }
+
+  .empty-datagrid-header-bottom {
+    td, th {
+      border-bottom-style: solid !important;
+      border-bottom-width: 0.02rem !important;
+      border-bottom-color: #E4E4E4 !important;
+    }
+  }
+
+  .datagrid-container {
+    display: flex;
+    padding: unset;
+
+    .datagrid {
+      width: 100%;
+      flex: 1;
+      margin: unset;
+
+      .datagrid {
+        border: unset;
+
+        .datagrid-header {
+          height: 2.4rem;
+        }
+      }
+    }
+  }
+
+  .detailPanelCSS {
+    width: 60%;
+   overflow-x: scroll;
+ }
+
+ .details-pane {
+  flex: 1;
+  animation: expand 500ms ease-in-out;
+  animation-direction: alternate;
+  min-width: 1%;
+  max-width: 24.217rem;
+  max-height: 34.1985rem;
+  margin-left: 1.153rem;
+
+  .card {
+    margin-top: unset;
+  }
+}
+
+ 
+.details-card {
+  padding: 1.295rem 2.2585rem 1.7635rem 1.677rem;
+  margin-top: 0;
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      margin: unset;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.15rem;
+    }
+
+    .close-button {
+      height: 1.2rem !important;
+      margin: unset;
+    }
+  }
+  .borderless-table {
+    &.table.table-noborder td {
+      text-align: left;
+      border: unset;
+      min-width: 50%;
+      font-size: 0.65rem;
+      font-weight: 500;
+      line-height: 0.75rem;
+    }
+  }
+
+  .card-block {
+    padding: unset;
+    margin: unset;
+
+    table {
+      margin-top: unset;
+    }
+  }
+
+  .card-title {
+    margin-bottom: 1.19rem;
+  }
+
+  .medium-button {
+    margin: unset;
+    margin-top: 1.1975rem;
+    height: 1.6rem !important;
+  }
+}
+
+.value-width {
+  max-width: 12rem !important;
+  word-wrap: break-word !important;
+}
+
+.detailPanel-tab{
+  .clr-col-4{
+      flex: 0 0 33.3333333333%;
+      max-width: 45%;
+  }
+}
