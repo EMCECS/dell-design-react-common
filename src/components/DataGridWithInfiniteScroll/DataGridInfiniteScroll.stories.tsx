@@ -34,7 +34,12 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
         <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} isFilter={true} />
     </div>
 ))
-.add("Grid with Column Hide/Show", () => (
+.add("DataGrid with Column Resize", () => (
+    <div>
+        <DataGridWithInfiniteScroll rows={rowData} columns={columnsData} />
+    </div>
+))
+.add("DataGrid with Column Hide/Show", () => (
     <div>
         <DataGridWithInfiniteScroll
             rows={rowData} columns={columnsData}
@@ -43,7 +48,7 @@ storiesOf("Data Grid with Infinite Scroll", module).add("Basic Grid", () => (
         />
     </div>
 ))
-.add("Grid with Detail Panel", () => (
+.add("DataGrid with Detail Panel", () => (
     <div>
         <DataGridWithInfiniteScroll
             rows={DETAILDATA}

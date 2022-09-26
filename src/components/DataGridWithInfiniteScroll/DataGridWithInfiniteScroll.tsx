@@ -9,7 +9,7 @@
  */
 import {useRef,useState, forwardRef, useEffect} from "react";
 import { Button } from "@dellstorage/clarity-react/forms/button";
-import {useTable, Column,useRowSelect, Hooks,useSortBy} from "react-table";
+import {useTable, Column,useRowSelect, Hooks,useSortBy,useResizeColumns, useFlexLayout,useBlockLayout} from "react-table";
 import {Spinner, SpinnerSize} from "@dellstorage/clarity-react/spinner/Spinner";
 import {Constants} from "components/DataGridWithInfiniteScroll/Constants";
 import {CheckBox} from "@dellstorage/clarity-react/forms/checkbox/CheckBox";
@@ -113,6 +113,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
      * @param {rows} display rows of the datagrid
      * @param {prepareRow} is a function that must be called on any row to be displayed. It is responsible for preparing a row for rendering.
      * @param {useTable } hook takes options and plugins to build a table instance. The basic options are columns and row data
+     * @param {useResizeColumns} this is default functionality of react table to provide column resize
      */
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns, getToggleHideAllColumnsProps} = useTable({
         columns,
@@ -121,6 +122,8 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
         tableHooks,
         useSortBy,
         useRowSelect,
+        useFlexLayout,
+        useResizeColumns
         );
     
     const [allValues, setIsChecked] = useState<any>([]); // TODO : Change "any" to specific type while writing wrappers
@@ -238,10 +241,16 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
                     {headerGroup.headers.map((column:any) => (
                         <th {...column.getHeaderProps(isSorting?column.getSortByToggleProps():'')}
                             onClick={() => isSorting ? column.toggleSortBy(!column.isSortedDesc):''}
-                        >
+                        className="text-alingment-center">
                             {isSorting?renderSorting(column):''}
                             {!isSorting?column.render(Constants.DEFAULT_COLUMN_HEADER):''}
-                            <div className={"datagrid-column-separator"} />
+                            <div
+                                  {...column.getResizerProps()}
+                                  className={`resizer ${
+                                      column.isResizing ? "isResizing" : ""
+                                  }`}
+                              />
+                            {/* <div className={"datagrid-column-separator"} /> */}
                         </th>
                     ))}
                 </tr>
@@ -261,7 +270,7 @@ function DataGridWithInfiniteScroll(props: DataGridProps) {
             {rows.map((row,index) => {
                 prepareRow(row);
                 return (
-                    <tr {...row.getRowProps()} onClick={() =>
+                    <tr className="text-alingment-center" {...row.getRowProps()} onClick={() =>
                         showDetailPanel
                             ? handleDetailsPanel(row, index)
                             : ""
@@ -419,17 +428,16 @@ const showFilterIcon =()=>{
                           />
             )}
             <div className={showDetailsPanel && showDetailPanel ? "clr-row" : ""}>
-            <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
-                {/* "detailPanelCSS" */}
-            <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
-                {renderTableHeader()}
-                {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
-            </table>
-            </div>
-                {isFilterOpen && displayFilterPanel()}
-                  {showDetailsPanel &&
-               showDetailData !== undefined &&
-               <div className="clr-col-4">  {displayDetailPanel()} </div>}
+              <div className={showDetailsPanel && showDetailPanel ? "clr-col-8" : "clr-col-12" || isFilter  ? "row" : "clr-col-12" }>
+                <table {...getTableProps()} style={style} className={"data-grid-infinite-table"}>
+                    {renderTableHeader()}
+                    {allValues.length !== 0 ?  renderTableRow() : renderEmptyDatagrid() }
+                </table>
+             </div>
+                    {isFilterOpen && displayFilterPanel()}
+                    {showDetailsPanel &&
+                showDetailData !== undefined &&
+                <div className="clr-col-4">  {displayDetailPanel()} </div>}
             </div>
             </>
         );
