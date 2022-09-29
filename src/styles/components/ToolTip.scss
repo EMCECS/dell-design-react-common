@@ -15,6 +15,11 @@
 @import "../common/fonts";
 
 .tooltip {
+    .is-solid {
+        &:hover, &:focus {
+            color: $tooltip-icon-color !important;
+        }
+    }
     .tooltip-content {
         @include tooltip-content;
         &::before{
