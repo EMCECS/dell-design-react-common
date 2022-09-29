@@ -8,28 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import React, { useEffect, useState, useRef } from "react";
-
-/**
- * Props for the doughnut chart
- * @param {size} is to get the width or height of the chart (Width and height would be equal in case of this chart). Defaults to 200px.
- * @param {percentage} is to get the percentage of the chart
- * @param {status} is to get the status color for the chart (Success, Warning and Danger). Defaults to "Success".
- * @param {label} is to get the Label to be displayed in the chart.
- * @param {showPercentage} is a boolean value for displaying percentage in label. Defaults to true.
- * @param {trackWidth} is to get the width of the chart's track. Defaults to 15px.
- * @param {labelLength} is an optional prop to get the truncation length of the label provided. Defaults to 15.
- */
-
-export type CircularProgressType = {
-    size?: number;
-    percentage: number;
-    status?: CHART_STATUS;
-    label: string;
-    showPercentage?: boolean;
-    trackWidth?: number;
-    labelLength?: number;
-}
+import React, { useEffect, useState } from "react";
 
 export enum CHART_STATUS {
     SUCCESS = "success",
@@ -50,6 +29,27 @@ export enum DEFAULT_CHART_VALUES {
     LABEL_LENGTH = 15,
     MIN_SIZE = 100,
     MAX_SIZE = 250,
+}
+
+/**
+ * Props for the doughnut chart
+ * @param {size} is to get the width or height of the chart (Width and height would be equal in case of this chart). Defaults to 200px.
+ * @param {percentage} is to get the percentage of the chart
+ * @param {status} is to get the status color for the chart (Success, Warning and Danger). Defaults to "Success".
+ * @param {label} is to get the Label to be displayed in the chart.
+ * @param {showPercentage} is a boolean value for displaying percentage in label. Defaults to true.
+ * @param {trackWidth} is to get the width of the chart's track. Defaults to 15px.
+ * @param {labelLength} is an optional prop to get the truncation length of the label provided. Defaults to 15.
+ */
+
+ export type CircularProgressType = {
+    size?: number;
+    percentage: number;
+    status?: CHART_STATUS;
+    label: string;
+    showPercentage?: boolean;
+    trackWidth?: number;
+    labelLength?: number;
 }
 
 // This offset will move the text with the specified pixels vertically downwards, preventing the overlap of percentage and label text.
@@ -110,7 +110,7 @@ export const DoughnutChart = (props: CircularProgressType) => {
                 setProgressClass(PROGRESS_CLASS.SUCCESS);
         }
 
-    }, [percentage, setOffset, dimensions.circumference, offset, label, showPercentage, trackWidth])
+    }, [status, percentage, setOffset, dimensions.circumference, offset, label, showPercentage, trackWidth])
     return (
         <React.Fragment key={percentage}>
             <svg className="doughnut-chart" width={size} height={size}>

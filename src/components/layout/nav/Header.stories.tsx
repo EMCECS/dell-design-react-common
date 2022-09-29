@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- import * as React from "react";
+ import React from "react";
  import {storiesOf} from "@storybook/react";
  import {Header, HeaderColor, Nav, NavLevel, NavLink, NavType} from "@dellstorage/clarity-react/layout/nav";
  import "styles/components/Navigation.scss";
@@ -33,26 +33,26 @@
                      </div>
                  </Header>
                  <Nav navLevel={NavLevel.SECONDARY} navType={NavType.HEADER}>
-                    <a className="nav-link nav-icon-text submenu-navlink">
+                    <span className="nav-link nav-icon-text submenu-navlink">
                         <Icon shape={"dashboard"} className="nav-icon" />
                         <span className="nav-text">{"Dashboard"}</span>
-                    </a>
-                    <a className="nav-link nav-icon-text submenu-navlink active">
+                    </span>
+                    <span className="nav-link nav-icon-text submenu-navlink active">
                         <Icon shape={"storage"} className="nav-icon" />
                         <span className="nav-text">{"Object Stores"}</span> 
-                    </a>
-                    <a className="nav-link nav-icon-text submenu-navlink">
+                    </span>
+                    <span className="nav-link nav-icon-text submenu-navlink">
                         <Icon shape={""} className="" />
                         <span className="nav-text">{"ObjectScale Systems"}</span>
-                    </a>
-                    <a className="nav-link nav-icon-text submenu-navlink">
+                    </span>
+                    <span className="nav-link nav-icon-text submenu-navlink">
                         <Icon shape={"file-settings"} className="nav-icon" />
                         <span className="nav-text">{"Settings"}</span>
-                    </a>
-                    <a className="nav-link nav-icon-text submenu-navlink">
+                    </span>
+                    <span className="nav-link nav-icon-text submenu-navlink">
                         <Icon shape={"form"} className="nav-icon" />
                         <span className="nav-text">{"Summary"}</span>
-                    </a>
+                    </span>
                  </Nav>
              </div>
          </React.Fragment>

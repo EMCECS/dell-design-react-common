@@ -54,7 +54,7 @@ storiesOf("DataGrid", module)
                         filter: (
                             <DataGridFilter
                                 onFilter={filterFunction}
-                                columnName={"Name"}
+                                columnName="Serial"
                                 datagridRef={datagridFilterRef}
                                 position={FilterPosition.CENTER}
                             />
@@ -151,7 +151,7 @@ storiesOf("DataGrid", module)
                         filter: (
                             <DataGridFilter
                                 onFilter={filterFunction}
-                                columnName={"Name"}
+                                columnName="Serial"
                                 datagridRef={datagridFilterSortRef}
                                 position={FilterPosition.CENTER}
                             />
@@ -185,7 +185,7 @@ storiesOf("DataGrid", module)
                             filter: (
                                 <DataGridFilter
                                     onFilter={filterFunction}
-                                    columnName={"Name"}
+                                    columnName="Serial"
                                     datagridRef={datagridFilterRef}
                                     position={FilterPosition.CENTER}
                                 />
@@ -213,7 +213,7 @@ storiesOf("DataGrid", module)
                             filter: (
                                 <DataGridFilter
                                     onFilter={filterFunction}
-                                    columnName={"Name"}
+                                    columnName={"Serial"}
                                     datagridRef={datagridFilterRef}
                                     position={FilterPosition.CENTER}
                                     showFilter={false}
