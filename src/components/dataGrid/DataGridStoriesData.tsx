@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2021 - 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,10 +8,10 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
+import React from "react";
 import {DataGridRow, DataGridFilterResult, SortOrder, DataGridColumn} from "@dellstorage/clarity-react/datagrid";
 import {Icon} from "@dellstorage/clarity-react/icon";
 import {Button} from "@dellstorage/clarity-react/forms/button";
-import * as React from "react";
 /**
  * Data for Columns
  */
@@ -196,7 +196,7 @@ export const hideShowColFooter = {
  * Data for Pagination
  */
 
-// Function to get data for page based on pagenumber
+// Function to get data for page based on page number
 export const getPageData = (pageIndex: number, pageSize: number): Promise<DataGridRow[]> => {
     return new Promise((resolve, reject) => {
         let rows: DataGridRow[] = [];
@@ -210,7 +210,7 @@ export const getPageData = (pageIndex: number, pageSize: number): Promise<DataGr
         } else if (pageSize === 10) {
             rows = paginationRows;
         }
-        // Purposefully added dealy here to see loading spinner
+        // Purposefully added delay here to see loading spinner
         setTimeout(function() {
             resolve(rows);
         }, 2000);
@@ -273,27 +273,18 @@ export const paginationDetails = {
     pageSize: 5,
     pageSizes: [5, 10],
 };
+
 /**
  * Data for Filtering
  */
-
- function filterRows(rows: DataGridRow[], columnValues: string[]) {
-    const newRows = rows.filter(row => {
-        let matchFound = false;
-        for (const index in row.rowData) {
-            const content = String(row.rowData[index].cellData);
-            columnValues.forEach(columnValue => {
-                if (content.indexOf(columnValue) !== -1) {
-                    matchFound = true;
-                }
-            });
-        }
-        if (matchFound) {
-            return row;
-        }
-    });
-    return newRows;
-}
+ function filterRows(rows: DataGridRow[], filterColumn: string, columnValues: string[]) {
+     return rows.filter((row) =>
+         row.rowData.some(
+             ({columnName, cellData}) =>
+                 filterColumn === columnName && columnValues.some((value) => cellData.indexOf(value) !== -1),
+         ),
+     );
+ }
 
 
 //Custom function to filter data
@@ -318,7 +309,7 @@ export const filterFunction = (
                 totalItems: normalRows.length,
             };
         } else {
-            const newRows = filterRows(normalRows, Array.isArray(columnValue) ? columnValue : [columnValue]);
+            const newRows = filterRows(normalRows, columnName, Array.isArray(columnValue) ? columnValue : [columnValue]);
             result = {
                 rows: newRows,
                 totalItems: newRows.length,
@@ -335,11 +326,11 @@ export const sortFunction = (rows: DataGridRow[], sortOrder: SortOrder, columnNa
             (first: DataGridRow, second: DataGridRow): number => {
                 let result = 0;
                 let firstRecord = first.rowData.find(function(element: any) {
-                    if (element.columnName === columnName) return element;
+                    return element.columnName === columnName;
                 });
 
                 let secondRecord = second.rowData.find(function(element: any) {
-                    if (element.columnName === columnName) return element;
+                    return element.columnName === columnName;
                 });
 
                 if (firstRecord && secondRecord) {
@@ -352,7 +343,7 @@ export const sortFunction = (rows: DataGridRow[], sortOrder: SortOrder, columnNa
                             if (firstRecord.cellData > secondRecord.cellData) result = -1;
                             else if (firstRecord.cellData < secondRecord.cellData) result = 1;
                         }
-                    } else if (sortOrder == SortOrder.DESC) {
+                    } else if (sortOrder === SortOrder.DESC) {
                         if (contentType === "number") {
                             result = secondRecord.cellData - firstRecord.cellData;
                         } else if (contentType === "string") {

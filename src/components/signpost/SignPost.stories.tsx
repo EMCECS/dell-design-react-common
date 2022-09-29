@@ -146,7 +146,7 @@ storiesOf("Signposts", module)
             <div style={{float: "left"}}>
                 <SignPost
                     direction={SignPostDirection.RIGHT_MIDDLE}
-                    openAt={<a href="javascript://">Hello</a>}
+                    openAt={<span>Hello</span>}
                     customSignPostTrigger
                     signpostHeading={"Signpost Heading"}
                 >

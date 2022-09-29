@@ -15,9 +15,8 @@
 @import "../common/fonts";
 
 .tooltip {
-    .is-solid {
-        color: $tooltip-icon-color!important;
-    }
+    color: $tooltip-icon-color;
+
     .tooltip-content {
         @include tooltip-content;
         &::before{

@@ -11,7 +11,7 @@
  import React from "react";
  import {storiesOf} from "@storybook/react";
  import Wizard, {WizardSize} from "@dellstorage/clarity-react/newWizard/Wizard";
- import WizardStep, {WizardStepType} from "@dellstorage/clarity-react/newWizard/WizardStep";
+ import WizardStep from "@dellstorage/clarity-react/newWizard/WizardStep";
  import {State} from "@sambego/storybook-state";
  import {Button} from "@dellstorage/clarity-react/forms/button";
  import {Input} from "@dellstorage/clarity-react/forms/input/Input";
