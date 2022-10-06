@@ -1,180 +1,180 @@
 {
-    "name": "@dellstorage/dell-design-react-common",
-    "description": "Override CSS of Clarity-React components to align it with Dell design standards",
-    "version": "0.2.3",
-    "license": "Apache-2.0",
-    "private": false,
-    "outDir": "dist",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "engines": {
-        "npm": ">=8.1.2",
-        "node": ">=16.14.1"
-    },
-    "dependencies": {
-        "@dellstorage/clarity-react": "^1.2.1",
-        "@types/node": "^12.14.1",
-        "bootstrap": "^5.2.0",
-        "react": "^17.0.2",
-        "react-bootstrap": "2.1.2",
-        "react-data-table-component": "^7.5.2",
-        "react-dom": "17.0.2",
-        "react-infinite-scroll-component": "^6.1.0",
-        "react-infinite-scroll-hook": "^4.0.3",
-        "react-table": "^7.8.0",
-        "sb": "^6.3.8",
-        "styled-components": "^5.3.5",
-        "typescript": "^4.5.2",
-        "web-vitals": "^1.0.1"
-    },
-    "repository": {
-        "type": "http",
-        "url": "https://github.com/EMCECS/dell-design-react-common"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "eject": "react-scripts eject",
-        "build": "webpack --mode=production --node-env=production && tsc",
-        "copy": "cp package.json ./dist/. && cp README.md ./dist/. ",
-        "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook",
-        "testWithCoverage": "jest --coverage",
-        "test": "jest",
-        "lint": "./node_modules/.bin/eslint **//*.tsx",
-        "precommit": "lint-staged",
-        "publish-public": "npm publish --ignore-scripts --access public",
-        "version": "npm version",
-        "pretty": "prettier --write src/**/*.{js,jsx,json,css,ts,tsx}",
-        "package": "yarn run version patch --unsafe-perm",
-        "package-major": "yarn run lint && yarn run build && yarn run version major --unsafe-perm",
-        "package-minor": "yarn run lint && yarn run build && yarn run version minor --unsafe-perm",
-        "package-patch": "yarn run lint && yarn run build && yarn run version patch --unsafe-perm",
-        "build:dev": "webpack --mode=development  && tsc",
-        "build:prod": "webpack --mode=production --node-env=production  && tsc",
-        "watch": "webpack --watch",
-        "serve": "webpack serve"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
+  "name": "@dellstorage/dell-design-react-common",
+  "description": "Override CSS of Clarity-React components to align it with Dell design standards",
+  "version": "0.2.3",
+  "license": "Apache-2.0",
+  "private": false,
+  "outDir": "dist",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "npm": ">=8.1.2",
+    "node": ">=16.14.1"
+  },
+  "dependencies": {
+    "@dellstorage/clarity-react": "^1.2.1",
+    "@types/node": "^12.14.1",
+    "bootstrap": "^5.2.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "2.1.2",
+    "react-data-table-component": "^7.5.2",
+    "react-dom": "17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-infinite-scroll-hook": "^4.0.3",
+    "react-table": "^7.8.0",
+    "sb": "^6.3.8",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.5.2",
+    "web-vitals": "^1.0.1"
+  },
+  "repository": {
+    "type": "http",
+    "url": "https://github.com/EMCECS/dell-design-react-common"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "eject": "react-scripts eject",
+    "build": "webpack --mode=production --node-env=production && tsc",
+    "copy": "cp package.json ./dist/. && cp README.md ./dist/. ",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "testWithCoverage": "jest --coverage",
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint **//*.tsx",
+    "precommit": "lint-staged",
+    "publish-public": "npm publish --ignore-scripts --access public",
+    "version": "npm version",
+    "pretty": "prettier --write src/**/*.{js,jsx,json,css,ts,tsx}",
+    "package": "yarn run version patch --unsafe-perm",
+    "package-major": "yarn run lint && yarn run build && yarn run version major --unsafe-perm",
+    "package-minor": "yarn run lint && yarn run build && yarn run version minor --unsafe-perm",
+    "package-patch": "yarn run lint && yarn run build && yarn run version patch --unsafe-perm",
+    "build:dev": "webpack --mode=development  && tsc",
+    "build:prod": "webpack --mode=production --node-env=production  && tsc",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
         ],
-        "overrides": [
-            {
-                "files": [
-                    "**/*.stories.*"
-                ],
-                "rules": {
-                    "import/no-anonymous-default-export": "off"
-                }
-            }
-        ]
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,ts,tsx}": [
+      "./node_modules/.bin/prettier --write",
+      "git add"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-env": "^7.15.4",
+    "@faker-js/faker": "^7.5.0",
+    "@sambego/storybook-state": "^2.0.1",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/node-logger": "^6.3.7",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.8",
+    "@testing-library/dom": "^7.21.4",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/react": "17.0.14",
+    "@types/react-dom": "17.0.14",
+    "@types/react-table": "^7.7.12",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^5.36.2",
+    "@webpack-cli/generators": "^2.4.1",
+    "autoprefixer": "^10.4.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.0.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "css-loader": "^5.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-17-updated": "^1.0.2",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^7.5.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "html-webpack-plugin": "^4.0.0",
+    "husky": "^7.0.4",
+    "jest": "^24.5.0",
+    "jest-environment-jsdom-fourteen": "^0.1.0",
+    "lint-staged": "^8.2.1",
+    "mini-css-extract-plugin": "^1.0.0",
+    "node-sass": "^6.0.1",
+    "postcss": "^8.4.4",
+    "postcss-loader": "^4.2.0",
+    "prettier": "^2.5.1",
+    "react-docgen-typescript-loader": "^3.0.1",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-refresh": "^0.9.0",
+    "react-scripts": "^4.0.3",
+    "regenerator-runtime": "^0.13.1",
+    "sass-loader": "^10.2.0",
+    "style-loader": "^2.0.0",
+    "ts-jest": "^24.0.0",
+    "ts-loader": "^8.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.0.0",
+    "webpack-dev-server": "^4.6.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.14"
+  },
+  "jest": {
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
     },
-    "lint-staged": {
-        "src/**/*.{js,jsx,json,css,ts,tsx}": [
-            "./node_modules/.bin/prettier --write",
-            "git add"
-        ]
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/testResolver.tsx",
+      "\\.(css|less)$": "<rootDir>/testResolver.tsx"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@babel/core": "^7.0.0-0",
-        "@babel/preset-env": "^7.15.4",
-        "@faker-js/faker": "^7.5.0",
-        "@sambego/storybook-state": "^2.0.1",
-        "@storybook/addon-actions": "^6.3.7",
-        "@storybook/addon-essentials": "^6.3.7",
-        "@storybook/addon-info": "^5.3.19",
-        "@storybook/addon-links": "^6.3.7",
-        "@storybook/node-logger": "^6.3.7",
-        "@storybook/preset-create-react-app": "^3.2.0",
-        "@storybook/react": "^6.3.8",
-        "@testing-library/dom": "^7.21.4",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.1.0",
-        "@testing-library/user-event": "^12.1.10",
-        "@types/jest": "^26.0.15",
-        "@types/react": "17.0.14",
-        "@types/react-dom": "17.0.14",
-        "@types/react-table": "^7.7.12",
-        "@typescript-eslint/eslint-plugin": "^4.0.0",
-        "@typescript-eslint/parser": "^5.36.2",
-        "@webpack-cli/generators": "^2.4.1",
-        "autoprefixer": "^10.4.0",
-        "babel-core": "^7.0.0-bridge.0",
-        "babel-eslint": "^10.1.0",
-        "babel-loader": "^8.0.0",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-es2015": "^6.1.18",
-        "babel-preset-react": "^6.1.18",
-        "css-loader": "^5.1.1",
-        "enzyme": "^3.9.0",
-        "enzyme-adapter-react-17-updated": "^1.0.2",
-        "enzyme-to-json": "^3.3.5",
-        "eslint": "^7.5.0",
-        "eslint-config-react-app": "^6.0.0",
-        "eslint-plugin-flowtype": "^5.2.0",
-        "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-jsx-a11y": "^6.3.1",
-        "eslint-plugin-prettier": "^4.0.0",
-        "eslint-plugin-react": "^7.20.0",
-        "eslint-plugin-react-hooks": "^4.0.4",
-        "html-webpack-plugin": "^4.0.0",
-        "husky": "^7.0.4",
-        "jest": "^24.5.0",
-        "jest-environment-jsdom-fourteen": "^0.1.0",
-        "lint-staged": "^8.2.1",
-        "mini-css-extract-plugin": "^1.0.0",
-        "node-sass": "^6.0.1",
-        "postcss": "^8.4.4",
-        "postcss-loader": "^4.2.0",
-        "prettier": "^2.5.1",
-        "react-docgen-typescript-loader": "^3.0.1",
-        "react-docgen-typescript-webpack-plugin": "^1.1.0",
-        "react-refresh": "^0.9.0",
-        "react-scripts": "^4.0.3",
-        "regenerator-runtime": "^0.13.1",
-        "sass-loader": "^10.2.0",
-        "style-loader": "^2.0.0",
-        "ts-jest": "^24.0.0",
-        "ts-loader": "^8.0.0",
-        "url-loader": "^4.1.1",
-        "webpack": "^4.44.2",
-        "webpack-cli": "^3.0.0",
-        "webpack-dev-server": "^4.6.0"
-    },
-    "resolutions": {
-        "@types/react": "17.0.14"
-    },
-    "jest": {
-        "transform": {
-            "\\.(ts|tsx)$": "ts-jest"
-        },
-        "moduleNameMapper": {
-            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/testResolver.tsx",
-            "\\.(css|less)$": "<rootDir>/testResolver.tsx"
-        },
-        "setupFiles": [
-            "<rootDir>/testSetup.tsx"
-        ],
-        "snapshotSerializers": [
-            "enzyme-to-json/serializer"
-        ],
-        "snapshotResolver": "<rootDir>/testResolver.tsx",
-        "testEnvironment": "jest-environment-jsdom-fourteen"
-    }
+    "setupFiles": [
+      "<rootDir>/testSetup.tsx"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "snapshotResolver": "<rootDir>/testResolver.tsx",
+    "testEnvironment": "jest-environment-jsdom-fourteen"
+  }
 }
