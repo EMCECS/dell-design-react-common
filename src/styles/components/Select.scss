@@ -23,7 +23,7 @@
 .clr-control-container {
 
     .clr-select-wrapper {
-        width: $input-width;
+        max-width: $input-width;
         max-height: unset;
         height: $input-height;
 

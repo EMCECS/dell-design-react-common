@@ -119,8 +119,7 @@
 @mixin input-style {
     box-shadow: none;
     min-height: $input-height !important;
-    height: $input-height;
-    width: $input-width;
+    max-width: $input-width;
     margin-left: $input-margin-left !important;
     margin-right: $input-margin-right;
     border-color: $input-border-color;
