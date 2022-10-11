@@ -1,10 +1,10 @@
-name: dell-design-react-common CI - PR On master branch - Pipeline
+name: dell-design-react-common CI - PR On main branch - Pipeline
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
