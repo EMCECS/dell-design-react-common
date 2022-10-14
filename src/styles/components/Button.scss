@@ -25,10 +25,6 @@
         size: $btn-size;
         height: $btn-height !important;
         box-shadow: none !important;
-
-        &:focus{
-            @include button-focus;
-        }
     
         &:hover{     
             border-color: $btn-hover;
@@ -48,10 +44,6 @@
         @include link_button;
         border: none;
         outline-style: none;
-
-        &:focus{
-            @include button-focus;
-        }
     
         &:hover{     
             color: $btn-hover;
