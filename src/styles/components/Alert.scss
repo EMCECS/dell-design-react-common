@@ -27,6 +27,7 @@
     }
     &.alert-app-level {
         height: $alert-app-level-height;
+        font-size: $alert-app-level-font-size!important;
         .alert-text {
             flex: 0 1 auto!important;
             .btn {
