@@ -48,13 +48,13 @@ const getBreadcrumbItems = (
             <Breadcrumb.Item
                 key={index}
                 data-qa={item?.dataqa}
-                href={item.path}
+                href={item?.path}
                 active={item?.isActive}
                 onClick={(event?: React.MouseEvent<HTMLElement>) => {
                     onClick && onClick(event);
                 }}
             >
-                {<span>{item.title}</span>}
+                {<span>{item?.title}</span>}
             </Breadcrumb.Item>
         );
     });
@@ -62,8 +62,8 @@ const getBreadcrumbItems = (
 
 export const Breadcrumbs = ({breadcrumbItems = [], className, dataqa, onClick}: BreadcrumbItems) => {
     return (
-        <div className={className} data-qa={dataqa}>
-            <Breadcrumb>{getBreadcrumbItems(breadcrumbItems, onClick)}</Breadcrumb>
+        <div className={className} >
+            <Breadcrumb data-qa={dataqa}>{getBreadcrumbItems(breadcrumbItems, onClick)}</Breadcrumb>
         </div>
     );
 };
