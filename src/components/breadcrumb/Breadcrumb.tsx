@@ -45,9 +45,9 @@ const getBreadcrumbItems = (
 ): ReactNode => {
     return items.map((item, index) => {
         return (
-            <div data-qa={item?.dataqa}>
             <Breadcrumb.Item
                 key={index}
+                data-qa={item?.dataqa}
                 href={item.path}
                 active={item?.isActive}
                 onClick={(event?: React.MouseEvent<HTMLElement>) => {
@@ -56,7 +56,6 @@ const getBreadcrumbItems = (
             >
                 {<span>{item.title}</span>}
             </Breadcrumb.Item>
-            </div>
         );
     });
 };
