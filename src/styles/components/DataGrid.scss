@@ -159,6 +159,20 @@
         .switch-header {
             font-size: $grid-font-size-default;
             font-weight: $font-weight-medium;
+            padding-bottom: unset;
+            line-height: unset;
+        }
+
+        .switch-footer .btn {
+            padding-top: 0.8rem;
+        }
+
+        &.clr-popover-content {
+            position: absolute;
+            inset: unset !important;
+            transform: unset !important;
+            bottom: 30px !important;
+            left: 19px !important;
         }
 
         .clr-control-label {
