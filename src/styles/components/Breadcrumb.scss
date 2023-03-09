@@ -60,9 +60,9 @@
      }
 
     &::before {
-      font-size: 12px;
+      font-size: 14px;
       float: right;
-      padding: 0 8px;
+      padding: 1px 8px;
       color: $gray-500;
       content: var(--bs-breadcrumb-divider, "/");
     }
