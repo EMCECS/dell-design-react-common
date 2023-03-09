@@ -8,56 +8,70 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- @import "../common/colors";
- @import "../common/fonts";
- @import "../common/mixins";
- 
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/mixins";
+
 .breadcrumbs-container {
   margin: 24px 0;
 }
- .breadcrumb {
-   display: flex;
-   flex-wrap: wrap;
-   width: fit-content;
-   padding: 0 2px;
-   margin-bottom: 1rem;
-   list-style: none;
-   line-height: 1;
 
-  .clr-form-control {
-    margin: 0;
-  }
-  
-  a {
-    position: relative;
-    div {
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  padding: 0 2px;
+  margin-bottom: 1rem;
+  list-style: none;
+
+  .breadcrumb-item-container {
+    .btn.breadcrumb-item {
+      height: unset !important;
+      border: none;
+      margin: 0;
+
+      .breadcrumb-collapsed-ellipsis {
+        margin-top: 8px;
+      }
+    }
+
+    & .breadcrumb-collapsed-menu {
       display: none;
       position: absolute;
       background-color: #fff;
       box-shadow: 0 0 10px #e4e4e4;
-      option {
-        padding: 0 16px;
+
+      a {
+        padding: 4px 16px 0;
         font-size: 14px;
         height: 32px;
-        padding-top: 4px;
+        display: block;
+        min-width: max-content;
+
         &:hover {
           background-color: $gray-100;
           color: $gray-700 !important;
+
         }
         &:active {
           background-color: $blue-50;
         }
       }
     }
+
+    &:focus-within .breadcrumb-collapsed-menu {
+        display: block;
+    }
   }
 
   .breadcrumb-item {
-     padding: 0;
-     min-width: 40px;
-     span {
-       font-size: 14px;
-       padding: 0 2px;
-     }
+    padding: 0;
+    min-width: unset;
+
+    span {
+      font-size: 14px;
+      padding: 0 2px;
+    }
 
     &::before {
       font-size: 14px;
@@ -80,10 +94,6 @@
       }
     }
 
-    .breadcrumb-collapsed-ellipsis {
-      width: 30px;
-    }
-
     @include breadcrumb-item($blue-600);
 
     :hover {
@@ -95,5 +105,5 @@
     font-size: 24px;
     padding-top: 12px;
     margin: 0;
- }
+  }
 }

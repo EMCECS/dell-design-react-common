@@ -8,7 +8,8 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import {ReactNode} from "react";
+import {Button} from "@dellstorage/clarity-react/forms/button";
+import {Icon} from "@dellstorage/clarity-react/icon";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 /**
@@ -22,6 +23,7 @@ export type BreadcrumbItem = {
     title: JSX.Element | string;
     path: string;
     isActive?: boolean;
+    maxItems?: number;
     dataqa?: string;
 };
 
@@ -37,37 +39,78 @@ export type BreadcrumbItems = {
     className?: string;
     dataqa?: string;
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void;
+    maxItems?: number;
 };
+
+const DEFAULT_MAX_ITEMS = 3;
 
 const getBreadcrumbItems = (
     items: Array<BreadcrumbItem>,
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void,
+    maxItems?: number,
 ): JSX.Element[] => {
     let breadcrumbItems: JSX.Element[] = [];
+    const collapsedItems: JSX.Element[] = [];
     items.forEach((item, index) => {
         if (index !== items.length - 1) {
-            breadcrumbItems.push(
-                <Breadcrumb.Item
-                    key={index}
-                    data-qa={item?.dataqa}
-                    href={item?.path}
-                    active={item?.isActive}
-                    onClick={(event?: React.MouseEvent<HTMLElement>) => {
-                        onClick && onClick(event);
-                    }}
-                >
-                    {<span>{item?.title}</span>}
-                </Breadcrumb.Item>,
-            );
+            if (items.length > (maxItems || DEFAULT_MAX_ITEMS)) {
+                if ([0, items.length - 2].includes(index)) {
+                    breadcrumbItems = [
+                        ...breadcrumbItems,
+                        <Breadcrumb.Item
+                            key={index}
+                            data-qa={item?.dataqa}
+                            href={item?.path}
+                            active={item?.isActive}
+                            onClick={(event?: React.MouseEvent<HTMLElement>) => {
+                                onClick && onClick(event);
+                            }}
+                        >
+                            {<span>{item?.title}</span>}
+                        </Breadcrumb.Item>,
+                    ];
+                } else {
+                    collapsedItems.push(<a href={item?.path}>{item?.title}</a>);
+                }
+            } else {
+                breadcrumbItems.push(
+                    <Breadcrumb.Item
+                        key={index}
+                        data-qa={item?.dataqa}
+                        href={item?.path}
+                        active={item?.isActive}
+                        onClick={(event?: React.MouseEvent<HTMLElement>) => {
+                            onClick && onClick(event);
+                        }}
+                    >
+                        {<span>{item?.title}</span>}
+                    </Breadcrumb.Item>,
+                );
+            }
         }
     });
+    items.length > (maxItems || DEFAULT_MAX_ITEMS) &&
+        breadcrumbItems.splice(
+            1,
+            0,
+            <div className="breadcrumb-item-container">
+                <Button className="breadcrumb-item">
+                    <Icon
+                        shape="ellipsis-horizontal"
+                        data-qa="breadcrumb-collapsed-ellipsis"
+                        className="breadcrumb-collapsed-ellipsis"
+                    />
+                </Button>
+                <div className="breadcrumb-collapsed-menu">{collapsedItems}</div>
+            </div>,
+        );
     return breadcrumbItems;
 };
 
-export const Breadcrumbs = ({breadcrumbItems = [], className, dataqa, onClick}: BreadcrumbItems) => {
+export const Breadcrumbs = ({breadcrumbItems = [], className, dataqa, onClick, maxItems}: BreadcrumbItems) => {
     return (
         <div className={`breadcrumbs-container ${className}`}>
-            <Breadcrumb data-qa={dataqa}>{getBreadcrumbItems(breadcrumbItems, onClick)}</Breadcrumb>
+            <Breadcrumb data-qa={dataqa}>{getBreadcrumbItems(breadcrumbItems, onClick, maxItems)}</Breadcrumb>
             <div className="breadcrumb active-element">{breadcrumbItems[breadcrumbItems.length - 1]?.title}</div>
         </div>
     );
