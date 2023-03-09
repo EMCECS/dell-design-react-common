@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 - 2023 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,41 +12,88 @@
  @import "../common/fonts";
  @import "../common/mixins";
  
+.breadcrumbs-container {
+  margin: 24px 0;
+}
  .breadcrumb {
    display: flex;
    flex-wrap: wrap;
    width: fit-content;
-   padding: 0 0;
+   padding: 0 2px;
    margin-bottom: 1rem;
    list-style: none;
-   .breadcrumb-item {
-     + {
-       .breadcrumb-item {
-         padding-left: 0.5rem;
- 
-         &::before {
-           float: left;
-           padding-right: 0.5rem;
-           color: $gray-500;
-           content: var(--bs-breadcrumb-divider, "/");
-         }
-         :focus {
-           outline: none !important;
-           border: 2px solid $blue-450;
-           border-radius: 5px;
-         }
-       }
+   line-height: 1;
+
+  .clr-form-control {
+    margin: 0;
+  }
+  
+  a {
+    position: relative;
+    div {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 0 10px #e4e4e4;
+      option {
+        padding: 0 16px;
+        font-size: 14px;
+        height: 32px;
+        padding-top: 4px;
+        &:hover {
+          background-color: $gray-100;
+          color: $gray-700 !important;
+        }
+        &:active {
+          background-color: $blue-50;
+        }
+      }
+    }
+  }
+
+  .breadcrumb-item {
+     padding: 0;
+     min-width: 40px;
+     span {
+       font-size: 14px;
+       padding: 0 2px;
      }
-     &.active {
-       color: $gray-900;
-       :hover {
-         color: $gray-900;
-       }
-     }
-     @include breadcrumb-item($blue-600);
-     :hover {
-       color: $blue-700;
-     }
-   }
+
+    &::before {
+      font-size: 12px;
+      float: right;
+      padding: 0 8px;
+      color: $gray-500;
+      content: var(--bs-breadcrumb-divider, "/");
+    }
+
+    :focus {
+      outline: 2px solid $blue-450;
+      border-radius: 5px;
+    }
+
+    &.active {
+      color: $gray-900;
+
+      :hover {
+        color: $gray-900;
+      }
+    }
+
+    .breadcrumb-collapsed-ellipsis {
+      width: 30px;
+    }
+
+    @include breadcrumb-item($blue-600);
+
+    :hover {
+      color: $blue-700;
+    }
+  }
+
+  &.active-element {
+    font-size: 24px;
+    padding-top: 12px;
+    margin: 0;
  }
- 
+}

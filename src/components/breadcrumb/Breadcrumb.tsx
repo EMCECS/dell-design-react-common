@@ -42,28 +42,33 @@ export type BreadcrumbItems = {
 const getBreadcrumbItems = (
     items: Array<BreadcrumbItem>,
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void,
-): ReactNode => {
-    return items.map((item, index) => {
-        return (
-            <Breadcrumb.Item
-                key={index}
-                data-qa={item?.dataqa}
-                href={item?.path}
-                active={item?.isActive}
-                onClick={(event?: React.MouseEvent<HTMLElement>) => {
-                    onClick && onClick(event);
-                }}
-            >
-                {<span>{item?.title}</span>}
-            </Breadcrumb.Item>
-        );
+): JSX.Element[] => {
+    let breadcrumbItems: JSX.Element[] = [];
+    items.forEach((item, index) => {
+        if (index !== items.length - 1) {
+            breadcrumbItems.push(
+                <Breadcrumb.Item
+                    key={index}
+                    data-qa={item?.dataqa}
+                    href={item?.path}
+                    active={item?.isActive}
+                    onClick={(event?: React.MouseEvent<HTMLElement>) => {
+                        onClick && onClick(event);
+                    }}
+                >
+                    {<span>{item?.title}</span>}
+                </Breadcrumb.Item>,
+            );
+        }
     });
+    return breadcrumbItems;
 };
 
 export const Breadcrumbs = ({breadcrumbItems = [], className, dataqa, onClick}: BreadcrumbItems) => {
     return (
-        <div className={className} >
+        <div className={`breadcrumbs-container ${className}`}>
             <Breadcrumb data-qa={dataqa}>{getBreadcrumbItems(breadcrumbItems, onClick)}</Breadcrumb>
+            <div className="breadcrumb active-element">{breadcrumbItems[breadcrumbItems.length - 1]?.title}</div>
         </div>
     );
 };
