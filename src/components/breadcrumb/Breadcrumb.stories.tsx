@@ -8,11 +8,11 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import React from "react";
 import {storiesOf} from "@storybook/react";
-import {Breadcrumbs, BreadcrumbItem} from "./Breadcrumb";
+import {Accordion} from "@dellstorage/clarity-react/accordian";
 import {action} from "@storybook/addon-actions";
 import "styles/components/Breadcrumb.scss";
+import {Breadcrumbs, BreadcrumbItem} from "./Breadcrumb";
 
 const twoLevelBreadcrumbItems: Array<BreadcrumbItem> = [
     {title: "Data Grid with Infinite Scroll", path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid"},
@@ -44,22 +44,53 @@ const singleBreadcrumbItem: Array<BreadcrumbItem> = [
         isActive: true,
     },
 ];
+const defaultBreadcrumbs = [
+    {title: "Single Level Breadcrumb", itemComponent: <Breadcrumbs breadcrumbItems={singleBreadcrumbItem} />},
+    {
+        title: "Two level Breadcrumb",
+        itemComponent: (
+            <Breadcrumbs breadcrumbItems={twoLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
+        ),
+    },
+    {
+        title: "Three level Breadcrumb",
+        itemComponent: (
+            <Breadcrumbs breadcrumbItems={threeLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
+        ),
+    },
+];
 
-storiesOf("Breadcrumb", module).add("Basic", () => (
-    <React.Fragment>
-        Single Breadcrumb: <Breadcrumbs breadcrumbItems={singleBreadcrumbItem} />
-        <br />
-        Two level Breadcrumbs:{" "}
-        <Breadcrumbs breadcrumbItems={twoLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
-        <br />
-        Three level Breadcrumbs:{" "}
-        <Breadcrumbs breadcrumbItems={threeLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
-        <br />
-        Four level Breadcrumbs:{" "}
-        <Breadcrumbs breadcrumbItems={fourLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
-        <br />
-        Five level Breadcrumbs:{" "}
-        <Breadcrumbs breadcrumbItems={fiveLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
-        <br />
-    </React.Fragment>
-));
+const collapsibleBreadcrumbs = (maxItems: number = 3, isCollapsible: boolean = true) => [
+    {
+        title: `${isCollapsible && maxItems < 4 ? "Collapsible " : ""}Four level Breadcrumb`,
+        itemComponent: (
+            <Breadcrumbs
+                breadcrumbItems={fourLevelBreadcrumbItems}
+                onClick={action("breadcrumbItem click")}
+                maxItems={maxItems}
+                isCollapsible={isCollapsible}
+            />
+        ),
+    },
+    {
+        title: `${isCollapsible && maxItems < 5 ? "Collapsible " : ""}Five level Breadcrumb`,
+        itemComponent: (
+            <Breadcrumbs
+                breadcrumbItems={fiveLevelBreadcrumbItems}
+                onClick={action("breadcrumbItem click")}
+                maxItems={maxItems}
+                isCollapsible={isCollapsible}
+            />
+        ),
+    },
+];
+
+storiesOf("Breadcrumb", module)
+    .add("Default Breadcrumbs", () => <Accordion content={defaultBreadcrumbs} />)
+    .add("Uncollapsed Breadcrumbs", () => (
+        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs(undefined, false)]} />
+    ))
+    .add("Collapsible Breadcrumbs with Default (3)", () => (
+        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs()]} />
+    ))
+    .add("Collapsible Breadcrumbs with maxItems as 4", () => <Accordion content={collapsibleBreadcrumbs(4)} />);

@@ -12,6 +12,8 @@ import {Button} from "@dellstorage/clarity-react/forms/button";
 import {Icon} from "@dellstorage/clarity-react/icon";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
+const DEFAULT_MAX_ITEMS = 3;
+
 /**
  * Props for the BreadcrumbItem
  * @param {title} is to get the title of the Breadcrumb Item.(can be string or JSX Element)
@@ -23,7 +25,6 @@ export type BreadcrumbItem = {
     title: JSX.Element | string;
     path: string;
     isActive?: boolean;
-    maxItems?: number;
     dataqa?: string;
 };
 
@@ -40,20 +41,20 @@ export type BreadcrumbItems = {
     dataqa?: string;
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void;
     maxItems?: number;
+    isCollapsible?: boolean;
 };
-
-const DEFAULT_MAX_ITEMS = 3;
 
 const getBreadcrumbItems = (
     items: Array<BreadcrumbItem>,
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void,
-    maxItems?: number,
+    isCollapsible: boolean = true,
+    maxItems: number = DEFAULT_MAX_ITEMS,
 ): JSX.Element[] => {
     let breadcrumbItems: JSX.Element[] = [];
     const collapsedItems: JSX.Element[] = [];
     items.forEach((item, index) => {
         if (index !== items.length - 1) {
-            if (items.length > (maxItems || DEFAULT_MAX_ITEMS)) {
+            if (isCollapsible && items.length > maxItems) {
                 if ([0, items.length - 2].includes(index)) {
                     breadcrumbItems = [
                         ...breadcrumbItems,
@@ -89,7 +90,8 @@ const getBreadcrumbItems = (
             }
         }
     });
-    items.length > (maxItems || DEFAULT_MAX_ITEMS) &&
+    items.length > maxItems &&
+        isCollapsible &&
         breadcrumbItems.splice(
             1,
             0,
@@ -107,10 +109,19 @@ const getBreadcrumbItems = (
     return breadcrumbItems;
 };
 
-export const Breadcrumbs = ({breadcrumbItems = [], className, dataqa, onClick, maxItems}: BreadcrumbItems) => {
+export const Breadcrumbs = ({
+    breadcrumbItems = [],
+    className,
+    dataqa,
+    onClick,
+    maxItems,
+    isCollapsible,
+}: BreadcrumbItems) => {
     return (
         <div className={`breadcrumbs-container ${className}`}>
-            <Breadcrumb data-qa={dataqa}>{getBreadcrumbItems(breadcrumbItems, onClick, maxItems)}</Breadcrumb>
+            <Breadcrumb data-qa={dataqa}>
+                {getBreadcrumbItems(breadcrumbItems, onClick, isCollapsible, maxItems)}
+            </Breadcrumb>
             <div className="breadcrumb active-element">{breadcrumbItems[breadcrumbItems.length - 1]?.title}</div>
         </div>
     );
