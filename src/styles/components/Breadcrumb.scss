@@ -26,12 +26,15 @@
 
   .breadcrumb-item-container {
     .btn.breadcrumb-item {
-      height: unset !important;
-      border: none;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: flex-end;
       margin: 0;
+      border: none;
+      height: unset !important;
 
-      .breadcrumb-collapsed-ellipsis {
-        margin-top: 8px;
+      :hover {
+        background-color: transparent;
       }
     }
 
@@ -76,9 +79,10 @@
     &::before {
       font-size: 14px;
       float: right;
-      padding: 1px 8px;
+      padding: 4px 8px;
       color: $gray-500;
       content: var(--bs-breadcrumb-divider, "/");
+      line-height: initial;
     }
 
     :focus {
