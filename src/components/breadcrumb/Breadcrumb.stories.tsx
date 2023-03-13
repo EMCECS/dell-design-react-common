@@ -60,7 +60,7 @@ const defaultBreadcrumbs = [
     },
 ];
 
-const collapsibleBreadcrumbs = (maxItems: number = 3, isCollapsible: boolean = true) => [
+const collapsibleBreadcrumbs = (maxItems: number = 3, isCollapsible?: boolean) => [
     {
         title: `${isCollapsible && maxItems < 4 ? "Collapsible " : ""}Four level Breadcrumb`,
         itemComponent: (
@@ -86,11 +86,8 @@ const collapsibleBreadcrumbs = (maxItems: number = 3, isCollapsible: boolean = t
 ];
 
 storiesOf("Breadcrumb", module)
-    .add("Default Breadcrumbs", () => <Accordion content={defaultBreadcrumbs} />)
-    .add("Uncollapsed Breadcrumbs", () => (
-        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs(undefined, false)]} />
-    ))
+    .add("Default Breadcrumbs", () => <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs()]} />)
     .add("Collapsible Breadcrumbs with Default (3)", () => (
-        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs()]} />
+        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs(undefined, true)]} />
     ))
-    .add("Collapsible Breadcrumbs with maxItems as 4", () => <Accordion content={collapsibleBreadcrumbs(4)} />);
+    .add("Collapsible Breadcrumbs with maxItems as 4", () => <Accordion content={collapsibleBreadcrumbs(4, true)} />);

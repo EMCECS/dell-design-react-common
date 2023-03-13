@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 - 2023 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,50 +44,38 @@ export type BreadcrumbItems = {
     isCollapsible?: boolean;
 };
 
+// Function to create breadcrumbs collapsible or default list
 const getBreadcrumbItems = (
     items: Array<BreadcrumbItem>,
     onClick?: (event?: React.MouseEvent<HTMLElement>) => void,
-    isCollapsible: boolean = true,
+    isCollapsible?: boolean,
     maxItems: number = DEFAULT_MAX_ITEMS,
 ): JSX.Element[] => {
-    let breadcrumbItems: JSX.Element[] = [];
+    const breadcrumbItems: JSX.Element[] = [];
     const collapsedItems: JSX.Element[] = [];
     items.forEach((item, index) => {
-        if (index !== items.length - 1) {
-            if (isCollapsible && items.length > maxItems) {
-                if ([0, items.length - 2].includes(index)) {
-                    breadcrumbItems = [
-                        ...breadcrumbItems,
-                        <Breadcrumb.Item
-                            key={index}
-                            data-qa={item?.dataqa}
-                            href={item?.path}
-                            active={item?.isActive}
-                            onClick={(event?: React.MouseEvent<HTMLElement>) => {
-                                onClick && onClick(event);
-                            }}
-                        >
-                            {<span>{item?.title}</span>}
-                        </Breadcrumb.Item>,
-                    ];
-                } else {
-                    collapsedItems.push(<a href={item?.path}>{item?.title}</a>);
-                }
-            } else {
-                breadcrumbItems.push(
-                    <Breadcrumb.Item
-                        key={index}
-                        data-qa={item?.dataqa}
-                        href={item?.path}
-                        active={item?.isActive}
-                        onClick={(event?: React.MouseEvent<HTMLElement>) => {
-                            onClick && onClick(event);
-                        }}
-                    >
-                        {<span>{item?.title}</span>}
-                    </Breadcrumb.Item>,
-                );
-            }
+        if (index === items.length - 1) return;
+
+        if (isCollapsible && items.length > maxItems && ![0, items.length - 2].includes(index)) {
+            collapsedItems.push(
+                <a href={item?.path} key={item?.path}>
+                    {item?.title}
+                </a>,
+            );
+        } else {
+            breadcrumbItems.push(
+                <Breadcrumb.Item
+                    key={index}
+                    data-qa={item?.dataqa}
+                    href={item?.path}
+                    active={item?.isActive}
+                    onClick={(event?: React.MouseEvent<HTMLElement>) => {
+                        onClick?.(event);
+                    }}
+                >
+                    <span>{item?.title}</span>
+                </Breadcrumb.Item>,
+            );
         }
     });
     items.length > maxItems &&
@@ -95,11 +83,11 @@ const getBreadcrumbItems = (
         breadcrumbItems.splice(
             1,
             0,
-            <div className="breadcrumb-item-container">
+            <div className="breadcrumb-item-container" key="breadcrumb-item-container">
                 <Button className="breadcrumb-item">
                     <Icon
                         shape="ellipsis-horizontal"
-                        data-qa="breadcrumb-collapsed-ellipsis"
+                        data-qa="dataqa-breadcrumb-collapsed-ellipsis"
                         className="breadcrumb-collapsed-ellipsis"
                     />
                 </Button>
@@ -116,13 +104,11 @@ export const Breadcrumbs = ({
     onClick,
     maxItems,
     isCollapsible,
-}: BreadcrumbItems) => {
-    return (
-        <div className={`breadcrumbs-container ${className}`}>
-            <Breadcrumb data-qa={dataqa}>
-                {getBreadcrumbItems(breadcrumbItems, onClick, isCollapsible, maxItems)}
-            </Breadcrumb>
-            <div className="breadcrumb active-element">{breadcrumbItems[breadcrumbItems.length - 1]?.title}</div>
-        </div>
-    );
-};
+}: BreadcrumbItems) => (
+    <div className={`breadcrumbs-container ${className}`}>
+        <Breadcrumb data-qa={dataqa}>
+            {getBreadcrumbItems(breadcrumbItems, onClick, isCollapsible, maxItems)}
+        </Breadcrumb>
+        <div className="breadcrumb active-element">{breadcrumbItems[breadcrumbItems.length - 1]?.title}</div>
+    </div>
+);

@@ -13,14 +13,14 @@
 @import "../common/mixins";
 
 .breadcrumbs-container {
-  margin: 24px 0;
+  margin: 1.2rem 0;
 }
 
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
   width: fit-content;
-  padding: 0 2px;
+  padding: 0 0.1rem;
   margin-bottom: 1rem;
   list-style: none;
 
@@ -45,9 +45,9 @@
       box-shadow: 0 0 10px #e4e4e4;
 
       a {
-        padding: 4px 16px 0;
-        font-size: 14px;
-        height: 32px;
+        padding: 0.2rem 0.8rem 0;
+        font-size: $font-size-7;
+        height: 1.6rem;
         display: block;
         min-width: max-content;
 
@@ -72,22 +72,22 @@
     min-width: unset;
 
     span {
-      font-size: 14px;
-      padding: 0 2px;
+      font-size: $font-size-7;
+      padding: 0 0.1rem;
     }
 
     &::before {
-      font-size: 14px;
+      font-size: $font-size-7;
       float: right;
-      padding: 4px 8px;
+      padding: 0.2rem 0.4rem;
       color: $gray-500;
       content: var(--bs-breadcrumb-divider, "/");
       line-height: initial;
     }
 
     :focus {
-      outline: 2px solid $blue-450;
-      border-radius: 5px;
+      outline: 0.1rem solid $blue-450;
+      border-radius: 0.25rem;
     }
 
     &.active {
@@ -106,8 +106,8 @@
   }
 
   &.active-element {
-    font-size: 24px;
-    padding-top: 12px;
+    font-size: $font-size-24;
+    padding-top: 0.6rem;
     margin: 0;
   }
 }
