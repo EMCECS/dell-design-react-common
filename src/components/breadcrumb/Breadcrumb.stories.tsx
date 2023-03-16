@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 - 2023 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,28 +8,86 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- import React from "react"; 
- import {storiesOf} from "@storybook/react";
- import {Breadcrumbs,BreadcrumbItem} from "./Breadcrumb";
- import {action} from "@storybook/addon-actions";
- import "styles/components/Breadcrumb.scss"
- 
- const breadcrumbItems:Array<BreadcrumbItem> = [
-    {title: "Dashboard", path: "#"},
-    {title: "Profile", path: "/#/path"},
-    {title: "Details", path: "#",isActive:true}
- ];
+import {storiesOf} from "@storybook/react";
+import {Accordion} from "@dellstorage/clarity-react/accordian";
+import {action} from "@storybook/addon-actions";
+import "styles/components/Breadcrumb.scss";
+import {Breadcrumbs, BreadcrumbItem} from "./Breadcrumb";
 
- const singleBreadcrumbItem:Array<BreadcrumbItem> = [
-   {title: "Dashboard", path: "#",isActive:true},
- ];
+const twoLevelBreadcrumbItems: Array<BreadcrumbItem> = [
+    {title: "Data Grid with Infinite Scroll", path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid"},
+    {title: "Accordion Multi Panel", path: "/?path=/story/accordion--accordion-multi-panel", isActive: true},
+];
+const threeLevelBreadcrumbItems: Array<BreadcrumbItem> = [
+    {title: "Data Grid with Infinite Scroll", path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid"},
+    {title: "Accordion Multi Panel", path: "/?path=/story/accordion--accordion-multi-panel"},
+    {title: "Data Grid with Filtering", path: "#", isActive: true},
+];
+const fourLevelBreadcrumbItems: Array<BreadcrumbItem> = [
+    {title: "Data Grid with Infinite Scroll", path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid"},
+    {title: "Accordion Multi Panel", path: "/?path=/story/accordion--accordion-multi-panel"},
+    {title: "Data Grid with Filtering", path: "/?path=/story/datagrid--basic-grid-with-filtering"},
+    {title: "Main Container", path: "#", isActive: true},
+];
+const fiveLevelBreadcrumbItems: Array<BreadcrumbItem> = [
+    {title: "Data Grid with Infinite Scroll", path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid"},
+    {title: "Accordion Multi Panel", path: "/?path=/story/accordion--accordion-multi-panel"},
+    {title: "Data Grid with Filtering", path: "/?path=/story/datagrid--basic-grid-with-filtering"},
+    {title: "Main Container", path: "/?path=/story/maincontainer--main-container"},
+    {title: "Vertical Navigation", path: "#", isActive: true},
+];
 
- storiesOf("Breadcrumb", module)
-     .add("Basic", () => 
-        <React.Fragment>
-        <Breadcrumbs breadcrumbItems={singleBreadcrumbItem} />
-        <br />
-        <Breadcrumbs breadcrumbItems={breadcrumbItems} onClick={action("breadcrumbItem click")}/>
-        <br />
-        </React.Fragment>
- );
+const singleBreadcrumbItem: Array<BreadcrumbItem> = [
+    {
+        title: "Data Grid with Infinite Scroll",
+        path: "/?path=/story/data-grid-with-infinite-scroll--basic-grid",
+        isActive: true,
+    },
+];
+const defaultBreadcrumbs = [
+    {title: "Single Level Breadcrumb", itemComponent: <Breadcrumbs breadcrumbItems={singleBreadcrumbItem} />},
+    {
+        title: "Two level Breadcrumb",
+        itemComponent: (
+            <Breadcrumbs breadcrumbItems={twoLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
+        ),
+    },
+    {
+        title: "Three level Breadcrumb",
+        itemComponent: (
+            <Breadcrumbs breadcrumbItems={threeLevelBreadcrumbItems} onClick={action("breadcrumbItem click")} />
+        ),
+    },
+];
+
+const collapsibleBreadcrumbs = (maxItems: number = 3, isCollapsible?: boolean) => [
+    {
+        title: `${isCollapsible && maxItems < 4 ? "Collapsible " : ""}Four level Breadcrumb`,
+        itemComponent: (
+            <Breadcrumbs
+                breadcrumbItems={fourLevelBreadcrumbItems}
+                onClick={action("breadcrumbItem click")}
+                maxItems={maxItems}
+                isCollapsible={isCollapsible}
+            />
+        ),
+    },
+    {
+        title: `${isCollapsible && maxItems < 5 ? "Collapsible " : ""}Five level Breadcrumb`,
+        itemComponent: (
+            <Breadcrumbs
+                breadcrumbItems={fiveLevelBreadcrumbItems}
+                onClick={action("breadcrumbItem click")}
+                maxItems={maxItems}
+                isCollapsible={isCollapsible}
+            />
+        ),
+    },
+];
+
+storiesOf("Breadcrumb", module)
+    .add("Default Breadcrumbs", () => <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs()]} />)
+    .add("Collapsible Breadcrumbs with Default (3)", () => (
+        <Accordion content={[...defaultBreadcrumbs, ...collapsibleBreadcrumbs(undefined, true)]} />
+    ))
+    .add("Collapsible Breadcrumbs with maxItems as 4", () => <Accordion content={collapsibleBreadcrumbs(4, true)} />);

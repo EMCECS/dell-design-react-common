@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022 Dell Inc., or its subsidiaries. All Rights Reserved.
+ * Copyright (c) 2022 - 2023 Dell Inc., or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,45 +8,106 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
 
- @import "../common/colors";
- @import "../common/fonts";
- @import "../common/mixins";
- 
- .breadcrumb {
-   display: flex;
-   flex-wrap: wrap;
-   width: fit-content;
-   padding: 0 0;
-   margin-bottom: 1rem;
-   list-style: none;
-   .breadcrumb-item {
-     + {
-       .breadcrumb-item {
-         padding-left: 0.5rem;
- 
-         &::before {
-           float: left;
-           padding-right: 0.5rem;
-           color: $gray-500;
-           content: var(--bs-breadcrumb-divider, "/");
-         }
-         :focus {
-           outline: none !important;
-           border: 2px solid $blue-450;
-           border-radius: 5px;
-         }
-       }
-     }
-     &.active {
-       color: $gray-900;
-       :hover {
-         color: $gray-900;
-       }
-     }
-     @include breadcrumb-item($blue-600);
-     :hover {
-       color: $blue-700;
-     }
-   }
- }
- 
+@import "../common/colors";
+@import "../common/fonts";
+@import "../common/mixins";
+
+.breadcrumbs-container {
+  margin: 1.2rem 0;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  padding: 0 0.1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+
+  .breadcrumb-item-container {
+    .btn.breadcrumb-item {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: flex-end;
+      margin: 0;
+      border: none;
+      height: unset !important;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    & .breadcrumb-collapsed-menu {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 0 10px #e4e4e4;
+
+      a {
+        padding: 0.2rem 0.8rem 0;
+        font-size: $font-size-7;
+        height: 1.6rem;
+        display: block;
+        min-width: max-content;
+
+        &:hover {
+          background-color: $gray-100;
+          color: $gray-700 !important;
+
+        }
+        &:active {
+          background-color: $blue-50;
+        }
+      }
+    }
+
+    &:focus-within .breadcrumb-collapsed-menu {
+        display: block;
+    }
+  }
+
+  .breadcrumb-item {
+    padding: 0;
+    min-width: unset;
+
+    span {
+      font-size: $font-size-7;
+      padding: 0 0.1rem;
+    }
+
+    &::before {
+      font-size: $font-size-7;
+      float: right;
+      padding: 0.2rem 0.4rem;
+      color: $gray-500;
+      content: var(--bs-breadcrumb-divider, "/");
+      line-height: initial;
+    }
+
+    :focus {
+      outline: 0.1rem solid $blue-450;
+      border-radius: 0.25rem;
+    }
+
+    &.active {
+      color: $gray-900;
+
+      :hover {
+        color: $gray-900;
+      }
+    }
+
+    @include breadcrumb-item($blue-600);
+
+    :hover {
+      color: $blue-700;
+    }
+  }
+
+  &.active-element {
+    font-size: $font-size-24;
+    padding-top: 0.6rem;
+    margin: 0;
+  }
+}
