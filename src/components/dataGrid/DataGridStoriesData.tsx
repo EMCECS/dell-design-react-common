@@ -217,6 +217,19 @@ export const getPageData = (pageIndex: number, pageSize: number): Promise<DataGr
     });
 };
 
+//Function to get data for page based on customPageSize and page number
+export const getPageDataForCustomPageSize = (pageIndex: number, pageSize: number): Promise<DataGridRow[]> => {
+    return new Promise((resolve, reject) => {
+        let rows: DataGridRow[] = [];
+        let offset = pageSize * (pageIndex - 1);
+        rows = paginationRows.slice(offset, offset + pageSize);
+
+        setTimeout(function() {
+            resolve(rows);
+        }, 2000);
+    });
+};
+
 const cellData = [
     ['192.168.0.1', "xyz", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
     ['192.168.0.1', "abc", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
@@ -271,7 +284,13 @@ export const paginationDetails = {
     totalItems: paginationRows.length,
     getPageData: getPageData,
     pageSize: 5,
-    pageSizes: [5, 10],
+    pageSizes: ["5", "10"],
+};
+
+export const paginationDetailswithDefaultPageSizes = {
+    totalItems: paginationRows.length,
+    getPageData: getPageDataForCustomPageSize,
+    pageSize: 10,
 };
 
 /**
