@@ -35,7 +35,7 @@ import {
     sortFunction,
     columnsForCustomRows,
     paginationRowsWithLinks,
-    paginationDetailswithDefaultPageSizes
+    paginationDetailswithCustomPageSize,
 } from "./DataGridStoriesData";
 
 const datagridFilterRef = React.createRef<DataGrid>();
@@ -91,12 +91,12 @@ storiesOf("DataGrid", module)
             />
         </div>
     ))
-    .add("Grid with pagination and default pageSizes dropdown", () => (
+    .add("Grid with pagination and custom pageSize", () => (
         <div style={{width: "80%"}}>
             <DataGrid
                 columns={normalColumns}
                 rows={paginationRows.slice(0, 10)}
-                pagination={paginationDetailswithDefaultPageSizes}
+                pagination={paginationDetailswithCustomPageSize}
                 itemText={"Items"}
                 footer={{showFooter: true}}
             />
