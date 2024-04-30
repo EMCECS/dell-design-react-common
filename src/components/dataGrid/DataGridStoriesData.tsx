@@ -9,7 +9,14 @@
  */
 
 import React from "react";
-import {DataGridRow, DataGridFilterResult, SortOrder, DataGridColumn} from "@dellstorage/clarity-react/datagrid";
+import {
+    DataGridRow,
+    DataGridFilterResult,
+    SortOrder,
+    DataGridColumn,
+    DataGridPaginationProps,
+    CUSTOM_PAGE_SIZE_OPTION
+} from "@dellstorage/clarity-react/datagrid";
 import {Icon} from "@dellstorage/clarity-react/icon";
 import {Button} from "@dellstorage/clarity-react/forms/button";
 /**
@@ -280,17 +287,18 @@ export function getRowData() {
 // Data for pagination rows
 export const paginationRows = getRowData();
 
-export const paginationDetails = {
+export const paginationDetails: DataGridPaginationProps = {
     totalItems: paginationRows.length,
     getPageData: getPageData,
     pageSize: 5,
     pageSizes: ["5", "10"],
 };
 
-export const paginationDetailswithDefaultPageSizes = {
+export const paginationDetailswithCustomPageSize: DataGridPaginationProps = {
     totalItems: paginationRows.length,
     getPageData: getPageDataForCustomPageSize,
     pageSize: 10,
+    pageSizes: ["10", "20", "50", "100", CUSTOM_PAGE_SIZE_OPTION],
 };
 
 /**
