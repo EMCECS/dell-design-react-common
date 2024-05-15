@@ -1337,10 +1337,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@dellstorage/clarity-react@^1.2.13":
-  version "1.2.13"
-  resolved "https://registry.yarnpkg.com/@dellstorage/clarity-react/-/clarity-react-1.2.13.tgz#c5355efd6515d6875e9513cbd98b4fcadc469f45"
-  integrity sha512-IKu65gzeTNTUTWywP7enrOQ3SkSdym+gblbEYtXdV6B3iS5LmKxkehbRFIuzohxajGLilwftWDlwTLnC7welNw==
+"@dellstorage/clarity-react@^1.2.14":
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/@dellstorage/clarity-react/-/clarity-react-1.2.14.tgz#04c6ac3e1169fdba053984d11aa26dd8f3408093"
+  integrity sha512-E/O45+vFFpD3vHpkWX893pKpjSM1DZ892ltNNnP0J3RwGklrRsJJ7MxDh+QTmYhKKpKY6UAyBmJ1Ik3qwIRayw==
   dependencies:
     "@clr/icons" "12.0.8"
     "@clr/ui" "12.0.8"

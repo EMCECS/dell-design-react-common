@@ -244,7 +244,11 @@ const cellData = [
     ['192.168.0.1', "xyz", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
     ['192.168.0.1', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
     ['192.168.0.1', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "klm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"]
+    ['192.168.0.1', "klm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.1', "fgh", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.1', "uvx", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.1', "kssdlm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.1', "lmn", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
 ];
 // Function to get row data
 export function getRowData() {
