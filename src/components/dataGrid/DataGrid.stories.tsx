@@ -27,6 +27,7 @@ import {
     hideShowColFooter,
     paginationDetails,
     filterFunction,
+    pageFilterFunction,
     paginationRows,
     sortColumns,
     customRows,
@@ -42,6 +43,7 @@ const datagridFilterRef = React.createRef<DataGrid>();
 const datagridFilterSortRef = React.createRef<DataGrid>();
 const datagridCustomFilterMultiRef = React.createRef<DataGrid>();
 const datagridDetailsDemoRef = React.createRef<DataGrid>();
+const datagridFullDemoRef = React.createRef<DataGrid>();
 
 storiesOf("DataGrid", module)
     .add("Basic grid with filtering", () => (
@@ -285,5 +287,36 @@ storiesOf("DataGrid", module)
     .add("Empty data grid", () => (
         <div style={{width: "80%"}}>
             <DataGrid columns={normalColumns} footer={defaultFooter} style={{height: "70vh"}} />
+        </div>
+    ))
+    .add("Grid full demo", () => (
+        <div style={{width: "80%", paddingTop: "5%"}}>
+            <DataGrid
+                ref={datagridFullDemoRef}
+                itemText={"Users"}
+                columns={[
+                    {columnName: "IP"},
+                    {
+                        columnName: "Serial",
+                        filter: (
+                            <DataGridFilter
+                                onFilter={pageFilterFunction}
+                                columnName="Serial"
+                                datagridRef={datagridFullDemoRef}
+                                position={FilterPosition.CENTER}
+                            />
+                        ),
+                        sort: {defaultSortOrder: SortOrder.ASC, sortFunction: sortFunction},
+                    },
+                    {columnName: "Model"},
+                    {columnName: "Template"},
+                    {columnName: "Networking"},
+                    {columnName: "Role"},
+                ]}
+                rows={paginationRows.slice(0, 5)}
+                pagination={paginationDetails}
+                selectionType={GridSelectionType.MULTI}
+                footer={hideShowColFooter}
+            />
         </div>
     ));
