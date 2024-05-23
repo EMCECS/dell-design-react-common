@@ -207,28 +207,7 @@ export const hideShowColFooter = {
 export const getPageData = (pageIndex: number, pageSize: number): Promise<DataGridRow[]> => {
     return new Promise((resolve, reject) => {
         let rows: DataGridRow[] = [];
-        if (pageSize === 5) {
-            if (pageIndex === 2) {
-                rows = paginationRows.slice(5, 10);
-            }
-            if (pageIndex === 1) {
-                rows = paginationRows.slice(0, 5);
-            }
-        } else if (pageSize === 10) {
-            rows = paginationRows;
-        }
-        // Purposefully added delay here to see loading spinner
-        setTimeout(function() {
-            resolve(rows);
-        }, 2000);
-    });
-};
-
-//Function to get data for page based on customPageSize and page number
-export const getPageDataForCustomPageSize = (pageIndex: number, pageSize: number): Promise<DataGridRow[]> => {
-    return new Promise((resolve, reject) => {
-        let rows: DataGridRow[] = [];
-        let offset = pageSize * (pageIndex - 1);
+        const offset = pageSize * (pageIndex - 1);
         rows = paginationRows.slice(offset, offset + pageSize);
 
         setTimeout(function() {
@@ -239,16 +218,23 @@ export const getPageDataForCustomPageSize = (pageIndex: number, pageSize: number
 
 const cellData = [
     ['192.168.0.1', "xyz", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "abc", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "def", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "xyz", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "klm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "fgh", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "uvx", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "kssdlm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
-    ['192.168.0.1', "lmn", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.2', "abc", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.3', "def", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.4', "xyz", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.5', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.6', "123", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.7', "klm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.8', "fgh", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.9', "uvx", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.10', "klm", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.11', "lmn", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.12', "uvx", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.13', "xyz1", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.14', "xyz2", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.15', "xyz3", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.16', "xyz4", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.17', "xyz5", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
+    ['192.168.0.18', "xyz6", "PI-12345672", "ECS EX400", "DHCP", "Data,Monitor"],
 ];
 // Function to get row data
 export function getRowData() {
@@ -295,13 +281,15 @@ export const paginationDetails: DataGridPaginationProps = {
     totalItems: paginationRows.length,
     getPageData: getPageData,
     pageSize: 5,
+    currentPage: 1,
     pageSizes: ["5", "10"],
 };
 
 export const paginationDetailswithCustomPageSize: DataGridPaginationProps = {
     totalItems: paginationRows.length,
-    getPageData: getPageDataForCustomPageSize,
+    getPageData: getPageData,
     pageSize: 10,
+    currentPage: 1,
     pageSizes: ["10", "20", "50", "100", CUSTOM_PAGE_SIZE_OPTION],
 };
 
@@ -554,3 +542,33 @@ export function getRowDataWithLink(functionToAttach: Function) {
     });
     return rowValues;
 }
+
+export const pageFilterFunction = (
+    rows: DataGridRow[],
+    columnValue: string,
+    columnName: string,
+): Promise<DataGridFilterResult> => {
+    return new Promise((resolve, reject) => {
+        let result: DataGridFilterResult = {
+            rows: [],
+            totalItems: 0,
+        };
+        if (columnValue === "" || columnValue === undefined) {
+            result = {
+                rows: paginationRows.slice(0, 5),
+                totalItems: paginationRows.length,
+            };
+        } else {
+            const newRows = filterRows(paginationRows, columnName, Array.isArray(columnValue) ? columnValue : [columnValue]);
+            result = {
+                rows: newRows.slice(0, 5),
+                totalItems: newRows.length,
+            };
+        }
+
+        // Purposefully added delay here to see loading spinner
+        setTimeout(function() {
+            resolve(result);
+        }, 2000);
+    });
+};
